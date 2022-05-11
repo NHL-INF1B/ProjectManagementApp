@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "ProjectManagementApp",
+    "slug": "ProjectManagementApp",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./app/src/assets/images/icon.png",
+    "splash": {
+      "image": "./app/src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./app/src/assets/images/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./app/src/assets/images/favicon.png"
+    }
+  }
+}
