@@ -7,10 +7,10 @@ function ProjectScreen() {
     
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <Button style={Styles.Tile}>
+            <View style={Styles.Tile}>
                 <MaterialCommunityIcons name="book" size={55} color="#009BAA" style={Styles.Icon}/>
                 <Text style={Styles.Text}>Teamcode</Text>
-            </Button>
+            </View>
             <View style={Styles.Tile}>
                 <MaterialCommunityIcons name="calendar" size={55} color="#009BAA" style={Styles.Icon}/>
                 <Text style={Styles.Text}>Planning</Text>
