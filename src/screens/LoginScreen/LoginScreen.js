@@ -4,8 +4,6 @@ import { View, Text, SafeAreaView } from "react-native";
 import { Button } from "react-native-web";
 
 function LoginScreen() {
-    let test;
-    
 	const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
         try {
             fetch("http://localhost/pma/PmaAPI/handlers/registration/registrationHandler.php", {
@@ -22,25 +20,69 @@ function LoginScreen() {
                     confirmPassword: confirmPassword,
                 }),
             })
-            .then((response) => response.text()) //or json - Puts response to text
+            // .then((response) => response.text())
+            .then((response) => response.json())
             .then((response) => {
-                catchFeedback(response);
-                console.log("feedback => " + response);
+                console.log(response);
+                // catchFeedback(response);
             });
         } catch (error) {
             alert(error);
         }
 	};
 
-    const catchFeedback = (test) => {
-        switch (test) {
-            case "invalid_name":
-                //do something
-                console.log('het werkt!');
-                break;
+    /**
+     * Function to catch feedback of request to API
+     * @param response JSON object of response
+     */
+    const catchFeedback = (response) => {
+        console.log('ja');
+        console.log(response);
+        console.log(response.length);
 
-            default:
-                break;
+        for (let index = 0; index < response.length; index++) {
+            switch (response[index]) {
+                case 'name_incorrect':
+                    //do something
+                    console.log('name_incorrect');
+                    break;
+
+                case 'email_incorrect':
+                    //do something
+                    console.log('email_incorrect');
+                    break;
+
+                case 'dateOfBirth_incorrect':
+                    //do something
+                    console.log('dateOfBirth_incorrect');
+                    break;
+
+                case 'password_incorrect':
+                    //do something
+                    console.log('password_incorrect');
+                    break;
+
+                case 'confirmPassword_incorrect':
+                    //do something
+                    console.log('confirmPassword_incorrect');
+                    break;
+
+                case 'samePassword_incorrect':
+                    //do something
+                    console.log('samePassword_incorrect');
+                    break;
+
+                case 'email_in_use':
+                    //do something
+                    console.log('email_in_use');
+                    break;
+                
+
+                default:
+                    //Succes - log in user! (call function to login)
+                    console.log(response);
+                    break;
+            }
         }
     };
 
