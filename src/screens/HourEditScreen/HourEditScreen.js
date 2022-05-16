@@ -12,9 +12,9 @@ const HourEditScreen = () => {
   const [EindTijd, setEindTijd] = useState('');
   return (
     <ScrollView style={styles.root}>
-      <MaterialCommunityIcons style={styles.arrow}  name="arrow-left-thick" size={60} color={'black'} />
+      <MaterialCommunityIcons style={styles.arrow}  name="arrow-left" size={60} color={'black'} />
       <Circle name={"clipboard-text"} size={60} color={"#009BAA"} style={styles.icon} />
-      <Text style={[styles.title, styles.marginBottom25]}>Urenverantwoording{"\n"}Toevoegen</Text>
+      <Text style={[styles.title, styles.marginBottom5]}>Urenverantwoording{"\n"}Toevoegen</Text>
       <Text style={styles.subtitle}>Activiteit</Text>
       <CustomTextInput placeholder="Activiteit" value={Activiteit} setValue={setActiviteit} />
       <Text style={styles.subtitle}>Datum</Text>
@@ -24,16 +24,16 @@ const HourEditScreen = () => {
       <Text style={styles.subtitle}>Eind Tijd</Text>
       <CustomTextInput placeholder="EindTijd" value={EindTijd} setValue={setEindTijd} />
       <Pressable>
-          <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>Toevoegen</Text>
+          <Text style={[styles.button, styles.buttonBlue, styles.marginTop1, styles.marginBottom5]}>Toevoegen</Text>
       </Pressable>
       <Circle name={"timer"} size={60} color={"#009BAA"} style={styles.icon} />
-      <Text style={[styles.title, styles.marginBottom25]}>Timer</Text>
+      <Text style={[styles.title, styles.marginBottom5]}>Timer</Text>
       <Text style={styles.subtitle}>Activiteit</Text>
       <CustomTextInput placeholder="Activiteit" value={Activiteit} setValue={setActiviteit} />
 
       {/* <Button
         title="Toevoegen"
-        style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}
+        style={[styles.button, styles.buttonBlue, styles.marginTop5, styles.marginBottom5]}
         onPress={() =>
         Alert.alert("Test titel", "Test bericht",
         [
@@ -43,8 +43,8 @@ const HourEditScreen = () => {
       /> */}
 
       <Pressable>
-          <Text style={[styles.button, styles.buttonGreen, styles.marginTop25]}>Start</Text>
-          <Text style={[styles.button, styles.buttonRed, styles.marginBottom25]}>Stop</Text>
+          <Text style={[styles.button, styles.buttonGreen, styles.marginTop1]}>Start</Text>
+          <Text style={[styles.button, styles.buttonRed, styles.marginBottom5]}>Stop</Text>
       </Pressable>
     </ScrollView>
   );

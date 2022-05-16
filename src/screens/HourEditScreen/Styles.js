@@ -5,7 +5,7 @@ export default StyleSheet.create({
       backgroundColor: '#009BAA',
     },
     circle: {
-      width: 100,
+      width: '10%',
       height: 100,
       borderWidth: 1,
       borderRadius: 100,
@@ -27,25 +27,15 @@ export default StyleSheet.create({
       color: 'white',
       fontWeight: 'bold',
     },
-    input: {
-      textAlign: 'center',
-      borderWidth: 1,
-      borderColor: '#009BAA',
-      padding: 1,
-      width: '50%',
-      marginLeft: 90,
-      backgroundColor: 'white',
-      borderRadius: 5,
-    },
     button: {
       width: '50%',
-      marginLeft: 90,
+      marginLeft: '25%',
       textAlign: 'center',
-      padding: 6,
+      padding: '2%',
       color: 'white',
       fontWeight: 'bold',
       borderRadius: 5,
-      marginBottom: 5,
+      marginBottom: '1%',
     },
     buttonBlue: {
       backgroundColor: '#005AAA',
@@ -61,12 +51,12 @@ export default StyleSheet.create({
     },
     arrow: {
       textAlign: 'right',
-      marginTop: 15,
+      marginTop: '5%',
     },
-    marginTop25: {
-      marginTop: 5,
+    marginTop1: {
+      marginTop: '1%',
     },
-    marginBottom25: {
-      marginBottom: 25,
+    marginBottom5: {
+      marginBottom: '5%',
     }
   });
