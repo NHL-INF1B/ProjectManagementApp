@@ -4,9 +4,9 @@
     "slug": "ProjectManagementApp",
     "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./app/src/assets/images/icon.png",
+    "icon": "./src/assets/images/icon.png",
     "splash": {
-      "image": "./app/src/assets/images/splash.png",
+      "image": "./src/assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,12 +21,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/src/assets/images/adaptive-icon.png",
+        "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./app/src/assets/images/favicon.png"
+      "favicon": "./src/assets/images/favicon.png"
     }
   }
 }
