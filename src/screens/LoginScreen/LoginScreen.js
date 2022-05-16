@@ -8,7 +8,7 @@ function LoginScreen() {
     
 	const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
         try {
-            fetch("http://localhost/ProjectManagementApp/src/screens/LoginScreen/handler.php", {
+            fetch("http://localhost/PmaAPI/handlers/registration/registrationHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
