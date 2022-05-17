@@ -29,47 +29,50 @@ const FormTest = () => {
     }
   };
 
+  <FormTest deviceLocale="nl" />
+
   return (
     <View>
-      
-      
       <TextInput 
-      style={styles.input}
+        style={styles.input}
         onChangeText={setName} 
         value={name} 
         placeholder="Naam"
         />
       {isFieldInError('name') &&
         getErrorsInField('name').map(errorMessage => (
-          <Text>{errorMessage}</Text>
+          <Text style={styles.text}>{errorMessage}</Text>
         ))}
 
       
       <TextInput 
+        style={styles.input}
         onChangeText={setEmail} 
         value={email} 
         placeholder="Email"
         />
         {isFieldInError('email') &&
         getErrorsInField('email').map(errorMessage => (
-          <Text>{errorMessage}</Text>
+          <Text style={styles.text}>{errorMessage}</Text>
         ))}
 
 
       
       <TextInput 
+      style={styles.input}
         onChangeText={setDate} 
         value={date} 
         placeholder="Datum"
       />
       {isFieldInError('date') &&
         getErrorsInField('date').map(errorMessage => (
-          <Text>{errorMessage}</Text>
+          <Text style={styles.text}>{errorMessage}</Text>
         ))}
 
 
       
       <TextInput
+      style={styles.input}
         onChangeText={setNewPassword}
         value={newPassword}
         secureTextEntry={true}
@@ -77,12 +80,13 @@ const FormTest = () => {
       />
       {isFieldInError('newPassword') &&
         getErrorsInField('newPassword').map(errorMessage => (
-          <Text>{errorMessage}</Text>
+          <Text style={styles.text}>{errorMessage}</Text>
         ))}
 
 
       
       <TextInput
+      style={styles.input}
         onChangeText={setConfirmPassword}
         value={confirmPassword}
         secureTextEntry={true}
@@ -90,7 +94,7 @@ const FormTest = () => {
       />
       {isFieldInError('confirmPassword') &&
         getErrorsInField('confirmPassword').map(errorMessage => (
-          <Text>{errorMessage}</Text>
+          <Text style={styles.text}>{errorMessage}</Text>
         ))}
 
       <Pressable onPress={_onPressButton}>
@@ -102,22 +106,36 @@ const FormTest = () => {
 
 const styles = StyleSheet.create({
   View: {
-    flex:1
+    backgroundColor: '#009BAA'
 },
 input: {
-  marginTop: 20,
+  textAlign: 'center',
+  borderWidth: 1,
+  borderColor: '#009BAA',
+  padding: 1,
+  width: '50%',
+  marginLeft: 90,
+  backgroundColor: 'white',
+  borderRadius: 5,
 },
 button: {
     width: '50%',
-      marginLeft: 90,
-      textAlign: 'center',
-      padding: 6,
-      color: 'white',
-      fontWeight: 'bold',
-      borderRadius: 5,
-      marginBottom: 5,
-      backgroundColor: '#005AAA',
-      borderColor: '#066BC9',
+    marginLeft: 90,
+    textAlign: 'center',
+    padding: 6,
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: 5,
+    marginBottom: 5,
+    backgroundColor: '#005AAA',
+    borderColor: '#066BC9',
+},
+text: {
+  textAlign: 'center',
+  width: '50%',
+  marginLeft: 90,
+  marginBottom: 5,
+  color: 'red',
 }
 })
 
