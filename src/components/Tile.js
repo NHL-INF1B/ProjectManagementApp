@@ -1,15 +1,23 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Tile({ text, image, path}){
+export default function Tile({ text, image, path }){
+
+    const navigation = useNavigation();
+    
     return (
-        <TouchableOpacity onPress={() => navigation.navigate({path})}>
+        <Pressable 
+            onPress={() =>
+            navigation.navigate({path})}>
+
             <View style={Styles.Tile}>
                 <MaterialCommunityIcons name={image} size={55} color="#009BAA" style={Styles.Icon}/>
                 <Text style={Styles.Text}>{text}</Text>
             </View>
-        </TouchableOpacity>
+            
+        </Pressable>
     );
 }
 
