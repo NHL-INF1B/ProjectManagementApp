@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
-import { View, TextInput, Text, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Text, Button, StyleSheet, Keyboard } from 'react-native';
+import { InputAccessoryView } from 'react-native-web';
 
 
 const Registration = () => {
+  const [errors, setErrors] = useState({});
   const [naam, setNaam] = useState("");
   const [email, setEmail] = useState("");
   const [datum, setDatum] = useState("");
   const [wachtwoord, setWachtwoord] = useState("");
   const [confirmWachtwoord, setConfirmWachtwoord] = useState("");
-  const validate = () => {};
+
+  const validate = () => {
+    if
+  };
+
+
 
   return (
     <View>
