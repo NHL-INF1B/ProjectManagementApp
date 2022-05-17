@@ -23,8 +23,8 @@ function LoginScreen() {
             // .then((response) => response.text())
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
-                // catchFeedback(response);
+                // console.log(response);
+                catchFeedback(response);
             });
         } catch (error) {
             alert(error);
@@ -36,9 +36,9 @@ function LoginScreen() {
      * @param response JSON object of response
      */
     const catchFeedback = (response) => {
-        console.log('ja');
-        console.log(response);
-        console.log(response.length);
+        
+        // console.log(response);
+        // console.log(response.length);
 
         for (let index = 0; index < response.length; index++) {
             switch (response[index]) {
@@ -77,10 +77,12 @@ function LoginScreen() {
                     console.log('email_in_use');
                     break;
                 
-
                 default:
-                    //Succes - log in user! (call function to login)
-                    console.log(response);
+                    //Succes
+                    console.log(response[0].id);
+                    console.log(response[0].name);
+                    console.log(response[0].email);
+                    console.log(response[0].dateOfBirth);
                     break;
             }
         }
