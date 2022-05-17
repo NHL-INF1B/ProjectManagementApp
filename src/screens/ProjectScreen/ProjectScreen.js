@@ -1,17 +1,20 @@
 import React from 'react';
 import Styles from './Styles';
-import { View, Text, SafeAreaView } from 'react-native';
-import { MaterialCommunityIcons} from '@expo/vector-icons';
+import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import Tile from '../../components/Tile';
 
-function ProjectScreen() {
+export default function ProjectScreen() {
     
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <View style={Styles.Tile}>
-                <MaterialCommunityIcons name="book" size={55} color="#009BAA" style={Styles.Icon}/>
-                <Text style={Styles.Text}>Teamcode</Text>
-            </View>
-            <View style={Styles.Tile}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate("../LoginScreen/LoginScreen")}>
+                <View style={Styles.Tile}>
+                    <MaterialCommunityIcons name="book" size={55} color="#009BAA" style={Styles.Icon}/>
+                    <Text style={Styles.Text}>Teamcode</Text>
+                </View>
+            </TouchableOpacity> */}
+            <Tile text="Teamcode" image="book" path="../LoginScreen/LoginScreen" />
+            {/* <View style={Styles.Tile}>
                 <MaterialCommunityIcons name="calendar" size={55} color="#009BAA" style={Styles.Icon}/>
                 <Text style={Styles.Text}>Planning</Text>
             </View>
@@ -22,9 +25,7 @@ function ProjectScreen() {
             <View style={Styles.Tile}>
                 <MaterialCommunityIcons name="exclamation-thick" size={55} color="#009BAA" style={Styles.Icon}/>
                 <Text style={Styles.Text}>Waarschuwingen</Text>
-            </View>
+            </View> */}
         </SafeAreaView>
     );
 }
-
-export default ProjectScreen;
