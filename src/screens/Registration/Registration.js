@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableHighlight, StyleSheet, Pressable } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, TouchableHighlight, StyleSheet, Pressable } from 'react-native';
 import { useValidation } from 'react-native-form-validator';
 
 const FormTest = () => {
@@ -21,18 +21,14 @@ const FormTest = () => {
       name: { required: true },
       email: { email: true, required: true },
       date: { date: 'DD-MM-YYYY', required: true },
-      newPassword: { required: true },
+      newPassword: { required: true, isPassword: true },
       confirmPassword: { equalPassword: newPassword, required: true },
-    });
-    if(!getErrorsInField('name')){
-      console.log('geen errors');
-    }
+    });    
   };
 
-  <FormTest deviceLocale="nl" />
-
   return (
-    <View>
+    <SafeAreaView>
+      <View>
       <TextInput 
         style={styles.input}
         onChangeText={setName} 
@@ -83,6 +79,8 @@ const FormTest = () => {
           <Text style={styles.text}>{errorMessage}</Text>
         ))}
 
+        
+
 
       
       <TextInput
@@ -101,6 +99,7 @@ const FormTest = () => {
         <Text style={styles.button} >Submit</Text>
       </Pressable>
     </View>
+    </SafeAreaView>
   );
 };
 
@@ -117,6 +116,7 @@ input: {
   marginLeft: 90,
   backgroundColor: 'white',
   borderRadius: 5,
+  margin: 10,
 },
 button: {
     width: '50%',
