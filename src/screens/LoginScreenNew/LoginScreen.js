@@ -3,7 +3,7 @@ import Styles from "./Styles";
 import { View, Text, SafeAreaView, Button } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const LoginScreenNew = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
 
 	useEffect(() => {
         // removeValue(); //If you want to remove the stored data for testing
@@ -11,7 +11,7 @@ const LoginScreenNew = ({ navigation }) => {
         data.then((data) => {
             if (data != null) {
                 console.log(data);
-                navigation.navigate('LoginScreen'); //Needs to go to welcomescreen
+                navigation.navigate('RegisterScreen'); //Needs to go to welcomescreen
             }
         });
 	}, []);
@@ -108,7 +108,7 @@ const LoginScreenNew = ({ navigation }) => {
 					console.log(response[0].dateOfBirth);
 
 					storeData(response[0]);
-					navigation.navigate('LoginScreen'); //Needs to go to welcomescreen
+					navigation.navigate('RegisterScreen'); //Needs to go to welcomescreen
 					break;
 			}
 		}
@@ -132,4 +132,4 @@ const LoginScreenNew = ({ navigation }) => {
 	);
 }
 
-export default LoginScreenNew;
+export default LoginScreen;
