@@ -10,6 +10,7 @@ export default StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
     },
+    
     title: {
       textAlign: 'center',
       color: 'white',
@@ -80,7 +81,7 @@ export default StyleSheet.create({
     errorMessage: {
       textAlign: 'center',
       color:'red',
-      fontWeight: 'bolder',
+      fontWeight: 'bold',
 
     },
 });

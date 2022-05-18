@@ -12,15 +12,47 @@ import Circle from '../../components/Circle/Circle';
 const CreateProject = ()=> {
   const [ProjectNaam, setProjectNaam] = useState('');
 
-  const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+  const sendDataToAPI = () => {
+    try {
+        fetch("http://localhost/ProjectManagementApp/src/screens/LoginScreen/handler.php", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                test: "stefan",
+            }),
+        })
+        .then((response) => response.json())
+        .then((response) => console.log(response));
+    } catch (error) {
+        alert(error);
+    }
+};
+
+  const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
   useValidation({
       state: { ProjectNaam},
   });
 
+  const _checkValidation = () => {
+    if(isFormValid() == true) {
+      console.log("geen errors");
+      sendDataToAPI();
+    } else if (isFormValid() == false) {
+      console.log("wel errors");
+    }
+      else {
+        console.log("dikke kutzooi");
+    }
+  }
+
   const _onPressButton = () => {
     validate({
       ProjectNaam: { minlength: 3, maxlength: 30, hasNoSpecialCharacter: true, required: true },
-    });
+    }),
+    _checkValidation();
   };
 return (
     <ScrollView style={styles.root}>
@@ -45,7 +77,6 @@ return (
         <Pressable onPress={_onPressButton}>
         <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>AANMAKEN</Text>
         </Pressable>
-
     </ScrollView>
     );
 };
