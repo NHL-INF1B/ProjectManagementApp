@@ -35,7 +35,7 @@ const getData = async () => {
     }
 };
 
-// 
+// Data verwijderen 
 removeFew = async () => {
     const keys = ['','']
     try {
