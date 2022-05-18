@@ -33,7 +33,7 @@ const Registration = () => {
   });
 
   //send the data to the api if there are no errors.
-  const sendToAPI = () => {
+  const sendToAPI = (name, email, date, password) => {
     try {
       fetch(
         "http://localhost/project4/ProjectManagementApp/src/screens/Registration/handler.php",
@@ -47,7 +47,7 @@ const Registration = () => {
             name: name,
             email: email,
             dateOfBirth: date,
-            password: newPassword,
+            password: password,
           }),
         }
       )
@@ -74,7 +74,7 @@ const Registration = () => {
   const _checkValidation = () => {
     if (isFormValid() == true) {
       console.log("woohooo er zijn geen errors");
-      //sendToAPI();
+      sendToAPI(name, email, date, confirmPassword);
     } else if (isFormValid() == false) {
       console.log("er zijn nog goede errors");
     } else {
