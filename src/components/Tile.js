@@ -3,14 +3,17 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Tile({ text, image, path }){
+export default function Tile({ text, image, goToScreen, projectId, userId }){
 
     const navigation = useNavigation();
     
     return (
         <Pressable 
             onPress={() =>
-            navigation.navigate({path})}>
+            navigation.navigate("TileTestScreen", {
+				projectId: {projectId},
+				userId: {userId},
+			})}>
 
             <View style={Styles.Tile}>
                 <MaterialCommunityIcons name={image} size={55} color="#009BAA" style={Styles.Icon}/>
