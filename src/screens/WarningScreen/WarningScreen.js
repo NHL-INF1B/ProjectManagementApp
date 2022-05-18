@@ -6,20 +6,20 @@ import Bar from '../../components/Bar/bar';
 const WarningScreen = () => {
     return (
         <ScrollView style={styles.root}>
-            <View style={[styles.flex, styles.marginTop15]}>
+            <View style={[styles.flex, styles.marginTop10]}>
                 <MaterialCommunityIcons name="plus" size={60} color={'black'} />
                 <MaterialCommunityIcons style={[styles.arrow]}  name="arrow-left" size={60} color={'black'} />
             </View>
-            <Bar name={"alert-circle"} color={"black"} style={[styles.verticalMid, styles.marginLeft10]}/>
-            <Bar name={"alert-circle"} color={"black"}  style={[styles.verticalMid, styles.marginLeft10]}/>
-            <Bar name={"alert-circle"} color={"black"}  style={[styles.verticalMid, styles.marginLeft10]}/>
-            <Bar name={"alert-circle"} color={"black"}  style={[styles.verticalMid, styles.marginLeft10]}/>
-            <Bar name={"alert-circle"} color={"black"}  style={[styles.verticalMid, styles.marginLeft10]}/>
-            <Bar name={"alert-circle"} color={"black"}  style={[styles.verticalMid, styles.marginLeft10]}/>
-            <Bar name={"alert-circle"} color={"black"}  style={[styles.verticalMid, styles.marginLeft10]}/>
-            <Bar name={"alert-circle"} color={"black"}  style={[styles.verticalMid, styles.marginLeft10]}/>
-            <Bar name={"alert-circle"} color={"black"}  style={[styles.verticalMid, styles.marginLeft10]}/>
-            <Bar name={"alert-circle"} color={"black"}  style={[styles.verticalMid, styles.marginLeft10]}/>
+            <Bar name={"alert-circle"} color={"black"} value={"Naam Test"}/>
+            <Bar name={"alert-circle"} color={"black"}  style={styles.verticalMid}/>
+            <Bar name={"alert-circle"} color={"black"}  style={styles.verticalMid}/>
+            <Bar name={"alert-circle"} color={"black"}  style={styles.verticalMid}/>
+            <Bar name={"alert-circle"} color={"black"}  style={styles.verticalMid}/>
+            <Bar name={"alert-circle"} color={"black"}  style={styles.verticalMid}/>
+            <Bar name={"alert-circle"} color={"black"}  style={styles.verticalMid}/>
+            <Bar name={"alert-circle"} color={"black"}  style={styles.verticalMid}/>
+            <Bar name={"alert-circle"} color={"black"}  style={styles.verticalMid}/>
+            <Bar name={"alert-circle"} color={"black"}  style={styles.verticalMid}/>
         </ScrollView>
     )
 }

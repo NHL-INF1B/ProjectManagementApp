@@ -15,9 +15,6 @@ const CustomTextInput = ({value, setValue, placeholder}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        
-    },
     input: {
         textAlign: 'center',
         borderWidth: 1,

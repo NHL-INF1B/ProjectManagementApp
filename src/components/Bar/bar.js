@@ -1,36 +1,55 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const Bar = ({ name, color, style, value, value2 }) => {
+const Bar = ({ name, color, value }) => {
     return (
         <View style={[styles.bar, styles.marginBottom5, styles.flex]}>
             <MaterialCommunityIcons 
                 name={name} 
-                size={60} 
+                size={100} 
                 color={color} 
-                style={[style]} 
+                style={[styles.flex, styles.icon]} 
             />
+            <View style={styles.text}>
+                <Text style={styles.name}>Naam</Text>
+                <Text style={styles.text}>Te laat zonder geldige reden testtesttesttesttesttesttesttesttesttesttesttesttesttesttestaggadgdfasa</Text>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        
-    },
     bar: {
         width: '95%',
-        marginLeft: '2.5%',
-        height: 100,
+        height: '10%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
         borderRadius: 20,
         backgroundColor: 'red',
     },
+    icon: {
+        marginBottom: 'auto',
+        marginTop: 'auto',
+    },
     marginBottom5: {
-        marginBottom: '5%',
+        marginBottom: 10,
     },
     flex: {
         flexDirection: 'row',
     },
+    text: {
+        alignSelf: 'center',
+        fontSize: 15,
+        flex: 1,
+        flexWrap: 'wrap',
+        marginTop: 5,
+    },
+    name: {
+        color: 'white',
+        textDecorationLine: 'underline',
+        fontWeight: 'bold',
+        fontSize: 20,
+    }
 });
 export default Bar

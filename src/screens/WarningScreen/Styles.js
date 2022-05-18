@@ -13,23 +13,10 @@ export default StyleSheet.create({
     flex: {
         flexDirection: 'row',
     },
-    marginTop15: {
-        marginTop: '5%',
+    marginTop10: {
+        marginTop: 10,
     },
-    marginLeft10: {
-        marginLeft: '5%',
+    textcenter: {
+        textAlign: 'center',
     },
-    marginBottom10: {
-        marginBottom: '5%',
-    },
-    bar: {
-        width: '95%',
-        marginLeft: '2.5%',
-        height: 100,
-        borderRadius: 15,
-        backgroundColor: 'red',
-    },
-    verticalMid: {
-        marginVertical: '5%',
-    }
 });
