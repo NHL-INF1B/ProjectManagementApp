@@ -22,21 +22,16 @@ const Registration = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   //step 1 to validate things
-  const {
-    validate,
-    isFieldInError,
-    getErrorsInField,
-    getErrorMessages,
-    isFormValid,
-  } = useValidation({
-    state: { name, email, date, newPassword, confirmPassword },
-  });
+  const { validate, isFieldInError, getErrorsInField, isFormValid } =
+    useValidation({
+      state: { name, email, date, newPassword, confirmPassword },
+    });
 
   //send the data to the api if there are no errors.
-  const sendToAPI = (name, email, date, password) => {
+  const sendToAPI = (name, email, date, password, confirmPassword) => {
     try {
       fetch(
-        "http://localhost/PMA/ProjectManagementApp/src/screens/Registration/handler.php",
+        "http://localhost/PMA/PmaAPI/handlers/registration//registrationHandler.php",
         {
           method: "POST",
           headers: {
@@ -48,33 +43,34 @@ const Registration = () => {
             email: email,
             dateOfBirth: date,
             password: password,
+            confirmPassword: confirmPassword,
           }),
         }
       )
         .then((response) => response.json())
-        .then((response) => console.log(response));
+        .then((response) => feedback(response));
     } catch (error) {
       alert(error);
     }
   };
 
   //set the requirements for the textinput.
-  const _onPressButton = () => {
+  const onPressButton = () => {
     validate({
       name: { required: true },
       email: { email: true, required: true },
-      date: { date: "DD-MM-YYYY", required: true },
+      date: { date: "YYYY-MM-DD", required: true },
       newPassword: { required: true, isPassword: true },
       confirmPassword: { equalPassword: newPassword, required: true },
     }),
-      _checkValidation();
+      checkValidation();
   };
 
   //check if there are no more errors
-  const _checkValidation = () => {
+  const checkValidation = () => {
     if (isFormValid() == true) {
       console.log("woohooo er zijn geen errors");
-      sendToAPI(name, email, date, confirmPassword);
+      sendToAPI(name, email, date, newPassword, confirmPassword);
     } else if (isFormValid() == false) {
       console.log("er zijn nog goede errors");
     } else {
@@ -82,6 +78,33 @@ const Registration = () => {
     }
   };
 
+  const feedback = (response) => {
+    console.log(response);
+
+    for (let x = 0; x < response.lenght; x++) {
+      switch (response[x]) {
+        case "name_incorrect":
+          alert("De naam is verkeerd.");
+          break;
+        case "email_incorrect":
+          alert("Het emailadres is verkeerd.");
+          break;
+        case "dateOfBirth_incorrect":
+          alert("De geboortedatum is verkeerd.");
+          break;
+        case "password_incorrect":
+          alert("Het eerste wachtwoord is verkeerd.");
+          break;
+        case "confirmPassword_incorrect":
+          alert("Het tweede wachtwoord is verkeerd.");
+          break;
+        case "samePassword_incorrect":
+          alert("De wachtwoorden zijn niet hetzelfde.");
+        default:
+          alert("Je account is aangemaakt, log nu in met je gegevens.");
+      }
+    }
+  };
   //the screen
   return (
     <ScrollView style={styles.container}>
@@ -161,7 +184,7 @@ const Registration = () => {
           ))}
       </View>
 
-      <Pressable onPress={_onPressButton}>
+      <Pressable onPress={onPressButton}>
         <Text style={styles.button}>REGISTREREN</Text>
       </Pressable>
 
