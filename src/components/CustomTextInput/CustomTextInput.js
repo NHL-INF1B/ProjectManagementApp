@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
         borderColor: '#009BAA',
         padding: 1,
         width: '50%',
-        marginLeft: 90,
         backgroundColor: 'white',
         borderRadius: 5,
+        alignSelf: 'center',
     },
 });
 export default CustomTextInput
