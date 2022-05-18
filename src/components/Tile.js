@@ -10,7 +10,7 @@ export default function Tile({ text, image, screen, projectId, userId }){
     return (
         <Pressable 
             onPress={() =>
-            navigation.navigate("TileTestScreen", {
+            navigation.navigate(screen, {
 				projectId: {projectId},
 				userId: {userId},
 			})}>
@@ -38,7 +38,7 @@ const Styles = StyleSheet.create({
 		margin: 15,
 	},
 	Icon: {
-		flex: 1,
+		flex: 2,
 	},
 	Text: {
 		flex: 2,

@@ -10,21 +10,25 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator>
+			<Stack.Navigator
+				screenOptions={{
+					headerShown: false,
+				}
+				}
+			>
 				<Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
-					options={{
-						headerShown: false,
-					}}
 				/>
 
 				<Stack.Screen
 					name="TileTestScreen"
 					component={TileTestScreen}
-					options={{
-						headerShown: true,
-					}}
+				/>
+
+				<Stack.Screen 
+					name="LoginScreen"
+					component={LoginScreen}
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>
