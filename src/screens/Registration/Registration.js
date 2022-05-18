@@ -36,7 +36,7 @@ const Registration = () => {
   const sendToAPI = (name, email, date, password) => {
     try {
       fetch(
-        "http://localhost/project4/ProjectManagementApp/src/screens/Registration/handler.php",
+        "http://localhost/PMA/ProjectManagementApp/src/screens/Registration/handler.php",
         {
           method: "POST",
           headers: {
