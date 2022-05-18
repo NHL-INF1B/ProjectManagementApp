@@ -13,7 +13,6 @@ import { useValidation } from "react-native-form-validator";
 import styles from "./Styles";
 const Registration = () => {
   //the things where the info goess in.
-  const errors = useRef([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
@@ -73,9 +72,10 @@ const Registration = () => {
   //check if there are no more errors
   const _checkValidation = () => {
     if (isFormValid() == true) {
+      console.log("woohooo er zijn geen errors");
       sendToAPI();
     } else if (isFormValid() == false) {
-      console.log("wel errors die de bedoeling zijn");
+      console.log("er zijn nog goede errors");
     } else {
       console.log("ik heb echt geen idee waarom dit is");
     }

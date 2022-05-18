@@ -38,5 +38,6 @@ export default StyleSheet.create({
     marginLeft: 90,
     marginBottom: 5,
     color: "red",
+    fontWeight: "bold",
   },
 });
