@@ -2,7 +2,7 @@ import React from 'react';
 import Styles from './Styles';
 import { View, Text, SafeAreaView } from 'react-native';
 
-function LoginScreen() {
+const LoginScreen = ({ navigation, route }) => {
 	const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
         try {
             fetch("http://localhost/pma/PmaAPI/handlers/registration/registrationHandler.php", {
@@ -94,8 +94,8 @@ function LoginScreen() {
 			</View>
 
 			<View style={Styles.login}>
-				<Text>Hier alles voor login</Text>
-                <Button title="druk hier" onPress={() => sendDataToAPI("Stefan", "stefan@email.com", "2001-12-26", "welkom10", "welkom10")} />
+				<Text>Hier alles voor registratie</Text>
+                <Button title="druk hier" onPress={() => sendDataToAPI("Stefan", "stefan@email.com", "2001-12-26", "!Welkom10", "!Welkom10")} />
 			</View>
 		</SafeAreaView>
 	);
