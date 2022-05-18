@@ -3,7 +3,7 @@ import Styles from "./Styles";
 import { View, Text, SafeAreaView } from "react-native";
 import { Button } from "react-native-web";
 
-function LoginScreen() {
+const LoginScreen = ({ navigation, route }) => {
 	const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
         try {
             fetch("http://localhost/pma/PmaAPI/handlers/registration/registrationHandler.php", {

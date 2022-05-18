@@ -13,7 +13,7 @@ export default StyleSheet.create({
 		alignItems: "center",
 	},
 	login: {
-		backgroundColor: "dodgerblue",
+		backgroundColor: "salmon",
 		flex: 2,
 		alignItems: "center",
 	},
