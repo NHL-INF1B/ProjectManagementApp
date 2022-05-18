@@ -3,7 +3,7 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Tile({ text, image, goToScreen, projectId, userId }){
+export default function Tile({ text, image, screen, projectId, userId }){
 
     const navigation = useNavigation();
     
