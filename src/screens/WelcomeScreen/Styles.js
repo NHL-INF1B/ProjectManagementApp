@@ -1,6 +1,4 @@
-import { StyleSheet, Platform, StatusBar, Dimensions } from 'react-native';
-
-const _width = Dimensions.get('screen').width * 0.5;
+import { StyleSheet, Platform, StatusBar} from 'react-native';
 
 export default StyleSheet.create({
     container: {
@@ -16,7 +14,6 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'center',
     },
     img: {
         height: 157,
