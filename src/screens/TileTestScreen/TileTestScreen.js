@@ -11,8 +11,8 @@ export default function TileTestScreen() {
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <Tile text="Go back" image="airplane" screen="ProjectScreen" />
-            {/* <Text>ProjectId: {route.params.projectId}</Text>
-            <Text>UserId: {route.params.userId}</Text> */}
+            <Text>ProjectId: {route.params.projectId}</Text>
+            <Text>UserId: {route.params.userId}</Text>
         </SafeAreaView>
     );
 }

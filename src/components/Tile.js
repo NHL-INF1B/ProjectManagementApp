@@ -11,8 +11,8 @@ export default function Tile({ text, image, screen, projectId, userId }){
         <Pressable 
             onPress={() =>
             navigation.navigate(screen, {
-				projectId: {projectId},
-				userId: {userId},
+				projectId: projectId,
+				userId: userId,
 			})}>
 
             <View style={Styles.Tile}>
@@ -38,6 +38,7 @@ const Styles = StyleSheet.create({
 		margin: 15,
 	},
 	Icon: {
+		paddingTop: 15,
 		flex: 2,
 	},
 	Text: {
@@ -47,4 +48,16 @@ const Styles = StyleSheet.create({
 		textAlign: "center",
 		fontSize: 25,
 	},
+	Uitloggen: {
+        minWidth: 135,
+        maxWidth: 135,
+        minHeight: 141,
+        maxHeight: 141,
+        backgroundColor: 'red',
+        borderColor: '#707070',
+        borderRadius: 10,
+        flex: 1,
+        alignItems: 'center',
+        margin: 15,
+    },
 });
