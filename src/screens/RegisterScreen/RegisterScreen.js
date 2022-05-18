@@ -3,7 +3,7 @@ import Styles from "./Styles";
 import { View, Text, SafeAreaView } from "react-native";
 import { Button } from "react-native-web";
 
-const LoginScreen = ({ navigation, route }) => {
+const RegisterScreen = ({ navigation, route }) => {
 	const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
         try {
             fetch("http://localhost/pma/PmaAPI/handlers/registration/registrationHandler.php", {
@@ -102,4 +102,4 @@ const LoginScreen = ({ navigation, route }) => {
 	);
 }
 
-export default LoginScreen;
+export default RegisterScreen;

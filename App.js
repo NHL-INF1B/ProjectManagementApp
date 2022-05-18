@@ -1,6 +1,6 @@
-import {React, useEffect} from "react";
-import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
-import LoginScreenNew from "./src/screens/LoginScreenNew/LoginScreenNew";
+import {React} from "react";
+import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
+import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -10,8 +10,8 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{headerShown:false}}>
-				<Stack.Screen name="LoginScreenNew" component={LoginScreenNew} />
 				<Stack.Screen name="LoginScreen" component={LoginScreen} />
+				<Stack.Screen name="RegisterScreen" component={RegisterScreen} />
       		</Stack.Navigator>
 	  	</NavigationContainer>
 	);
