@@ -1,13 +1,13 @@
 'use strict';
 
-import { Text, ScrollView, TextInput, Pressable } from 'react-native';
+import { Text, ScrollView, View, TextInput, Pressable, } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { useValidation } from 'react-native-form-validator';
-// import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
 // import { set } from 'react-native-reanimated';
+// import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 
 const CreateProject = ()=> {
   const [ProjectNaam, setProjectNaam] = useState('');
@@ -19,27 +19,33 @@ const CreateProject = ()=> {
 
   const _onPressButton = () => {
     validate({
-      ProjectNaam: { minlength: 3, maxlength: 30, required: true },
+      ProjectNaam: { minlength: 3, maxlength: 30, hasNoSpecialCharacter: true, required: true },
     });
   };
 return (
     <ScrollView style={styles.root}>
         <MaterialCommunityIcons style={styles.arrow}  name="arrow-left-thick" size={60} color={'black'} />
-        <Circle name={"account-group"} size={60} color={"black"} style={styles.icon} />
-        <Text style={[styles.title, styles.marginBottom25]}>PROJECT AANMAKEN</Text>
-        <Text style={styles.subtitle}>PROJECTNAAM</Text>
-        <TextInput style={[styles.textInput]} onChangeText={setProjectNaam} value={ProjectNaam} placeholder={'PROJECTNAAM'}/>
-        {isFieldInError('date' &&
-            getErrorsInField('date').map(ErrorMessage => (
-                <text>{ErrorMessage}</text>
+        <View style={styles.div}>
+        <Circle name={"account-group"} size={60} color={"black"} style={[styles.icon,]} />
+        </View>
+        <View style={styles.div}>
+        <Text style={[styles.title, styles.marginBottom25, styles.marginTop50, styles.sampleText,]}>PROJECT AANMAKEN</Text>
+        </View>
+        <View style={styles.div}> 
+        <Text style={[styles.subtitle, styles.sampleText,]}>PROJECTNAAM</Text>
+        </View>
+        <View style={styles.div}>
+        <TextInput style={[styles.textInput,]} onChangeText={setProjectNaam} value={ProjectNaam} placeholder={'PROJECTNAAM'}/>
+        </View>
+        {isFieldInError('projectNaam' &&
+            getErrorsInField('projectNaam').map(ErrorMessage => (
+                <Text style={[styles.sampleText]}>{ErrorMessage}</Text>
             )))}
+                    <Text style={styles.errorMessage}>{getErrorMessages()}</Text>
         <Pressable onPress={_onPressButton}>
         <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>AANMAKEN</Text>
         </Pressable>
-        {/* <Pressable>
-            <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>AANMAKEN</Text>
-        </Pressable>    */}
-        <Text>{getErrorMessages()}</Text>
+
     </ScrollView>
     );
 };
@@ -116,4 +122,3 @@ export default CreateProject;
 // };
 
 // export default FormTest;
->>>>>>> Stashed changes

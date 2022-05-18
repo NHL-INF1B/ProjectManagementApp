@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         borderColor: 'black',
         backgroundColor: 'white',
-        marginLeft: '40%',
+        alignItems:'center',
+        justifyContent:'center'
     },
 });
 export default Circle
