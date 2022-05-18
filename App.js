@@ -27,8 +27,8 @@ export default function App() {
           component={LoginScreen}
         />
         <Stack.Screen
-          name = "LogoutScreen"
-          component={LogoutScreen}
+          name = "ProfileScreen"
+          component={ProfileScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

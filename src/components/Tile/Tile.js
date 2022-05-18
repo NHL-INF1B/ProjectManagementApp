@@ -9,7 +9,7 @@ export default function Tile({ text, image, screen, projectId, userId }){
     
     var styling = Styles.Tile;
     
-    if (screen == "LogoutScreen") {
+    if (screen == "LoginScreen") {
         styling = Styles.Uitloggen;
     };
 

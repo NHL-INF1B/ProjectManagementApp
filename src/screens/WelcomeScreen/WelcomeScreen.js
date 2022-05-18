@@ -14,8 +14,8 @@ export default function WelcomeScreen() {
             />
             <SafeAreaView style={Styles.safeAreaView}>
                 <Tile text="Projecten" image="account-group" screen="ProjectScreen" projectId={projectId} userId={userId} />
-                <Tile text="Profiel" image="card-account-details" screen="LoginScreen" projectId={projectId} userId={userId} />
-                <Tile text="Uitloggen" image="logout" screen="LogoutScreen" projectId={projectId} userId={userId} />
+                <Tile text="Profiel" image="card-account-details" screen="ProfileScreen" projectId={projectId} userId={userId} />
+                <Tile text="Uitloggen" image="logout" screen="LoginScreen" projectId={projectId} userId={userId} />
             <StatusBar style="auto" />
             </SafeAreaView>
         </SafeAreaView>
