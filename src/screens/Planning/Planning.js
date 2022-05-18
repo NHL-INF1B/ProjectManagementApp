@@ -27,6 +27,8 @@ const Planning = () => {
         })
         .then((response) => response.text())
         // .then((response) => response.json())
+        // .then((response) => response.text())
+        .then((response) => response.json())
         .then((response) => {
             console.log(response);
             // catchFeedback(response);
