@@ -11,7 +11,6 @@ import {
   Image,
 } from "react-native";
 import { useValidation } from "react-native-form-validator";
-import { Assets } from "react-navigation-stack";
 import styles from "./Styles";
 const Registration = () => {
   //the things where the info goess in.
@@ -48,7 +47,13 @@ const Registration = () => {
         }
       )
         .then((response) => response.json())
-        .then((response) => feedback(response));
+        .then((response) => {
+          this.setState({ name: response[0].name });
+          this.setState({ email: response[0].email });
+          this.setState({ dateOfBirth: response[0].dateOfBirth });
+          this.setState({ password: response[0].password });
+          this.setState({ confirmPassword: response[0].confirmPassword });
+        });
     } catch (error) {
       alert(error);
     }
@@ -69,39 +74,45 @@ const Registration = () => {
   //check if there are no more errors
   const checkValidation = () => {
     if (isFormValid() == true) {
-      console.log("woohooo er zijn geen errors");
       sendToAPI(name, email, date, newPassword, confirmPassword);
-    } else if (isFormValid() == false) {
-      console.log("er zijn nog goede errors");
-    } else {
-      console.log("ik heb echt geen idee waarom dit is");
     }
   };
 
   const feedback = (response) => {
     console.log(response);
+    console.log(response.lenght);
 
-    for (let x = 0; x < response.lenght; x++) {
+    for (let i = 0; i < response.lenght; i++) {
       switch (response[x]) {
         case "name_incorrect":
           alert("De naam is verkeerd.");
+          console.log("De naam is verkeerd.");
           break;
         case "email_incorrect":
           alert("Het emailadres is verkeerd.");
+          console.log("Het emailadres is verkeerd.");
           break;
         case "dateOfBirth_incorrect":
           alert("De geboortedatum is verkeerd.");
+          console.log("De geboortedatum is verkeerd.");
           break;
         case "password_incorrect":
           alert("Het eerste wachtwoord is verkeerd.");
+          console.log("Het eerste wachtwoord is verkeerd.");
           break;
         case "confirmPassword_incorrect":
           alert("Het tweede wachtwoord is verkeerd.");
+          console.log("Het tweede wachtwoord is verkeerd.");
           break;
         case "samePassword_incorrect":
           alert("De wachtwoorden zijn niet hetzelfde.");
+          console.log("De wachtwoorden zijn niet hetzelfde.");
+        case "email_in_use":
+          alert("Dit emailadres is al in gebruik.");
+          console.log("Dit emailadres is al in gebruik.");
         default:
           alert("Je account is aangemaakt, log nu in met je gegevens.");
+          console.log("Je account is aangemaakt, log nu in met je gegevens.");
       }
     }
   };
