@@ -1,6 +1,5 @@
 import React from "react";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
-import LoginScreen from './src/screens/LoginScreen/LoginScreen';
 import TileTestScreen from "./src/screens/TileTestScreen/TileTestScreen";
 import {React, useEffect} from "react";
 import LoginScreen from "./src/screens/LoginScreen/LoginScreen";

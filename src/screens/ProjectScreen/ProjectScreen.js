@@ -8,12 +8,13 @@ export default function ProjectScreen() {
     // temporary hardcode
     const projectId = 23;
     const userId = 519;
+    const projectName = "Innovate";
     
     return (
         <ScrollView>
             <SafeAreaView style={Styles.Container}>
                 <Image style={Styles.Img} source={require("../../assets/images/logo.png")} />
-                <Text style={Styles.ProjectName}>Projectnaam</Text>
+                <Text style={Styles.ProjectName}>{projectName}</Text>
                 <SafeAreaView style={Styles.Tiles}>
                     <Tile text="Teamcode" image="book" screen="TileTestScreen" projectId={projectId} userId={userId} />
                     <Tile text="Planning" image="calendar" screen="PlanningScreen" projectId={projectId} userId={userId} />
