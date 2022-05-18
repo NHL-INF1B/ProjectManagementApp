@@ -1,15 +1,17 @@
 "use strict";
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
-  SafeAreaView,
+  ScrollView,
   View,
   Text,
   TextInput,
   StyleSheet,
   Pressable,
+  Image,
 } from "react-native";
 import { useValidation } from "react-native-form-validator";
+import { Assets } from "react-navigation-stack";
 import styles from "./Styles";
 const Registration = () => {
   //the things where the info goess in.
@@ -34,7 +36,7 @@ const Registration = () => {
   const sendToAPI = () => {
     try {
       fetch(
-        "http://localhost/project4/ProjectManagementApp/src/screens/LoginScreen/handler.php",
+        "http://localhost/project4/ProjectManagementApp/src/screens/Registration/handler.php",
         {
           method: "POST",
           headers: {
@@ -44,9 +46,8 @@ const Registration = () => {
           body: JSON.stringify({
             name: name,
             email: email,
-            birthdate: date,
-            newPassword: newPassword,
-            confirmPassword: confirmPassword,
+            dateOfBirth: date,
+            password: newPassword,
           }),
         }
       )
@@ -73,7 +74,7 @@ const Registration = () => {
   const _checkValidation = () => {
     if (isFormValid() == true) {
       console.log("woohooo er zijn geen errors");
-      sendToAPI();
+      //sendToAPI();
     } else if (isFormValid() == false) {
       console.log("er zijn nog goede errors");
     } else {
@@ -83,7 +84,16 @@ const Registration = () => {
 
   //the screen
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
+      <View>
+        <Image
+          style={styles.logo}
+          source={require("../../assets/images/logo.png")}
+        />
+      </View>
+
+      <Text style={styles.titel}>REGISTREREN</Text>
+
       <View style={styles.div}>
         <TextInput
           style={styles.input}
@@ -96,6 +106,7 @@ const Registration = () => {
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
+
       <View style={styles.div}>
         <TextInput
           style={styles.input}
@@ -108,6 +119,7 @@ const Registration = () => {
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
+
       <View style={styles.div}>
         <TextInput
           style={styles.input}
@@ -120,6 +132,7 @@ const Registration = () => {
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
+
       <View style={styles.div}>
         <TextInput
           style={styles.input}
@@ -133,6 +146,7 @@ const Registration = () => {
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
+
       <View style={styles.div}>
         <TextInput
           style={styles.input}
@@ -148,11 +162,15 @@ const Registration = () => {
       </View>
 
       <Pressable onPress={_onPressButton}>
-        <Text style={styles.button}>Submit</Text>
+        <Text style={styles.button}>REGISTREREN</Text>
+      </Pressable>
+
+      <Pressable onPress>
+        <Text style={styles.inloggen}>INLOGGEN</Text>
       </Pressable>
 
       <Text></Text>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
