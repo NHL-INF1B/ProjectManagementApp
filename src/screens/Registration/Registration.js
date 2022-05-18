@@ -1,21 +1,45 @@
 'use strict';
 
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, TextInput, TouchableHighlight, StyleSheet, Pressable } from 'react-native';
-import { useValidation } from 'react-native-form-validator';
+import { SafeAreaView, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
+import { useValidation, isFormValid } from 'react-native-form-validator';
 
-const FormTest = () => {
+const Registration = () => {
+  //the things where the info goess in.
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [date, setDate] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+  //step 1 to validate things
+  const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
     useValidation({
       state: { name, email, date, newPassword, confirmPassword },
     });
 
+    //send the data to the api if there are no errors.
+    const sendToAPI = () => {
+      try {
+        fetch("http://localhost/ProjectManagementApp/src/screens/LoginScreen/handler.php", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              test: "stefan",
+            }),
+        })
+        .then((response) => response.json())
+        .then((response) => console.log(response));
+      } catch (error) {
+        alert(error);
+      }
+  };
+
+
+  //set the requirements for the textinput.
   const _onPressButton = () => {
     validate({
       name: { required: true },
@@ -23,9 +47,25 @@ const FormTest = () => {
       date: { date: 'DD-MM-YYYY', required: true },
       newPassword: { required: true, isPassword: true },
       confirmPassword: { equalPassword: newPassword, required: true },
-    });    
+    }),
+    _checkValidation;
   };
 
+  //check if there are no more errors
+  const _checkValidation = () => {
+    if(isFormValid() == "true"){
+      console.log("geen errors");
+      sendToAPI;
+    }
+    else if(isFormValid() == "false"){
+      console.log('wel errors die de bedoeling zijn');
+    }
+    else{
+      console.log('ik heb echt geen idee waarom dit is');
+    };
+  }
+
+  //the screen
   return (
     <SafeAreaView>
       <View>
@@ -95,10 +135,10 @@ const FormTest = () => {
           <Text style={styles.text}>{errorMessage}</Text>
         ))}
 
-      <Pressable onPress={_onPressButton}>
+      <Pressable disabled={!isFormValid} onPress={_onPressButton}>
         <Text style={styles.button} >Submit</Text>
       </Pressable>
-    </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -139,4 +179,4 @@ text: {
 }
 })
 
-export default FormTest;
+export default Registration;
