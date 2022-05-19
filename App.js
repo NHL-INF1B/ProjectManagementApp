@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React } from "react";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import { NavigationContainer } from "@react-navigation/native";
