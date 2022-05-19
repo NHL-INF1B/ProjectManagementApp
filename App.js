@@ -1,4 +1,3 @@
-import React from "react";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import {React, useEffect} from "react";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
