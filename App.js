@@ -1,8 +1,7 @@
 import React from "react";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import {React, useEffect} from "react";
-import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
-import LoginScreenNew from "./src/screens/LoginScreenNew/LoginScreenNew";
+import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -15,18 +14,13 @@ export default function App() {
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 
 				<Stack.Screen
-					name="LoginScreen"
+					name="LoginScreenNew"
 					component={LoginScreen}
 				/>
 
 				<Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
-				/>
-
-				<Stack.Screen 
-					name="LoginScreen"
-					component={LoginScreen}
 				/>
 
 				<Stack.Screen
@@ -57,11 +51,6 @@ export default function App() {
 				<Stack.Screen
 					name="ScoreScreen"
 					component={""}
-				/>
-
-				<Stack.Screen
-					name="LoginScreenNew"
-					component={LoginScreenNew}
 				/>
 
 				<Stack.Screen
