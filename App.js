@@ -7,7 +7,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProjectScreen from './src/screens/ProjectScreen/ProjectScreen';
 import ProfileScreen from './src/screens/ProfileScreen/ProfileScreen';
 import LoginScreen from './src/screens/LoginScreen/LoginScreen';
-//import ProjectAanmaken from './src/screens/ProjectAanmaken/ProjectAanmaken';
+import RegisterScreen from './src/screens/RegisterScreen/RegisterScreen';
+//import CreateProject from './src/screens/CreateProject/CreateProject';
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm. 
@@ -30,6 +31,10 @@ export default function App() {
         <Stack.Screen
           name = "ProfileScreen"
           component={ProfileScreen}
+        />
+        <Stack.Screen
+          name = "RegisterScreen"
+          component={RegisterScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
