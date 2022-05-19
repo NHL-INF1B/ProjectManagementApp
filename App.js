@@ -4,11 +4,13 @@ import { StyleSheet, Text, Image, View } from 'react-native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ProjectScreen from './src/screens/ProjectScreen/ProjectScreen';
-import ProfileScreen from './src/screens/ProfileScreen/ProfileScreen';
-import LoginScreen from './src/screens/LoginScreen/LoginScreen';
+//import ProjectScreen from './src/screens/ProjectScreen/ProjectScreen';
+//import ProfileScreen from './src/screens/ProfileScreen/ProfileScreen';
+import LoginScreen from './src/screens/LoginScreenNew/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen/RegisterScreen';
-//import CreateProject from './src/screens/CreateProject/CreateProject';
+import CreateProject from './src/screens/CreateProject/CreateProject';
+import HourEditScreen from './src/screens/HourEditScreen/HourEditScreen';
+import WelcomeScreen from './src/screens/WelcomeScreen/WelcomeScreen';
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm. 
@@ -21,6 +23,10 @@ export default function App() {
           headerShown: false,
         }}>
         <Stack.Screen
+          name='WelcomeScreen'
+          component={WelcomeScreen}
+        />
+        <Stack.Screen
           name = "HourEditScreen"
           component={HourEditScreen}
         />
@@ -29,8 +35,8 @@ export default function App() {
           component={LoginScreen}
         />
         <Stack.Screen
-          name = "ProfileScreen"
-          component={ProfileScreen}
+          name = "CreateProject"
+          component={CreateProject}
         />
         <Stack.Screen
           name = "RegisterScreen"

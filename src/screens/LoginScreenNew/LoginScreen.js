@@ -11,7 +11,7 @@ const LoginScreen = ({ navigation }) => {
         data.then((data) => {
             if (data != null) {
                 console.log(data);
-                navigation.navigate('RegisterScreen'); //Needs to go to welcomescreen
+                navigation.navigate('WelcomeScreen'); //Needs to go to welcomescreen
             }
         });
 	}, []);
@@ -108,7 +108,7 @@ const LoginScreen = ({ navigation }) => {
 					console.log(response[0].dateOfBirth);
 
 					storeData(response[0]);
-					navigation.navigate('RegisterScreen'); //Needs to go to welcomescreen
+					navigation.navigate('WelcomeScreen'); //Needs to go to welcomescreen
 					break;
 			}
 		}
