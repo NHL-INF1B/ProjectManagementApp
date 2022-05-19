@@ -198,7 +198,7 @@ const Registration = () => {
         <Text style={styles.button}>REGISTREREN</Text>
       </Pressable>
 
-      <Pressable onPress={() => navigation.navigate(LoginScreen)}>
+      <Pressable onPress={() => navigation.navigate("LoginScreen")}>
         <Text style={styles.inloggen}>INLOGGEN</Text>
       </Pressable>
     </ScrollView>
