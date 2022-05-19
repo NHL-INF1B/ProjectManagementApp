@@ -24,6 +24,11 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="TeamcodeScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
 					name="PlanningScreen"
 					component={""}
 				/>

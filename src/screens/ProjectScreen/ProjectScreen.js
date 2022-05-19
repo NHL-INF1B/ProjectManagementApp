@@ -16,7 +16,7 @@ export default function ProjectScreen() {
                 <Image style={Styles.Img} source={require("../../assets/images/logo.png")} />
                 <Text style={Styles.ProjectName}>{projectName}</Text>
                 <SafeAreaView style={Styles.Tiles}>
-                    <Tile text="Teamcode" image="book" screen="TileTestScreen" projectId={projectId} userId={userId} />
+                    <Tile text="Teamcode" image="book" screen="TeamcodeScreen" projectId={projectId} userId={userId} />
                     <Tile text="Planning" image="calendar" screen="PlanningScreen" projectId={projectId} userId={userId} />
                     <Tile text="Urenverwantwoording" image="clipboard" screen="LogbookScreen" projectId={projectId} userId={userId} />
                     <Tile text="Waarschuwingen" image="exclamation-thick" screen="WarningScreen" projectId={projectId} userId={userId} />
