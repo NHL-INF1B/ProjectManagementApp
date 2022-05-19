@@ -1,15 +1,17 @@
 'use strict';
 
-import { Text, ScrollView, Pressable, View, Button } from 'react-native';
+import { Text, ScrollView, Pressable, View, Button, TextInput} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
+import { useValidation} from 'react-native-form-validator';
 
 const Planning = () => {
   const [Activiteit, setActiviteit] = useState('');
-  const [weeknummer, setWeeknummer] = useState('');
+  const [Weeknummer, setWeeknummer] = useState('');
+  //const [PlanningNaam, setPlanningNaam] = useState('');
 
 
   const sendDataToAPI = (planning, week, activiteit, project_id) => {
@@ -40,13 +42,13 @@ const Planning = () => {
 
 const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
   useValidation({
-      state: { PlanningNaam},
+      state: { Activiteit, Weeknummer},
   });
 
   const _checkValidation = () => {
     if(isFormValid() == true) {
       console.log("geen errors");
-      sendDataToAPI();
+      //sendDataToAPI();
     } else if (isFormValid() == false) {
       console.log("wel errors");
     }
@@ -54,7 +56,8 @@ const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormVali
 
   const _onPressButton = () => {
     validate({
-      PlanningtNaam: { minlength: 3, maxlength: 30, hasNoSpecialCharacter: true, required: true },
+      Activiteit: { minlength: 3, maxlength: 50, hasNoSpecialCharacter: true, required: true },
+      Weeknummer: {minlength: 1, maxlength: 2, hasNoSpecialCharacter: true, required: true, numbers: true},
     }),
     _checkValidation();
   };
@@ -65,12 +68,25 @@ const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormVali
       <Circle name={"calendar-month"} size={60} color={"Black"} style={styles.icon} />
       <Text style={[styles.title, styles.marginBottom25]}>Planning Toevoegen</Text>
       <Text style={styles.subtitle}>Activiteit</Text>
-      <CustomTextInput style={styles.subtitle} placeholder="Activiteit" value={Activiteit} setValue={setActiviteit} />
+      <TextInput style={styles.textInput} onChangeText={setActiviteit} placeholder="Activiteit" value={Activiteit}  />
+      {isFieldInError('Activiteit')&&
+            getErrorsInField('Activiteit').map(ErrorMessage => (
+                <Text style={[styles.sampleText]}>{ErrorMessage}</Text>
+            ))}
+                    {/* <Text style={styles.errorMessage}>{getErrorMessages()}</Text> */}
       <Text style={styles.subtitle}>Weeknummer</Text>
-      <CustomTextInput placeholder="Weeknummer" value={weeknummer} setValue={setWeeknummer} />
-      <Pressable>
+      <TextInput style={styles.textInput} onChangeText={setWeeknummer} placeholder="Weeknummer" value={Weeknummer}  />
+      {isFieldInError('Weeknummer') &&
+            getErrorsInField('Weeknummer').map(ErrorMessage => (
+                <Text style={[styles.sampleText]}>{ErrorMessage}</Text>
+            ))}
+                    {/* <Text style={styles.errorMessage}>{getErrorMessages()}</Text> */}
+        <Pressable onPress={_onPressButton}>
+        <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>Aanmaken</Text>
+        </Pressable>
+      {/* <Pressable onPress={_onPressButton}>
           <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>Toevoegen</Text>
-      </Pressable>
+      </Pressable> */}
       <View>
         <Button title="druk hier" onPress={() => sendDataToAPI("planning", "week", "activiteit", "project_id")} />
       </View>
@@ -86,14 +102,7 @@ const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormVali
 
       /> */}
 
-         {isFieldInError('planning' &&
-            getErrorsInField('planning').map(ErrorMessage => (
-                <Text style={[styles.sampleText]}>{ErrorMessage}</Text>
-            )))}
-                    <Text style={styles.errorMessage}>{getErrorMessages()}</Text>
-        <Pressable onPress={_onPressButton}>
-        <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>AANMAKEN</Text>
-        </Pressable>
+         
 
     </ScrollView>
   );
