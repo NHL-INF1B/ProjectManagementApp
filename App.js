@@ -1,6 +1,5 @@
 import React from "react";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
-import TileTestScreen from "./src/screens/TileTestScreen/TileTestScreen";
 import {React, useEffect} from "react";
 import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
 import LoginScreenNew from "./src/screens/LoginScreenNew/LoginScreenNew";
@@ -16,14 +15,13 @@ export default function App() {
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 
 				<Stack.Screen
-					name="ProjectScreen"
-					component={ProjectScreen}
+					name="LoginScreen"
+					component={LoginScreen}
 				/>
 
-				{/* Remove when put in production */}
 				<Stack.Screen
-					name="TileTestScreen"
-					component={TileTestScreen}
+					name="ProjectScreen"
+					component={ProjectScreen}
 				/>
 
 				<Stack.Screen 
@@ -64,16 +62,6 @@ export default function App() {
 				<Stack.Screen
 					name="LoginScreenNew"
 					component={LoginScreenNew}
-				/>
-
-				<Stack.Screen
-					name="LoginScreen"
-					component={LoginScreen}
-				/>
-
-				<Stack.Screen
-					name="LoginScreen"
-					component={LoginScreen}
 				/>
 
 				<Stack.Screen
