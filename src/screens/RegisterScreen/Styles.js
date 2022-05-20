@@ -6,21 +6,41 @@ export default StyleSheet.create({
 		backgroundColor:  "#009BAA",
 		flex: 1,
   },
-  container: {
-    backgroundColor: "#009BAA",
-    flex: 1,
-    flexDirection: "column"
-  },
   head: {
     flex: 1,
+    backgroundColor: "#009BAA",
     justifyContent: "center",
-		alignItems: "center",
+    alignItems: "center"
   },
   content: {
     flex: 2,
-    backgroundColor: "salmon",
+    backgroundColor: "#009BAA",
   },
   inputContainer : {
     marginBottom: 12,
   },
+  redirectContainer: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  redirectText: {
+    color: "white",
+    textTransform: "uppercase",
+    textDecorationLine: "underline",
+  },
+  logo: {
+    width: 200,
+    height: 200,
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#005AAA",
+    color: "white",
+    fontWeight: "bold",
+    padding: 13,
+    width: '70%',
+    borderWidth: 3,
+    borderRadius: 10,
+    borderColor: '#006BC9',
+  }
 });
