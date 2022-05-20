@@ -1,4 +1,5 @@
-import {React} from "react";
+import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
+import {React, useEffect} from "react";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import TestFile from "./src/screens/TestFile/TestFile";
@@ -10,27 +11,59 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator
-				screenOptions={{
-					headerStyle: {
-						backgroundColor: "#009BAA",
-					},
-					headerShadowVisible: false,
-				}}
-			>
+			<Stack.Navigator screenOptions={{ headerShown: false }}>
+
 				<Stack.Screen
-					name="TestFile"
-					component={TestFile}
-				/>
-				<Stack.Screen 
-					name="LoginScreen"
+					name="LoginScreenNew"
 					component={LoginScreen}
 				/>
+
+				<Stack.Screen
+					name="ProjectScreen"
+					component={ProjectScreen}
+				/>
+
+				<Stack.Screen
+					name="TeamcodeScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="PlanningScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="LogbookScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="WarningScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="InviteScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="MemberScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="ScoreScreen"
+					component={""}
+				/>
+
 				<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
 				/>
-      		</Stack.Navigator>
-	  	</NavigationContainer>
+
+			</Stack.Navigator>
+		</NavigationContainer>
 	);
 }
