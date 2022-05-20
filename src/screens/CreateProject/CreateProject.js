@@ -1,6 +1,6 @@
 'use strict';
 
-import { Text, ScrollView, View, TextInput, Pressable, } from 'react-native';
+import { Text, ScrollView, View, TextInput, Pressable, Button } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { useValidation } from 'react-native-form-validator';
@@ -10,18 +10,25 @@ import Circle from '../../components/Circle/Circle';
 // import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 
 const CreateProject = ()=> {
+  //the things where the info goes in.
   const [ProjectNaam, setProjectNaam] = useState('');
 
-  const sendDataToAPI = () => {
+  //step 1 to validate things
+  const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
+  useValidation({
+      state: { ProjectNaam},
+  });
+
+  const sendDataToAPI = (ProjectNaam) => {
     try {
-        fetch("http://localhost/ProjectManagementApp/src/screens/LoginScreen/handler.php", {
+        fetch("http://localhost/pma/PmaAPI/handlers/createProject/createProjectHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                test: "stefan",
+                name: ProjectNaam,
             }),
         })
         .then((response) => response.json())
@@ -31,15 +38,20 @@ const CreateProject = ()=> {
     }
 };
 
-  const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
-  useValidation({
-      state: { ProjectNaam},
-  });
+  //set the requirements for the textinput.
+  const _onPressButton = () => {
+  validate({
+    ProjectNaam: { minlength: 3, maxlength: 50, hasNoSpecialCharacter: true, required: true },
+  }),
+  _checkValidation();
+};
 
+  //check if there are no more errors
   const _checkValidation = () => {
     if(isFormValid() == true) {
       console.log("geen errors");
-      sendDataToAPI();
+      console.log(ProjectNaam);
+      //sendDataToAPI(ProjectNaam);
     } else if (isFormValid() == false) {
       console.log("wel errors");
     }
@@ -48,12 +60,7 @@ const CreateProject = ()=> {
     }
   }
 
-  const _onPressButton = () => {
-    validate({
-      ProjectNaam: { minlength: 3, maxlength: 30, hasNoSpecialCharacter: true, required: true },
-    }),
-    _checkValidation();
-  };
+  //the screen
 return (
     <ScrollView style={styles.root}>
         <MaterialCommunityIcons style={styles.arrow}  name="arrow-left-thick" size={60} color={'black'} />
@@ -77,6 +84,9 @@ return (
         <Pressable onPress={_onPressButton}>
         <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>AANMAKEN</Text>
         </Pressable>
+        <View>
+          <Button style={[styles.button]} title="druk hier" onPress={() => sendDataToAPI(ProjectNaam)} />
+        </View>
     </ScrollView>
     );
 };
@@ -87,35 +97,6 @@ export default CreateProject;
 
 
 
-
-// 'use strict';
-
-// import React, { useState } from 'react';
-// import { View, Text, TextInput, TouchableHighlight } from 'react-native';
-// import { useValidation } from 'react-native-form-validator';
-
-// const FormTest = () => {
-//   const [name, setName] = useState('My name');
-//   const [email, setEmail] = useState('tibtib@gmail.com');
-//   const [number, setNumber] = useState('56');
-//   const [date, setDate] = useState('2017-03-01');
-//   const [newPassword, setNewPassword] = useState('');
-//   const [confirmPassword, setConfirmPassword] = useState('');
-
-//   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
-//     useValidation({
-//       state: { name, email, number, date, newPassword, confirmPassword },
-//     });
-
-//   const _onPressButton = () => {
-//     validate({
-//       name: { minlength: 3, maxlength: 7, required: true },
-//       email: { email: true },
-//       number: { numbers: true },
-//       date: { date: 'YYYY-MM-DD' },
-//       confirmPassword: { equalPassword: newPassword },
-//     });
-//   };
 
 //   return (
 //     <View>
