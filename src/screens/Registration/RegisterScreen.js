@@ -193,7 +193,7 @@ const Registration = () => {
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
-      <Pressable onPress={() => checkValidation}>
+      <Pressable onPress={checkValidation}>
         <Text style={styles.button}>REGISTREREN</Text>
       </Pressable>
       <Pressable onPress={() => navigation.navigate("LoginScreen")}>
