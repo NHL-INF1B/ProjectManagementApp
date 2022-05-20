@@ -60,5 +60,16 @@ export default StyleSheet.create({
     },
     marginBottom25: {
       marginBottom: 25,
-    }
+    },
+
+    textInput: {
+      textAlign: 'center',
+      borderWidth: 1,
+      borderColor: '#009BAA',
+      padding: 1,
+      width: '50%',
+      marginLeft: 90,
+      backgroundColor: 'white',
+      borderRadius: 5,
+  },
   });
