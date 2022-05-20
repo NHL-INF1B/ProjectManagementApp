@@ -7,18 +7,18 @@ import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 const RegisterScreen = ({ navigation }) => {
     //form handling
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
     const PASS_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,254}$/;
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, formState: { errors }, getValues } = useForm({
       defaultValues: {
         name: '',
         email: '',
-        dateOfBirth: '',
         password: '',
+        password_repeat: '',
       }
     });
+
     const onSubmit = (data) => {
-      console.log(data)
+      sendDataToAPI(data.name, data.email, "2000-01-01", data.password, data.password_repeat);
     };
 
     const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
@@ -79,7 +79,6 @@ const RegisterScreen = ({ navigation }) => {
       }
     };
 
-
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
           <ScrollView style={Styles.container}>
@@ -130,30 +129,6 @@ const RegisterScreen = ({ navigation }) => {
 
               <View style={Styles.inputContainer}>
                 <Controller
-                  name="dateOfBirth"
-                  control={control}
-                  rules={{
-                    required: { value: true, message: 'Geboortedatum is verplicht' },
-                    pattern: {
-                      value: DATE_REGEX,
-                      message: 'Geboortedatum is niet correct'
-                    },
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <CustomTextInput
-                      placeholder="Geboortedatum" 
-                      placeholderTextColor="#707070" 
-                      onChangeText={(text) => onChange(text)} 
-                      value={value} 
-                      errorText={errors?.dateOfBirth?.message} 
-                      titleText="geboortedatum"
-                    />
-                  )}
-                />
-              </View>
-
-              <View style={Styles.inputContainer}>
-                <Controller
                   name="password"
                   control={control}
                   rules={{
@@ -176,8 +151,35 @@ const RegisterScreen = ({ navigation }) => {
                   )}
                 />
               </View>
-            </View>
 
+              <View style={Styles.inputContainer}>
+                <Controller
+                  name="password_repeat"
+                  control={control}
+                  rules={{
+                    required: { value: true, message: 'Wachtwoord is verplicht' },
+                    pattern: {
+                      value: PASS_REGEX,
+                      message: 'Wachtwoord is te zwak'
+                    },
+                    validate: 
+                      value => value === getValues('password') || 'Wachtwoorden zijn niet gelijk aan elkaar'
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <CustomTextInput 
+                      placeholder="Wachtwoord" 
+                      placeholderTextColor="#707070" 
+                      onChangeText={(text) => onChange(text)} 
+                      value={value} 
+                      errorText={errors?.password_repeat?.message} 
+                      secureTextEntry={true}
+                      titleText="Wachtwoord herhalen"
+                    />
+                  )}
+                />
+              </View>
+            </View>
+            
             <View>
               <Button style={Styles.button} title="Submit" onPress={handleSubmit(onSubmit)} />
             </View>

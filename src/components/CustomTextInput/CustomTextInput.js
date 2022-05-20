@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
     },
     errorText: {
         textAlign: "center",
-        color: "black",
+        color: "red",
         fontWeight: "bold",
     },
 });
+
 export default CustomTextInput;

@@ -11,9 +11,13 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-
 				<Stack.Screen
-					name="LoginScreenNew"
+					name="RegisterScreen"
+					component={RegisterScreen}
+				/>
+				
+				<Stack.Screen
+					name="LoginScreen"
 					component={LoginScreen}
 				/>
 
@@ -55,11 +59,6 @@ export default function App() {
 				<Stack.Screen
 					name="ScoreScreen"
 					component={""}
-				/>
-
-				<Stack.Screen
-					name="RegisterScreen"
-					component={RegisterScreen}
 				/>
 
 			</Stack.Navigator>
