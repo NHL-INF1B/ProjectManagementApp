@@ -11,11 +11,10 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen
+			<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
 				/>
-				
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
