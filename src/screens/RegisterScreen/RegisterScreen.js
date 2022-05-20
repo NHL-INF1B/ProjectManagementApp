@@ -1,201 +1,191 @@
 import { React, useState } from "react";
 import Styles from "./Styles";
-import { View, Text, ScrollView, TextInput, Pressable, Image, SafeAreaView } from "react-native";
-import { useValidation } from "react-native-form-validator";
+import { View, Text, ScrollView, Button, TextInput, Pressable, Image, SafeAreaView } from "react-native";
+import { useForm, Controller } from "react-hook-form";
+import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 
 const RegisterScreen = ({ navigation }) => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [date, setDate] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-
-    const { validate, isFieldInError, getErrorsInField, isFormValid } =
-    useValidation({
-      state: { name, email, date, newPassword, confirmPassword },
+    //form handling
+    const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const PASS_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,254}$/;
+    const { control, handleSubmit, formState: { errors }, getValues } = useForm({
+      defaultValues: {
+        name: '',
+        email: '',
+        password: '',
+        password_repeat: '',
+      }
     });
 
-    /**
-     * 
-     */
-    const onPressButton = () => {
-        validate({
-          name: { required: true, maxLength: 50 },
-          email: { email: true, required: true, maxLength: 50 },
-          date: { date: "YYYY-MM-DD", required: true },
-          newPassword: { required: true, isPassword: true },
-          confirmPassword: { equalPassword: newPassword, required: true },
-        }),
-
-        checkValidation();
-          // () => {
-          //   if (isFormValid() == true) {
-          //       sendDataToAPI(name, email, date, newPassword, confirmPassword);
-          //   }
-          // };
+    const onSubmit = (data) => {
+      sendDataToAPI(data.name, data.email, "2000-01-01", data.password, data.password_repeat);
     };
 
-    const checkValidation = () => {
-        if (isFormValid() == true) {
-            sendDataToAPI(name, email, date, newPassword, confirmPassword);
-        }
+    const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
+          try {
+              fetch("http://localhost/pma/PmaAPI/handlers/registration/registrationHandler.php", {
+                  method: "POST",
+                  headers: {
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                      name: name,
+                      email: email,
+                      dateOfBirth: dateOfBirth,
+                      password: password,
+                      confirmPassword: confirmPassword,
+                  }),
+              })
+              // .then((response) => response.text())
+              .then((response) => response.json())
+              .then((response) => {
+                  // console.log(response);
+                  catchFeedback(response);
+              });
+          } catch (error) {
+              alert(error);
+          }
     };
 
-    /**
-     * 
-     * @param {*} name
-     * @param {*} email
-     * @param {*} dateOfBirth
-     * @param {*} password
-     * @param {*} confirmPassword
-     */
-	const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
-        try {
-            fetch("http://localhost/pma/PmaAPI/handlers/registration/registrationHandler.php", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    dateOfBirth: dateOfBirth,
-                    password: password,
-                    confirmPassword: confirmPassword,
-                }),
-            })
-            // .then((response) => response.text())
-            .then((response) => response.json())
-            .then((response) => {
-                // console.log(response);
-                catchFeedback(response);
-            });
-        } catch (error) {
-            alert(error);
-        }
-	};
-
-    /**
-     * Catch feedback of request from API
-     * @param {*} response 
-     */
-     const catchFeedback = (response) => {
-        // console.log(response);
-    
-        switch (response[0]) {
-          case "name_incorrect":
-            alert("De naam is verkeerd.");
-            break;
-          case "email_incorrect":
-            alert("Het emailadres is verkeerd.");
-            break;
-          case "dateOfBirth_incorrect":
-            alert("De geboortedatum is verkeerd.");
-            break;
-          case "password_incorrect":
-            alert("Het eerste wachtwoord is verkeerd.");
-            break;
-          case "confirmPassword_incorrect":
-            alert("Het tweede wachtwoord is verkeerd.");
-            break;
-          case "samePassword_incorrect":
-            alert("De wachtwoorden zijn niet hetzelfde.");
-            break;
-          case "email_in_use":
-            alert("Dit emailadres is al in gebruik.");
-            break;
-          default:
-            alert("Je account is aangemaakt, log nu in met je gegevens.");
-            navigation.navigate('LoginScreen');
-        }
-      };
+    const catchFeedback = (response) => {
+      // console.log(response);
+  
+      switch (response[0]) {
+        case "name_incorrect":
+          alert("De naam is verkeerd.");
+          break;
+        case "email_incorrect":
+          alert("Het emailadres is verkeerd.");
+          break;
+        case "dateOfBirth_incorrect":
+          alert("De geboortedatum is verkeerd.");
+          break;
+        case "password_incorrect":
+          alert("Het eerste wachtwoord is verkeerd.");
+          break;
+        case "confirmPassword_incorrect":
+          alert("Het tweede wachtwoord is verkeerd.");
+          break;
+        case "samePassword_incorrect":
+          alert("De wachtwoorden zijn niet hetzelfde.");
+          break;
+        case "email_in_use":
+          alert("Dit emailadres is al in gebruik.");
+          break;
+        default:
+          alert("Je account is aangemaakt, log nu in met je gegevens.");
+          navigation.navigate('LoginScreen');
+      }
+    };
 
     return (
-        <SafeAreaView style={Styles.container}>
-          <View>
-            <Image
-              style={Styles.logo}
-              source={require("../../assets/images/logo.png")}
-            />
-          </View>
-    
-          <Text style={Styles.titel}>REGISTREREN</Text>
-    
-          <View style={Styles.div}>
-            <TextInput
-              style={Styles.input}
-              onChangeText={setName}
-              value={name}
-              placeholder="Naam"
-            />
-            {isFieldInError("name") &&
-              getErrorsInField("name").map((errorMessage) => (
-                <Text style={Styles.text}>{errorMessage}</Text>
-              ))}
-          </View>
-    
-          <View style={Styles.div}>
-            <TextInput
-              style={Styles.input}
-              onChangeText={setEmail}
-              value={email}
-              placeholder="Email"
-            />
-            {isFieldInError("email") &&
-              getErrorsInField("email").map((errorMessage) => (
-                <Text style={Styles.text}>{errorMessage}</Text>
-              ))}
-          </View>
-    
-          <View style={Styles.div}>
-            <TextInput
-              style={Styles.input}
-              onChangeText={setDate}
-              value={date}
-              placeholder="Datum"
-            />
-            {isFieldInError("date") &&
-              getErrorsInField("date").map((errorMessage) => (
-                <Text style={Styles.text}>{errorMessage}</Text>
-              ))}
-          </View>
-    
-          <View style={Styles.div}>
-            <TextInput
-              style={Styles.input}
-              onChangeText={setNewPassword}
-              value={newPassword}
-              secureTextEntry={true}
-              placeholder="Wachtwoord"
-            />
-            {isFieldInError("newPassword") &&
-              getErrorsInField("newPassword").map((errorMessage) => (
-                <Text style={Styles.text}>{errorMessage}</Text>
-              ))}
-          </View>
-    
-          <View style={Styles.div}>
-            <TextInput
-              style={Styles.input}
-              onChangeText={setConfirmPassword}
-              value={confirmPassword}
-              secureTextEntry={true}
-              placeholder="Confirm wachtwoord"
-            />
-            {isFieldInError("confirmPassword") &&
-              getErrorsInField("confirmPassword").map((errorMessage) => (
-                <Text style={Styles.text}>{errorMessage}</Text>
-              ))}
-          </View>
-    
-          <Pressable onPress={onPressButton}>
-            <Text style={Styles.button}>REGISTREREN</Text>
-          </Pressable>
-    
-          <Pressable onPress={() => navigation.navigate("LoginScreen")}>
-            <Text style={Styles.inloggen}>INLOGGEN</Text>
-          </Pressable>
+        <SafeAreaView style={Styles.SafeAreaView}>
+          <ScrollView style={Styles.container}>
+            <View styles={Styles.head}>
+              <Text>image</Text>
+            </View>
+
+            <View style={Styles.content}>
+              <View style={Styles.inputContainer}>
+                <Controller
+                  name="name"
+                  control={control}
+                  rules={{
+                    required: { value: true, message: 'Naam is verplicht' },
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <CustomTextInput 
+                      placeholder="Naam" 
+                      placeholderTextColor="#707070" 
+                      onChangeText={(text) => onChange(text)} 
+                      value={value} 
+                      errorText={errors?.name?.message} 
+                      titleText="naam"
+                    />
+                  )}
+                />
+              </View>
+
+              <View style={Styles.inputContainer}>
+                <Controller
+                  name="email"
+                  control={control}
+                  rules={{
+                    required: { value: true, message: 'Email is verplicht' },
+                    pattern: {
+                      value: EMAIL_REGEX,
+                      message: 'Email is niet correct'
+                    },
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <CustomTextInput 
+                      placeholder="Emailadres" 
+                      placeholderTextColor="#707070" 
+                      onChangeText={(text) => onChange(text)} 
+                      value={value} 
+                      errorText={errors?.email?.message} 
+                      titleText="email"
+                    />
+                  )}
+                />
+              </View>
+
+              <View style={Styles.inputContainer}>
+                <Controller
+                  name="password"
+                  control={control}
+                  rules={{
+                    required: { value: true, message: 'Wachtwoord is verplicht' },
+                    pattern: {
+                      value: PASS_REGEX,
+                      message: 'Wachtwoord is te zwak'
+                    },
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <CustomTextInput 
+                      placeholder="Wachtwoord" 
+                      placeholderTextColor="#707070" 
+                      onChangeText={(text) => onChange(text)} 
+                      value={value} 
+                      errorText={errors?.password?.message} 
+                      secureTextEntry={true}
+                      titleText="wachtwoord"
+                    />
+                  )}
+                />
+              </View>
+
+              <View style={Styles.inputContainer}>
+                <Controller
+                  name="password_repeat"
+                  control={control}
+                  rules={{
+                    required: { value: true, message: 'Wachtwoord is verplicht' },
+                    pattern: {
+                      value: PASS_REGEX,
+                      message: 'Wachtwoord is te zwak'
+                    },
+                    validate: 
+                      value => value === getValues('password') || 'Wachtwoorden zijn niet gelijk aan elkaar'
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <CustomTextInput 
+                      placeholder="Wachtwoord" 
+                      placeholderTextColor="#707070" 
+                      onChangeText={(text) => onChange(text)} 
+                      value={value} 
+                      errorText={errors?.password_repeat?.message} 
+                      secureTextEntry={true}
+                      titleText="Wachtwoord herhalen"
+                    />
+                  )}
+                />
+              </View>
+
+              <Button style={Styles.button} title="Registreren" color="black" onPress={handleSubmit(onSubmit)} />
+            </View>
+          </ScrollView>
         </SafeAreaView>
       );
 };
