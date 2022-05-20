@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import {React} from "react";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
@@ -14,5 +15,18 @@ export default function App() {
 				<Stack.Screen name="RegisterScreen" component={RegisterScreen} />
       		</Stack.Navigator>
 	  	</NavigationContainer>
+=======
+import React from "react";
+import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
+import HourEditScreen from "../ProjectManagementApp/src/screens/HourEditScreen/HourEditScreen";
+import CreateProject from "./src/screens/CreateProject/CreateProject";
+import EditProject from "./src/screens/EditProject/EditProject";
+import { View } from "react-native";
+
+export default function App() {
+	return (
+		<EditProject />
+		
+>>>>>>> Stashed changes
 	);
 }
