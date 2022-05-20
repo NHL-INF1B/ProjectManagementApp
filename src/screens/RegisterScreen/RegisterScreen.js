@@ -82,7 +82,11 @@ const RegisterScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
           <ScrollView style={Styles.container}>
-            <View>
+            <View styles={Styles.head}>
+              <Text>image</Text>
+            </View>
+
+            <View style={Styles.content}>
               <View style={Styles.inputContainer}>
                 <Controller
                   name="name"
@@ -178,10 +182,8 @@ const RegisterScreen = ({ navigation }) => {
                   )}
                 />
               </View>
-            </View>
-            
-            <View>
-              <Button style={Styles.button} title="Submit" onPress={handleSubmit(onSubmit)} />
+
+              <Button style={Styles.button} title="Registreren" color="black" onPress={handleSubmit(onSubmit)} />
             </View>
           </ScrollView>
         </SafeAreaView>
