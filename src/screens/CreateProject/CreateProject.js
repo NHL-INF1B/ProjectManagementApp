@@ -114,7 +114,7 @@ export default CreateProject;
 //         value={newPassword}
 //         secureTextEntry={true}
 //       />
-//       <TextInput
+//       <TextInput 
 //         onChangeText={setConfirmPassword}
 //         value={confirmPassword}
 //         secureTextEntry={true}
