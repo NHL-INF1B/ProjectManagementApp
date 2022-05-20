@@ -11,6 +11,10 @@ export default function Header(){
         navigation.goBack()
     }
 
+    const GoToHome = () => {
+        navigation.navigate("WelcomeScreen")
+    }
+
     return (
         <View style={Styles.HeaderContainer}>
             <MaterialCommunityIcons name="plus" size={40} color="black" />
@@ -22,7 +26,11 @@ export default function Header(){
                 onPress={GoBack}>
                 <MaterialCommunityIcons name="arrow-left" size={40} color="black" />
             </Pressable>
-            <MaterialCommunityIcons name="home" size={40} color="black" />
+
+            <Pressable
+                onPress={GoToHome}>
+                <MaterialCommunityIcons name="home" size={40} color="black" />
+            </Pressable>
         </View>
     )
 }
