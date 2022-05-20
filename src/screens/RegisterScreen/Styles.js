@@ -18,9 +18,41 @@ export default StyleSheet.create({
   },
   content: {
     flex: 2,
-    backgroundColor: "salmon",
   },
   inputContainer : {
     marginBottom: 12,
   },
+  logo: {
+		resizeMode: "center",
+		height: 200,
+		alignSelf: "center",
+		marginBottom: 20,
+		marginTop: 30,
+	},
+  inloggen:{
+    alignSelf: "center",
+    marginTop: 10,
+    textDecorationLine: "underline",
+    color: "white",
+    fontWeight: "bold",
+  },
+  button: {
+    width: "70%",
+		textAlign: "center",
+		padding: 10,
+		color: "white",
+		fontWeight: "bold",
+		borderRadius: 5,
+		marginTop: 5,
+		backgroundColor: "#005AAA",
+		borderColor: "#066BC9",
+		alignSelf: "center",
+  },
+  titel:  {
+    alignSelf: "center",
+		fontWeight: "bold",
+		fontSize: 30,
+		color: "white",
+		margin: 10,
+  }
 });

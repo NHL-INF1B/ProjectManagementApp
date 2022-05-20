@@ -82,9 +82,13 @@ const RegisterScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
           <ScrollView style={Styles.container}>
-            <View styles={Styles.head}>
-              <Text>image</Text>
-            </View>
+          <View>
+        		<Image
+         			style={Styles.logo}
+          			source={require("../../assets/images/logo.png")}
+        		/>
+      		</View>
+          <Text style={Styles.titel}>Registreren</Text>
 
             <View style={Styles.content}>
               <View style={Styles.inputContainer}>
@@ -183,7 +187,17 @@ const RegisterScreen = ({ navigation }) => {
                 />
               </View>
 
-              <Button style={Styles.button} title="Registreren" color="black" onPress={handleSubmit(onSubmit)} />
+            <View>
+					    <Pressable onPress={handleSubmit(onSubmit)}>
+						    <Text style={Styles.button}>Registreer</Text>
+					    </Pressable>
+				    </View>
+
+        <View>
+					<Pressable onPress={() => navigation.navigate("LoginScreen")}>
+						<Text style={Styles.inloggen}>Inloggen</Text>
+					</Pressable>
+				</View>
             </View>
           </ScrollView>
         </SafeAreaView>

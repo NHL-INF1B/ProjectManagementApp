@@ -4,8 +4,10 @@ import { ScrollView, View, Text, SafeAreaView, Button, Image, TouchableOpacity, 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = ({ navigation }) => {
+	const navigatie = useNavigation();
 
 	useEffect(() => {
         // removeValue(); //If you want to remove the stored data for testing
@@ -187,20 +189,21 @@ const LoginScreen = ({ navigation }) => {
                   )}
                 />
 				</View>
-				<View>
-					<Pressable title="Log in" onPress={handleSubmit(onSubmit)}>
-						<Text style={Styles.button}>Log in</Text>
-					</Pressable>
-				</View>
-				
-
 				<View style={Styles.head}>
 					<Text>{errorText}</Text>
 				</View>
 
-				<Pressable onPress={() => navigation.navigate("LoginScreen")}>
-        			<Text style={Styles.registreren}>Registreren</Text>
-      			</Pressable>
+				<View>
+					<Pressable onPress={handleSubmit(onSubmit)}>
+						<Text style={Styles.button}>Log in</Text>
+					</Pressable>
+				</View>
+
+				<View>
+					<Pressable onPress={() => navigatie.navigate("RegisterScreen")}>
+						<Text style={Styles.registreren}>Registreren</Text>
+					</Pressable>
+				</View>
 			</ScrollView>
 		</SafeAreaView>
 	);
