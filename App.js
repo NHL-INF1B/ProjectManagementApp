@@ -3,7 +3,6 @@ import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/Registration/RegisterScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Hallo from "./src/screens/Registration/Test";
 const Stack = createNativeStackNavigator();
 
 export default function App() {

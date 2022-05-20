@@ -33,6 +33,7 @@ const Registration = () => {
 
   //send the data to the api if there are no errors.
   const sendToAPI = (name, email, date, password, confirmPassword) => {
+    const newDate = date.replace(/\//g, "-");
     try {
       fetch(
         "http://localhost/PMA/PmaAPI/handlers/registration//registrationHandler.php",
@@ -45,7 +46,7 @@ const Registration = () => {
           body: JSON.stringify({
             name: name,
             email: email,
-            dateOfBirth: date,
+            dateOfBirth: newDate,
             password: password,
             confirmPassword: confirmPassword,
           }),
@@ -80,8 +81,6 @@ const Registration = () => {
   };
 
   const feedback = (response) => {
-    console.log(response);
-
     switch (response[0]) {
       case "name_incorrect":
         alert("De naam is verkeerd.");
