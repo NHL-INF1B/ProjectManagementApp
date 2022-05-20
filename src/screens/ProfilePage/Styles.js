@@ -6,10 +6,23 @@ export default StyleSheet.create({
     backgroundColor: "#009BAA",
     flex: 1,
   },
-  div: {
-    justifyContent: "center",
+  inputFields: {
+    flexDirection: "row",
     alignSelf: "center",
     width: "70%",
     marginBottom: 10,
+    borderColor: "#009BAA",
+    borderWidth: 1,
+    backgroundColor: "white",
+    padding: 1,
+    borderRadius: 5,
+  },
+  icon: {
+    width: "10%",
+    alignSelf: "center",
+  },
+  input: {
+    width: "90%",
+    textAlign: "center",
   },
 });
