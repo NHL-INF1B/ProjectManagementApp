@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './Styles';
 import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
-import Tile from '../../components/Tile';
+import Tile from '../../components/Tile/Tile';
 
 export default function ProjectScreen() {
 
