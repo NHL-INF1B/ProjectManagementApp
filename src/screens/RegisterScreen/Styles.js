@@ -3,12 +3,11 @@ import { StyleSheet, Platform, StatusBar } from 'react-native';
 export default StyleSheet.create({
   SafeAreaView: {
 		paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-		backgroundColor:  "salmon",
+		backgroundColor:  "#009BAA",
 		flex: 1,
   },
   container: {
     backgroundColor: "#009BAA",
-    flex: 1,
   },
   div: {
     justifyContent: "center",
@@ -23,6 +22,7 @@ export default StyleSheet.create({
     padding: 1,
     backgroundColor: "white",
     borderRadius: 5,
+    color: "black",
   },
   button: {
     width: "70%",
@@ -64,4 +64,7 @@ export default StyleSheet.create({
     color: "white",
     margin: 10,
   },
+  inputContainer : {
+    marginBottom: 12,
+  }
 });
