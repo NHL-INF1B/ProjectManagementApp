@@ -13,7 +13,7 @@ import {
 import { useValidation } from "react-native-form-validator";
 import styles from "./Styles";
 import { useNavigation } from "@react-navigation/native";
-import LoginScreen from "../LoginScreen/LoginScreen";
+import DatePicker from "react-native-modern-datepicker";
 
 const Registration = () => {
   //the things where the info goess in.
@@ -23,6 +23,7 @@ const Registration = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigation = useNavigation();
+  const [isShowingDatePicker, setShowingDatePicker] = useState(false);
 
   //step 1 to validate things
   const { validate, isFieldInError, getErrorsInField, isFormValid } =
@@ -115,6 +116,7 @@ const Registration = () => {
         console.log("Je account is aangemaakt, log nu in met je gegevens.");
     }
   };
+
   //the screen
   return (
     <ScrollView style={styles.container}>
@@ -124,9 +126,7 @@ const Registration = () => {
           source={require("../../assets/images/logo.png")}
         />
       </View>
-
       <Text style={styles.titel}>REGISTREREN</Text>
-
       <View style={styles.div}>
         <TextInput
           style={styles.input}
@@ -139,7 +139,6 @@ const Registration = () => {
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
-
       <View style={styles.div}>
         <TextInput
           style={styles.input}
@@ -152,20 +151,23 @@ const Registration = () => {
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
+      <View style={styles.div}>
+        {isShowingDatePicker ? (
+          <DatePicker mode="calendar" value={date} onSelectedChange={setDate} />
+        ) : (
+          <Pressable onPress={() => setShowingDatePicker(true)}>
+            <Text>Kies je geboortedatum</Text>
+          </Pressable>
+        )}
+      </View>
 
       <View style={styles.div}>
-        <TextInput
-          style={styles.input}
-          onChangeText={setDate}
-          value={date}
-          placeholder="Datum"
-        />
+        <TextInput style={styles.input} value={date} placeholder="Datum" />
         {isFieldInError("date") &&
           getErrorsInField("date").map((errorMessage) => (
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
-
       <View style={styles.div}>
         <TextInput
           style={styles.input}
@@ -179,7 +181,6 @@ const Registration = () => {
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
-
       <View style={styles.div}>
         <TextInput
           style={styles.input}
@@ -193,11 +194,9 @@ const Registration = () => {
             <Text style={styles.text}>{errorMessage}</Text>
           ))}
       </View>
-
-      <Pressable onPress={onPressButton}>
+      <Pressable onPress={() => checkValidation}>
         <Text style={styles.button}>REGISTREREN</Text>
       </Pressable>
-
       <Pressable onPress={() => navigation.navigate("LoginScreen")}>
         <Text style={styles.inloggen}>INLOGGEN</Text>
       </Pressable>
