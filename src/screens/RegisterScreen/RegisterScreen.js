@@ -83,11 +83,14 @@ const RegisterScreen = ({ navigation }) => {
       <SafeAreaView style={Styles.SafeAreaView}>
 
         <View style={Styles.head}>
-        <Image
-          style={Styles.logo}
-          source={require('../../assets/images/logo.png')}
-        />
+          <Image
+            style={Styles.logo}
+            source={require('../../assets/images/logo.png')}
+          />
         </View>
+
+        <Text style={Styles.titel}>Registreren</Text>
+
         <View style={Styles.content} >
           <ScrollView>
             <View style={Styles.inputContainer}>

@@ -135,17 +135,17 @@ const LoginScreen = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={Styles.SafeAreaView}>
-			<ScrollView>
-			<View>
+			<ScrollView style={Styles.content}>
+			<View style={Styles.head}>
         		<Image
          			style={Styles.logo}
           			source={require("../../assets/images/logo.png")}
         		/>
       		</View>
 
-			  <Text style={Styles.titel}>Inloggen</Text>
+			<Text style={Styles.titel}>Inloggen</Text>
 
-			<View>
+			<View style={Styles.inputContainer}>
 				<Controller
 					name="email"
 					control={control}
@@ -169,7 +169,7 @@ const LoginScreen = ({ navigation }) => {
 					/>
 				</View>
 
-				<View>
+				<View style={Styles.inputContainer}>
 				<Controller
                   name="password"
                   control={control}
@@ -193,10 +193,10 @@ const LoginScreen = ({ navigation }) => {
 					<Text>{errorText}</Text>
 				</View>
 
-				<View>
-					<Pressable onPress={handleSubmit(onSubmit)}>
+				<View style={[Styles.redirectContainer, {marginBottom:20}]}>
+					<TouchableOpacity onPress={handleSubmit(onSubmit)}>
 						<Text style={Styles.button}>Log in</Text>
-					</Pressable>
+					</TouchableOpacity>
 				</View>
 
 				<View>

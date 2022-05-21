@@ -12,16 +12,17 @@ export default StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
-	login: {
-		backgroundColor: "#009BAA",
+	content: {
 		flex: 2,
-		alignItems: "center",
+		backgroundColor: "#009BAA",
+	},
+	inputContainer : {
+		marginTop: 13,
 	},
 	logo: {
 		resizeMode: "center",
 		height: 200,
 		alignSelf: "center",
-		marginBottom: 20,
 		marginTop: 30,
 	},
 	titel: {
@@ -34,20 +35,22 @@ export default StyleSheet.create({
 	button:	{
 		width: "70%",
 		textAlign: "center",
-		padding: 10,
+		padding: 13,
 		color: "white",
 		fontWeight: "bold",
-		borderRadius: 5,
-		marginTop: 5,
+		borderWidth: 3,
+		borderRadius: 10,
 		backgroundColor: "#005AAA",
 		borderColor: "#066BC9",
 		alignSelf: "center",
+		color:"white", 
+		textTransform:"uppercase", 
+		fontWeight: "bold"
 	},
 	registreren: {
 		alignSelf: "center",
-		marginTop: 10,
 		textDecorationLine: "underline",
 		color: "white",
-		fontWeight: "bold",
+		textTransform: "uppercase",
 	}
 });

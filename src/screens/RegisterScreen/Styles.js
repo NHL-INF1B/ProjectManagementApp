@@ -29,8 +29,11 @@ export default StyleSheet.create({
     textDecorationLine: "underline",
   },
   logo: {
-    width: 200,
-    height: 200,
+		resizeMode: "center",
+		height: 200,
+		alignSelf: "center",
+		marginBottom: 20,
+		marginTop: 30,
   },
   button: {
     alignItems: "center",
@@ -42,5 +45,12 @@ export default StyleSheet.create({
     borderWidth: 3,
     borderRadius: 10,
     borderColor: '#006BC9',
+  },
+  titel:  {
+    alignSelf: "center",
+		fontWeight: "bold",
+		fontSize: 30,
+		color: "white",
+		margin: 10,
   }
 });
