@@ -1,8 +1,9 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import WarningHandler from '../../../../../ReactNativeAPI/PmaAPI/handlers/warning/WarningHandler';
 
-const Bar = ({ name, color, value }) => {
+const Bar = ({ name, color }) => {
     return (
         <View style={[styles.bar, styles.marginBottom5, styles.flex]}>
             <MaterialCommunityIcons 
@@ -12,8 +13,8 @@ const Bar = ({ name, color, value }) => {
                 style={[styles.flex, styles.icon]} 
             />
             <View style={styles.text}>
-                <Text style={styles.name}>Naam</Text>
-                <Text style={styles.text}>Te laat zonder geldige reden testtesttesttesttesttesttesttesttesttesttesttesttesttesttestaggadgdfasa</Text>
+                <Text style={styles.name}></Text>
+                <Text style={styles.text}></Text>
             </View>
         </View>
     )
