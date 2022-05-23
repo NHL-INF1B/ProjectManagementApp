@@ -39,6 +39,18 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#CB0005',
       },
+      greenButton: {
+        alignSelf: "center",
+        alignItems: "center",
+        backgroundColor: "#00AA33",
+        color: "white",
+        fontWeight: "bold",
+        padding: 13,
+        width: '70%',
+        borderWidth: 3,
+        borderRadius: 10,
+        borderColor: '#008528',
+      },
       buttonText: {
         color:"white", 
         textTransform:"uppercase", 
