@@ -1,6 +1,5 @@
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import {React, useEffect} from "react";
-import Header from "./src/components/Header/Header";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import TestFile from "./src/screens/TestFile/TestFile";

@@ -3,7 +3,7 @@ import { View, Text, Pressable, StyleSheet, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 
-export default function Header(){
+export default function Header({ GoToType, GoTo, ReturnType }){
 
     const navigation = useNavigation()
 
@@ -11,25 +11,37 @@ export default function Header(){
         navigation.goBack()
     }
 
-    const GoToHome = () => {
-        navigation.navigate("WelcomeScreen")
+    const NavigateTo = () => {
+        navigation.navigate(GoTo)
+    }
+
+    if(GoToType == "Add"){
+        var GoToIcon = "plus";
+    } else if(GoToType == "Edit"){
+        var GoToIcon = "square-edit-outline";
+    }
+
+    if(ReturnType == "Back"){
+        var ReturnIcon = "arrow-left";
+    } else if(ReturnType == "Home"){
+        var ReturnIcon = "home";
     }
 
     return (
         <View style={Styles.HeaderContainer}>
-            <MaterialCommunityIcons name="plus" size={40} color="black" />
-            <MaterialCommunityIcons name="square-edit-outline" size={40} color="black" />
+            
+            <Pressable
+                onPress={NavigateTo}>
+                <MaterialCommunityIcons name={GoToIcon} size={40} color="black" />
+            </Pressable>
 
-            <MaterialCommunityIcons name="account-supervisor" size={40} color="black" />
+            <View style={Styles.Center}>
+                <MaterialCommunityIcons name="account-supervisor" size={40} color="black" />
+            </View>
 
             <Pressable
                 onPress={GoBack}>
-                <MaterialCommunityIcons name="arrow-left" size={40} color="black" />
-            </Pressable>
-
-            <Pressable
-                onPress={GoToHome}>
-                <MaterialCommunityIcons name="home" size={40} color="black" />
+                <MaterialCommunityIcons name={ReturnIcon} size={40} color="black" />
             </Pressable>
         </View>
     )
@@ -38,8 +50,17 @@ export default function Header(){
 const Styles = StyleSheet.create({
     HeaderContainer: {
         backgroundColor: "#009BAA",
-        height: 65,
-        borderWidth: 1,
-        borderColor: "red",
+        minHeight: 65,
+        maxHeight: 65,
+        flex: 1,
+        justifyContent: "space-around",
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    Center: {
+        height: 40,
+        width: 40,
+        marginLeft: 70,
+        marginRight: 70,
     }
 })
