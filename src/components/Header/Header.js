@@ -39,7 +39,7 @@ export default function Header({ GoToType, GoTo, CenterGoTo, ReturnType }){
                 <MaterialCommunityIcons name={GoToIcon} size={40} color="black" />
             </Pressable>
 
-           {CheckCenterGoTo()}
+           {CheckCenterGoTo({CenterGoTo, CenterNavigateTo })}
 
             <Pressable
                 onPress={GoBack}>
@@ -67,11 +67,11 @@ const Styles = StyleSheet.create({
     }
 })
 
-function CheckCenterGoTo({ CenterGoTo }){
+function CheckCenterGoTo({ CenterGoTo, CenterNavigateTo }){
     if(CenterGoTo !== null){
         return (
         <Pressable
-            onPress={CenterGoTo}>
+            onPress={CenterNavigateTo}>
             <View style={Styles.Center}>
                 <MaterialCommunityIcons name="account-supervisor" size={40} color="black" />
             </View>
