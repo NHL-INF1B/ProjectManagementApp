@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import Styles from "./Styles";
-import { View, Text, ScrollView, Button, TextInput, Pressable, Image, SafeAreaView } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, TextInput, Pressable, Image, SafeAreaView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 
@@ -80,113 +80,128 @@ const RegisterScreen = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={Styles.SafeAreaView}>
-          <ScrollView style={Styles.container}>
-            <View styles={Styles.head}>
-              <Text>image</Text>
+      <SafeAreaView style={Styles.SafeAreaView}>
+
+        <View style={Styles.head}>
+          <Image
+            style={Styles.logo}
+            source={require('../../assets/images/logo.png')}
+          />
+        </View>
+
+        <Text style={Styles.titel}>Registreren</Text>
+
+        <View style={Styles.content} >
+          <ScrollView>
+            <View style={Styles.inputContainer}>
+                  <Controller
+                    name="name"
+                    control={control}
+                    rules={{
+                      required: { value: true, message: 'Naam is verplicht' },
+                    }}
+                    render={({ field: { onChange, value } }) => (
+                      <CustomTextInput 
+                        placeholder="Naam" 
+                        placeholderTextColor="#707070" 
+                        onChangeText={(text) => onChange(text)} 
+                        value={value} 
+                        errorText={errors?.name?.message} 
+                        titleText="naam"
+                      />
+                    )}
+                  />
             </View>
 
-            <View style={Styles.content}>
-              <View style={Styles.inputContainer}>
-                <Controller
-                  name="name"
-                  control={control}
-                  rules={{
-                    required: { value: true, message: 'Naam is verplicht' },
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <CustomTextInput 
-                      placeholder="Naam" 
-                      placeholderTextColor="#707070" 
-                      onChangeText={(text) => onChange(text)} 
-                      value={value} 
-                      errorText={errors?.name?.message} 
-                      titleText="naam"
-                    />
-                  )}
-                />
-              </View>
+            <View style={Styles.inputContainer}>
+              <Controller
+                name="email"
+                control={control}
+                rules={{
+                  required: { value: true, message: 'Email is verplicht' },
+                  pattern: {
+                    value: EMAIL_REGEX,
+                    message: 'Email is niet correct'
+                  },
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <CustomTextInput 
+                    placeholder="Emailadres" 
+                    placeholderTextColor="#707070" 
+                    onChangeText={(text) => onChange(text)} 
+                    value={value} 
+                    errorText={errors?.email?.message} 
+                    keyboardType="email-address"
+                    titleText="email"
+                  />
+                )}
+              />
+            </View>
 
-              <View style={Styles.inputContainer}>
-                <Controller
-                  name="email"
-                  control={control}
-                  rules={{
-                    required: { value: true, message: 'Email is verplicht' },
-                    pattern: {
-                      value: EMAIL_REGEX,
-                      message: 'Email is niet correct'
-                    },
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <CustomTextInput 
-                      placeholder="Emailadres" 
-                      placeholderTextColor="#707070" 
-                      onChangeText={(text) => onChange(text)} 
-                      value={value} 
-                      errorText={errors?.email?.message} 
-                      titleText="email"
-                    />
-                  )}
-                />
-              </View>
+            <View style={Styles.inputContainer}>
+              <Controller
+                name="password"
+                control={control}
+                rules={{
+                  required: { value: true, message: 'Wachtwoord is verplicht' },
+                  pattern: {
+                    value: PASS_REGEX,
+                    message: 'Wachtwoord is te zwak'
+                  },
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <CustomTextInput 
+                    placeholder="Wachtwoord" 
+                    placeholderTextColor="#707070" 
+                    onChangeText={(text) => onChange(text)} 
+                    value={value} 
+                    errorText={errors?.password?.message} 
+                    secureTextEntry={true}
+                    titleText="wachtwoord"
+                  />
+                )}
+              />
+            </View>
 
-              <View style={Styles.inputContainer}>
-                <Controller
-                  name="password"
-                  control={control}
-                  rules={{
-                    required: { value: true, message: 'Wachtwoord is verplicht' },
-                    pattern: {
-                      value: PASS_REGEX,
-                      message: 'Wachtwoord is te zwak'
-                    },
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <CustomTextInput 
-                      placeholder="Wachtwoord" 
-                      placeholderTextColor="#707070" 
-                      onChangeText={(text) => onChange(text)} 
-                      value={value} 
-                      errorText={errors?.password?.message} 
-                      secureTextEntry={true}
-                      titleText="wachtwoord"
-                    />
-                  )}
-                />
-              </View>
+            <View style={Styles.inputContainer}>
+              <Controller
+                name="password_repeat"
+                control={control}
+                rules={{
+                  required: { value: true, message: 'Wachtwoord is verplicht' },
+                  validate: 
+                    (value) => value === getValues('password') || 'Wachtwoorden zijn niet gelijk aan elkaar'
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <CustomTextInput 
+                    placeholder="Wachtwoord" 
+                    placeholderTextColor="#707070" 
+                    onChangeText={(text) => onChange(text)} 
+                    value={value} 
+                    errorText={errors?.password_repeat?.message} 
+                    secureTextEntry={true}
+                    titleText="Wachtwoord herhalen"
+                  />
+                )}
+              />
+            </View>
 
-              <View style={Styles.inputContainer}>
-                <Controller
-                  name="password_repeat"
-                  control={control}
-                  rules={{
-                    required: { value: true, message: 'Wachtwoord is verplicht' },
-                    pattern: {
-                      value: PASS_REGEX,
-                      message: 'Wachtwoord is te zwak'
-                    },
-                    validate: 
-                      value => value === getValues('password') || 'Wachtwoorden zijn niet gelijk aan elkaar'
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <CustomTextInput 
-                      placeholder="Wachtwoord" 
-                      placeholderTextColor="#707070" 
-                      onChangeText={(text) => onChange(text)} 
-                      value={value} 
-                      errorText={errors?.password_repeat?.message} 
-                      secureTextEntry={true}
-                      titleText="Wachtwoord herhalen"
-                    />
-                  )}
-                />
-              </View>
+            <View style={[Styles.redirectContainer, {marginBottom:20}]}>
+              <TouchableOpacity
+                style={Styles.button}
+                onPress={handleSubmit(onSubmit)}
+              >
+                <Text style={{color:"white", textTransform:"uppercase", fontWeight: "bold",}}>Registreren</Text>
+              </TouchableOpacity>
+            </View>
 
-              <Button style={Styles.button} title="Registreren" color="black" onPress={handleSubmit(onSubmit)} />
+            <View style={Styles.redirectContainer}>
+              <Text onPress={() => navigation.navigate("LoginScreen")} style={Styles.redirectText}>Inloggen</Text>
             </View>
           </ScrollView>
-        </SafeAreaView>
+        </View>
+
+      </SafeAreaView>
       );
 };
 

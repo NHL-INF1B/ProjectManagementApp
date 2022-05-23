@@ -25,7 +25,6 @@ export default function App() {
 					name="RegisterScreen"
 					component={RegisterScreen}
 				/>
-				
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
