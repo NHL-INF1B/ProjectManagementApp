@@ -16,6 +16,7 @@ export default StyleSheet.create({
     backgroundColor: "white",
     padding: 1,
     borderRadius: 5,
+    textAlign: "center"
   },
   icon: {
     width: "10%",
@@ -23,6 +24,5 @@ export default StyleSheet.create({
   },
   input: {
     width: "90%",
-    textAlign: "center",
   },
 });

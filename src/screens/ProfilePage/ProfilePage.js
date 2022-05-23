@@ -1,18 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Text } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Styles from "../ProfilePage/Styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfilePage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [discord, setDiscord] = useState("");
+  const navigation = useNavigation();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [discord, setDiscord] = useState('');
+
+
+  const getData = async () => {
+		try {
+			const jsonValue = await AsyncStorage.getItem("@user_data");
+			if (jsonValue !== null) {
+        return JSON.parse(jsonValue);
+			}
+		} catch (e) {
+			alert(e);
+		}
+	};
+
+  useEffect(() => {
+    const data = getData();
+    setName(data['name']);
+    data.then((data) => setName(data['name']));
+    data.then((data) => setEmail(data['email']));
+    data.then((data) => setDateOfBirth(data['dateOfBirth']));
+    data.then((data) => setPhoneNumber(data['phoneNumber']));
+    data.then((data) => setDiscord(data['discord']));
+  }, []);
+
+  
 
   return (
     <SafeAreaView style={Styles.SafeAreaView}>

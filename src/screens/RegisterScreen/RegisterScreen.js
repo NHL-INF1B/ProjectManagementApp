@@ -23,7 +23,7 @@ const RegisterScreen = ({ navigation }) => {
 
     const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
           try {
-              fetch("http://localhost/pma/PmaAPI/handlers/registration/registrationHandler.php", {
+              fetch("http://localhost/PMA/PmaAPI/handlers/registration/registrationHandler.php", {
                   method: "POST",
                   headers: {
                       Accept: "application/json",

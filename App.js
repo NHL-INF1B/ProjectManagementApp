@@ -4,6 +4,7 @@ import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ProfilePage from "./src/screens/ProfilePage/ProfilePage"
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +12,11 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen
+				<Stack.Screen
+					name="ProfilePage"
+					component={ProfilePage}
+				/>
+				<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
 				/>

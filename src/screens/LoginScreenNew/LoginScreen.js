@@ -65,7 +65,7 @@ const LoginScreen = ({ navigation }) => {
 
 	const sendDataToAPI = (email, password) => {
 		try {
-			fetch("http://localhost/pma/PmaAPI/handlers/login/loginHandler.php", {
+			fetch("http://localhost/PMA/PmaAPI/handlers/login/loginHandler.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -127,7 +127,7 @@ const LoginScreen = ({ navigation }) => {
 					console.log(response[0].dateOfBirth);
 
 					storeData(response[0]);
-					navigation.navigate('RegisterScreen'); //Needs to go to welcomescreen
+					navigation.navigate('ProfilePage'); //Needs to go to welcomescreen
 					break;
 			}
 		}
@@ -202,6 +202,12 @@ const LoginScreen = ({ navigation }) => {
 				<View>
 					<Pressable onPress={() => navigatie.navigate("RegisterScreen")}>
 						<Text style={Styles.registreren}>Registreren</Text>
+					</Pressable>
+				</View>
+
+				<View>
+					<Pressable onPress={() => navigatie.navigate("ProfilePage")}>
+						<Text style={Styles.registreren}>ProfielPagina</Text>
 					</Pressable>
 				</View>
 			</ScrollView>
