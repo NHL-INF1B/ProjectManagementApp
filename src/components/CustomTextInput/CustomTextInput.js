@@ -1,29 +1,49 @@
-import React from 'react'
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import React from "react";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 
-const CustomTextInput = ({value, setValue, placeholder}) => {
-    return (
+const CustomTextInput = (props) => {
+	return (
         <View>
-            <TextInput 
-                value={value}
-                onChangeText={setValue}
-                placeholder={placeholder} 
-                style={styles.input}
+            {props.titleText && (
+                <Text style={styles.titleText}>{props.titleText}</Text>
+            )}
+            <TextInput
+                {...props}
+                style={[styles.input]}
             />
-        </View>
-    )
-}
+            {props.errorText && (
+                <Text style={styles.errorText}>{props.errorText}</Text>
+            )}
+      </View>
+	);
+};
 
 const styles = StyleSheet.create({
+    titleText: {
+        textAlign: "center",
+        color: "white",
+        fontWeight: "bold",
+        textTransform: 'uppercase',
+    },
     input: {
+        padding: 13,
+        alignSelf: "center",
         textAlign: 'center',
         borderWidth: 1,
         borderColor: '#009BAA',
         padding: '0.4%',
         width: '50%',
         backgroundColor: 'white',
-        borderRadius: 5,
-        alignSelf: 'center',
+        width: '70%',
+        borderWidth: 3,
+        borderRadius: 10,
+        borderColor: '#00AABB',
+    },
+    errorText: {
+        textAlign: "center",
+        color: "red",
+        fontWeight: "bold",
     },
 });
-export default CustomTextInput
+
+export default CustomTextInput;

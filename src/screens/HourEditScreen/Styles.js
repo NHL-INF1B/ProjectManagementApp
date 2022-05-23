@@ -4,14 +4,6 @@ export default StyleSheet.create({
     root: {
       backgroundColor: '#009BAA',
     },
-    circle: {
-      width: '10%',
-      height: 100,
-      borderWidth: 1,
-      borderRadius: 100,
-      borderColor: 'black',
-      backgroundColor: 'white',
-      },
     icon: {
       alignSelf: 'center',
       marginTop: 'auto',
@@ -31,7 +23,7 @@ export default StyleSheet.create({
     button: {
       width: '50%',
       textAlign: 'center',
-      padding: '1%',
+      padding: '.5%',
       color: 'white',
       fontWeight: 'bold',
       borderRadius: 5,
@@ -55,6 +47,9 @@ export default StyleSheet.create({
     },
     marginTop1: {
       marginTop: '1%',
+    },
+    marginBottom1: {
+      marginBottom: '1%',
     },
     marginTop5: {
       marginTop: '5%',
