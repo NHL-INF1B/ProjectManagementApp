@@ -11,7 +11,7 @@ import { useValidation} from 'react-native-form-validator';
 const Teamcode = () => {
   const [Teamcode, setTeamcode] = useState('');
 
-  const sendDataToAPI = (name, qrcode, teamcode) => {
+  const sendDataToAPI = (teamcode) => {
     try {
         fetch("http://localhost:8080/PmaAPI/handlers/planning/planningHandler.php", {
             method: "POST",
@@ -21,8 +21,8 @@ const Teamcode = () => {
             },
             body: JSON.stringify({
                // planning: planning,
-                name: name,
-                qrcode: qrcode,
+                // name: name,
+                // qrcode: qrcode,
                 teamcode: teamcode,
             }),
         })
@@ -37,10 +37,47 @@ const Teamcode = () => {
     }
 };
 
-const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
-  useValidation({
-      state: { Teamcode},
-  });
+// const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
+//   useValidation({
+//       state: { Teamcode},
+//   });
+
+//   const res = await DocumentPicker.pick({
+//     type: [DocumentPicker.types.allFiles],
+// });
+// this.setState({ singleFile: res });
+
+// const data = new FormData();
+// data.append('name', 'Image Upload');
+// data.append('file_attachment', fileToUpload);
+
+// let uploadImage = async () => {
+//   //Check if any file is selected or not
+//   if (singleFile != null) {
+//     //If file selected then create FormData
+//     const fileToUpload = singleFile;
+//     const data = new FormData();
+//     data.append('name', 'Image Upload');
+//     data.append('file_attachment', fileToUpload);
+//     let res = await fetch(
+//       'http://localhost:8080/PmaAPI/handlers/teamcode/teamcodeHandler.php',
+//       {
+//         method: 'post',
+//         body: data,
+//         headers: {
+//           'Content-Type': 'multipart/form-data; ',
+//         },
+//       }
+//     );
+//     let responseJson = await res.json();
+//     if (responseJson.status == 1) {
+//       alert('Upload Successful');
+//     }
+//   } else {
+//     //if no file selected the show alert
+//     alert('Please Select File first');
+//   }
+// };
 
   // const _checkValidation = () => {
   //   if(isFormValid() == true) {
@@ -51,17 +88,17 @@ const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormVali
   //   }
   // }
 
-  const _onPressButton = () => {
-    validate({
-      teamcode: { minlength: 3, maxlength: 50, hasNoSpecialCharacter: true, required: true },
-    }),
-    _checkValidation();
-  };
+//   const _onPressButton = () => {
+//     validate({
+//       teamcode: { minlength: 3, maxlength: 50, hasNoSpecialCharacter: true, required: true },
+//     }),
+//     _checkValidation();
+//   };
 
-  const res = await DocumentPicker.pick({
-    type: [DocumentPicker.types.allFiles],
-});
-this.setState({ singleFile: res });
+//   const res = await DocumentPicker.pick({
+//     type: [DocumentPicker.types.allFiles],
+// });
+// this.setState({ singleFile: res });
 
 // const data = new FormData();
 // data.append('name', 'Image Upload');
