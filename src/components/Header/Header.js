@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 
-export default function Header({ GoToType, GoTo, ReturnType }){
+export default function Header({ GoToType, GoTo, CenterGoTo, ReturnType }){
 
     const navigation = useNavigation()
 
@@ -13,6 +13,10 @@ export default function Header({ GoToType, GoTo, ReturnType }){
 
     const NavigateTo = () => {
         navigation.navigate(GoTo)
+    }
+
+    const CenterNavigateTo = () => {
+        navigation.navigate(CenterGoTo)
     }
 
     if(GoToType == "Add"){
@@ -35,9 +39,7 @@ export default function Header({ GoToType, GoTo, ReturnType }){
                 <MaterialCommunityIcons name={GoToIcon} size={40} color="black" />
             </Pressable>
 
-            <View style={Styles.Center}>
-                <MaterialCommunityIcons name="account-supervisor" size={40} color="black" />
-            </View>
+           {CheckCenterGoTo()}
 
             <Pressable
                 onPress={GoBack}>
@@ -64,3 +66,20 @@ const Styles = StyleSheet.create({
         marginRight: 70,
     }
 })
+
+function CheckCenterGoTo({ CenterGoTo }){
+    if(CenterGoTo !== null){
+        return (
+        <Pressable
+            onPress={CenterGoTo}>
+            <View style={Styles.Center}>
+                <MaterialCommunityIcons name="account-supervisor" size={40} color="black" />
+            </View>
+        </Pressable>
+        )
+    } else{
+        return (
+            <View style={Styles.Center}></View>
+        )
+    }
+}
