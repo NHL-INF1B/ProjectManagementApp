@@ -10,13 +10,13 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignSelf: "center",
     width: "70%",
-    marginBottom: 10,
-    borderColor: "#009BAA",
+    marginBottom: 15,
+    borderColor: "#707070",
     borderWidth: 1,
     backgroundColor: "white",
     padding: 1,
-    borderRadius: 5,
-    textAlign: "center"
+    borderRadius: 15,
+    textAlign: "center",
   },
   icon: {
     width: "10%",
@@ -24,5 +24,12 @@ export default StyleSheet.create({
   },
   input: {
     width: "90%",
+    padding: 13,
+  },
+  Circle: {
+    alignSelf: "center",
+  },
+  person: {
+    marginBottom: 100,
   },
 });
