@@ -14,14 +14,14 @@ export default function App() {
 				screenOptions={{ headerShown: false}}
 			>
 
-				{/* <Stack.Screen
+				<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
 				/>
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
-				/> */}
+				/>
 
 				<Stack.Screen
 					name="ProjectScreen"
