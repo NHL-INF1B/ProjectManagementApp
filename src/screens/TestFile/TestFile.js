@@ -10,7 +10,7 @@ export default function TestFile() {
     
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <Header GoToType="Add" GoTo="" ReturnType="Back" />
+            <Header GoToType="Add" GoTo="" CenterGoTo="false" ReturnType="Back" />
             <Tile text="Teamcode" image="book" screen="TestFile2" projectId={projectId} userId={userId} />
         </SafeAreaView>
     );

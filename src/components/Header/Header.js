@@ -68,7 +68,7 @@ const Styles = StyleSheet.create({
 })
 
 function CheckCenterGoTo({ CenterGoTo, CenterNavigateTo }){
-    if(CenterGoTo !== null){
+    if(CenterGoTo !== "false"){
         return (
         <Pressable
             onPress={CenterNavigateTo}>
