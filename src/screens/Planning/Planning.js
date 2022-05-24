@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
-import { useValidation} from 'react-native-form-validator';
 
 const Planning = () => {
   const [Activiteit, setActiviteit] = useState('');
@@ -40,27 +39,6 @@ const Planning = () => {
     }
 };
 
-const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
-  useValidation({
-      state: { Activiteit, Weeknummer},
-  });
-
-  // const _checkValidation = () => {
-  //   if(isFormValid() == true) {
-  //     console.log("geen errors");
-  //     //sendDataToAPI();
-  //   } else if (isFormValid() == false) {
-  //     console.log("wel errors");
-  //   }
-  // }
-
-  const _onPressButton = () => {
-    validate({
-      Activiteit: { minlength: 3, maxlength: 50, hasNoSpecialCharacter: true, required: true },
-      Weeknummer: { minlength: 1, maxlength: 2, hasNoSpecialCharacter: true, required: true, numbers: true},
-    }),
-    _checkValidation();
-  };
 
   return (
     <ScrollView style={styles.root}>
@@ -69,24 +47,12 @@ const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormVali
       <Text style={[styles.title, styles.marginBottom25]}>Planning Toevoegen</Text>
       <Text style={styles.subtitle}>Activiteit</Text>
       <TextInput style={styles.textInput} onChangeText={setActiviteit} placeholder="Activiteit" value={Activiteit}  />
-      {isFieldInError('Activiteit') &&
-            getErrorsInField('Activiteit').map(ErrorMessage => (
-                <Text style={[styles.sampleText]}>{ErrorMessage}</Text>
-            ))}
-
       <Text style={styles.subtitle}>Weeknummer</Text>
       <TextInput style={styles.textInput} onChangeText={setWeeknummer} placeholder="Weeknummer" value={Weeknummer}  />
-      {isFieldInError('Weeknummer') &&
-            getErrorsInField('Weeknummer').map(ErrorMessage => (
-                <Text style={[styles.sampleText]}>{ErrorMessage}</Text>
-            ))}
 
-        <Pressable onPress={_onPressButton}>
+        <Pressable onPress={() => sendDataToAPI(Activiteit, Weeknummer)}>
         <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>Aanmaken</Text>
         </Pressable>
-      <View>
-        <Button title="druk hier" onPress={() => sendDataToAPI(Activiteit, Weeknummer)} />
-      </View>
 
 
     </ScrollView>
