@@ -7,7 +7,6 @@ import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = ({ navigation }) => {
-	const navigatie = useNavigation();
 
 	useEffect(() => {
         // removeValue(); //If you want to remove the stored data for testing
@@ -200,13 +199,13 @@ const LoginScreen = ({ navigation }) => {
 				</View>
 
 				<View>
-					<Pressable onPress={() => navigatie.navigate("RegisterScreen")}>
+					<Pressable onPress={() => navigation.navigate("RegisterScreen")}>
 						<Text style={Styles.registreren}>Registreren</Text>
 					</Pressable>
 				</View>
 
 				<View>
-					<Pressable onPress={() => navigatie.navigate("ProfilePage")}>
+					<Pressable onPress={() => navigation.navigate("ProfilePage")}>
 						<Text style={Styles.registreren}>ProfielPagina</Text>
 					</Pressable>
 				</View>

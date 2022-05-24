@@ -13,18 +13,17 @@ export default function App() {
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen
-					name="ProfilePage"
-					component={ProfilePage}
+					name="LoginScreen"
+					component={LoginScreen}
 				/>
-				<Stack.Screen
+								<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
 				/>
 				<Stack.Screen
-					name="LoginScreen"
-					component={LoginScreen}
+					name="ProfilePage"
+					component={ProfilePage}
 				/>
-
 				<Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
