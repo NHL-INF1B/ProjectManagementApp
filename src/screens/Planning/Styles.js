@@ -9,6 +9,11 @@ export default StyleSheet.create({
       marginLeft: '19%',
       marginTop: '19%',
     },
+    div: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     title: {
       textAlign: 'center',
       color: 'white',
@@ -26,7 +31,6 @@ export default StyleSheet.create({
       borderColor: '#009BAA',
       padding: 1,
       width: '50%',
-      marginLeft: 90,
       backgroundColor: 'white',
       borderRadius: 5,
     },
@@ -62,14 +66,15 @@ export default StyleSheet.create({
     marginBottom25: {
       marginBottom: 25,
     },
-
+    marginBottom50: {
+      marginBottom: 50,
+    },
     textInput: {
       textAlign: 'center',
       borderWidth: 1,
       borderColor: '#009BAA',
       padding: 1,
       width: '50%',
-      marginLeft: 90,
       backgroundColor: 'white',
       borderRadius: 5,
   },

@@ -43,13 +43,24 @@ const Planning = () => {
   return (
     <ScrollView style={styles.root}>
       <MaterialCommunityIcons style={styles.arrow}  name="arrow-left-thick" size={60} color={'black'} />
+      <View style={[styles.div, styles.marginBottom50]}>
       <Circle name={"calendar-month"} size={60} color={"Black"} style={styles.icon} />
+      </View>
+      <View style={styles.div}>
       <Text style={[styles.title, styles.marginBottom25]}>Planning Toevoegen</Text>
+      </View>
+      <View style={styles.div}>
       <Text style={styles.subtitle}>Activiteit</Text>
+      </View>
+      <View style={styles.div}>
       <TextInput style={styles.textInput} onChangeText={setActiviteit} placeholder="Activiteit" value={Activiteit}  />
+      </View>
+      <View style={styles.div}>
       <Text style={styles.subtitle}>Weeknummer</Text>
+      </View>
+      <View style={styles.div}>
       <TextInput style={styles.textInput} onChangeText={setWeeknummer} placeholder="Weeknummer" value={Weeknummer}  />
-
+      </View>
         <Pressable onPress={() => sendDataToAPI(Activiteit, Weeknummer)}>
         <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>Aanmaken</Text>
         </Pressable>
