@@ -10,7 +10,7 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 
   const CreateProject = ({ navigation }) => {
     //form handling
-    const NAME_REGEX = /^[a-zA-Z0-9\s]{3,30}$/;
+    const NAME_REGEX = /^[a-zA-Z0-9 ]{3,30}$/;
     const { control, handleSubmit, formState: { errors } } = useForm({
       defaultValues: {
         name: '',
@@ -64,7 +64,7 @@ return (
                     required: { value: true, message: 'Projectnaam is verplicht' },
                     pattern: {
                       value: NAME_REGEX,
-                      message: 'Projectnaam moet tussen de 3 en 30 karakters bevatten'
+                      message: 'Projectnaam moet tussen de 3 en 30 karakters bevatten én mag geen speciale karakters bevatten.',
                     },
                   }}
                   render={({ field: { onChange, value } }) => (
