@@ -34,10 +34,12 @@ export default function Header({ GoToType, GoTo, CenterGoTo, ReturnType }){
     return (
         <View style={Styles.HeaderContainer}>
             
-            <Pressable
+            {/* <Pressable
                 onPress={NavigateTo}>
                 <MaterialCommunityIcons name={GoToIcon} size={40} color="black" />
-            </Pressable>
+            </Pressable> */}
+
+            {CheckGoTo({ GoToType, NavigateTo, GoToIcon })}
 
            {CheckCenterGoTo({CenterGoTo, CenterNavigateTo })}
 
@@ -64,6 +66,10 @@ const Styles = StyleSheet.create({
         width: 40,
         marginLeft: 70,
         marginRight: 70,
+    },
+    Icon: {
+        height: 40,
+        width: 40,
     }
 })
 
@@ -80,6 +86,23 @@ function CheckCenterGoTo({ CenterGoTo, CenterNavigateTo }){
     } else{
         return (
             <View style={Styles.Center}></View>
+        )
+    }
+}
+
+function CheckGoTo({ GoToType, NavigateTo, GoToIcon }){
+    if(GoToType !== "None"){
+        return (
+            <Pressable
+                onPress={NavigateTo}>
+                <View style={Styles.Icon}>
+                    <MaterialCommunityIcons name={GoToIcon} size={40} color="black" />
+                </View>
+            </Pressable>
+        )
+    } else{
+        return (
+            <View style={Styles.Icon}></View>
         )
     }
 }
