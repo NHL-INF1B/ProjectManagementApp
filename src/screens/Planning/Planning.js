@@ -8,7 +8,7 @@ import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
 import { useValidation} from 'react-native-form-validator';
 
-export default function PlanningScreen() {
+const Planning = () => {
   const [Activiteit, setActiviteit] = useState('');
   const [Weeknummer, setWeeknummer] = useState('');
   //const [PlanningNaam, setPlanningNaam] = useState('');
@@ -93,4 +93,4 @@ const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormVali
   );
 }
 
-// export default PlanningScreen;
+export default Planning;
