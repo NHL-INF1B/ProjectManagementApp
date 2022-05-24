@@ -3,6 +3,11 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 
+// Valid inputs for GoToType: "None", "Add", "Edit"
+// Valid inputs for GoTo: File you want to go to, leave empty if GoToType is "None"
+// Valid inputs for CenterGoTo: "None" or file you want to go to
+// Valid inputs for ReturnType: "Back" or "Home"
+
 export default function Header({ GoToType, GoTo, CenterGoTo, ReturnType }){
 
     const navigation = useNavigation()
@@ -33,19 +38,16 @@ export default function Header({ GoToType, GoTo, CenterGoTo, ReturnType }){
 
     return (
         <View style={Styles.HeaderContainer}>
-            
-            {/* <Pressable
-                onPress={NavigateTo}>
-                <MaterialCommunityIcons name={GoToIcon} size={40} color="black" />
-            </Pressable> */}
 
             {CheckGoTo({ GoToType, NavigateTo, GoToIcon })}
 
-           {CheckCenterGoTo({CenterGoTo, CenterNavigateTo })}
+            {CheckCenterGoTo({CenterGoTo, CenterNavigateTo })}
 
             <Pressable
                 onPress={GoBack}>
-                <MaterialCommunityIcons name={ReturnIcon} size={40} color="black" />
+                <View style={Styles.Icon}>
+                    <MaterialCommunityIcons name={ReturnIcon} size={40} color="black" />
+                </View>
             </Pressable>
         </View>
     )
@@ -64,8 +66,8 @@ const Styles = StyleSheet.create({
     Center: {
         height: 40,
         width: 40,
-        marginLeft: 70,
-        marginRight: 70,
+        marginLeft: 100,
+        marginRight: 100,
     },
     Icon: {
         height: 40,
@@ -74,7 +76,7 @@ const Styles = StyleSheet.create({
 })
 
 function CheckCenterGoTo({ CenterGoTo, CenterNavigateTo }){
-    if(CenterGoTo !== "false"){
+    if(CenterGoTo !== "None"){
         return (
         <Pressable
             onPress={CenterNavigateTo}>

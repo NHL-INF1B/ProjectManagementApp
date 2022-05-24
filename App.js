@@ -2,8 +2,6 @@ import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import {React, useEffect} from "react";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
-import TestFile from "./src/screens/TestFile/TestFile";
-import TestFile2 from "./src/screens/TestFile2/TestFile2";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -16,28 +14,18 @@ export default function App() {
 				screenOptions={{ headerShown: false}}
 			>
 
-				<Stack.Screen
-					name="TestFile"
-					component={TestFile}
-				/>
-
-				<Stack.Screen
+				{/* <Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
 				/>
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
-				/>
+				/> */}
 
 				<Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
-				/>
-
-				<Stack.Screen
-					name="TestFile2"
-					component={TestFile2}
 				/>
 
 				<Stack.Screen
