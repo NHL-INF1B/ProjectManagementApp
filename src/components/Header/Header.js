@@ -58,6 +58,7 @@ const Styles = StyleSheet.create({
         backgroundColor: "#009BAA",
         minHeight: 65,
         maxHeight: 65,
+        width: "100%",
         flex: 1,
         justifyContent: "space-around",
         flexDirection: "row",
@@ -66,8 +67,8 @@ const Styles = StyleSheet.create({
     Center: {
         height: 40,
         width: 40,
-        marginLeft: 100,
-        marginRight: 100,
+        marginLeft: "25%",
+        marginRight: "25%",
     },
     Icon: {
         height: 40,
