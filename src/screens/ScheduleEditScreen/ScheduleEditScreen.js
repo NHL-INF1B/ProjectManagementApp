@@ -71,8 +71,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 		}
     }
 
-    const removeData = () => {
-        console.log('yesss');
+    const sendRemoveData = () => {
         try {
 			fetch("http://localhost/pma/PmaAPI/handlers/planning/planningDelete.php", {
 				method: "POST",
@@ -99,6 +98,10 @@ const ScheduleEditScreen = ({ navigation }) => {
             case "data_updated":
               alert("Data is geüpdatet");
               navigation.navigate("ScheduleEditScreen"); //kan ook planning scherm worden
+              break;
+            case "data_deleted":
+              alert("De planning is verwijderd");
+              navigation.navigate("ScheduleEditScreen"); //moet planning scherm worden
               break;
             default:
               console.log('not defined');
@@ -169,8 +172,8 @@ const ScheduleEditScreen = ({ navigation }) => {
                     text={"Verwijderen"}
                     onPress={() =>
                         Alert.alert("Weet je zeker dat je deze planning wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
-                            { text: "Verwijderen", onPress: () => removeData() },
-                            { text: "Annuleren", onPress: () => console.log("no geklikt") },
+                            { text: "Verwijderen", onPress: () => sendRemoveData() },
+                            { text: "Annuleren" },
                         ])
                     }
                 />
