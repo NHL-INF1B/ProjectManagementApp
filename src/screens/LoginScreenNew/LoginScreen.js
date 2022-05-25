@@ -7,6 +7,8 @@ import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = ({ navigation }) => {
+	
+	const navigatie = useNavigation();
 
 	useEffect(() => {
         // removeValue(); //If you want to remove the stored data for testing
@@ -14,7 +16,7 @@ const LoginScreen = ({ navigation }) => {
         data.then((data) => {
             if (data != null) {
                 console.log(data);
-                navigation.navigate('RegisterScreen'); //Needs to go to welcomescreen
+                navigation.navigate('WelcomeScreen'); //Needs to go to welcomescreen
             }
         });
 	}, []);
@@ -64,7 +66,7 @@ const LoginScreen = ({ navigation }) => {
 
 	const sendDataToAPI = (email, password) => {
 		try {
-			fetch("http://localhost/PMA/PmaAPI/handlers/login/loginHandler.php", {
+			fetch("http://localhost/ReactNative/PmaAPI/handlers/login/loginHandler.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -122,7 +124,7 @@ const LoginScreen = ({ navigation }) => {
 					console.log(response[0].dateOfBirth);
 
 					storeData(response[0]);
-					navigation.navigate('ProfilePage'); //Needs to go to welcomescreen
+					navigation.navigate('WelcomeScreen'); //Needs to go to welcomescreen
 					break;
 			}
 		}
