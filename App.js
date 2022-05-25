@@ -16,14 +16,17 @@ export default function App() {
 					name="ScheduleEditScreen"
 					component={ScheduleEditScreen}
 				/>
-				<Stack.Screen
-					name="RegisterScreen"
-					component={RegisterScreen}
-				/>
+
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
 				/>
+
+				<Stack.Screen
+					name="RegisterScreen"
+					component={RegisterScreen}
+				/>
+
 
 				<Stack.Screen
 					name="ProjectScreen"
