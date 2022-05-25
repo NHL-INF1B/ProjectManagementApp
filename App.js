@@ -14,15 +14,10 @@ export default function App() {
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen
-					name="ScheduleEditScreen"
-					component={ScheduleEditScreen}
-				/>
-
-				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
 				/>
-								<Stack.Screen
+				<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
 				/>
@@ -31,21 +26,17 @@ export default function App() {
 					component={ProfilePage}
 				/>
 				<Stack.Screen
-					name="RegisterScreen"
-					component={RegisterScreen}
-				/>
-
-
-				<Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
 				/>
-
 				<Stack.Screen
 					name="TeamcodeScreen"
 					component={""}
 				/>
-
+				<Stack.Screen
+					name="ScheduleEditScreen"
+					component={ScheduleEditScreen}
+				/>
 				<Stack.Screen
 					name="PlanningScreen"
 					component={""}

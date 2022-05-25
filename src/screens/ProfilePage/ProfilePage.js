@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Styles from "../ProfilePage/Styles";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from "../../components/Circle/Circle";
+import ShowProfileInfo from "../../components/TextLatenZien/ShowProfileInfo";
 
 const ProfilePage = () => {
   const [name, setName] = useState("-");
@@ -43,46 +42,36 @@ const ProfilePage = () => {
       <View style={Styles.person}>
         <Circle name="account" color="black" size={90} style={Styles.Circle} />
       </View>
-      <View style={Styles.inputFields}>
-        <Ionicons name="person" size={30} color="black" style={Styles.icon} />
-        <Text style={Styles.input}>{name}</Text>
-      </View>
-      <View style={Styles.inputFields}>
-        <MaterialCommunityIcons
-          name="email"
-          size={30}
-          color="black"
-          style={Styles.icon}
-        />
-        <Text style={Styles.input}>{email}</Text>
-      </View>
-      <View style={Styles.inputFields}>
-        <MaterialCommunityIcons
-          name="calendar"
-          size={30}
-          color="black"
-          style={Styles.icon}
-        />
-        <Text style={Styles.input}>{dateOfBirth}</Text>
-      </View>
-      <View style={Styles.inputFields}>
-        <MaterialCommunityIcons
-          name="phone"
-          size={30}
-          color="black"
-          style={Styles.icon}
-        />
-        <Text style={Styles.input}>{phoneNumber}</Text>
-      </View>
-      <View style={Styles.inputFields}>
-        <MaterialCommunityIcons
-          name="discord"
-          size={30}
-          color="black"
-          style={Styles.icon}
-        />
-        <Text style={Styles.input}>{discord}</Text>
-      </View>
+      <ShowProfileInfo
+        name={name}
+        iconName="account"
+        iconSize={30}
+        iconColor="black"
+      />
+      <ShowProfileInfo
+        name={email}
+        iconName="email"
+        iconSize={30}
+        iconColor="black"
+      />
+      <ShowProfileInfo
+        name={dateOfBirth}
+        iconName="calendar"
+        iconSize={30}
+        iconColor="black"
+      />
+      <ShowProfileInfo
+        name={phoneNumber}
+        iconName="phone"
+        iconSize={30}
+        iconColor="black"
+      />
+      <ShowProfileInfo
+        name={discord}
+        iconName="discord"
+        iconSize={30}
+        iconColor="black"
+      />
     </SafeAreaView>
   );
 };
