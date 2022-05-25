@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './src/screens/LoginScreenNew/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen/RegisterScreen';
 import CreateProject from './src/screens/CreateProject/CreateProject';
+import EditProject from './src/screens/EditProject/EditProject';
 import HourEditScreen from './src/screens/HourEditScreen/HourEditScreen';
 // import WelcomeScreen from './src/screens/WelcomeScreen/WelcomeScreen';
 import ScheduleEditScreen from './src/screens/ScheduleEditScreen/ScheduleEditScreen';
@@ -20,9 +21,13 @@ export default function App() {
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 
-				<Stack.Screen
+				{/* <Stack.Screen
 					name='CreateProject'
 					component={CreateProject}
+				/> */}
+								<Stack.Screen
+					name='EditProject'
+					component={EditProject}
 				/>
 				{/* <Stack.Screen
 					name="ProfilePage"
