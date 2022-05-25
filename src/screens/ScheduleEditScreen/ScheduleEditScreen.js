@@ -4,6 +4,7 @@ import { ScrollView, View, Text, SafeAreaView, Button, Image, TouchableOpacity, 
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import Circle from "../../components/Circle/Circle";
 
 const ScheduleEditScreen = ({ navigation }) => {
     const scheduleId = 1; //Temp until previous page is made. Usually it will be send when calling this page.
@@ -111,6 +112,10 @@ const ScheduleEditScreen = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={Styles.SafeAreaView}>
+            <View>
+                <Circle name={"calendar-month"} size={60} color={"black"} text={"planning bewerken"} />
+            </View>
+
             <View>
                 <Controller
                     name="activity"

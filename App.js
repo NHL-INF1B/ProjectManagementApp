@@ -19,7 +19,11 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-
+				<Stack.Screen
+					name="ScheduleEditScreen"
+					component={ScheduleEditScreen}
+				/>
+				
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
@@ -33,11 +37,6 @@ export default function App() {
 				<Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
-				/>
-
-				<Stack.Screen
-					name="ScheduleEditScreen"
-					component={ScheduleEditScreen}
 				/>
 
 				<Stack.Screen

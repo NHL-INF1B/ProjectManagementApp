@@ -1,32 +1,41 @@
 import React from 'react'
-import { View, StyleSheet, TextInput } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const Circle = ({ name, size, color, style }) => {
+const Circle = (props) => {
     return (
-        <View style={styles.circle}>
-            <MaterialCommunityIcons 
-                name={name}
-                size={size}
-                color={color}
-                style={style}
-            />
+        <View>
+            <View style={styles.circle}>
+                <MaterialCommunityIcons 
+                    {...props}
+                />
+            </View>
+            {props.text && (
+                <View>
+                    <Text style={styles.text}>{props.text}</Text>
+                </View>
+            )}
+
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        
-    },
     circle: {
+        alignSelf: "center",
+        borderRadius: 100,
         width: 100,
         height: 100,
-        borderWidth: 1,
-        borderRadius: 100,
-        borderColor: 'black',
-        backgroundColor: 'white',
-        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor:'white',
+    },
+    text : {
+        textAlign: "center",
+        color: "white",
+        fontWeight: "bold",
+        textTransform: 'uppercase',
+        fontSize: 20,
     },
 });
 export default Circle
