@@ -11,58 +11,5 @@ const Stack = ShowPlanning();
 export default function App() {
 	return (
 		<ShowPlanning />
-		// <NavigationContainer>
-		// 	<Stack.Navigator screenOptions={{ headerShown: false }}>
-		// 	<Stack.Screen
-		// 			name="RegisterScreen"
-		// 			component={RegisterScreen}
-		// 		/>
-		// 		<Stack.Screen
-		// 			name="LoginScreen"
-		// 			component={LoginScreen}
-		// 		/>
-
-		// 		<Stack.Screen
-		// 			name="ProjectScreen"
-		// 			component={ProjectScreen}
-		// 		/>
-
-		// 		<Stack.Screen
-		// 			name="TeamcodeScreen"
-		// 			component={""}
-		// 		/>
-
-		// 		<Stack.Screen
-		// 			name="PlanningScreen"
-		// 			component={""}
-		// 		/>
-
-		// 		<Stack.Screen
-		// 			name="LogbookScreen"
-		// 			component={""}
-		// 		/>
-
-		// 		<Stack.Screen
-		// 			name="WarningScreen"
-		// 			component={""}
-		// 		/>
-
-		// 		<Stack.Screen
-		// 			name="InviteScreen"
-		// 			component={""}
-		// 		/>
-
-		// 		<Stack.Screen
-		// 			name="MemberScreen"
-		// 			component={""}
-		// 		/>
-
-		// 		<Stack.Screen
-		// 			name="ScoreScreen"
-		// 			component={""}
-		// 		/>
-
-		// 	</Stack.Navigator>
-		// </NavigationContainer>
 	);
 }
