@@ -7,7 +7,6 @@ import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
-import { CustomButton } from "../../components/CustomButton/CustomButton";
 
   const CreateProject = ({ navigation }) => {
     //form handling
@@ -80,16 +79,9 @@ return (
                   )}
                 />
               </View>
-        {/* <Pressable onPress={handleSubmit(onSubmit)}>
+        <Pressable onPress={handleSubmit(onSubmit)}>
         <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>AANMAKEN</Text>
-        </Pressable> */}
-        <View>
-                <CustomButton 
-                buttonType={"blueButton"}
-                text={"Bewerken"}
-                />
-
-        </View>
+        </Pressable>
     </ScrollView>
     );
 };
