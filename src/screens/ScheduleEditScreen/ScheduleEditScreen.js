@@ -72,7 +72,26 @@ const ScheduleEditScreen = ({ navigation }) => {
     }
 
     const removeData = () => {
-
+        console.log('yesss');
+        try {
+			fetch("http://localhost/pma/PmaAPI/handlers/planning/planningDelete.php", {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+                body: JSON.stringify({
+                    scheduleId : scheduleId,
+				}),
+			})
+				// .then((response) => response.text())
+				.then((response) => response.json())
+				.then((response) => {
+                    catchFeedback(response);
+				});
+		} catch (error) {
+			alert(error);
+		}
     }
 
 	const catchFeedback = (response) => {
@@ -102,7 +121,7 @@ const ScheduleEditScreen = ({ navigation }) => {
                             onChangeText={(text) => onChange(text)} 
                             value={value} 
                             errorText={errors?.activity?.message} 
-                            titleText="activity"
+                            titleText="Activiteit"
                         />
                     )}
                 />
@@ -150,7 +169,7 @@ const ScheduleEditScreen = ({ navigation }) => {
                     text={"Verwijderen"}
                     onPress={() =>
                         Alert.alert("Weet je zeker dat je deze planning wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
-                            { text: "Verwijderen", onPress: () => console.log("yes geklikt") },
+                            { text: "Verwijderen", onPress: () => removeData() },
                             { text: "Annuleren", onPress: () => console.log("no geklikt") },
                         ])
                     }
