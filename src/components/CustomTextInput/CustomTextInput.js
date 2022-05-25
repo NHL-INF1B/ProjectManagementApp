@@ -9,6 +9,7 @@ const CustomTextInput = (props) => {
             )}
             <TextInput
                 {...props}
+                placeholderTextColor="#707070" 
                 style={[styles.input]}
             />
             {props.errorText && (
