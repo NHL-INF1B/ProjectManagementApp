@@ -15,7 +15,6 @@ const Circle = (props) => {
                     <Text style={styles.text}>{props.text}</Text>
                 </View>
             )}
-
         </View>
     )
 }
