@@ -2,12 +2,15 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     root: {
+      flex: 1,
       backgroundColor: '#009BAA',
     },
-    icon: {
-      marginLeft: '19%',
-      marginTop: '19%',
+    div: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
     },
+    
     title: {
       textAlign: 'center',
       color: 'white',
@@ -18,6 +21,7 @@ export default StyleSheet.create({
       textAlign: 'center',
       color: 'white',
       fontWeight: 'bold',
+      padding: 0,
     },
     input: {
       textAlign: 'center',
@@ -25,9 +29,9 @@ export default StyleSheet.create({
       borderColor: '#009BAA',
       padding: 1,
       width: '50%',
-      marginLeft: 90,
       backgroundColor: 'white',
       borderRadius: 5,
+      justifyContent: 'center',
     },
     button: {
       width: '50%',
@@ -56,9 +60,28 @@ export default StyleSheet.create({
       marginTop: 15,
     },
     marginTop25: {
-      marginTop: 5,
+      marginTop: 25,
     },
+    marginTop50: {
+      marginTop: 50,
+    },
+
     marginBottom25: {
       marginBottom: 25,
-    }
-  });
+    },
+    textInput: {
+      textAlign: 'center',
+      borderWidth: 1,
+      borderColor: '#009BAA',
+      padding: 1,
+      width: '50%',
+      backgroundColor: 'white',
+      borderRadius: 5,
+    },
+    errorMessage: {
+      textAlign: 'center',
+      color:'red',
+      fontWeight: 'bold',
+
+    },
+});
