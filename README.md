@@ -9,7 +9,7 @@ Step 1: Open Terminal in project folder
 
 Step 2: type: npm i
 
-Step 3: type: npm start
+Step 3: type: npm start OR expo start
 
 Step 4: type: d
 

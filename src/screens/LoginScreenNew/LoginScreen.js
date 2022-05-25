@@ -98,26 +98,22 @@ const LoginScreen = ({ navigation }) => {
 			switch (response[index]) {
 				case "email_incorrect":
 					alert('Deze inloggegevens kloppen niet');
-					setErrorText("email_incorrect");
-					console.log("email_incorrect");
+					// setErrorText("email_incorrect");
 					break;
 
 				case "user_not_exists":
 					alert('Deze gebruiker bestaat niet.');
-					setErrorText("user_not_exists");
-					console.log("user_not_exists");
+					// setErrorText("user_not_exists");
 					break;
 
 				case "password_incorrect":
 					alert('Deze inloggegevens kloppen niet');
-					setErrorText("password_incorrect");
-					console.log("password_incorrect");
+					// setErrorText("password_incorrect");
 					break;
 
 				case "login_incorrect":
 					alert('Deze inloggegevens kloppen niet.')
-					setErrorText("login_incorrect");
-					console.log("login_incorrect");
+					// setErrorText("login_incorrect");
 					break;
 
 				default:
