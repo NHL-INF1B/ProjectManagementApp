@@ -53,7 +53,7 @@ const WelcomeScreen = ({ navigation }) => {
             />
             <Text style={Styles.welkom}>Welkom, {name}</Text>
             <SafeAreaView style={Styles.safeAreaView}>
-                <Tile text="Projecten" image="account-group" screen="ProjectScreen" projectId={projectId} userId={userId} />
+                <Tile text="Projecten" image="account-group" screen="ShowProjects" projectId={projectId} userId={userId} />
                 <Tile text="Profiel" image="card-account-details" screen="ProfileScreen" projectId={projectId} userId={userId} />
                 <Pressable
                     onPress={() => {
