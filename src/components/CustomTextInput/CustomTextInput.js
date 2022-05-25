@@ -4,11 +4,13 @@ import { View, Text, TextInput, StyleSheet } from 'react-native'
 const CustomTextInput = ({value, setValue, placeholder}) => {
     return (
         <View>
-            <TextInput 
-                value={value}
-                onChangeText={setValue}
-                placeholder={placeholder} 
-                style={styles.input}
+            {props.titleText && (
+                <Text style={styles.titleText}>{props.titleText}</Text>
+            )}
+            <TextInput
+                {...props}
+                placeholderTextColor="#707070" 
+                style={[styles.input]}
             />
         </View>
     )

@@ -4,7 +4,7 @@ import {React, useEffect} from "react";
 // import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Planning from "./src/screens/Planning/Planning";
+import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,17 +13,20 @@ export default function App() {
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen
-					name="ProfilePage"
-					component={ProfilePage}
+					name="ScheduleEditScreen"
+					component={ScheduleEditScreen}
 				/>
-				<Stack.Screen
-					name="RegisterScreen"
-					component={RegisterScreen}
-				/>
+
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
 				/>
+
+				<Stack.Screen
+					name="RegisterScreen"
+					component={RegisterScreen}
+				/>
+
 
 				<Stack.Screen
 					name="ProjectScreen"
