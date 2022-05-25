@@ -205,7 +205,7 @@ const LoginScreen = ({ navigation }) => {
 				</View>
 
 				<View>
-					<Pressable onPress={() => navigation.navigate("ProfilePage")}>
+					<Pressable onPress={() => navigatie.navigate("ProfilePage")}>
 						<Text style={Styles.registreren}>ProfielPagina</Text>
 					</Pressable>
 				</View>

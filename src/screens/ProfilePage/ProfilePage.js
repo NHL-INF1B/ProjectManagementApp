@@ -5,14 +5,16 @@ import Styles from "../ProfilePage/Styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 import Circle from "../../components/Circle/Circle";
 
 const ProfilePage = () => {
-  const [name, setName] = useState("-");
-  const [email, setEmail] = useState("-");
-  const [dateOfBirth, setDateOfBirth] = useState("-");
-  const [phoneNumber, setPhoneNumber] = useState("-");
-  const [discord, setDiscord] = useState("-");
+  const navigation = useNavigation();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [discord, setDiscord] = useState("");
 
   const getData = async () => {
     try {
@@ -27,15 +29,12 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const data = getData();
-    data.then((data) => {
-      if (data !== undefined) {
-        setName(data["name"]),
-          setEmail(data["email"]),
-          setDateOfBirth(data["dateOfBirth"]),
-          setPhoneNumber(data["phoneNumber"]),
-          setDiscord(data["discord"]);
-      }
-    });
+    setName(data["name"]);
+    data.then((data) => setName(data["name"]));
+    data.then((data) => setEmail(data["email"]));
+    data.then((data) => setDateOfBirth(data["dateOfBirth"]));
+    data.then((data) => setPhoneNumber(data["phoneNumber"]));
+    data.then((data) => setDiscord(data["discord"]));
   }, []);
 
   return (

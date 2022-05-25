@@ -34,16 +34,32 @@ const RegisterScreen = ({ navigation }) => {
     },
   });
 
-  const onSubmit = (data) => {
-    sendDataToAPI(
-      data.name,
-      data.email,
-      "2000-01-01",
-      data.password,
-      data.password_repeat
-    );
-    console.log(data);
-  };
+    const sendDataToAPI = (name, email, dateOfBirth, password, confirmPassword) => {
+          try {
+              fetch("http://localhost/PMA/PmaAPI/handlers/registration/registrationHandler.php", {
+                  method: "POST",
+                  headers: {
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                      name: name,
+                      email: email,
+                      dateOfBirth: dateOfBirth,
+                      password: password,
+                      confirmPassword: confirmPassword,
+                  }),
+              })
+              // .then((response) => response.text())
+              .then((response) => response.json())
+              .then((response) => {
+                  // console.log(response);
+                  catchFeedback(response);
+              });
+          } catch (error) {
+              alert(error);
+          }
+    };
 
   const sendDataToAPI = (
     name,
