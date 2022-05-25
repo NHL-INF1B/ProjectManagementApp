@@ -5,7 +5,6 @@ import { MaterialCommunityIcons} from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProjectScreen from './src/screens/ProjectScreen/ProjectScreen';
-import ProfileScreen from './src/screens/ProfileScreen/ProfileScreen';
 import LoginScreen from './src/screens/LoginScreenNew/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen/RegisterScreen';
 import CreateProject from './src/screens/CreateProject/CreateProject';
