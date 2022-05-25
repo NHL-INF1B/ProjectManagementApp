@@ -58,6 +58,7 @@ export default StyleSheet.create({
     welkom: {
         fontSize: 25,
         color: '#005AAA',
+        fontWeight: 'bold',
     },
   });
   

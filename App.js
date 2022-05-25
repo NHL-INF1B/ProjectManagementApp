@@ -8,8 +8,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //import ProfileScreen from './src/screens/ProfileScreen/ProfileScreen';
 import LoginScreen from './src/screens/LoginScreenNew/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen/RegisterScreen';
-import CreateProject from './src/screens/CreateProject/CreateProject';
-import HourEditScreen from './src/screens/HourEditScreen/HourEditScreen';
+//import CreateProject from './src/screens/CreateProject/CreateProject';
+//import HourEditScreen from './src/screens/HourEditScreen/HourEditScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen/WelcomeScreen';
 
 const Stack = createNativeStackNavigator();
@@ -28,7 +28,7 @@ export default function App() {
         />
         <Stack.Screen
           name = "HourEditScreen"
-          component={HourEditScreen}
+          component={""}
         />
         <Stack.Screen 
           name = "LoginScreen"
@@ -36,13 +36,45 @@ export default function App() {
         />
         <Stack.Screen
           name = "CreateProject"
-          component={CreateProject}
+          component={""}
         />
         <Stack.Screen
           name = "RegisterScreen"
           component={RegisterScreen}
         />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+				<Stack.Screen
+					name="ProjectScreen"
+					component={""}
+				/>
+				<Stack.Screen
+					name="TeamcodeScreen"
+					component={""}
+				/>
+				<Stack.Screen
+					name="PlanningScreen"
+					component={""}
+				/>
+				<Stack.Screen
+					name="LogbookScreen"
+					component={""}
+				/>
+				<Stack.Screen
+					name="WarningScreen"
+					component={""}
+				/>
+				<Stack.Screen
+					name="InviteScreen"
+					component={""}
+				/>
+				<Stack.Screen
+					name="MemberScreen"
+					component={""}
+				/>
+				<Stack.Screen
+					name="ScoreScreen"
+					component={""}
+				/>
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
