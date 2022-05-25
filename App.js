@@ -11,6 +11,7 @@ import CreateProject from './src/screens/CreateProject/CreateProject';
 import HourEditScreen from './src/screens/HourEditScreen/HourEditScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen/WelcomeScreen';
 import ScheduleEditScreen from './src/screens/ScheduleEditScreen/ScheduleEditScreen';
+import MemberInfo from './src/screens/MemberInfo/MemberInfo';
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm. 
@@ -35,50 +36,42 @@ export default function App() {
 					name="ScheduleEditScreen"
 					component={ScheduleEditScreen}
 				/>
-
 				<Stack.Screen
         		  name='WelcomeScreen'
 	        	  component={WelcomeScreen}
     	    	/>
-
 				<Stack.Screen
 					name="TeamcodeScreen"
 					component={""}
 				/>
 				<Stack.Screen
-					name="ScheduleEditScreen"
-					component={ScheduleEditScreen}
-				/>
-				<Stack.Screen
 					name="PlanningScreen"
 					component={""}
 				/>
-
 				<Stack.Screen
 					name="LogbookScreen"
 					component={""}
 				/>
-
 				<Stack.Screen
 					name="WarningScreen"
 					component={""}
 				/>
-
 				<Stack.Screen
 					name="InviteScreen"
 					component={""}
 				/>
-
 				<Stack.Screen
 					name="MemberScreen"
 					component={""}
 				/>
-
 				<Stack.Screen
 					name="ScoreScreen"
 					component={""}
 				/>
-
+				<Stack.Screen
+					name="MemberInfo"
+					component={MemberInfo}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

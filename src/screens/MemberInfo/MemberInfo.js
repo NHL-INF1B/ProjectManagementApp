@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Styles from "../ProfilePage/Styles";
+import Styles from "./Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from "../../components/Circle/Circle";
 import ShowProfileInfo from "../../components/TextLatenZien/ShowProfileInfo";
 
-const ProfilePage = () => {
+const MemberInfo = () => {
   const [name, setName] = useState("-");
   const [email, setEmail] = useState("-");
   const [dateOfBirth, setDateOfBirth] = useState("-");
@@ -76,4 +76,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default MemberInfo;
