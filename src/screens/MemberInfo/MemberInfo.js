@@ -46,18 +46,29 @@ const MemberInfo = () => {
           }),
         }
       )
-        .then((response) => response.text())
-        // .then((response) => response.json())
+        .then((response) => response.json())
         .then((response) => {
           console.log(response);
-          // setName(response.name);
-          // setEmail(response.email);
-          // setDateOfBirth(response.dateOfBirth);
-          // setPhoneNumber(response.phoneNumber);
-          // setDiscord(response.discord);
+          catchFeedback(response);
         });
     } catch (error) {
       alert(error);
+    }
+  };
+
+  const catchFeedback = (response) => {
+    console.log(response);
+
+    switch (response[0]) {
+      case "user_not_exists":
+        alert("Deze gebruiker bestaat niet");
+        break;
+      default:
+        setName(response.name);
+        setEmail(response.email);
+        setDateOfBirth(response.dateOfBirth);
+        setPhoneNumber(response.phoneNumber);
+        setDiscord(response.discord);
     }
   };
 
