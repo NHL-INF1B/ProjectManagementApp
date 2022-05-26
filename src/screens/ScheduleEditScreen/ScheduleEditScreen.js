@@ -112,77 +112,82 @@ const ScheduleEditScreen = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={Styles.SafeAreaView}>
-            <View>
-                <Circle name={"calendar-month"} size={60} color={"black"} text={"planning bewerken"} />
+            <View style={Styles.head}>
+                <View>
+                    <Circle name={"calendar-month"} size={60} color={"black"} text={"planning bewerken"} />
+                </View>
             </View>
+            
+            <View style={Styles.content}>
+                <View style={Styles.marginContainer}>
+                    <Controller
+                        name="activity"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Activiteit is verplicht' },
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <CustomTextInput 
+                                placeholder="Activiteit"
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                errorText={errors?.activity?.message} 
+                                titleText="Activiteit"
+                            />
+                        )}
+                    />
+                </View>
 
-            <View>
-                <Controller
-                    name="activity"
-                    control={control}
-                    rules={{
-                        required: { value: true, message: 'Activiteit is verplicht' },
-                    }}
-                    render={({ field: { onChange, value } }) => (
-                        <CustomTextInput 
-                            placeholder="Activiteit"
-                            onChangeText={(text) => onChange(text)} 
-                            value={value} 
-                            errorText={errors?.activity?.message} 
-                            titleText="Activiteit"
-                        />
-                    )}
-                />
-            </View>
+                <View style={Styles.marginContainer}>
+                    <Controller
+                        name="week"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Week is verplicht' },
+                            pattern: {
+                                value: NUMMERIC_REGEX,
+                                message: 'Week mag alleen cijfers bevatten'
+                            },
+                            maxLength: {
+                                value: 3,
+                                message: 'Maximaal 3 cijfers lang',
+                            }
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <CustomTextInput 
+                                placeholder="Weeknummer" 
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                keyboardType = "numeric"
+                                errorText={errors?.week?.message} 
+                                titleText="week"
+                            />
+                        )}
+                    />
+                </View>
 
-            <View>
-                <Controller
-                    name="week"
-                    control={control}
-                    rules={{
-                        required: { value: true, message: 'Week is verplicht' },
-                        pattern: {
-                            value: NUMMERIC_REGEX,
-                            message: 'Week mag alleen cijfers bevatten'
-                        },
-                        maxLength: {
-                            value: 3,
-                            message: 'Maximaal 3 cijfers lang',
+                <View style={Styles.marginContainer}>
+                    <CustomButton 
+                        buttonType={"blueButton"}
+                        text={"Bewerken"}
+                        onPress={handleSubmit(submitData)}
+                    />
+                </View>
+
+                <View>
+                    <CustomButton 
+                        buttonType={"redButton"}
+                        text={"Verwijderen"}
+                        onPress={() =>
+                            Alert.alert("Weet je zeker dat je deze planning wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
+                                { text: "Verwijderen", onPress: () => sendRemoveData() },
+                                { text: "Annuleren" },
+                            ])
                         }
-                    }}
-                    render={({ field: { onChange, value } }) => (
-                        <CustomTextInput 
-                            placeholder="Weeknummer" 
-                            onChangeText={(text) => onChange(text)} 
-                            value={value} 
-                            keyboardType = "numeric"
-                            errorText={errors?.week?.message} 
-                            titleText="week"
-                        />
-                    )}
-                />
+                    />
+                </View>
             </View>
-
-            <View>
-                <CustomButton 
-                    buttonType={"blueButton"}
-                    text={"Bewerken"}
-                    onPress={handleSubmit(submitData)}
-                />
-            </View>
-
-            <View>
-                <CustomButton 
-                    buttonType={"redButton"}
-                    text={"Verwijderen"}
-                    onPress={() =>
-                        Alert.alert("Weet je zeker dat je deze planning wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
-                            { text: "Verwijderen", onPress: () => sendRemoveData() },
-                            { text: "Annuleren" },
-                        ])
-                    }
-                />
-            </View>
+            
 		</SafeAreaView>
 	);
 }
