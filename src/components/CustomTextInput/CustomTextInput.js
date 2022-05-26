@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
         textTransform: 'uppercase',
+        fontSize: 15,
     },
     input: {
         padding: 13,
