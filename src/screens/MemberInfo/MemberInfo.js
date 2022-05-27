@@ -4,9 +4,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Styles from "./Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from "../../components/Circle/Circle";
-import ShowProfileInfo from "../../components/TextLatenZien/ShowProfileInfo";
+import ShowProfileInfo from "../../components/ShowProfileInfo/ShowProfileInfo";
 
 const MemberInfo = () => {
+  //declaring the const where the info goes into.
   const memberId = 10; //temporary until the members page is made.
   const [name, setName] = useState("-");
   const [email, setEmail] = useState("-");
@@ -25,12 +26,13 @@ const MemberInfo = () => {
   //   }
   // };
 
+  //get the data when you go on the page
   useEffect(() => {
     // const data = getData();
     getMemberInfo(memberId);
-    console.log(memberId);
   }, []);
 
+  //get the info from the member which is chosen.
   const getMemberInfo = (memberId) => {
     try {
       fetch(
@@ -48,7 +50,7 @@ const MemberInfo = () => {
       )
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           catchFeedback(response);
         });
     } catch (error) {
@@ -56,6 +58,7 @@ const MemberInfo = () => {
     }
   };
 
+  //catch the feeback from the API
   const catchFeedback = (response) => {
     console.log(response);
 
@@ -72,6 +75,7 @@ const MemberInfo = () => {
     }
   };
 
+  //the screen
   return (
     <SafeAreaView style={Styles.SafeAreaView}>
       <View style={Styles.person}>
@@ -81,31 +85,31 @@ const MemberInfo = () => {
         name={name}
         iconName="account"
         iconSize={30}
-        iconColor="#009BAA"
+        iconColor="black"
       />
       <ShowProfileInfo
         name={email}
         iconName="email"
         iconSize={30}
-        iconColor="#009BAA"
+        iconColor="black"
       />
       <ShowProfileInfo
         name={dateOfBirth}
         iconName="calendar"
         iconSize={30}
-        iconColor="#009BAA"
+        iconColor="black"
       />
       <ShowProfileInfo
         name={phoneNumber}
         iconName="phone"
         iconSize={30}
-        iconColor="#009BAA"
+        iconColor="black"
       />
       <ShowProfileInfo
         name={discord}
         iconName="discord"
         iconSize={30}
-        iconColor="#5865F2"
+        iconColor="black"
       />
     </SafeAreaView>
   );
