@@ -18,66 +18,74 @@ const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
 //Dit moet dan ook de waarde van 'screen' bij elke link naar dit scherm.
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen 
-          name="MemberInfo" 
-          component={MemberInfo} 
-        />
-        <Stack.Screen 
-          name="LoginScreen" 
-          component={LoginScreen} 
-        />
-        <Stack.Screen 
-          name="RegisterScreen" 
-          component={RegisterScreen} 
-        />
-        <Stack.Screen 
-          name="ProjectScreen" 
-          component={ProjectScreen} 
-        />
+	return (
+		<NavigationContainer>
+			<Stack.Navigator screenOptions={{ headerShown: false }}>
+				<Stack.Screen
+					name="ScheduleEditScreen"
+					component={ScheduleEditScreen}
+				/>
+				
+				<Stack.Screen
+					name="LoginScreen"
+					component={LoginScreen}
+				/>
+
+				<Stack.Screen
+					name="RegisterScreen"
+					component={RegisterScreen}
+				/>
+
+				<Stack.Screen
+					name="ProjectScreen"
+					component={ProjectScreen}
+				/>
+
+				<Stack.Screen
+        		  name='WelcomeScreen'
+	        	  component={WelcomeScreen}
+    	    	/>
+
+				<Stack.Screen
+					name="TeamcodeScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="PlanningScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="LogbookScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="WarningScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="InviteScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="MemberScreen"
+					component={""}
+				/>
+
+				<Stack.Screen
+					name="ScoreScreen"
+					component={""}
+				/>
+
         <Stack.Screen
-          name="ScheduleEditScreen"
-          component={ScheduleEditScreen}
+          name="MemberInfo"
+          component={MemberInfo}
         />
-        <Stack.Screen 
-          name="WelcomeScreen" 
-          component={WelcomeScreen} 
-        />
-        <Stack.Screen 
-          name="TeamcodeScreen" 
-          component={""} 
-        />
-        <Stack.Screen 
-          name="PlanningScreen" 
-          component={""} 
-        />
-        <Stack.Screen 
-          name="LogbookScreen" 
-          component={""} 
-        />
-        <Stack.Screen 
-          name="WarningScreen" 
-          component={""} 
-        />
-        <Stack.Screen 
-          name="InviteScreen" 
-          component={""} 
-        />
-        <Stack.Screen 
-          name="MemberScreen" 
-          component={""} 
-        />
-        <Stack.Screen 
-          name="ScoreScreen" 
-          component={""} 
-        />
-        <Stack.Screen 
-          name="EditProfile" 
-          component={EditProfile} 
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
