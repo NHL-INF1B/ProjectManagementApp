@@ -8,7 +8,7 @@ import Circle from '../../components/Circle/Circle';
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 
-  const CreateProject = ({ navigation }) => {
+  const TeamcodeToevoegen = ({ navigation }) => {
     //form handling
     // const NAME_REGEX = /^[a-zA-Z0-9 ]{3,30}$/;
     // const { control, handleSubmit, formState: { errors } } = useForm({
@@ -16,6 +16,7 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
     //     name: '',
     //   }
     // });
+
     const onSubmit = (data) => {
       sendDataToAPI(data.name);
       console.log(data);
@@ -24,27 +25,27 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
   //the things where the info goes in.
   // const [ProjectNaam, setProjectNaam] = useState('');
 
-  const sendDataToAPI = (ProjectNaam) => {
-    try {
-        fetch("http://localhost/pma/PmaAPI/handlers/createProject/createProjectHandler.php", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: ProjectNaam,
-            }),
-        })
-        .then((response) => response.json())
-        .then((response) => {
-            // console.log(response);
-            catchFeedback(response);
-        });
-    } catch (error) {
-        alert(error);
-    }
-};
+//   const sendDataToAPI = (ProjectNaam) => {
+//     try {
+//         fetch("http://localhost/pma/PmaAPI/handlers/createProject/createProjectHandler.php", {
+//             method: "POST",
+//             headers: {
+//                 Accept: "application/json",
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({
+//                 name: ProjectNaam,
+//             }),
+//         })
+//         .then((response) => response.json())
+//         .then((response) => {
+//             // console.log(response);
+//             catchFeedback(response);
+//         });
+//     } catch (error) {
+//         alert(error);
+//     }
+// };
 
   //the screen
 return (
@@ -64,4 +65,4 @@ return (
     );
 };
   
-export default CreateProject;
+export default TeamcodeToevoegen;

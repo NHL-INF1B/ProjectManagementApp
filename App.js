@@ -4,6 +4,7 @@ import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import TeamcodeToevoegen from "./src/screens/TeamcodeToevoegen/TeamcodeToevoegen";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,16 +12,16 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen
+			{/* <Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
-				/>
+				/> */}
 				<Stack.Screen
-					name="LoginScreen"
-					component={LoginScreen}
+					name="TeancodeToevoegen"
+					component={TeamcodeToevoegen}
 				/>
 
-				<Stack.Screen
+				{/* <Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
 				/>
@@ -58,7 +59,7 @@ export default function App() {
 				<Stack.Screen
 					name="ScoreScreen"
 					component={""}
-				/>
+				/> */}
 
 			</Stack.Navigator>
 		</NavigationContainer>
