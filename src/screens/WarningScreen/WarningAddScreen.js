@@ -5,7 +5,7 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import SelectDropdown from 'react-native-select-dropdown';
+// import SelectDropdown from 'react-native-select-dropdown';
 
 const WarningAddScreen = () => {
     const [member, setMember] = useState('');
@@ -43,11 +43,8 @@ const WarningAddScreen = () => {
             <Text style={styles.subtitle}>Reden</Text>
             <CustomTextInput placeholder="Reden" value={reason} setValue={setReason} />
             <View style={[styles.dropdown, styles.marginTop5 ]}>
-                <SelectDropdown
-                    
-                />
             </View>
-
+            <Text></Text>
             <TouchableOpacity 
                 style={[styles.button, styles.buttonRed, styles.marginTop5]} 
                 onPress={() => sendDataToAPI(reason, "user_id", "project_id")}
