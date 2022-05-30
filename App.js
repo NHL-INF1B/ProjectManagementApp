@@ -12,7 +12,6 @@ import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
-import EditProfile from "./src/screens/EditProfile/EditProfile";
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -81,10 +80,10 @@ export default function App() {
 					component={""}
 				/>
 
-        <Stack.Screen
-          name="MemberInfo"
-          component={MemberInfo}
-        />
+        		<Stack.Screen
+          			name="MemberInfo"
+         		 	component={MemberInfo}
+        		/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
