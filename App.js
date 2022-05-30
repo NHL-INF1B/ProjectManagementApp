@@ -12,6 +12,8 @@ import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
+import InviteMembers from "./src/InviteMembers/InviteMembers";
+import Test from "./src/InviteMembers/Test"
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -20,6 +22,14 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
+				{/* <Stack.Screen
+					name="Test"
+					component={Test}
+				/> */}
+				<Stack.Screen
+					name="InviteMembers"
+					component={InviteMembers}
+				/>
 				<Stack.Screen
 					name="ScheduleEditScreen"
 					component={ScheduleEditScreen}
