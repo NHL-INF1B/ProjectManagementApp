@@ -30,7 +30,6 @@ const WarningScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-
             <FlatList 
                 data={warnings}
                 keyExtractor={(warning) => warning.id.toString()}
