@@ -24,7 +24,7 @@ export default function Tile({ text, image, screen, projectId, userId }){
             })}>
 
             <View style={styling}>
-                <MaterialCommunityIcons name={image} size={55} color="#009BAA" style={Styles.Icon}/>
+                <MaterialCommunityIcons name={image} size={55} color="black" style={Styles.Icon}/>
                 <Text style={Styles.Text}>{text}</Text>
             </View>
             

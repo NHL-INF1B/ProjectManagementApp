@@ -6,11 +6,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProjectScreen from './src/screens/ProjectScreen/ProjectScreen';
 import LoginScreen from './src/screens/LoginScreenNew/LoginScreen';
-import RegisterScreen from './src/screens/RegisterScreen/RegisterScreen';
 import CreateProject from './src/screens/CreateProject/CreateProject';
 import HourEditScreen from './src/screens/HourEditScreen/HourEditScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen/WelcomeScreen';
 import ScheduleEditScreen from './src/screens/ScheduleEditScreen/ScheduleEditScreen';
+import MemberScreen from './src/screens/MemberScreen/MemberScreen';
+import RegisterScreen from './src/screens/RegisterScreen/RegisterScreen';
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm. 
@@ -19,6 +20,11 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
+
+				<Stack.Screen
+					name="MemberScreen"
+					component={MemberScreen}
+				/>
 
 				<Stack.Screen
 					name="LoginScreen"
@@ -67,11 +73,6 @@ export default function App() {
 
 				<Stack.Screen
 					name="InviteScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="MemberScreen"
 					component={""}
 				/>
 

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Tile from './../../components/Tile/Tile';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Styles from './Styles';
+import Header from '../../components/Header/Header';
 
 const WelcomeScreen = ({ navigation }) => {
 
@@ -43,10 +44,11 @@ const WelcomeScreen = ({ navigation }) => {
     }, []);
 
     // temp hardcode
-    var projectId = 18
+    var projectId = 1
 
     return (
         <SafeAreaView style={Styles.container}>
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
             <Image 
                 style={Styles.img}
                 source={require('./../../assets/images/logo.png')}
@@ -67,7 +69,7 @@ const WelcomeScreen = ({ navigation }) => {
                         ))
                     }}>
                     <View style={Styles.uitloggen}>
-                        <MaterialCommunityIcons name="logout" screen="LoginScreen" size={55} color="#009BAA" style={Styles.icon} />
+                        <MaterialCommunityIcons name="logout" screen="LoginScreen" size={55} color="black" style={Styles.icon} />
                         <Text style={Styles.text}>Uitloggen</Text>
                     </View>
                 </Pressable>

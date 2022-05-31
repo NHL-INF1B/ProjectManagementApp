@@ -20,18 +20,6 @@ export default StyleSheet.create({
         width: 157,
         marginTop: 30,
     },
-    // tile: {
-    //     minWidth: 135,
-    //     maxWidth: 135,
-    //     minHeight: 141,
-    //     maxHeight: 141,
-    //     backgroundColor: 'white',
-    //     borderColor: '#707070',
-    //     borderRadius: 10,
-    //     flex: 1,
-    //     alignItems: 'center',
-    //     margin: 15,
-    // },
     text: {
         flex: 2,
         color: '#009BAA',
