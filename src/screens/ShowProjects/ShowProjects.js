@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Styles from './Styles';
 import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
 import Tile from '../../components/Tile/Tile';
@@ -7,24 +7,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ShowProjects(){
 
-    // temporary hardcode
-    const userId = 1;
-    const porjectId = null;    
-    
-    const getData = async () => {
-        try {
-            const jsonValue = await AsyncStorage.getItem('@user_data')
-            if(jsonValue !== null) {
-                return JSON.parse(jsonValue);
-            }
-        } catch(e) {
-            alert(e);
-        }
-    }
+    var userId = 2;
+    const [id, setId] = useState("-");
+    const [name, setName] = useState("-");
+    const [roles, setRoles] = useState("-");
 
-    const sendDataToAPI = (userId) => {
+    useEffect(() => {
+        getData(userId)
+    }, []);
+    
+    // const getData = async () => {
+    //     try {
+    //         const jsonValue = await AsyncStorage.getItem('@user_data')
+    //         if(jsonValue !== null) {
+    //             return JSON.parse(jsonValue);
+    //         }
+    //     } catch(e) {
+    //         alert(e);
+    //     }
+    // }
+
+    const getData = (userId) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/showProjects/showProjectsHandler", {
+            fetch("http://localhost/PMA/PmaAPI/handlers/showProjects/showProjectsHandler", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -35,9 +40,25 @@ export default function ShowProjects(){
                 }),
             })
             .then((response) => response.json())
-            alert("Success");
+            .then((response) => {
+                catchFeedback(response);
+            })
         } catch (error) {
             alert(error);
+        }
+    }
+
+    const catchFeedback = (response) => {
+        console.log(response);
+        
+        switch(response[0]){
+            case "":
+                alert("Geen projecten gevonden");
+                break;
+            default:
+                setId(response.project_id);
+                setName(response.name);
+                setRoles(response.role_id);
         }
     }
   
