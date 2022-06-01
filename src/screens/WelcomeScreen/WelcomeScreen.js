@@ -37,7 +37,7 @@ const WelcomeScreen = ({ navigation }) => {
         data.then((data) => {
             if (data !== undefined) {
                 setName(data["name"]),
-                setUserId(data["userId"]);
+                setUserId(data["id"]);
             }
         });
     }, []);

@@ -13,6 +13,8 @@ import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
 import ShowProjects from "./src/screens/ShowProjects/ShowProjects";
+import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
+import Profile from "./src/screens/Profile/Profile";
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -21,7 +23,7 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-						
+
 				{/* <Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
@@ -48,6 +50,21 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="ProfileScreen"
+					component={Profile}
+				/>
+
+				<Stack.Screen
+					name="ScheduleEditScreen"
+					component={ScheduleEditScreen}
+				/>
+
+				<Stack.Screen
+					name="WarningScreen"
+					component={WarningScreen}
+				/>
+
+				<Stack.Screen
 					name="ScheduleEditScreen"
 					component={ScheduleEditScreen}
 				/>
@@ -64,11 +81,6 @@ export default function App() {
 
 				<Stack.Screen
 					name="LogbookScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="WarningScreen"
 					component={""}
 				/>
 
