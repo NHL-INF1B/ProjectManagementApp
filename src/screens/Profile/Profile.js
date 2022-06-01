@@ -9,12 +9,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 
 const Profile = ({ navigation }) => {
+    const [isShowingDatePicker, setShowingDatePicker] = useState(false);
+    const [userid, setUserId] = useState("");
+
     const NUMMERIC_REGEX = /^[0-9]*$/;
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const DISCORD_REGEX = /^.{3,32}#[0-9]{4}$/;
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
-
-    const [isShowingDatePicker, setShowingDatePicker] = useState(false);
 
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
@@ -30,6 +31,7 @@ const Profile = ({ navigation }) => {
         const data = getData();
         data.then((data) => {
             if (data !== undefined) {
+                setUserId(data["id"]);
                 getUserData(data["id"]);
             }
         });
@@ -66,7 +68,6 @@ const Profile = ({ navigation }) => {
             // .then((response) => response.text())
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setValue("name", response.name);
                 setValue("email", response.email);
                 setValue("dateOfBirth", response.dateOfBirth);
@@ -79,39 +80,36 @@ const Profile = ({ navigation }) => {
 	};
 
     const sendUpdateData = (data) => {
-        console.log(data);
-        // try {
-		// 	fetch("http://localhost/pma/PmaAPI/handlers/profile/profileEdit.php", {
-		// 		method: "POST",
-		// 		headers: {
-		// 			Accept: "application/json",
-		// 			"Content-Type": "application/json",
-		// 		},
-        //         body: JSON.stringify({
-        // 			   activity: data.activity,
-        //             week: data.week,
-        //             scheduleId : scheduleId,
-		// 		}),
-		// 	})
-		// 		// .then((response) => response.text())
-		// 		.then((response) => response.json())
-		// 		.then((response) => {
-        //             catchFeedback(response);
-		// 		});
-		// } catch (error) {
-		// 	alert(error);
-		// }
+        try {
+			fetch("http://localhost/pma/PmaAPI/handlers/profile/profileEdit.php", {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+                body: JSON.stringify({
+                    id: userid,
+                    name: data.name,
+                    email: data.email,
+                    dateOfBirth: data.dateOfBirth,
+                    phoneNumber: data.phoneNumber,
+                    discord: data.discord,
+				}),
+			})
+				// .then((response) => response.text())
+				.then((response) => response.json())
+				.then((response) => {
+                    catchFeedback(response);
+				});
+		} catch (error) {
+			alert(error);
+		}
     }
 
 	const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":
               alert("Data is geüpdatet");
-              navigation.navigate("ScheduleEditScreen"); //kan ook planning scherm worden
-              break;
-            case "data_deleted":
-              alert("De planning is verwijderd");
-              navigation.navigate("ScheduleEditScreen"); //moet planning scherm worden
               break;
             default:
               console.log('not defined');
@@ -128,7 +126,7 @@ const Profile = ({ navigation }) => {
             </View>
             
             <View style={Styles.content}>
-                <ScrollView>
+                <ScrollView keyboardShouldPersistTaps="always">
                     <View style={Styles.marginContainer}>
                         <Controller
                             name="name"
@@ -208,29 +206,31 @@ const Profile = ({ navigation }) => {
                         </View>
                     ) : (
                         <View style={Styles.marginContainer}>
-                            <Pressable onPress={() => setShowingDatePicker(true)}>
-                            <Controller
-                                name="dateOfBirth"
-                                control={control}
-                                rules={{
-                                    required: { value: true, message: 'Datum is verplicht' },
-                                    pattern: {
-                                        value: DATE_REGEX,
-                                        message: 'Datum is incorrect'
-                                    },
-                                }}
-                                render={({ field: { onChange, value } }) => (
-                                    <CustomTextInput
-                                    placeholder="Kies een datum"
-                                    placeholderTextColor="#707070"
-                                    onChangeText={(text) => onChange(text)}
-                                    value={getValues("dateOfBirth")}
-                                    errorText={errors?.dateOfBirth?.message}
-                                    titleText="Geboortedatum"
-                                    />
-                                )}
-                            />
-
+                            <Pressable>
+                                <Controller
+                                    name="dateOfBirth"
+                                    control={control}
+                                    rules={{
+                                        required: { value: true, message: 'Datum is verplicht' },
+                                        pattern: {
+                                            value: DATE_REGEX,
+                                            message: 'Datum is incorrect'
+                                        },
+                                    }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <View>
+                                            <CustomTextInput
+                                            placeholder="Kies een datum"
+                                            placeholderTextColor="#707070"
+                                            onFocus={() => setShowingDatePicker(true)}
+                                            onChangeText={(text) => onChange(text)}
+                                            value={getValues("dateOfBirth")}
+                                            errorText={errors?.dateOfBirth?.message}
+                                            titleText="Geboortedatum"
+                                            />
+                                        </View>
+                                    )}
+                                />
                             </Pressable>
                         </View>
                     )
