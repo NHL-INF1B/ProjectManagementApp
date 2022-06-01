@@ -43,7 +43,7 @@ const WelcomeScreen = ({ navigation }) => {
     }, []);
 
     // temp hardcode
-    var projectId = 18
+    var projectId = null
 
     return (
         <SafeAreaView style={Styles.container}>
