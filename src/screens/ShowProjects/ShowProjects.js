@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Styles from './Styles';
 import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
 import Tile from '../../components/Tile/Tile';
