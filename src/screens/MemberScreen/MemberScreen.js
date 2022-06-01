@@ -39,7 +39,7 @@ const MemberScreen = () => {
 
     const getData = async () => {
         try {
-            const jsonValue = await AsyncStorage.getItem('@user_data');
+            const jsonValue = await AsyncStorage.getItem('@member_data');
             if (jsonValue !== null) {
                 return JSON.parse(jsonValue);
             }

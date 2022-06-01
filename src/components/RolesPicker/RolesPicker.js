@@ -19,12 +19,11 @@ export default function DropDown({ items, setItems, projectId, userId, roleId })
             }}
         >
         <DropDownPicker
-        style={{
-            ...(Platform.OS !== 'android' && {
-                zIndex: {zIndex}
-            })
-        }}
-        // zIndex={zIndex}
+        //zIndex is nodig voor meerdere pickers, 
+        //maar volgens mijn bronnen werkt zIndex juist niet met android (belangrijkste bron hieronder)
+        //https://www.npmjs.com/package/rn-picker-dropdown#default-item
+        //Uitlezen moet nog doorgestuurd naar de database, waarschijnlijk is daar een submit oid knop voor nodig op MemberScreen.
+        zIndex={zIndex} //Dit levert dus (nog) problemen op op android
         open={open}
         items={items}
         value={value}
