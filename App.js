@@ -1,28 +1,60 @@
-import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
-import {React, useEffect} from "react";
-import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
+import React from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, Image, View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
+import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
+import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
+import CreateProject from "./src/screens/CreateProject/CreateProject";
+import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
+import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
+import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
+import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
+import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
+import Profile from "./src/screens/Profile/Profile";
 
 const Stack = createNativeStackNavigator();
-
+//Name en component moeten gelijk zijn aan de naam van het scherm.
+//Dit moet dan ook de waarde van 'screen' bij elke link naar dit scherm.
 export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen
-					name="RegisterScreen"
-					component={RegisterScreen}
+				<Stack.Screen
+					name="ProfileScreen"
+					component={Profile}
 				/>
+
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
 				/>
 
 				<Stack.Screen
+					name="RegisterScreen"
+					component={RegisterScreen}
+				/>
+
+				<Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
+				/>
+
+				<Stack.Screen
+        		  name='WelcomeScreen'
+	        	  component={WelcomeScreen}
+    	    	/>
+
+				<Stack.Screen
+					name="WarningScreen"
+					component={WarningScreen}
+				/>
+
+				<Stack.Screen
+					name="ScheduleEditScreen"
+					component={ScheduleEditScreen}
 				/>
 
 				<Stack.Screen
@@ -41,11 +73,6 @@ export default function App() {
 				/>
 
 				<Stack.Screen
-					name="WarningScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
 					name="InviteScreen"
 					component={""}
 				/>
@@ -60,6 +87,10 @@ export default function App() {
 					component={""}
 				/>
 
+        		<Stack.Screen
+          			name="MemberInfo"
+         		 	component={MemberInfo}
+        		/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

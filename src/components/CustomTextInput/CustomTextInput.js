@@ -9,6 +9,7 @@ const CustomTextInput = (props) => {
             )}
             <TextInput
                 {...props}
+                placeholderTextColor="#707070" 
                 style={[styles.input]}
             />
             {props.errorText && (
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
         textTransform: 'uppercase',
+        fontSize: 15,
     },
     input: {
         padding: 13,
