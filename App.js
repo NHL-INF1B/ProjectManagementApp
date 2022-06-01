@@ -12,8 +12,7 @@ import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
-import InviteMembers from "./src/InviteMembers/InviteMembers";
-import Test from "./src/InviteMembers/Test"
+import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.

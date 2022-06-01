@@ -7,6 +7,19 @@ export default StyleSheet.create({
 	flex: 1,
   },
   inputContainer : {
-    marginBottom: 12,
+    marginBottom: 20,
   },
+  QRCode: {
+    marginTop: 50,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
+  text: {
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
+    textTransform: 'uppercase',
+    fontSize: 15,
+    marginBottom: 10,
+  }
 });
