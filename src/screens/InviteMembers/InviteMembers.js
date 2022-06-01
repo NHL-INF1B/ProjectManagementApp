@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, Alert, Linking } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, Linking } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Controller, useForm } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
@@ -11,7 +11,8 @@ import Circle from "../../components/Circle/Circle";
 
 
 const InviteMembers = ({route}) => {
-  const [url, setUrl] = useState("-");
+  const [urlMail, setUrlMail] = useState("-");
+  const [urlQr, setUrlQr] = useState("-");
   const [name, setName] =  useState("-");
   const [token, setToken] = useState("-");
   const { control, handleSubmit, formState: { errors }, getValues 
@@ -55,11 +56,6 @@ const InviteMembers = ({route}) => {
       alert(error);
     }
   };
-
-  const onSubmit = (data) => {
-    Linking.openURL('mailto:'+ data.email +'?subject=Test&body=Hallo%0D%0ADit is een linkje naar de app ' + name + '%0D%0ADe link om deel te nemen aan het project is ' + url);
-  };
-
   const generateNewCode = (projectId) => {
     try {
       fetch(
@@ -95,19 +91,22 @@ const InviteMembers = ({route}) => {
         alert("Deze gebruiker bestaat niet");
         break;
       default:
-        setUrl('http://localhost/PMA/PmaWEB/pages/login.php?projectid=' + projectId + '&token=' + response[0].newQrcode);
+        setUrlMail("http://localhost/PMA/PmaWEB/pages/login.php?projectid=" + projectId + "%26token=" + response[0].newQrcode);
+        setUrlQr("http://localhost/PMA/PmaWEB/pages/login.php?projectid=" + projectId + "&token=" + response[0].newQrcode)
         setName(response[0].name);
     }
   };
+
+  const onSubmit = (data) => {
+    Linking.openURL("mailto:"+ data.email +"?subject=Test&body=Hallo%0D%0ADit is een linkje naar de app " + name + "%0D%0ADe link om deel te nemen aan het project is " + urlMail);
+  };
+
   
 
 
   return (
     <SafeAreaView style={Styles.SafeAreaView}>
       <View>
-        <Text>{name}</Text>
-        <Text>{token}</Text>
-        <Text>{url}</Text>
         <Circle name={"send"} size={50} color={"black"} text={"Uitnodigingen"} />
       </View>
       <View style={Styles.inputContainer}>
@@ -146,7 +145,7 @@ const InviteMembers = ({route}) => {
       <View style={styles.QRCode}>
         <Text style={styles.text}>QR-Code:</Text>
         <QRCode
-          value={url}
+          value={urlQr}
           size={250}
         />
       </View>

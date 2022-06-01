@@ -16,6 +16,7 @@ import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
 import Profile from "./src/screens/Profile/Profile";
 import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 
+
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
 //Dit moet dan ook de waarde van 'screen' bij elke link naar dit scherm.
