@@ -26,7 +26,10 @@ const WarningAddScreen = () => {
                 }),
             })
             .then((response) => response.json())
-            alert("dit werkt hopelijk");
+            .then((response) => {
+                console.log(response);
+                // catchFeedback(response);
+            });
         } catch (error) {
             alert(error);
         }
@@ -42,9 +45,7 @@ const WarningAddScreen = () => {
             <CustomTextInput placeholder="Selecteer projectlid" value={member} setValue={setMember} />
             <Text style={styles.subtitle}>Reden</Text>
             <CustomTextInput placeholder="Reden" value={reason} setValue={setReason} />
-            <View style={[styles.dropdown, styles.marginTop5 ]}>
-            </View>
-            <Text></Text>
+            
             <TouchableOpacity 
                 style={[styles.button, styles.buttonRed, styles.marginTop5]} 
                 onPress={() => sendDataToAPI(reason, "user_id", "project_id")}
