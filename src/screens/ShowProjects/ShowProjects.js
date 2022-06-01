@@ -7,14 +7,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ShowProjects(){
 
+    // userId comes from welcome screen, temporary hardcode
     const userId = 2;
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        getData(userId)
+        getProjects(userId);
     }, []);
 
-    const getData = (userId) => {
+    const getProjects = (userId) => {
         fetch("http://localhost/PMA/PmaAPI/handlers/showProjects/showProjectsHandler.php", {
             method: "POST",
             headers: {
