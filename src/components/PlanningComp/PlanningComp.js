@@ -12,7 +12,7 @@ function PlanningTest(props) {
 
     const getPlanningname = (id) => {
         try {
-            fetch("http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/PlanningOverzichtFetch.php", {
+            fetch("http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/PlanningOverzichtHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",

@@ -104,4 +104,9 @@ export default StyleSheet.create({
   rowText: {
     fontSize: 18,
   },
+  sectionHeader: {
+    backgroundColor: '#efefef',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
 });
