@@ -1,68 +1,86 @@
 'use strict';
 
-import { Text, ScrollView, View, Pressable, Button } from 'react-native';
+import { Text, ScrollView, View, Button, Platform} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
-import { useForm, Controller } from "react-hook-form";
-import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
+import * as DocumentPicker from "expo-document-picker";
 
-  const TeamcodeToevoegen = ({ navigation }) => {
-    //form handling
-    // const NAME_REGEX = /^[a-zA-Z0-9 ]{3,30}$/;
-    // const { control, handleSubmit, formState: { errors } } = useForm({
-    //   defaultValues: {
-    //     name: '',
-    //   }
-    // });
+const TeamcodeToevoegen = () => {
+const pickDocument = async () => {
+    let result = await DocumentPicker.getDocumentAsync({ 
+     type: "application/pdf", 
+     copyToCacheDirectory: true })
+      .then(response => {
+        if (response.type == 'success') {          
+          let { name, size, uri } = response;
 
-    const onSubmit = (data) => {
-      sendDataToAPI(data.name);
+       / ------------------------/
+          if (Platform.OS === "android" && uri[0] === "/") {
+             uri = `file://${uri}`;
+             uri = uri.replace(/%/g, "%25");
+          }
+      / ------------------------/
+
+          let nameParts = name.split('.');
+          let fileType = nameParts[nameParts.length - 1];
+          var fileToUpload = {
+            name: name,
+            size: size,
+            uri: uri,
+            type: "application/" + fileType
+          };
+
+          postDocument(fileToUpload);
+        } 
+      });
+}
+
+  const postDocument = (data) => {
       console.log(data);
-    };
+      console.log(uri);
+      const url = "";
+      const fileUri = data.uri;
+      const formData = new FormData();
+      formData.append('document', data);
+      const options = {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+          },
+      };
+      console.log(formData);
 
-  //the things where the info goes in.
-  // const [ProjectNaam, setProjectNaam] = useState('');
+      fetch(url, options).catch((error) => console.log(error));
+  }
 
-//   const sendDataToAPI = (ProjectNaam) => {
-//     try {
-//         fetch("http://localhost/pma/PmaAPI/handlers/createProject/createProjectHandler.php", {
-//             method: "POST",
-//             headers: {
-//                 Accept: "application/json",
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({
-//                 name: ProjectNaam,
-//             }),
-//         })
-//         .then((response) => response.json())
-//         .then((response) => {
-//             // console.log(response);
-//             catchFeedback(response);
-//         });
-//     } catch (error) {
-//         alert(error);
-//     }
-// };
+  
 
-  //the screen
+  //the screen 
 return (
     <ScrollView style={styles.root}>
         <MaterialCommunityIcons style={styles.arrow}  name="arrow-left-thick" size={60} color={'black'} />
         <View style={styles.div}>
-        <Circle name={"account-group"} size={60} color={"black"} style={[styles.icon,]} />
+          <Circle style={[styles.icon]} name={"book"} size={60} color={"black"}  />
         </View>
         <View style={styles.div}>
-        <Text style={[styles.title, styles.marginBottom25, styles.marginTop50, styles.sampleText,]}>PROJECT AANMAKEN</Text>
+          <Text style={[styles.title, styles.marginTop50, styles.sampleText,]}>TEAMCODE TOEVOEGEN</Text>
         </View>
-
-        <Pressable onPress={handleSubmit(onSubmit)}>
-        <Text style={[styles.button, styles.buttonBlue, styles.marginTop25, styles.marginBottom25]}>AANMAKEN</Text>
-        </Pressable>
+        <View style={styles.div}> 
+          <Text style={[styles.subtitle, styles.sampleText]}>TEAMCODE</Text>
+        </View>
+        <View>
+          <Button
+            style={styles.buttonBlue}
+            title="Selecteer Bestand"
+            onPress={pickDocument}
+          />
+        </View>
     </ScrollView>
-    );
-};
+    )
+}
   
 export default TeamcodeToevoegen;

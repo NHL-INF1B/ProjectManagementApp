@@ -5,12 +5,15 @@ export default StyleSheet.create({
       flex: 1,
       backgroundColor: '#009BAA',
     },
+    icon: {
+      marginLeft: '19%',
+      marginTop: '19%',
+    },
     div: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
     },
-    
     title: {
       textAlign: 'center',
       color: 'white',
@@ -77,11 +80,10 @@ export default StyleSheet.create({
       width: '50%',
       backgroundColor: 'white',
       borderRadius: 5,
+      marginBottom: -25,
     },
-    errorMessage: {
-      textAlign: 'center',
-      color:'red',
-      fontWeight: 'bold',
-
+    fileUpload: {
+        width: "30%",
+        justifyContent: "center",
     },
 });
