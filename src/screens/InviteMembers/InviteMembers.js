@@ -71,7 +71,6 @@ const InviteMembers = ({route}) => {
           }),
         }
       )
-        // .then((response) => response.text())
         .then((response) => response.json())
         .then((response) => {
           console.log(response);
@@ -91,8 +90,8 @@ const InviteMembers = ({route}) => {
         alert("Deze gebruiker bestaat niet");
         break;
       default:
-        setUrlMail("http://localhost/PMA/PmaWEB/pages/login.php?projectid=" + projectId + "%26token=" + response[0].newQrcode);
-        setUrlQr("http://localhost/PMA/PmaWEB/pages/login.php?projectid=" + projectId + "&token=" + response[0].newQrcode)
+        setUrlMail("https://inf1b.serverict.nl/PmaWEB/pages/login.php?projectid=" + projectId + "%26token=" + response[0].newQrcode);
+        setUrlQr("https://inf1b.serverict.nl/PmaWEB/pages/login.php?projectid=" + projectId + "&token=" + response[0].newQrcode)
         setName(response[0].name);
     }
   };
