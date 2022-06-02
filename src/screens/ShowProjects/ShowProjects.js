@@ -16,7 +16,7 @@ export default function ShowProjects(){
     }, []);
 
     const getProjects = (userId) => {
-        fetch("http://localhost/PMA/PmaAPI/handlers/showProjects/showProjectsHandler.php", {
+        fetch("https://inf1b.serverict.nl/handlers/showProjects/showProjectsHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",

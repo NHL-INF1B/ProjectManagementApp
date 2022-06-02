@@ -35,7 +35,7 @@ const InviteMembers = ({route}) => {
   const sendDataToAPI = (projectId) => {
     try {
       fetch(
-        "http://localhost/PMA/PmaAPI/handlers/InviteMembers/InviteMembers.php",
+        "https://inf1b.serverict.nl/handlers/InviteMembers/InviteMembers.php",
         {
           method: "POST",
           headers: {
@@ -59,7 +59,7 @@ const InviteMembers = ({route}) => {
   const generateNewCode = (projectId) => {
     try {
       fetch(
-        "http://localhost/PMA/PmaAPI/handlers/InviteMembers/generateNewCode.php",
+        "https://inf1b.serverict.nl/handlers/InviteMembers/generateNewCode.php",
         {
           method: "POST",
           headers: {

@@ -79,7 +79,7 @@ const LoginScreen = ({ navigation }) => {
 
   const sendDataToAPI = (email, password) => {
     try {
-      fetch("http://localhost/PMA/PmaAPI/handlers/login/loginHandler.php", {
+      fetch("https://inf1b.serverict.nl/handlers/login/loginHandler.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -212,12 +212,6 @@ const LoginScreen = ({ navigation }) => {
         <View>
           <Pressable onPress={() => navigation.navigate("RegisterScreen")}>
             <Text style={Styles.registreren}>Registreren</Text>
-          </Pressable>
-        </View>
-
-        <View>
-          <Pressable onPress={() => navigation.navigate("MemberInfo")}>
-            <Text style={Styles.registreren}>ProfielPagina</Text>
           </Pressable>
         </View>
       </ScrollView>

@@ -47,6 +47,11 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="ProjectScreen"
+					component={ProjectScreen}
+				/>
+
+				<Stack.Screen
 					name="ProfileScreen"
 					component={Profile}
 				/>
@@ -57,39 +62,19 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="CreateProject"
+					component={CreateProject}
+				/>
+
+				<Stack.Screen
 					name="WarningScreen"
 					component={WarningScreen}
 				/>
 
 				<Stack.Screen
-					name="TeamcodeScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="PlanningScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="LogbookScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="InviteScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="MemberScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="ScoreScreen"
-					component={""}
-				/>
+          			name="InviteMembers"
+         		 	component={InviteMembers}
+        		/>
 
         		<Stack.Screen
           			name="MemberInfo"
