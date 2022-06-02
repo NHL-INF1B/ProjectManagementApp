@@ -12,6 +12,7 @@ import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
+import ShowProjects from "./src/screens/ShowProjects/ShowProjects";
 import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
 import Profile from "./src/screens/Profile/Profile";
 
@@ -22,10 +23,6 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen
-					name="ProfileScreen"
-					component={Profile}
-				/>
 
 				<Stack.Screen
 					name="LoginScreen"
@@ -46,15 +43,25 @@ export default function App() {
         		  name='WelcomeScreen'
 	        	  component={WelcomeScreen}
     	    	/>
+				
+				<Stack.Screen
+					name="ShowProjects"
+					component={ShowProjects}
+				/>
 
 				<Stack.Screen
-					name="WarningScreen"
-					component={WarningScreen}
+					name="ProfileScreen"
+					component={Profile}
 				/>
 
 				<Stack.Screen
 					name="ScheduleEditScreen"
 					component={ScheduleEditScreen}
+				/>
+
+				<Stack.Screen
+					name="WarningScreen"
+					component={WarningScreen}
 				/>
 
 				<Stack.Screen
