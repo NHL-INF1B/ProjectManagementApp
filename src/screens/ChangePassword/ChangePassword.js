@@ -7,8 +7,8 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const ChangePassword = ({ navigation }) => {
-    const [userid, setUserId] = useState("");
+const ChangePassword = ({ route }) => {
+    const { userId } = route.params;
     const PASS_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,254}$/;
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
@@ -18,52 +18,58 @@ const ChangePassword = ({ navigation }) => {
         }
     });
 
-    useEffect(() => {
-        const data = getData();
-        data.then((data) => {
-            if (data !== undefined) {
-                setUserId(data["id"]);
-                getUserData(data["id"]);
-            }
-        });
-	}, []);
-
-    const getData = async () => {
-        try {
-            const jsonValue = await AsyncStorage.getItem("@user_data");
-            if (jsonValue !== null) {
-               return JSON.parse(jsonValue);
-            }
-        } catch (e) {
-            alert(e);
-        }
-    };
-
     const submitData = (data) => {
         sendUpdateData(data);
     };
 
     const sendUpdateData = (data) => {
         try {
-			fetch("http://localhost/pma/PmaAPI/handlers/profile/profileEdit.php", {
+			fetch("http://localhost/pma/PmaAPI/handlers/changePassword/changePassword.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
 					"Content-Type": "application/json",
 				},
                 body: JSON.stringify({
-                    id: userid,
+                    id: userId,
+                    oldPassword: data.oldPassword,
+                    newPassword: data.newPassword,
+                    confirmPassword: data.confirmPassword,
 				}),
 			})
 				// .then((response) => response.text())
 				.then((response) => response.json())
 				.then((response) => {
+                    console.log(response);
                     catchFeedback(response);
 				});
 		} catch (error) {
 			alert(error);
 		}
     }
+
+    const catchFeedback = (response) => {
+        switch (response[0]) {
+            case "wrong_old_password":
+              alert("Huidig wachtwoord is verkeerd");
+              break;
+            case "password_incorrect":
+              alert("Nieuw wachtwoord is verkeerd.");
+              break;
+            case "confirmPassword_incorrect":
+              alert("Bevestig wachtwoord is verkeerd.");
+              break;
+            case "samePassword_incorrect":
+              alert("De wachtwoorden zijn niet hetzelfde.");
+              break;
+            case "password_changed":
+                alert("Het wachtwoord is veranderd");
+                break;
+            default:
+              console.log('undefined');
+              break;
+          }
+	};
 
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
@@ -77,7 +83,7 @@ const ChangePassword = ({ navigation }) => {
                         name="oldPassword"
                         control={control}
                         rules={{
-                            required: { value: true, message: "Wachtwoord is verplicht" },
+                            required: { value: true, message: "Huidig wachtwoord is verplicht." },
                             pattern: {
                             value: PASS_REGEX,
                             message: "Verkeerde wachtwoord",
@@ -89,7 +95,7 @@ const ChangePassword = ({ navigation }) => {
                             placeholderTextColor="#707070"
                             onChangeText={(text) => onChange(text)}
                             value={value}
-                            errorText={errors?.password?.message}
+                            errorText={errors?.oldPassword?.message}
                             secureTextEntry={true}
                             titleText="Huidig wachtwoord"
                         />
@@ -102,7 +108,7 @@ const ChangePassword = ({ navigation }) => {
                         name="newPassword"
                         control={control}
                         rules={{
-                            required: { value: true, message: "Wachtwoord is verplicht" },
+                            required: { value: true, message: "Nieuw wachtwoord is verplicht." },
                             pattern: {
                             value: PASS_REGEX,
                             message: "Wachtwoord is te zwak",
@@ -114,7 +120,7 @@ const ChangePassword = ({ navigation }) => {
                             placeholderTextColor="#707070"
                             onChangeText={(text) => onChange(text)}
                             value={value}
-                            errorText={errors?.password?.message}
+                            errorText={errors?.newPassword?.message}
                             secureTextEntry={true}
                             titleText="Nieuw wachtwoord"
                         />
@@ -127,7 +133,7 @@ const ChangePassword = ({ navigation }) => {
                         name="confirmPassword"
                         control={control}
                         rules={{
-                            required: { value: true, message: "Wachtwoord is verplicht" },
+                            required: { value: true, message: "Bevestig wachtwoord is verplicht." },
                             pattern: {
                             value: PASS_REGEX,
                             message: "Wachtwoord is te zwak",
@@ -139,7 +145,7 @@ const ChangePassword = ({ navigation }) => {
                             placeholderTextColor="#707070"
                             onChangeText={(text) => onChange(text)}
                             value={value}
-                            errorText={errors?.password?.message}
+                            errorText={errors?.confirmPassword?.message}
                             secureTextEntry={true}
                             titleText="Bevestig wachtwoord"
                         />
