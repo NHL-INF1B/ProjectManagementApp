@@ -3,12 +3,13 @@ import Styles from './Styles';
 import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
 import Tile from '../../components/Tile/Tile';
 import Header from '../../components/Header/Header';
+import { useRoute } from "@react-navigation/native";
 
 export default function ProjectScreen() {
 
-    // temporary hardcode
-    const projectId = 23;
-    const userId = 519;
+    const route = useRoute();
+    const userId = route.params.userId;
+    const projectId = route.params.projectId;
     const projectName = "Innovate";
     
     return (
