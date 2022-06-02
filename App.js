@@ -1,10 +1,10 @@
-import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
-import {React, useEffect} from "react";
-import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import EditProject from './src/screens/EditProject/EditProject';
+// import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
+// import {React, useEffect} from "react";
+// import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
+// import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import EditProject from './src/screens/EditProject/EditProject';
 import TeamcodeToevoegen from'./src/screens/TeamcodeToevoegen/TeamcodeToevoegen'
 
 // const Stack = createNativeStackNavigator();

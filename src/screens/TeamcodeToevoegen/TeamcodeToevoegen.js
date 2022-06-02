@@ -39,8 +39,8 @@ const pickDocument = async () => {
 
   const postDocument = (data) => {
       console.log(data);
-      console.log(uri);
-      const url = "";
+      console.log(data.uri);
+      const url = "inf1b.serverict.nl/Upload";
       const fileUri = data.uri;
       const formData = new FormData();
       formData.append('document', data);
