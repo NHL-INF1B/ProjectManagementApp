@@ -90,8 +90,8 @@ const InviteMembers = ({route}) => {
         alert("Deze gebruiker bestaat niet");
         break;
       default:
-        setUrlMail("https://inf1b.serverict.nl/PmaWEB/pages/login.php?projectid=" + projectId + "%26token=" + response[0].newQrcode);
-        setUrlQr("https://inf1b.serverict.nl/PmaWEB/pages/login.php?projectid=" + projectId + "&token=" + response[0].newQrcode)
+        setUrlMail("https://inf1b.serverict.nl/PmaWEB/pages/add.php?projectid=" + projectId + "%26token=" + response[0].newQrcode);
+        setUrlQr("https://inf1b.serverict.nl/PmaWEB/pages/add.php?projectid=" + projectId + "&token=" + response[0].newQrcode)
         setName(response[0].name);
     }
   };
