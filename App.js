@@ -16,6 +16,7 @@ import ShowProjects from "./src/screens/ShowProjects/ShowProjects";
 import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
 import Profile from "./src/screens/Profile/Profile";
 import LogbookScreen from "./src/screens/LogbookScreen/LogbookScreen";
+import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -63,6 +64,11 @@ export default function App() {
 				<Stack.Screen
 					name="WarningScreen"
 					component={WarningScreen}
+				/>
+
+				<Stack.Screen
+					name="HourEditScreen"
+					component={HourEditScreen}
 				/>
 
 				<Stack.Screen
