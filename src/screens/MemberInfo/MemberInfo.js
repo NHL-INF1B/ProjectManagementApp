@@ -36,7 +36,7 @@ const MemberInfo = () => {
   const getMemberInfo = (memberId) => {
     try {
       fetch(
-        "http://localhost/PMA/PmaAPI/handlers/memberInfoHandler/memberInfoHandler.php",
+        "https://inf1b.serverict.nl/handlers/memberInfoHandler/memberInfoHandler.php",
         {
           method: "POST",
           headers: {
