@@ -7,4 +7,14 @@ export default StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
+  Title: {
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    fontSize: 25,
+  },
+  Name: {
+      fontWeight: "bold",
+      color: "#FFFFFF",
+      fontSize: 20,
+  }
 });
