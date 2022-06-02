@@ -15,6 +15,8 @@ import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
 import ShowProjects from "./src/screens/ShowProjects/ShowProjects";
 import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
 import Profile from "./src/screens/Profile/Profile";
+import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
+
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -32,11 +34,6 @@ export default function App() {
 				<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
-				/>
-
-				<Stack.Screen
-					name="ProjectScreen"
-					component={ProjectScreen}
 				/>
 
 				<Stack.Screen
