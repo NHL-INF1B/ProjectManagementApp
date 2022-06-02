@@ -7,7 +7,8 @@ export default function DropDown({ items, setItems, projectId, userId, roleId })
     const [open, setOpen] = useState(false);
     let controller;
     console.log([value]);
-    var zIndex = userId;
+    var zIndex = Number([userId]);
+    // var zIndex = 5;
     console.log(zIndex);
 
     return(

@@ -40,9 +40,22 @@ const MemberScreen = () => {
     const getData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem('@member_data');
+            const jsonValues = await AsyncStorage.getItem('@user_data');
             if (jsonValue !== null) {
                 return JSON.parse(jsonValue);
             }
+            if (jsonValues !== null) {
+                return JSON.parse(jsonValues);
+            }
+        } catch (e) {
+            alert(e);
+        }
+    };
+
+    const storeData = async (value) => {
+        try {
+            const jsonValues = JSON.stringify(value);
+            await AsyncStorage.setItem('@member_data', jsonValues);
         } catch (e) {
             alert(e);
         }
@@ -100,32 +113,32 @@ const MemberScreen = () => {
                     <MaterialCommunityIcons name="account" size={86} color="black" />
                     <View style={Styles.user}>
                         <Text style={Styles.textName}>{name}</Text>
-                        <DropDown items={items} setItems={setItems} projectId={projectId} userId='1' roleId={roleId} />
+                        <DropDown items={items} setItems={setItems} projectId={projectId} userId={userId} roleId={roleId} />
                     </View>
                     <Pressable
                         onPress={() =>
-                        navigation.navigate("WelcomeScreen", {
+                        navigation.navigate("ProfileScreen", {
                             projectId,
                             userId,
                         })}>
                         <MaterialCommunityIcons name={'chevron-right'} size={40} />
                     </Pressable>
                 </View>
-                <View style={Styles.profile}>
+                {/* <View style={Styles.profile}>
                     <MaterialCommunityIcons name="account" size={86} color="black" />
                     <View style={Styles.user}>
                         <Text style={Styles.textName}>{name}</Text>
-                        <DropDown items={items} setItems={setItems} projectId={projectId} userId='3' roleId={roleId} />
+                        <DropDown items={items} setItems={setItems} projectId={projectId} userId={userId} roleId={roleId} />
                     </View>
                     <Pressable
                         onPress={() =>
-                        navigation.navigate("WelcomeScreen", {
+                        navigation.navigate("ProfileScreen", {
                             projectId,
                             userId,
                         })}>
                         <MaterialCommunityIcons name={'chevron-right'} size={40} />
                     </Pressable>
-                </View>
+                </View> */}
         </SafeAreaView>
     )
 }

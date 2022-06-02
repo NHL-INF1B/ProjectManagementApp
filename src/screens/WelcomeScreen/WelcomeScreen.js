@@ -48,7 +48,7 @@ const WelcomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={Styles.container}>
-            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="None" />
             <Image 
                 style={Styles.img}
                 source={require('./../../assets/images/logo.png')}
