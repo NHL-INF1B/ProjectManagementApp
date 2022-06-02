@@ -22,7 +22,7 @@ export default function ProjectScreen() {
                     <Tile text="Planning" image="calendar" screen="PlanningScreen" projectId={projectId} userId={userId} />
                     <Tile text="Urenverwantwoording" image="clipboard" screen="LogbookScreen" projectId={projectId} userId={userId} />
                     <Tile text="Waarschuwingen" image="exclamation-thick" screen="WarningScreen" projectId={projectId} userId={userId} />
-                    <Tile text="Uitnodigingen" image="account-plus" screen="InviteScreen" projectId={projectId} userId={userId} />
+                    <Tile text="Uitnodigingen" image="account-plus" screen="InviteMembers" projectId={projectId} userId={userId} />
                     <Tile text="Leden" image="account-group" screen="MemberScreen" projectId={projectId} userId={userId} />
                     <Tile text="Scorebord" image="star" screen="ScoreScreen" projectId={projectId} userId={userId} />
                 </SafeAreaView>
