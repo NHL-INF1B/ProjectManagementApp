@@ -6,17 +6,4 @@ export default StyleSheet.create({
 		backgroundColor: "#009BAA",
 		flex: 1,
 	},
-	marginContainer: {
-		marginBottom: 12,
-	},
-	head: {
-		flex: 1,
-		backgroundColor: "#009BAA",
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	content: {
-		flex: 2,
-		backgroundColor: "#009BAA",
-	},
 });

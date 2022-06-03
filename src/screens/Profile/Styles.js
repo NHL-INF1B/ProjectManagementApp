@@ -19,4 +19,15 @@ export default StyleSheet.create({
 		flex: 2,
 		backgroundColor: "#009BAA",
 	},
+	errorText: {
+        textAlign: "center",
+        color: "red",
+        fontWeight: "bold",
+    },
+	registreren: {
+		alignSelf: "center",
+		textDecorationLine: "underline",
+		color: "white",
+		textTransform: "uppercase",
+	}
 });
