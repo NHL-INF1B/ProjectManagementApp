@@ -1,18 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState }from 'react';
 import Styles from './Styles';
 import { Text, SafeAreaView, ScrollView, Image, View } from 'react-native';
 import Tile from '../../components/Tile/Tile';
 import Header from '../../components/Header/Header';
 import { useRoute } from "@react-navigation/native";
+import { useForm } from "react-hook-form";
 
 export default function ProjectScreen() {
 
     const route = useRoute();
     const projectId = route.params.projectId;
     const userId = route.params.userId;
+    const [projectName, setProjectName] = useState("-");
 
-    // temporary hardcode
-    const projectName = "moet nog dynamisch";
+
+    const getProjectData = (projectId) => {
+        // console.log(projectId);
+		try {
+			fetch("https://inf1b.serverict.nl/handlers/projectScreen/projectScreen.php", {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					projectId: projectId,
+				}),
+			})
+            // .then((response) => response.text())
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+                setProjectName(response[0].projectName);
+            });
+		} catch (error) {
+			alert(error);
+		}
+	};
+
+    useEffect(() => {
+        getProjectData(projectId);
+      }, []);
     
     return (
             <SafeAreaView style={Styles.Container}>
