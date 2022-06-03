@@ -29,6 +29,10 @@ const Profile = ({ navigation }) => {
         }
     });
 
+    const replaceAll = (string, search, replace) => {
+        return string.split(search).join(replace);
+    }
+
     useEffect(() => {
         const data = getData();
         data.then((data) => {
@@ -195,7 +199,7 @@ const Profile = ({ navigation }) => {
                                 render={({ field: { onChange, value } }) => (
                                     <DatePicker
                                         style={{width:"70%", alignSelf: "center", borderWidth: 3, borderRadius: 10, borderColor: '#00AABB',}}
-                                        onSelectedChange={date => onChange(date.replaceAll("/", "-"))}
+                                        onSelectedChange={date => onChange(replaceAll(date, "/", "-"))}
                                         current={getValues("dateOfBirth")}
                                         mode="calendar"
                                         maximumDate={new Date().toJSON().slice(0,10).replace(/-/g,'/')}

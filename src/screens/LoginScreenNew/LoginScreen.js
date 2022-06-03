@@ -115,22 +115,18 @@ const LoginScreen = ({ navigation }) => {
       switch (response[index]) {
         case "email_incorrect":
           alert("Deze inloggegevens kloppen niet");
-          // setErrorText("email_incorrect");
           break;
 
         case "user_not_exists":
           alert("Deze gebruiker bestaat niet.");
-          // setErrorText("user_not_exists");
           break;
 
         case "password_incorrect":
           alert("Deze inloggegevens kloppen niet");
-          // setErrorText("password_incorrect");
           break;
 
         case "login_incorrect":
           alert("Deze inloggegevens kloppen niet.");
-          // setErrorText("login_incorrect");
           break;
 
         default: //Needs to go to welcomescreen
@@ -203,11 +199,8 @@ const LoginScreen = ({ navigation }) => {
             )}
           />
         </View>
-        <View style={Styles.head}>
-          <Text>{errorText}</Text>
-        </View>
 
-        <View>
+        <View style={{ marginBottom: 20 }}>
           <CustomButton 
             buttonType={"blueButton"}
             text={"Log in"}

@@ -17,7 +17,7 @@ export default StyleSheet.create({
 		backgroundColor: "#009BAA",
 	},
 	inputContainer : {
-		marginTop: 13,
+		marginBottom: 12,
 	},
 	logo: {
 		resizeMode: "center",
