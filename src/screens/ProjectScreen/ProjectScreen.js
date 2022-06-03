@@ -17,7 +17,7 @@ export default function ProjectScreen() {
     return (
         <ScrollView bounces={false}>
             <SafeAreaView style={Styles.Container}>
-                <Header GoToType="Edit" GoTo="EditProject" CenterGoTo="None" ReturnType="Back" />
+                <Header GoToType="Edit" GoTo="EditProject" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
                 <Image style={Styles.Img} source={require("../../assets/images/logo.png")} />
                 <Text style={Styles.ProjectName}>{projectName}</Text>
                 <View style={Styles.Tiles}>

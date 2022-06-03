@@ -15,6 +15,7 @@ import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
 import ShowProjects from "./src/screens/ShowProjects/ShowProjects";
 import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
 import Profile from "./src/screens/Profile/Profile";
+import LogbookScreen from "./src/screens/LogbookScreen/LogbookScreen";
 import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 import 'react-native-gesture-handler';
@@ -89,6 +90,12 @@ export default function App() {
           			name="MemberInfo"
          		 	component={MemberInfo}
         		/>
+
+				<Stack.Screen
+					name="LogbookScreen"
+					component={LogbookScreen}
+				/>
+				
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
