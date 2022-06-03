@@ -5,7 +5,8 @@ import { useRoute } from "@react-navigation/native";
 import Circle from "./../../components/Circle/Circle";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import Header from '../../components/Header/Header';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { FlatList } from 'react-native-gesture-handler';
+import LogbookUser from '../../components/LogbookUser/LogbookUser';
 
 export default function SelectLogbookUser(){
 
@@ -45,10 +46,12 @@ export default function SelectLogbookUser(){
             <Text style={Styles.Title}>URENVERANTWOORDING INZIEN</Text>
             <Text style={Styles.Subtitle}>Projectlid</Text>
 
-            <DropDownPicker
-                items={user}
-                defaultNull
-                placeholder="Selecteer projectlid"
+            <FlatList
+                data={user}
+                keyExtractor={(user) => user.id}
+                renderItem={({item}) =>
+                    <LogbookUser projectId={projectId} userId={item.id} userName={item.name} />
+            }
             />
 
             <CustomButton buttonType="blueButton" text="INZIEN" />
