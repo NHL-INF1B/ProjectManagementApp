@@ -22,6 +22,11 @@ export default function App() {
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 
 				<Stack.Screen
+					name="ProjectScreen"
+					component={ProjectScreen}
+				/>
+
+				<Stack.Screen
 					name="MemberScreen"
 					component={MemberScreen}
 				/>
@@ -34,11 +39,6 @@ export default function App() {
 				<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
-				/>
-
-				<Stack.Screen
-					name="ProjectScreen"
-					component={ProjectScreen}
 				/>
 
 				<Stack.Screen

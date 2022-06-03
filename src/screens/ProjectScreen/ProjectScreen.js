@@ -7,8 +7,8 @@ import Header from '../../components/Header/Header';
 export default function ProjectScreen() {
 
     // temporary hardcode
-    const projectId = 23;
-    const userId = 519;
+    const projectId = 1;
+    const userId = 1;
     const projectName = "Innovate";
     
     return (

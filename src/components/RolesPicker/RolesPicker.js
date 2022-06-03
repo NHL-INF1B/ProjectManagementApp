@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { View, Platform} from 'react-native';
 
-export default function DropDown({ items, setItems, projectId, userId, roleId }){
+export default function DropDown({ items, setItems, userId, roleId }){
     const [value, setValue] = useState(roleId);
     const [open, setOpen] = useState(false);
     let controller;
     console.log([value]);
     var zIndex = Number([userId]);
-    // var zIndex = 5;
     console.log(zIndex);
 
     return(
