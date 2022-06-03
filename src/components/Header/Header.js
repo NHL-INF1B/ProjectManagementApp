@@ -8,7 +8,7 @@ import { MaterialCommunityIcons} from '@expo/vector-icons';
 // Valid inputs for CenterGoTo: "None" or file you want to go to
 // Valid inputs for ReturnType: "Back" or "Home"
 
-export default function Header({ GoToType, GoTo, CenterGoTo, ReturnType }){
+export default function Header({ GoToType, GoTo, CenterGoTo, ReturnType, projectId, userId }){
 
     const navigation = useNavigation()
 
@@ -17,11 +17,17 @@ export default function Header({ GoToType, GoTo, CenterGoTo, ReturnType }){
     }
 
     const NavigateTo = () => {
-        navigation.navigate(GoTo)
+        navigation.navigate(GoTo, {
+            projectId: projectId,
+            userId: userId,
+        })
     }
 
     const CenterNavigateTo = () => {
-        navigation.navigate(CenterGoTo)
+        navigation.navigate(CenterGoTo, {
+            projectId: projectId,
+            userid: userId,
+        })
     }
 
     if(GoToType == "Add"){

@@ -1,12 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, SafeAreaView, Text, Pressable, View } from 'react-native';
+import { Image, SafeAreaView, Text, Pressable, View, BackHandler } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Tile from './../../components/Tile/Tile';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Styles from './Styles';
+import { useFocusEffect } from '@react-navigation/native';
 
 const WelcomeScreen = ({ navigation }) => {
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const onBackPress = () => {
+                // navigation.navigate('LoginScreen');
+                return true;
+            };
+
+            BackHandler.addEventListener(
+                'hardwareBackPress',
+                onBackPress
+            );
+
+            return () => {
+                BackHandler.removeEventListener(
+                    'hardwareBackPress',
+                    onBackPress
+                );
+            };
+        }, []),
+    );
 
     const [name, setName] = useState("-");
     const [userId, setUserId] = useState("-");
@@ -42,7 +64,6 @@ const WelcomeScreen = ({ navigation }) => {
         });
     }, []);
 
-    // temp hardcode
     var projectId = null
 
     return (
@@ -53,25 +74,36 @@ const WelcomeScreen = ({ navigation }) => {
             />
             <Text style={Styles.welkom}>Welkom, {name}</Text>
             <SafeAreaView style={Styles.safeAreaView}>
-                <Tile text="Projecten" image="account-group" screen="ShowProjects" projectId={projectId} userId={userId} />
-                <Tile text="Profiel" image="card-account-details" screen="ProfileScreen" projectId={projectId} userId={userId} />
-                <Pressable
-                    onPress={() => {
-                        const uitlog = removeValue();
-                        uitlog.then((uitlog) => 
-                        navigation.navigate("LoginScreen", 
-                        {
-                            projectId, 
-                            userId,
-                        }
-                        ))
-                    }}>
-                    <View style={Styles.uitloggen}>
-                        <MaterialCommunityIcons name="logout" screen="LoginScreen" size={55} color="#009BAA" style={Styles.icon} />
-                        <Text style={Styles.text}>Uitloggen</Text>
+                <View style={Styles.row}>
+                    <View style={Styles.column}>
+                        <Tile text="Projecten" image="account-group" screen="ShowProjects" projectId={projectId} userId={userId} />
                     </View>
-                </Pressable>
-            <StatusBar style="auto" />
+                    <View style={Styles.column}>
+                        <Tile text="Profiel" image="card-account-details" screen="ProfileScreen" projectId={projectId} userId={userId} />
+                    </View>
+                </View>
+
+                <View style={Styles.row}>
+                    <View style={Styles.column}>
+                        <Pressable
+                            onPress={() => {
+                                const uitlog = removeValue();
+                                uitlog.then((uitlog) => 
+                                navigation.navigate("LoginScreen", 
+                                {
+                                    projectId, 
+                                    userId,
+                                }
+                                ))
+                            }}>
+                            <View style={Styles.uitloggen}>
+                                <MaterialCommunityIcons name="logout" screen="LoginScreen" size={55} color="white" style={Styles.icon} />
+                                <Text style={Styles.text}>Uitloggen</Text>
+                            </View>
+                        </Pressable>
+                    </View>
+                </View>
+                <StatusBar style="auto" />
             </SafeAreaView>
         </SafeAreaView>
   );

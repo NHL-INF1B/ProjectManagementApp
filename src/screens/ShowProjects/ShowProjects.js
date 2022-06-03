@@ -9,6 +9,7 @@ export default function ShowProjects(){
 
     const route = useRoute();
     const userId = route.params.userId;
+    const projectId = route.params.projectId;
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export default function ShowProjects(){
 
     return (
         <SafeAreaView style={Styles.Container}>
-            <Header GoToType="Add" GoTo="CreateProject" CenterGoTo="None" ReturnType="Home" />
+            <Header GoToType="Add" GoTo="CreateProject" CenterGoTo="None" ReturnType="Home" projectId={projectId} userId={userId} />
             <FlatList
                 numColumns={2}
                 data={projects}

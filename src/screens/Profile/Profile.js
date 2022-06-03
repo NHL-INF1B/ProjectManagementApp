@@ -7,6 +7,8 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import ChangePassword from "../ChangePassword/ChangePassword";
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = ({ navigation }) => {
     const [isShowingDatePicker, setShowingDatePicker] = useState(false);
@@ -26,6 +28,10 @@ const Profile = ({ navigation }) => {
             discord: "",
         }
     });
+
+    const replaceAll = (string, search, replace) => {
+        return string.split(search).join(replace);
+    }
 
     useEffect(() => {
         const data = getData();
@@ -193,7 +199,7 @@ const Profile = ({ navigation }) => {
                                 render={({ field: { onChange, value } }) => (
                                     <DatePicker
                                         style={{width:"70%", alignSelf: "center", borderWidth: 3, borderRadius: 10, borderColor: '#00AABB',}}
-                                        onSelectedChange={date => onChange(date.replaceAll("/", "-"))}
+                                        onSelectedChange={date => onChange(replaceAll(date, "/", "-"))}
                                         current={getValues("dateOfBirth")}
                                         mode="calendar"
                                         maximumDate={new Date().toJSON().slice(0,10).replace(/-/g,'/')}
@@ -291,6 +297,12 @@ const Profile = ({ navigation }) => {
                             text={"Aanpassen"}
                             onPress={handleSubmit(submitData)}
                         />
+                    </View>
+
+                    <View style={Styles.marginContainer}>
+                        <Pressable onPress={() => navigation.navigate('ChangePassword', { userId: userid })}>
+                            <Text style={Styles.registreren}>Wachtwoord veranderen</Text>
+                        </Pressable>
                     </View>
                 </ScrollView>   
             </View>
