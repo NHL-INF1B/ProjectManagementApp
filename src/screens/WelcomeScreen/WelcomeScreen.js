@@ -1,12 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, SafeAreaView, Text, Pressable, View } from 'react-native';
+import { Image, SafeAreaView, Text, Pressable, View, BackHandler } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Tile from './../../components/Tile/Tile';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Styles from './Styles';
+import { useFocusEffect } from '@react-navigation/native';
 
 const WelcomeScreen = ({ navigation }) => {
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const onBackPress = () => {
+                // navigation.navigate('LoginScreen');
+                return true;
+            };
+
+            BackHandler.addEventListener(
+                'hardwareBackPress',
+                onBackPress
+            );
+
+            return () => {
+                BackHandler.removeEventListener(
+                    'hardwareBackPress',
+                    onBackPress
+                );
+            };
+        }, []),
+    );
 
     const [name, setName] = useState("-");
     const [userId, setUserId] = useState("-");
