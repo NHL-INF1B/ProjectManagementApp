@@ -57,7 +57,7 @@ const Profile = ({ navigation }) => {
     const getUserData = (userId) => {
         console.log(userId);
 		try {
-			fetch("http://localhost/pma/PmaAPI/handlers/profile/profileFetch.php", {
+			fetch("https://inf1b.serverict.nl/handlers/profile/profileFetch.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -83,7 +83,7 @@ const Profile = ({ navigation }) => {
 
     const sendUpdateData = (data) => {
         try {
-			fetch("http://localhost/pma/PmaAPI/handlers/profile/profileEdit.php", {
+			fetch("https://inf1b.serverict.nl/handlers/profile/profileEdit.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
