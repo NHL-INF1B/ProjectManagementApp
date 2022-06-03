@@ -17,6 +17,7 @@ import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
 import Profile from "./src/screens/Profile/Profile";
 import LogbookScreen from "./src/screens/LogbookScreen/LogbookScreen";
 import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
+import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 
 
 const Stack = createNativeStackNavigator();
@@ -26,7 +27,6 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
@@ -35,6 +35,11 @@ export default function App() {
 				<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
+				/>
+
+				<Stack.Screen 
+					name="ChangePassword"
+					component={ChangePassword}
 				/>
 
 				<Stack.Screen
