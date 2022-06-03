@@ -24,4 +24,10 @@ export default StyleSheet.create({
         color: "red",
         fontWeight: "bold",
     },
+	registreren: {
+		alignSelf: "center",
+		textDecorationLine: "underline",
+		color: "white",
+		textTransform: "uppercase",
+	}
 });

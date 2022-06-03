@@ -7,6 +7,8 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import ChangePassword from "../ChangePassword/ChangePassword";
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = ({ navigation }) => {
     const [isShowingDatePicker, setShowingDatePicker] = useState(false);
@@ -291,6 +293,12 @@ const Profile = ({ navigation }) => {
                             text={"Aanpassen"}
                             onPress={handleSubmit(submitData)}
                         />
+                    </View>
+
+                    <View style={Styles.marginContainer}>
+                        <Pressable onPress={() => navigation.navigate('ChangePassword', { userId: userid })}>
+                            <Text style={Styles.registreren}>Wachtwoord veranderen</Text>
+                        </Pressable>
                     </View>
                 </ScrollView>   
             </View>

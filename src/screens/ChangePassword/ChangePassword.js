@@ -7,8 +7,13 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
 
 const ChangePassword = ({ route }) => {
+    //get the userId from the last page.
     const { userId } = route.params;
+
+    //regex to check if the password is safe
     const PASS_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,254}$/;
+
+    //the variables for the input data.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             oldPassword: "",
@@ -17,10 +22,12 @@ const ChangePassword = ({ route }) => {
         }
     });
 
+    //when the button gets pushed it sends data to the API
     const submitData = (data) => {
         sendUpdateData(data);
     };
 
+    //send and fetch the feedback from the API.
     const sendUpdateData = (data) => {
         try {
 			fetch("http://localhost/pma/PmaAPI/handlers/changePassword/changePassword.php", {
@@ -36,7 +43,6 @@ const ChangePassword = ({ route }) => {
                     confirmPassword: data.confirmPassword,
 				}),
 			})
-				// .then((response) => response.text())
 				.then((response) => response.json())
 				.then((response) => {
                     console.log(response);
@@ -47,6 +53,7 @@ const ChangePassword = ({ route }) => {
 		}
     }
 
+    //catch the feedback from the API and give a alert.
     const catchFeedback = (response) => {
         switch (response[0]) {
             case "wrong_old_password":
