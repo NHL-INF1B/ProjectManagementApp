@@ -76,11 +76,6 @@ export default function App() {
 					component={WarningScreen}
 				/>
 
-				<Stack.Screen
-					name="ViewMembersLogbook"
-					component={ViewMembersLogbook}
-				/>
-
 				{/* <Stack.Screen
           			name="InviteMembers"
          		 	component={InviteMembers}
