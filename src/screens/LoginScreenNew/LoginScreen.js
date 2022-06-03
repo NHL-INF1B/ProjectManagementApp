@@ -13,6 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
+import CustomButton from "../../components/CustomButton/CustomButton";
 
 const LoginScreen = ({ navigation }) => {
   const navigatie = useNavigation();
@@ -204,9 +205,11 @@ const LoginScreen = ({ navigation }) => {
         </View>
 
         <View style={[Styles.redirectContainer, { marginBottom: 20 }]}>
-          <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-            <Text style={Styles.button}>Log in</Text>
-          </TouchableOpacity>
+          <CustomButton
+              buttonType={"blueButton"}
+              text={"Log in"}
+              onPress={handleSubmit(onSubmit)}
+          />
         </View>
 
         <View>
