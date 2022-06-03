@@ -11,7 +11,7 @@ function Warning(props) {
 
     const getUsername = (userid) => {
         try {
-            fetch("http://localhost/pma/PmaAPI/handlers/warning/warningUsernameFetch.php", {
+            fetch("https://inf1b.serverict.nl/handlers/warning/warningUsernameFetch.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",

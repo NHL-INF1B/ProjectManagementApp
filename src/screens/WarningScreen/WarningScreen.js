@@ -2,16 +2,20 @@ import {React, useEffect, useState} from 'react';
 import { View, SafeAreaView, FlatList } from 'react-native';
 import Warning from '../../components/Warning/Warning';
 import Styles from "./Styles";
+import { useRoute } from "@react-navigation/native";
 
 const WarningScreen = ({ navigation }) => {
+    const route = useRoute();
+    const projectId = route.params.projectId;
+
     const [warnings, setWarnings] = useState([]);
 
     useEffect(() => {
-        readData(1); //Hier moet de user komen die daadwerkelijk is meegestuurd
+        readData(projectId);
     }, []);
 
     const readData = (projectId) => {
-        fetch('http://localhost/pma/PmaAPI/handlers/warning/warninghandler.php', {
+        fetch('https://inf1b.serverict.nl/handlers/warning/warninghandler.php', {
             method: 'post',
             headers: {
                 Accept: 'application/json',

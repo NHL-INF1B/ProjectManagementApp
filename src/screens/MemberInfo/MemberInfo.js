@@ -15,16 +15,16 @@ const MemberInfo = () => {
   const [phoneNumber, setPhoneNumber] = useState("-");
   const [discord, setDiscord] = useState("-");
 
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("@member_data");
-  //     if (jsonValue !== null) {
-  //       return JSON.parse(jsonValue);
-  //     }
-  //   } catch (e) {
-  //     alert(e);
-  //   }
-  // };
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("@member_data");
+      if (jsonValue !== null) {
+        return JSON.parse(jsonValue);
+      }
+    } catch (e) {
+      alert(e);
+    }
+  };
 
   //get the data when you go on the page
   useEffect(() => {
@@ -36,7 +36,7 @@ const MemberInfo = () => {
   const getMemberInfo = (memberId) => {
     try {
       fetch(
-        "http://localhost/PMA/PmaAPI/handlers/memberInfoHandler/memberInfoHandler.php",
+        "https://inf1b.serverict.nl/handlers/memberInfoHandler/memberInfoHandler.php",
         {
           method: "POST",
           headers: {

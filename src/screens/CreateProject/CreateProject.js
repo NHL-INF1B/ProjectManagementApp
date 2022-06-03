@@ -18,7 +18,7 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
     });
     const onSubmit = (data) => {
       sendDataToAPI(data.name);
-      console.log(data);
+      // console.log(data.name);
     };
 
   //the things where the info goes in.
@@ -26,7 +26,7 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 
   const sendDataToAPI = (ProjectNaam) => {
     try {
-        fetch("http://localhost/pma/PmaAPI/handlers/createProject/createProjectHandler.php", {
+        fetch("https://inf1b.serverict.nl/handlers/createproject/createProjectHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -36,10 +36,10 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
                 name: ProjectNaam,
             }),
         })
-        .then((response) => response.json())
+        .then((response) => response.text())
         .then((response) => {
-            // console.log(response);
-            catchFeedback(response);
+            console.log(response);
+            alert('Project aangemaakt');
         });
     } catch (error) {
         alert(error);

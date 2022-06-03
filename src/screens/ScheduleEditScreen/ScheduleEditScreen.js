@@ -27,7 +27,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 
     const getScheduleData = (scheduleId) => {
 		try {
-			fetch("http://localhost/pma/PmaAPI/handlers/planning/planningEditFetch.php", {
+			fetch("https://inf1b.serverict.nl/handlers/planning/planningEditFetch.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -50,7 +50,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 
     const sendUpdateData = (data) => {
         try {
-			fetch("http://localhost/pma/PmaAPI/handlers/planning/planningEdit.php", {
+			fetch("https://inf1b.serverict.nl/handlers/planning/planningEdit.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -74,7 +74,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 
     const sendRemoveData = () => {
         try {
-			fetch("http://localhost/pma/PmaAPI/handlers/planning/planningDelete.php", {
+			fetch("https://inf1b.serverict.nl/handlers/planning/planningDelete.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
