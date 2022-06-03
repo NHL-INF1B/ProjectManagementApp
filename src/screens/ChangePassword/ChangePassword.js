@@ -1,11 +1,10 @@
 import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
-import { ScrollView, View, Text, SafeAreaView, Button, Image, TouchableOpacity, Pressable, Platform, Alert } from "react-native";
+import { View, SafeAreaView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ChangePassword = ({ route }) => {
     const { userId } = route.params;
