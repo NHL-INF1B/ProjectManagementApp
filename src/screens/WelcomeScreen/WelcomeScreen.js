@@ -42,7 +42,6 @@ const WelcomeScreen = ({ navigation }) => {
         });
     }, []);
 
-    // temp hardcode
     var projectId = null
 
     return (
