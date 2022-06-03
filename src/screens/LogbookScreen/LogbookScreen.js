@@ -15,6 +15,7 @@ export default function LogbookScreen(){
     const [logbook, setLogbook] = useState([]);
     const [role, setRole] = useState([]);
     const [name, setName] = useState();
+    const roleId = role.role_id;
 
     useEffect(() => {
         getLogbook(userId, projectId);
@@ -77,9 +78,15 @@ export default function LogbookScreen(){
         })
     }
 
+    if(roleId == 1 || roleId == 2){
+        var CenterGoTo = "LogbookScreen";
+    } else{
+        var CenterGoTo = "None";
+    }
+
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <Header GoToType="Edit" GoTo="HourEditScreen" CenterGoTo="None" ReturnType="Back" />
+            <Header GoToType="Edit" GoTo="HourEditScreen" CenterGoTo={CenterGoTo} ReturnType="Back" />
 
             <Text style={Styles.Title}>URENVERANTWOORDING</Text>
             <Text style={Styles.Name}>{name}</Text>

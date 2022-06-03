@@ -14,14 +14,14 @@ export default function Activity({ Name, Description, Date, Start, End, userId, 
             <Text style={Styles.ActivityDate}>{Date}</Text>
             <Text style={Styles.ActivityTimes}>{Start}</Text>
             <Text style={Styles.ActivityTimes}>{End}</Text>
-            <Pressable
+            {/* <Pressable
                 onPress={navigation.navigate("HourEditScreen",
                 {
                     projectId,
                     userId,
                 })}>
                 <MaterialCommunityIcons name="square-edit-outline" size={40} color="black" />
-            </Pressable>
+            </Pressable> */}
         </View>
     )
 }
