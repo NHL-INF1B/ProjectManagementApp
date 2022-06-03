@@ -41,7 +41,7 @@ export default function LogbookScreen(){
     };
 
     const getRole = (userId, projectId) => {
-        fetch("http://localhost/PMA/PmaAPI/handlers/logbook/getRoleHandler.php", {
+        fetch("http://localhost/PMA/PmaAPI/handlers/logbook/getRoleIdHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -79,17 +79,17 @@ export default function LogbookScreen(){
     }
 
     if(roleId == 1 || roleId == 2){
-        var CenterGoTo = "LogbookScreen";
+        var CenterGoTo = "SelectLogbookUser";
     } else{
         var CenterGoTo = "None";
     }
 
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <Header GoToType="Edit" GoTo="HourEditScreen" CenterGoTo={CenterGoTo} ReturnType="Back" />
+            <Header GoToType="Edit" GoTo="HourEditScreen" CenterGoTo={CenterGoTo} ReturnType="Back" projectId={projectId} userId={userId} />
 
             <Text style={Styles.Title}>URENVERANTWOORDING</Text>
-            <Text style={Styles.Name}>{name}</Text>
+            <Text style={Styles.Subtitle}>{name}</Text>
 
             <FlatList
                 data={logbook}
