@@ -8,15 +8,16 @@ import {
   Image,
   TouchableOpacity,
   Pressable,
+  BackHandler,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import { CommonActions } from "@react-navigation/native";
 
 const LoginScreen = ({ navigation }) => {
-  const navigatie = useNavigation();
 
   useEffect(() => {
     // removeValue(); //If you want to remove the stored data for testing
@@ -26,8 +27,10 @@ const LoginScreen = ({ navigation }) => {
         console.log(data);
         navigation.navigate("WelcomeScreen"); //Needs to go to welcomescreen
       }
-    });
+    });    
   }, []);
+
+  
 
   const [errorText, setErrorText] = useState("");
   const EMAIL_REGEX =
@@ -204,11 +207,11 @@ const LoginScreen = ({ navigation }) => {
           <Text>{errorText}</Text>
         </View>
 
-        <View style={[Styles.redirectContainer, { marginBottom: 20 }]}>
-          <CustomButton
-              buttonType={"blueButton"}
-              text={"Log in"}
-              onPress={handleSubmit(onSubmit)}
+        <View>
+          <CustomButton 
+            buttonType={"blueButton"}
+            text={"Log in"}
+            onPress={handleSubmit(onSubmit)}
           />
         </View>
 
