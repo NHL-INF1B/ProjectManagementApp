@@ -26,7 +26,6 @@ function PlanningTest(props) {
             // .then((response) => response.json())
             .then((response) => {
                 console.log(JSON.parse(response));
-                // ========================== Hier mag nog een functie komen voor het afhandelen van errors
                 setPlanning(JSON.parse(response));
             });
         } catch (error) {
