@@ -14,10 +14,8 @@ import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScr
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
 import ShowProjects from "./src/screens/ShowProjects/ShowProjects";
 import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
-import Profile from "./src/screens/Profile/Profile";
-import ViewMembersLogbook from "./src/screens/ViewMembersLogbook/ViewMembersLogbook";
 import LogbookScreen from "./src/screens/LogbookScreen/LogbookScreen";
-import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
+// import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 
 
@@ -83,10 +81,10 @@ export default function App() {
 					component={ViewMembersLogbook}
 				/>
 
-				<Stack.Screen
+				{/* <Stack.Screen
           			name="InviteMembers"
          		 	component={InviteMembers}
-        		/>
+        		/> */}
 
         		<Stack.Screen
           			name="MemberInfo"
