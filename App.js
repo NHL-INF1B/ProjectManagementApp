@@ -16,6 +16,10 @@ import ShowProjects from "./src/screens/ShowProjects/ShowProjects";
 import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
 import Profile from "./src/screens/Profile/Profile";
 import ViewMembersLogbook from "./src/screens/ViewMembersLogbook/ViewMembersLogbook";
+import LogbookScreen from "./src/screens/LogbookScreen/LogbookScreen";
+import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
+import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
+
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -24,8 +28,7 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-
-				{/* <Stack.Screen
+				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
 				/>
@@ -35,9 +38,9 @@ export default function App() {
 					component={RegisterScreen}
 				/>
 
-				<Stack.Screen
-					name="ProjectScreen"
-					component={ProjectScreen}
+				<Stack.Screen 
+					name="ChangePassword"
+					component={ChangePassword}
 				/>
 
 				<Stack.Screen
@@ -51,6 +54,11 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="ProjectScreen"
+					component={ProjectScreen}
+				/>
+
+				<Stack.Screen
 					name="ProfileScreen"
 					component={Profile}
 				/>
@@ -61,9 +69,14 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="CreateProject"
+					component={CreateProject}
+				/>
+
+				<Stack.Screen
 					name="WarningScreen"
 					component={WarningScreen}
-				/> */}
+				/>
 
 				<Stack.Screen
 					name="ViewMembersLogbook"
@@ -71,39 +84,20 @@ export default function App() {
 				/>
 
 				<Stack.Screen
-					name="TeamcodeScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="PlanningScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="LogbookScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="InviteScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="MemberScreen"
-					component={""}
-				/>
-
-				<Stack.Screen
-					name="ScoreScreen"
-					component={""}
-				/>
+          			name="InviteMembers"
+         		 	component={InviteMembers}
+        		/>
 
         		<Stack.Screen
           			name="MemberInfo"
          		 	component={MemberInfo}
         		/>
+
+				<Stack.Screen
+					name="LogbookScreen"
+					component={LogbookScreen}
+				/>
+				
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

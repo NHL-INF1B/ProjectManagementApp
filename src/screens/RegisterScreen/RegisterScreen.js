@@ -54,7 +54,7 @@ const RegisterScreen = ({ navigation }) => {
   ) => {
     try {
       fetch(
-        "http://localhost/PMA/PmaAPI/handlers/registration/registrationHandler.php",
+        "https://inf1b.serverict.nl/handlers/registration/registrationHandler.php",
         {
           method: "POST",
           headers: {
