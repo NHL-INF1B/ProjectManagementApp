@@ -1,6 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+    SafeAreaView: {
+		paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+		backgroundColor:  "#009BAA",
+		flex: 1,
+    },  
     root: {
       flex: 1,
       backgroundColor: '#009BAA',
@@ -85,5 +91,9 @@ export default StyleSheet.create({
     fileUpload: {
         width: "30%",
         justifyContent: "center",
+    },
+    pdf: {
+      flex: 1,
+      width: Dimensions.get('window').width,
     },
 });
