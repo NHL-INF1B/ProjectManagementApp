@@ -12,7 +12,8 @@ export default function ProjectScreen() {
     const projectId = route.params.projectId;
     const userId = route.params.userId;
     const [projectName, setProjectName] = useState("-");
-
+    const [roleId, setRoleId] = useState("6")
+    const [isVoorzitter, setVoorzitter] = useState(false);
 
     const getProjectData = (projectId) => {
         // console.log(projectId);
@@ -38,8 +39,36 @@ export default function ProjectScreen() {
 		}
 	};
 
+    const getRoleId = (userId) =>   {
+        try {
+			fetch("https://inf1b.serverict.nl/handlers/projectScreen/getRole.php", {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+                    userId: userId,
+				}),
+			})
+            // .then((response) => response.text())
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+                setRoleId(response[0].roleId);
+                console.log(response[0].roleId)
+                if(response[0].roleId == 1 || response[0].roleId == 2){
+                    setVoorzitter(true);
+                };
+            });
+		} catch (error) {
+			alert(error);
+		}
+    }
+
     useEffect(() => {
-        getProjectData(projectId);
+        getProjectData(projectId, userId);
+        getRoleId(userId);
       }, []);
     
     return (
@@ -66,17 +95,21 @@ export default function ProjectScreen() {
                     </View>
                     <View style={Styles.row}>
                         <View style={Styles.column}>
-                            <Tile text="Uitnodigingen" image="account-plus" screen="InviteMembers" projectId={projectId} userId={userId} />
-                        </View>
-                        <View style={Styles.column}>
                             <Tile text="Leden" image="account-group" screen="MemberScreen" projectId={projectId} userId={userId} />
                         </View>
-                    </View>
-                    <View style={Styles.row}>
                         <View style={Styles.column}>
                             <Tile text="Scorebord" image="star" screen="ScoreScreen" projectId={projectId} userId={userId} />
                         </View>
                     </View>
+                    {isVoorzitter ? (
+                        <View style={Styles.row}>
+                            <View style={Styles.column}>
+                                <Tile text="Uitnodigingen" image="account-plus" screen="InviteMembers" projectId={projectId} userId={userId} />
+                            </View>
+                        </View>
+                    ) : (
+                        <View style={Styles.row}></View>
+                    )}
                 </ScrollView>
             </SafeAreaView>
     );
