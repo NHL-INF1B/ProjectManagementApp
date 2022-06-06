@@ -39,7 +39,7 @@ const MemberScreen = () => {
     
     const route = useRoute();
     const projectId = route.params.projectId;
-    console.log(projectId);
+    console.log(projectId);  
 
     // const getData = async () => {
     //     try {
@@ -78,21 +78,33 @@ const MemberScreen = () => {
     // console.log(jsonValue);
 
     useEffect(() => {
-        const data = getDataFromAPI();
+        const data = getDataFromAPI(projectId);
             if (data !== undefined) {
                 setName(data["name"]),
                 setRoleId(data["role_id"]),
                 setUserId(data["user_id"]),
-                // setProjectId(route.params.projectId);
                 console.log(data);
                 console.log('name:', name, 'role_id:', roleId, 'user_id:', userId);
             };
             console.log('projectId:', projectId);
     }, []);
 
+
+    /*
+        Aan die php link in de onderstaande functie kun je 
+        
+        een GET meegeven
+        die kun je dan uitlezen in je getRolesHandler.php
+
+
+
+
+    */
+
     const getDataFromAPI = (projectId) => {
         try {
-            fetch("http://localhost/ReactNative/PmaAPI/handlers/roles/getRolesHandler.php", {
+            console.log(projectId);
+            fetch("https://inf1b.serverict.nl/handlers/roles/getRolesHandler.php?projectId=${encodeURIComponent(route.params.projectId)}", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",

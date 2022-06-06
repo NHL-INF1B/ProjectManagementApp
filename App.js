@@ -18,6 +18,7 @@ import Profile from "./src/screens/Profile/Profile";
 import LogbookScreen from "./src/screens/LogbookScreen/LogbookScreen";
 import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
+import MemberScreen from "./src/screens/MemberScreen/MemberScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -27,16 +28,6 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen
-					name="ProjectScreen"
-					component={ProjectScreen}
-				/>
-
-				<Stack.Screen
-					name="MemberScreen"
-					component={MemberScreen}
-				/>
-
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
@@ -53,6 +44,16 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="ProjectScreen"
+					component={ProjectScreen}
+				/>
+
+				<Stack.Screen
+					name="MemberScreen"
+					component={MemberScreen}
+				/>
+
+				<Stack.Screen
         		  name='WelcomeScreen'
 	        	  component={WelcomeScreen}
     	    	/>
@@ -60,11 +61,6 @@ export default function App() {
 				<Stack.Screen
 					name="ShowProjects"
 					component={ShowProjects}
-				/>
-
-				<Stack.Screen
-					name="ProjectScreen"
-					component={ProjectScreen}
 				/>
 
 				<Stack.Screen
