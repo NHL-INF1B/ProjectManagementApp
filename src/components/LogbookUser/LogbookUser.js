@@ -25,7 +25,7 @@ export default function LogbookUser({ projectId, userId, userName }){
 
 const Styles = StyleSheet.create({
     Container: {
-        minWidth: "95%",
+        minWidth: 343,
         minHeight: 97,
         margin: 10,
         backgroundColor: "white",
