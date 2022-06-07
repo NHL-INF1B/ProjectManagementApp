@@ -14,10 +14,12 @@ import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScr
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
 import ShowProjects from "./src/screens/ShowProjects/ShowProjects";
 import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
-import Profile from "./src/screens/Profile/Profile";
 import LogbookScreen from "./src/screens/LogbookScreen/LogbookScreen";
 import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
+import SelectLogbookUser from "./src/screens/LogbookScreen/SelectLogbookUser";
+import Profile from "./src/screens/Profile/Profile";
+
 import 'react-native-gesture-handler';
 import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOverzichtDev";
 
@@ -100,6 +102,16 @@ export default function App() {
 				<Stack.Screen
 					name="LogbookScreen"
 					component={LogbookScreen}
+				/>
+
+				<Stack.Screen
+					name="SelectLogbookUser"
+					component={SelectLogbookUser}
+				/>
+
+				<Stack.Screen
+					name="HourEditScreen"
+					component={HourEditScreen}
 				/>
 				
 			</Stack.Navigator>
