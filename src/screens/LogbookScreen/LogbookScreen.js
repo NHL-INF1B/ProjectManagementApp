@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './Styles';
 import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../../components/Header/Header';
 import Activity from '../../components/Activity/Activity';
 import { useRoute, useIsFocused } from "@react-navigation/native";
