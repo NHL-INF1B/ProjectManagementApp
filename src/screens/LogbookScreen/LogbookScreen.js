@@ -107,7 +107,7 @@ export default function LogbookScreen(){
                 data={logbook}
                 keyExtractor={(logbook) => logbook.id}
                 renderItem={({item}) =>
-                    <Activity Name={item.title} Description={item.description} Date={item.date} Start={item.time_start} End={item.time_end} userId={userId} projectId={projectId} />
+                    <Activity id={item.id} Name={item.title} Description={item.description} Date={item.date} Start={item.time_start} End={item.time_end} userId={userId} projectId={projectId} />
                 }
             />
         </SafeAreaView>

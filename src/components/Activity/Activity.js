@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
-export default function Activity({ Name, Description, Date, Start, End, userId, projectId }){
+export default function Activity({ id, Name, Description, Date, Start, End, userId, projectId }){
 
     const navigation = useNavigation();
 
@@ -20,16 +20,16 @@ export default function Activity({ Name, Description, Date, Start, End, userId, 
                 <Text style={Styles.ActivityDate}>{Date}</Text>
                 <Text style={Styles.ActivityTimes}>{Start}</Text>
                 <Text style={Styles.ActivityTimes}>{End}</Text>
-                <MaterialCommunityIcons name="square-edit-outline" size={35} color="black" />
-            </View>
-            {/* <Pressable
-                onPress={navigation.navigate("HourEditScreen",
+                <Pressable
+                onPress={() => navigation.navigate("HourEditScreen",
                 {
                     projectId,
                     userId,
+                    id,
                 })}>
-                <MaterialCommunityIcons name="square-edit-outline" size={40} color="black" />
-            </Pressable> */}
+                <MaterialCommunityIcons name="square-edit-outline" size={35} color="black" />
+            </Pressable>
+            </View>
         </View>
     )
 }
