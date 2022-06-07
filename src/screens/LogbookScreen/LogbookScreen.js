@@ -34,17 +34,6 @@ export default function LogbookScreen(){
         }
     }, [isFocused]);
 
-    const getData = async () => {
-        try {
-            const jsonValue = await AsyncStorage.getItem("@user_data");
-            if (jsonValue !== null) {
-               return JSON.parse(jsonValue);
-            }
-        } catch (e) {
-            alert(e);
-        }
-    };
-
     const getRole = (userId, projectId) => {
         fetch("http://localhost/PMA/PmaAPI/handlers/logbook/getRoleIdHandler.php", {
             method: "POST",
