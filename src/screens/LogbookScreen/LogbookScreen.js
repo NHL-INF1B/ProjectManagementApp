@@ -4,30 +4,35 @@ import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../../components/Header/Header';
 import Activity from '../../components/Activity/Activity';
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useIsFocused } from "@react-navigation/native";
 import { FlatList } from 'react-native-gesture-handler';
 
 export default function LogbookScreen(){
 
     const route = useRoute();
+    const isFocused = useIsFocused();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
+    const selectedUserId = route.params.selectedUserId;
+    const viewing = route.params.viewing;
     const [logbook, setLogbook] = useState([]);
     const [role, setRole] = useState([]);
-    const [name, setName] = useState();
+    const [userName, setUserName] = useState([]);
     const roleId = role.role_id;
+    const selectedUserName = userName.name;
 
     useEffect(() => {
-        getLogbook(userId, projectId);
+        
         getRole(userId, projectId);
         
-        const data = getData();
-        data.then((data) => {
-            if (data !== undefined) {
-                setName(data["name"]);
-            }
-        });
-    }, []);
+        if(viewing == "viewing"){
+            getUserName(selectedUserId);
+            getLogbook(selectedUserId, projectId);
+        } else{
+            getLogbook(userId, projectId);
+            getUserName(userId);
+        }
+    }, [isFocused]);
 
     const getData = async () => {
         try {
@@ -78,6 +83,24 @@ export default function LogbookScreen(){
         })
     }
 
+    const getUserName = (userId) => {
+        fetch("http://localhost/PMA/PmaAPI/handlers/logbook/getUserNameHandler.php", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId: userId,
+            }),
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            console.log(response);
+            setUserName(response);
+        })
+    }
+
     if(roleId == 1 || roleId == 2){
         var CenterGoTo = "SelectLogbookUser";
     } else{
@@ -89,7 +112,10 @@ export default function LogbookScreen(){
             <Header GoToType="Edit" GoTo="HourEditScreen" CenterGoTo={CenterGoTo} ReturnType="Back" projectId={projectId} userId={userId} />
 
             <Text style={Styles.Title}>URENVERANTWOORDING</Text>
-            <Text style={Styles.Subtitle}>{name}</Text>
+            <Text style={Styles.Subtitle}>{selectedUserName}</Text>
+            {/* <Text style={Styles.Subtitle}>{selectedUserId}</Text>
+            <Text>{userId}</Text>
+            <Text>{viewing}</Text> */}
 
             <FlatList
                 data={logbook}

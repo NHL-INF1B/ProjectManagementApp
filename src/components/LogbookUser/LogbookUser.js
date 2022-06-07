@@ -12,7 +12,8 @@ export default function LogbookUser({ projectId, userId, userName }){
             onPress={() =>
             navigation.navigate("LogbookScreen", {
                 projectId: projectId,
-                userId: userId,
+                selectedUserId: userId,
+                viewing: "viewing",
             })}>
             <View style={Styles.Container}>
                 <MaterialCommunityIcons name="account" size={90} color="black" />

@@ -53,8 +53,6 @@ export default function SelectLogbookUser(){
                     <LogbookUser projectId={projectId} userId={item.id} userName={item.name} />
             }
             />
-
-            <CustomButton buttonType="blueButton" text="INZIEN" />
         </SafeAreaView>
     )
 }
