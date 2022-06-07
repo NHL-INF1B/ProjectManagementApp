@@ -102,9 +102,6 @@ export default function LogbookScreen(){
 
             <Text style={Styles.Title}>URENVERANTWOORDING</Text>
             <Text style={Styles.Subtitle}>{selectedUserName}</Text>
-            {/* <Text style={Styles.Subtitle}>{selectedUserId}</Text>
-            <Text>{userId}</Text>
-            <Text>{viewing}</Text> */}
 
             <FlatList
                 data={logbook}
