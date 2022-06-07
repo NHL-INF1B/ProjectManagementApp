@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Styles from './Styles';
 import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
 import Header from '../../components/Header/Header';
+import Circle from "../../components/Circle/Circle";
 import Activity from '../../components/Activity/Activity';
 import { useRoute, useIsFocused } from "@react-navigation/native";
 import { FlatList } from 'react-native-gesture-handler';
@@ -98,6 +99,8 @@ export default function LogbookScreen(){
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType="Edit" GoTo="HourEditScreen" CenterGoTo={CenterGoTo} ReturnType="Back" projectId={projectId} userId={userId} />
+
+            <Circle name={"account-group"} size={60} color={"black"} style={[Styles.icon,]} />
 
             <Text style={Styles.Title}>URENVERANTWOORDING</Text>
             <Text style={Styles.Subtitle}>{selectedUserName}</Text>
