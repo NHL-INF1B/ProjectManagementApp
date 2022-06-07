@@ -52,5 +52,10 @@ export default StyleSheet.create({
 		fontSize: 30,
 		color: "white",
 		margin: 10,
-  }
+  },
+  errorText: {
+    textAlign: "center",
+    color: "red",
+    fontWeight: "bold",
+  },
 });

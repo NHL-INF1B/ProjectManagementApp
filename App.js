@@ -20,6 +20,8 @@ import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 import SelectLogbookUser from "./src/screens/LogbookScreen/SelectLogbookUser";
 import Profile from "./src/screens/Profile/Profile";
 
+import 'react-native-gesture-handler';
+import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOverzichtDev";
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -28,6 +30,11 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
+				<Stack.Screen
+					name="PlanningOverzichtDev"
+					component={PlanningOverzichtDev}
+				/>
+
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
@@ -45,7 +52,11 @@ export default function App() {
 
 				<Stack.Screen
         		  name='WelcomeScreen'
-	        	  component={WelcomeScreen}
+	        	  component={WelcomeScreen}	
+				  options={{
+					gestureEnabled: false,
+				  }}
+				  			  
     	    	/>
 				
 				<Stack.Screen
