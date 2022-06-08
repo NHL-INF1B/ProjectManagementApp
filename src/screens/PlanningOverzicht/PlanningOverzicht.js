@@ -15,7 +15,7 @@ const PlanningOverzicht = ({ navigation }) => {
   //   readData(3, 1, 'PvA concept');
   // }, []);
 
-  // const readData = (arr) => {
+  // const readData = (id, week, activiteit) => {
   //   fetch('http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/PlanningOverzichtHandler.php', {
   //     method: 'POST',
   //     headers: {
@@ -23,11 +23,14 @@ const PlanningOverzicht = ({ navigation }) => {
   //       'Content-Type': 'application/json'
   //     },
   //     body: JSON.stringify({
-  //       arr: arr,
+  //       id: id,
+  //       week: week,
+  //       activiteit: activiteit,
+
   //     }),
   //   })
-  //     .then((response) => response.json())
-  //     console.log(json);
+  //     // .then((response) => response.json())
+  //     // console.log(response);
   //     // .then((response) => {
   //       // return response;
   //       // console.log(response);
@@ -42,19 +45,22 @@ const PlanningOverzicht = ({ navigation }) => {
   //     // });
   // };
 
-  const readData = async () => {
-    const response = await fetch('http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/PlanningOverzichtHandler.php');
+  const test = async () => {
+    const response = await fetch('http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/PlanningOverzichtHandler.php'); 
     const json = await response.json();
-    return json;
-    
+    console.log(json);
+    return json;    
   }
+  
 
-  const renderItem = ({ week, data }) => {
-    return ([
-          { title: week, data: data },
-        ]
-    );
-  };
+  // const renderItem = ({ week, data }) => {
+  //   return ([
+  //         { title: week, data: data },
+  //       ]
+  //   );
+  // }; 
+  // console.log(renderItem);
+  
 
   // const renderItem = input.reduce(( week, data)=> {
   //   let activiteitGroup = week.find(x => x.activiteit === data.activiteit);
@@ -70,13 +76,13 @@ const PlanningOverzicht = ({ navigation }) => {
   // ];
   // console.log(responseData);
   // for (let i = 0; i < responseData.length; i++) {
-  //   // const element = array[i];
+    // const element = array[i];
 
 
   // }
 
   // const DATA = [
-  //     { responseData }
+  //     { }
   // ]
 
   // const x = {readData};
