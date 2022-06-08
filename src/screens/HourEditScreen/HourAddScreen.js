@@ -1,5 +1,5 @@
 import { ScrollView, View, SafeAreaView, Pressable, Text, Button } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
@@ -8,8 +8,32 @@ import { useForm, Controller } from "react-hook-form";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import * as Notifications from 'expo-notifications';
+import * as Device from 'expo-device';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
+
+  async function planNotification() {
+    Notifications.getAllScheduledNotificationsAsync();
+    await Notifications.cancelAllScheduledNotificationsAsync();
+    await schedulePushNotification();
+};
 
 const HourAddScreen = () => {
+
+    //notifactie toestemming vragen en alles
+    const [expoPushToken, setExpoPushToken] = useState('');
+    
+    useEffect(() => {
+        registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+}, []);
+
 
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
@@ -24,6 +48,7 @@ const HourAddScreen = () => {
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
   
     const submitData = (data) => {
+        planNotification();
         sendDataToAPI(data);
         alert("De gegevens zijn opgeslagen");
     };
@@ -34,6 +59,7 @@ const HourAddScreen = () => {
     }
 
     const timerStop = (data) => {
+        planNotification();
         stopTimer(data);
         alert("De timer is gestopt");
     }
@@ -436,5 +462,50 @@ const HourAddScreen = () => {
         </SafeAreaView>
     );
 }
+
+//set how the notifications looks and when it goes off.
+async function schedulePushNotification() {
+    const identifier = await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Project Management App",
+        body: 'Vergeet je logboek vandaag niet in te vullen!',
+      },
+      trigger: { seconds: 60 * 24 },
+    });
+    console.log(identifier);
+    return identifier;
+  }
+  
+  //ask for permission to give notifications
+  async function registerForPushNotificationsAsync() {
+    let token;
+    if (Device.isDevice) {
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+        alert('Failed to get push token for push notification!');
+        return;
+      }
+      token = (await Notifications.getExpoPushTokenAsync()).data;
+      console.log(token);
+    } else {
+      alert('Must use physical device for Push Notifications');
+    }
+  
+    if (Platform.OS === 'android') {
+      Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+      });
+    }
+  
+    return token;
+  }
 
 export default HourAddScreen;
