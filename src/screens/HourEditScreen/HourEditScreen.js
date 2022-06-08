@@ -10,10 +10,37 @@ import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 
 
 const HourEditScreen = ({navigation}) => {
-    const [isShowingDatePicker, setShowingDatePicker] = useState(false);
-    const [isShowingTimeStartPicker, setShowingTimeStartPicker] = useState(false);
-    const [isShowingTimeEndPicker, setShowingTimeEndPicker] = useState(false);
-    const [data, setData] = useState([]);
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isTimeStartPickerVisible, setTimeStartPickerVisibility] = useState(false);
+    const [isTimeStopPickerVisible, setTimeStopPickerVisibility] = useState(false);
+
+    const showTimeStartPicker = () => {
+        setTimeStartPickerVisibility(true);
+    };
+
+    const hideTimeStartPicker = () => {
+        setTimeStartPickerVisibility(false);
+    };
+
+    const showTimeStopPicker = () => {
+        setTimeStopPickerVisibility(true);
+    };
+
+    const hideTimeStopPicker = () => {
+        setTimeStopPickerVisibility(false);
+    };
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        hideDatePicker();
+    };
 
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
@@ -43,10 +70,6 @@ const HourEditScreen = ({navigation}) => {
         readData(id);
         alert("De gegevens zijn succesvol verwijderd");
     };
-    
-    const TimeStartConsole = (data) => {
-        console.log(data);
-    };
 
     //Selecting the data from the database based on id
     const readData = (id) => {
@@ -67,6 +90,7 @@ const HourEditScreen = ({navigation}) => {
             setValue("date", response.date);
             setValue("time_start", response.time_start);
             setValue("time_end", response.time_end);
+            catchFeedback(response);
         })
     };
 
@@ -91,6 +115,7 @@ const HourEditScreen = ({navigation}) => {
             .then((response) => response.json())
             .then((response) => {
                 console.log(response);
+                catchFeedback(response);
             });
         } catch (error) {
             alert(error);
@@ -113,6 +138,7 @@ const HourEditScreen = ({navigation}) => {
             .then((response) => response.text())
             .then((response) => {
                 console.log(response);
+                catchFeedback(response);
             });
         } catch (error) {
             alert(error);
@@ -122,10 +148,21 @@ const HourEditScreen = ({navigation}) => {
     const replaceAll = (string, search, replace) => {
         return string.split(search).join(replace);
     }
+
+    const catchFeedback = (response) => {
+        switch (response) {
+            case "data_updated":
+              alert("De gegevens zijn geüpdate");
+              break;
+            default:
+              console.log('Data not defined');
+              break;
+          }
+	};
     
     return (
         <SafeAreaView style={styles.SafeAreaView}>
-            <ScrollView style={styles.SafeAreaView}>
+            <ScrollView>
                 <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
                 <View style={styles.marginBottom5}>
                     <Circle name={"clipboard-text"} size={60} color={"#000000"} text={"Urenverantwoording\nBewerken"} />
@@ -180,7 +217,7 @@ const HourEditScreen = ({navigation}) => {
                 </View>
 
                 {/* Date */}
-                {isShowingDatePicker ? (
+                {isDatePickerVisible ? (
                     <View style={styles.marginContainer}>
                         <Controller
                             name="date"
@@ -224,7 +261,7 @@ const HourEditScreen = ({navigation}) => {
                                         <CustomTextInput
                                         placeholder="Kies een datum"
                                         placeholderTextColor="#707070"
-                                        onFocus={() => setShowingDatePicker(true)}
+                                        onFocus={() => setDatePickerVisibility(true)}
                                         onChangeText={(text) => onChange(text)}
                                         value={getValues("date")}
                                         errorText={errors?.date?.message}
@@ -235,130 +272,84 @@ const HourEditScreen = ({navigation}) => {
                             />
                         </Pressable>
                     </View>
-                )}
+                    )
+                }
 
-                {/* Time Start */}
-                {isShowingTimeStartPicker ? (
-                    <View style={styles.marginBottom1}>
-                        <Controller
-                            name="time_start"
-                            control={control}
-                            rules={{
-                                required: { value: true, message: 'Start tijd is verplicht' },
-                                pattern: {
-                                    message: 'Start tijd is incorrect'
-                                },
-                            }}
-                            render={({ field: { onChange, value } }) => (
-                                <DatePicker
-                                    style={{width:"70%", alignSelf: "center", borderWidth: 3, borderRadius: 10, borderColor: '#00AABB',}}
-                                    current={getValues("time_start")}
-                                    mode="time"
-                                    onPress={TimeStartConsole}
-                                />
-                            )}
-                        />
-                        {errors?.date?.message && (
-                            <Text style={styles.errorText}>{errors?.time_start?.message}</Text>
-                        )}
-                    </View>
-                ) : (
-                    <View style={styles.marginBottom1}>
-                        <Pressable>
-                            <Controller
-                                name="time_start"
-                                control={control}
-                                rules={{
-                                    required: { value: true, message: 'Start tijd is verplicht' },
-                                    pattern: {
-                                        value: DATE_REGEX,
-                                        message: 'Start tijd is incorrect'
-                                    },
-                                }}
-                                render={({ field: { onChange, value } }) => (
-                                    <View>
-                                        <CustomTextInput
-                                            placeholder="Kies een start tijd"
-                                            placeholderTextColor="#707070"
-                                            onFocus={() => setShowingTimeStartPicker(true)}
-                                            onChangeText={(text) => onChange(text)} 
-                                            value={getValues("time_start")}
-                                            errorText={errors?.time_start?.message}
-                                            titleText="Start tijd"
-                                        />
-                                    </View>
-                                )}
+                {/* Time start */}
+                <View>
+                    <Controller
+                        name="time_start"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Start tijd is verplicht' },
+                            pattern: {
+                                message: 'Start tijd is incorrect'
+                            },
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                        <View style={styles.marginBottom1}>
+                            <Text style={styles.subtitle}>START TIJD</Text>
+                            <CustomButton
+                                buttonType={"lightBlueButton"}
+                                buttonText={"buttonTextBlack"}
+                                text={"Kies een start tijd"}
+                                onPress={showTimeStartPicker}
                             />
-                        </Pressable>
-                    </View>
-                )}
+                                <DateTimePickerModal
+                                    isVisible={isTimeStartPickerVisible}
+                                    mode="time"
+                                    onConfirm={handleConfirm}
+                                    onCancel={hideTimeStartPicker}
+                                />
+                        </View>
+                        )}
+                    />   
+                </View>
 
                 {/* Time end */}
-                {isShowingTimeEndPicker ? (
-                    <View style={styles.marginBottom1}>
-                        <Controller
-                            name="time_end"
-                            control={control}
-                            rules={{
-                                required: { value: true, message: 'Eind tijd is verplicht' },
-                                pattern: {
-                                    value: DATE_REGEX,
-                                    message: 'Eind tijd is incorrect'
-                                },
-                            }}
-                            render={({ field: { onChange, value } }) => (
-                                <DatePicker
-                                    style={{width:"70%", alignSelf: "center", borderWidth: 3, borderRadius: 10, borderColor: '#00AABB',}}
-                                    current={getValues("time_end")}
-                                    mode="time"
-                                />
-                            )}
-                        />
-                        {errors?.time_end?.message && (
-                            <Text style={styles.errorText}>{errors?.time_end?.message}</Text>
-                        )}
-                    </View>
-                ) : (
-                    <View style={styles.marginBottom1}>
-                        <Pressable>
-                            <Controller
-                                name="time_end"
-                                control={control}
-                                rules={{
-                                    required: { value: true, message: 'Eind tijd is verplicht' },
-                                    pattern: {
-                                        message: 'Eind tijd is incorrect'
-                                    },
-                                }}
-                                render={({ field: { onChange, value } }) => (
-                                    <View>
-                                        <CustomTextInput
-                                            placeholder="Kies een Eind tijd"
-                                            placeholderTextColor="#707070"
-                                            onFocus={() => setShowingTimeEndPicker(true)}
-                                            onChangeText={(text) => onChange(text)} 
-                                            value={getValues("time_end")}
-                                            errorText={errors?.time_end?.message}
-                                            titleText="Eind tijd"
-                                        />
-                                    </View>
-                                )}
+                <View>
+                    <Controller
+                        name="time_end"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Eind tijd is verplicht' },
+                            pattern: {
+                                message: 'Eind tijd is incorrect'
+                            },
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                        <View style={styles.marginBottom1}>
+                            <Text style={styles.subtitle}>EIND TIJD</Text>
+                            <CustomButton
+                                buttonType={"lightBlueButton"}
+                                buttonText={"buttonTextBlack"}
+                                text={"Kies een eind tijd"}
+                                onPress={showTimeStopPicker}
                             />
-                        </Pressable>
-                    </View>
-                )}
+                            <DateTimePickerModal
+                                isVisible={isTimeStopPickerVisible}
+                                mode="time"
+                                onConfirm={handleConfirm}
+                                onCancel={hideTimeStopPicker}
+                            />
+                        </View>
+                        )}
+                    />   
+                </View>
 
                 <View style={styles.marginBottom1}>
                     <CustomButton 
                         buttonType={"blueButton"}
+                        buttonText={"buttonText"}
                         text={"Bewerken"}
                         onPress={handleSubmit(updateData)}
                     />
                 </View>
 
-                <View>
+                <View style={styles.marginBottom5}>
                     <CustomButton 
                         buttonType={"redButton"}
+                        buttonText={"buttonText"}
                         text={"Verwijderen"}
                         onPress={handleSubmit(deleteData)}
                     />

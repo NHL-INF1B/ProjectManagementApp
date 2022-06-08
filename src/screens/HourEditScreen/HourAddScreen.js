@@ -1,20 +1,45 @@
-import { Text, ScrollView, View, TextInput } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ScrollView, View, SafeAreaView, Pressable, Text, Button } from 'react-native';
 import React, { useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
-import CustomTextInputOld from '../../components/CustomTextInput/CustomTextInputOld';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import Header from '../../components/Header/Header';
+import { useForm, Controller } from "react-hook-form";
+import CustomButton from '../../components/CustomButton/CustomButton';
+import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const HourEditScreen = () => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [date, setDate] = useState('');
-    const [time_start, setTime_Start] = useState('');
-    const [time_end, setTime_End] = useState('');
+const HourAddScreen = () => {
+
+    const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
+        defaultValues: {
+            title: "",
+            description: "",
+            date: "",
+            time_start: "",
+            time_end: "",
+        }
+    });
+
+    const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
   
-    const sendDataToAPI = (title, description, date, time_start, time_end) => {
+    const submitData = (data) => {
+        sendDataToAPI(data);
+        alert("De gegevens zijn opgeslagen");
+    };
+
+    const timerStarter = (data) => {
+        startTimer(data);
+        alert("De timer is gestart");
+    }
+
+    const timerStop = (data) => {
+        stopTimer(data);
+        alert("De timer is gestopt");
+    }
+
+    //Inserting the data into the database
+    const sendDataToAPI = (data) => {
         try {
             fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditInsertHandler.php", {
                 method: "POST",
@@ -23,29 +48,31 @@ const HourEditScreen = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    title: title,
-                    description: description,
-                    date: date,
-                    time_start: time_start,
-                    time_end: time_end,
+                    title: data.title,
+                    description: data.description,
+                    date: data.date,
+                    time_start: data.time_start,
+                    time_end: data.time_end,
                 }),
             })
             .then((response) => response.json())
             .then((response) => {
                 console.log(response);
-                // catchFeedback(response);
+                setValue("title", response.title);
+                setValue("description", response.description);
+                setValue("date", response.date);
+                setValue("time_start", response.time_start);
+                setValue("time_end", response.time_end);
+                catchFeedback(response);
             });
         } catch (error) {
             alert(error);
         }
     };
+
     //Saves the current timestamp & inserts it into the database as the start_time along with the other data via the handler file
-    const startTimer = (title, description) => {
+    const startTimer = (data) => {
         try {
-            let today = new Date();
-            let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            setDate(date);
-            let time_start = new Date().toLocaleString();
             fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditStartHandler.php", {
                 method: "POST",
                 headers: {
@@ -53,98 +80,361 @@ const HourEditScreen = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    title: title,
-                    description: description,
-                    date: date,
-                    time_start: time_start,
-                    time_end: time_end,
+                    title: data.title,
+                    description: data.description,
+                    date: data.date,
+                    time_start: data.time_start,
+                    time_end: data.time_end,
                 }),
             })
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((response) => {
                 console.log(response);
-                // catchFeedback(response);
+                setValue("title", response.title);
+                setValue("description", response.description);
+                setValue("date", response.date);
+                setValue("time_start", response.time_start);
+                setValue("time_end", response.time_end);
+                catchFeedback(response);
             });
         } catch (error) {
             alert(error);
         }
     };
+
     //Saves the current timestamp & updates it into the database as the end_time via the handler file
-    const stopTimer = (title, description) => {
+    const stopTimer = (data) => {
         try {
-            let time_end = new Date();
             fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditStopHandler.php", {
                 method: "POST",
                 headers: {
-                    "Accept": "application/json",
+                    Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    title: title,
-                    description: description,
-                    date: date,
-                    time_end: time_end,
+                    id: data.id,
+                    title: data.title,
+                    description: data.description,
+                    date: data.date,
+                    time_start: data.time_start,
+                    time_end: data.time_end,
                 }),
             })
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((response) => {
                 console.log(response);
-                // catchFeedback(response);
+                catchFeedback(response);
             });
         } catch (error) {
             alert(error);
         }
     };
 
+    const replaceAll = (string, search, replace) => {
+        return string.split(search).join(replace);
+    }
+
+    const catchFeedback = (response) => {
+        switch (response) {
+            case "data_updated":
+              alert("De gegevens zijn geüpdate");
+              break;
+            default:
+              console.log('Data not defined');
+              break;
+          }
+	};
+
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isTimeStartPickerVisible, setTimeStartPickerVisibility] = useState(false);
+    const [isTimeStopPickerVisible, setTimeStopPickerVisibility] = useState(false);
+
+    const showTimeStartPicker = () => {
+        setTimeStartPickerVisibility(true);
+    };
+
+    const hideTimeStartPicker = () => {
+        setTimeStartPickerVisibility(false);
+    };
+
+    const showTimeStopPicker = () => {
+        setTimeStopPickerVisibility(true);
+    };
+
+    const hideTimeStopPicker = () => {
+        setTimeStopPickerVisibility(false);
+    };
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        hideDatePicker();
+    };
+
     return (
-        <ScrollView style={styles.root}>
-            <MaterialCommunityIcons style={styles.arrow}  name="arrow-left" size={60} color={'black'} />
-            <Circle name={"clipboard-text"} size={60} color={"#000000"} style={styles.icon} />
-            <Text style={[styles.title, styles.marginBottom5]}>Urenverantwoording{"\n"}Toevoegen</Text>
-            <Text style={styles.subtitle}>Activiteit</Text>
-            <CustomTextInputOld placeholder="Activiteit" value={title} setValue={setTitle} />
-            <Text style={styles.subtitle}>Beschrijving</Text>
-            <CustomTextInputOld placeholder="Beschrijving" value={description} setValue={setDescription} />
-            <Text style={styles.subtitle}>Datum</Text>
-            <CustomTextInputOld placeholder="Datum" value={date} setValue={setDate} />
-            <Text style={styles.subtitle}>Start Tijd</Text>
-            <CustomTextInputOld placeholder="Start Tijd" value={time_start} setValue={setTime_Start} />
-            <Text style={styles.subtitle}>Eind Tijd</Text>
-            <CustomTextInputOld style={styles.marginBottom5} placeholder="Eind Tijd" value={time_end} setValue={setTime_End} />
-            <View style={styles.marginBottom1}></View>
-            <TouchableOpacity 
-                style={[styles.button, styles.buttonBlue]} 
-                onPress={() => sendDataToAPI(title, description, date, time_start, time_end, "user_id", "project_id")}
-                activeOpacity={0.6}>
-                <Text>TOEVOEGEN</Text>
-            </TouchableOpacity>
-            <View style={styles.marginBottom5}></View>
-            <Circle name={"timer"} size={60} color={"#000000"} style={styles.icon} />
-            <Text style={[styles.title, styles.marginBottom5]}>Timer</Text>
-            <Text style={styles.subtitle}>Activiteit</Text>
-            <CustomTextInputOld placeholder="Activiteit" value={title} setValue={setTitle} />
-            <Text style={styles.subtitle}>Beschrijving</Text>
-            <CustomTextInputOld placeholder="Beschrijving" value={description} setValue={setDescription} />
-            <View style={styles.marginBottom1}></View>
-            <TouchableOpacity 
-                style={[styles.button, styles.buttonGreen]} 
-                onPress={() => startTimer(title, description, date, time_start)}
-                activeOpacity={0.6}>
-                <Text>START</Text>
-            </TouchableOpacity>
-            <View style={styles.marginBottom1}></View>
-            <TouchableOpacity 
-                style={[styles.button, styles.buttonRed]} 
-                onPress={() => stopTimer(title, description, date, time_end)}
-                activeOpacity={0.6}>
-                <Text styles={styles.subtitle}>STOP</Text>
-            </TouchableOpacity>
-            <View style={styles.marginBottom1}></View>
-        </ScrollView>
+        <SafeAreaView style={styles.SafeAreaView}>
+            <ScrollView style={styles.SafeAreaView}>
+                <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
+                <View style={styles.marginBottom5}>
+                    <Circle name={"clipboard-text"} size={60} color={"#000000"} text={"Urenverantwoording\nToevoegen"} />
+                </View>
+
+                {/* Title */}
+                <View style={styles.marginBottom1}>
+                    <Controller
+                        name="title"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Activiteit is verplicht' },
+                            maxLength: {
+                                value: 50,
+                                message: 'Maximaal 50 tekens lang',
+                            }
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <CustomTextInput 
+                                placeholder="Activiteit" 
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                errorText={errors?.title?.message} 
+                                titleText="Activiteit"
+                            />
+                        )}
+                    />
+                </View>
+
+                {/* Description */}
+                <View style={styles.marginBottom1}>
+                    <Controller
+                        name="description"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Beschrijving is verplicht' },
+                            maxLength: {
+                                value: 50,
+                                message: 'Maximaal 50 tekens lang',
+                            }
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <CustomTextInput 
+                                placeholder="Beschrijving" 
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                errorText={errors?.description?.message} 
+                                titleText="Beschrijving"
+                            />
+                        )}
+                    />
+                </View>
+
+                {/* Date */}
+                {isDatePickerVisible ? (
+                    <View style={styles.marginContainer}>
+                        <Controller
+                            name="date"
+                            control={control}
+                            rules={{
+                                required: { value: true, message: 'Datum is verplicht' },
+                                pattern: {
+                                    value: DATE_REGEX,
+                                    message: 'Datum is incorrect'
+                                },
+                            }}
+                            render={({ field: { onChange, value } }) => (
+                                <DatePicker
+                                    style={{width:"70%", alignSelf: "center", borderWidth: 3, borderRadius: 10, borderColor: '#00AABB',}}
+                                    onSelectedChange={date => onChange(replaceAll(date, "/", "-"))}
+                                    current={getValues("date")}
+                                    mode="calendar"
+                                    maximumDate={new Date().toJSON().slice(0,10).replace(/-/g,'/')}
+                                />
+                            )}
+                        />
+                        {errors?.date?.message && (
+                            <Text style={styles.errorText}>{errors?.date?.message}</Text>
+                        )}
+                    </View>
+                ) : (
+                    <View style={styles.marginContainer}>
+                        <Pressable>
+                            <Controller
+                                name="date"
+                                control={control}
+                                rules={{
+                                    required: { value: true, message: 'Datum is verplicht' },
+                                    pattern: {
+                                        value: DATE_REGEX,
+                                        message: 'Datum is incorrect'
+                                    },
+                                }}
+                                render={({ field: { onChange, value } }) => (
+                                    <View>
+                                        <CustomTextInput
+                                        placeholder="Kies een datum"
+                                        placeholderTextColor="#707070"
+                                        onFocus={() => setDatePickerVisibility(true)}
+                                        onChangeText={(text) => onChange(text)}
+                                        value={getValues("date")}
+                                        errorText={errors?.date?.message}
+                                        titleText="Datum"
+                                        />
+                                    </View>
+                                )}
+                            />
+                        </Pressable>
+                    </View>
+                    )
+                }
+
+                {/* Time start */}
+                <View>
+                    <Controller
+                        name="time_start"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Start tijd is verplicht' },
+                            pattern: {
+                                message: 'Start tijd is incorrect'
+                            },
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                        <View style={styles.marginBottom1}>
+                            <Text style={styles.subtitle}>START TIJD</Text>
+                            <CustomButton
+                                buttonType={"lightBlueButton"}
+                                buttonText={"buttonTextBlack"}
+                                text={"Kies een start tijd"}
+                                onPress={showTimeStartPicker}
+                            />
+                                <DateTimePickerModal
+                                    isVisible={isTimeStartPickerVisible}
+                                    mode="time"
+                                    onConfirm={handleConfirm}
+                                    onCancel={hideTimeStartPicker}
+                                />
+                        </View>
+                        )}
+                    />   
+                </View>
+
+                {/* Time end */}
+                <View>
+                    <Controller
+                        name="time_end"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Eind tijd is verplicht' },
+                            pattern: {
+                                message: 'Eind tijd is incorrect'
+                            },
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                        <View style={styles.marginBottom1}>
+                            <Text style={styles.subtitle}>EIND TIJD</Text>
+                            <CustomButton
+                                buttonType={"lightBlueButton"}
+                                buttonText={"buttonTextBlack"}
+                                text={"Kies een eind tijd"}
+                                onPress={showTimeStopPicker}
+                            />
+                                <DateTimePickerModal
+                                    isVisible={isTimeStopPickerVisible}
+                                    mode="time"
+                                    onConfirm={handleConfirm}
+                                    onCancel={hideTimeStopPicker}
+                                />
+                        </View>
+                        )}
+                    />   
+                </View>
+
+                <View style={styles.marginBottom5}>
+                    <CustomButton 
+                        buttonType={"blueButton"}
+                        buttonText={"buttonText"}
+                        text={"Toevoegen"}
+                        onPress={handleSubmit(submitData)}
+                    />
+                </View>
+
+                <View style={styles.marginBottom5}>
+                    <Circle name={"timer"} size={60} color={"black"} text={"Timer"} />
+                </View>
+
+                {/* Title */}
+                <View style={styles.marginBottom1}>
+                    <Controller
+                        name="title"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Activiteit is verplicht' },
+                            maxLength: {
+                                value: 50,
+                                message: 'Maximaal 50 tekens lang',
+                            }
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <CustomTextInput 
+                                placeholder="Activiteit" 
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                errorText={errors?.title?.message} 
+                                titleText="Activiteit"
+                            />
+                        )}
+                    />
+                </View>
+
+                {/* Description */}
+                <View style={styles.marginBottom1}>
+                    <Controller
+                        name="description"
+                        control={control}
+                        rules={{
+                            required: { value: true, message: 'Beschrijving is verplicht' },
+                            maxLength: {
+                                value: 50,
+                                message: 'Maximaal 50 tekens lang',
+                            }
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <CustomTextInput 
+                                placeholder="Beschrijving" 
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                errorText={errors?.description?.message} 
+                                titleText="Beschrijving"
+                            />
+                        )}
+                    />
+                </View>
+
+                <View style={styles.marginBottom1}>
+                    <CustomButton 
+                        buttonType={"greenButton"}
+                        buttonText={"buttonText"}
+                        text={"Start"}
+                        onPress={handleSubmit(timerStarter)}
+                    />
+                </View>
+
+                <View style={styles.marginBottom1}>
+                    <CustomButton 
+                        buttonType={"redButton"}
+                        buttonText={"buttonText"}
+                        text={"Stop"}
+                        onPress={handleSubmit(timerStop)}
+                    />
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
-export default HourEditScreen;
-  
-
-
+export default HourAddScreen;

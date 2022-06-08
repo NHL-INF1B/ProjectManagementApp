@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         textAlign: 'center',
         borderWidth: 1,
-        borderColor: '#009BAA',
         padding: '0.4%',
         width: '50%',
         backgroundColor: 'white',

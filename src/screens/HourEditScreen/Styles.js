@@ -1,8 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform, StatusBar } from "react-native";
 
 export default StyleSheet.create({
-    root: {
-      backgroundColor: '#009BAA',
+    SafeAreaView: {
+      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      backgroundColor: "#009BAA",
+      flex: 1,
     },
     icon: {
       alignSelf: 'center',
@@ -20,26 +22,8 @@ export default StyleSheet.create({
       color: 'white',
       fontWeight: 'bold',
     },
-    button: {
-      width: '50%',
-      textAlign: 'center',
-      padding: '.5%',
-      color: 'white',
-      fontWeight: 'bold',
-      borderRadius: 5,
-      alignSelf: 'center',
-    },
-    buttonBlue: {
-      backgroundColor: '#005AAA',
-      borderColor: '#066BC9',
-    },
-    buttonGreen: {
-      backgroundColor: 'green',
-      borderColor: '#008528',
-    },
-    buttonRed: {
-      backgroundColor: 'red',
-      borderColor: '#CB0005',
+    blackText: {
+      color: 'black',
     },
     arrow: {
       textAlign: 'right',
