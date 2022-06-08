@@ -39,11 +39,15 @@ const TeamcodeToevoegen = () => {
   }
 
   const postDocument = (data) => {
-    // console.log(data);
-    // console.log(data.uri);
+    console.log(data);
+    console.log(data.uri);
+    const fileUri = data.uri;
+    const formData = new FormData();
+    formData.append('document', data);
+    console.log(formData);
 
     try {
-      fetch("http://localhost/pma/PmaAPI/handlers/teamcode/teamcodeAdd.php", {
+      fetch("http://localhost/PMA/PmaAPI/handlers/teamcode/teamcodeAdd.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
