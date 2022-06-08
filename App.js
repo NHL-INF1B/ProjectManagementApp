@@ -1,7 +1,4 @@
-import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import {React, useEffect} from "react";
-import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import HourAddScreen from "./src/screens/HourEditScreen/HourAddScreen";
 import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
 import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
@@ -17,7 +14,6 @@ import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
 import ShowProjects from "./src/screens/ShowProjects/ShowProjects";
-import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
 import LogbookScreen from "./src/screens/LogbookScreen/LogbookScreen";
 import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
@@ -32,26 +28,6 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen
-					name="HourEditScreen"
-					component={HourEditScreen}
-				/>
-				
-				<Stack.Screen
-					name="HourAddScreen"
-					component={HourAddScreen}
-				/>
-				
-
-				<Stack.Screen
-					name="WarningEditScreen"
-					component={WarningEditScreen}
-				/>
-
-				<Stack.Screen
-					name="RegisterScreen"
-					component={RegisterScreen}
-				/>
 
 				<Stack.Screen
 					name="LoginScreen"
@@ -130,6 +106,22 @@ export default function App() {
 				<Stack.Screen
 					name="HourEditScreen"
 					component={HourEditScreen}
+				/>
+				
+				<Stack.Screen
+				name="PlanningOverzichtDev"
+				component={PlanningOverzichtDev}
+				/>
+				
+				<Stack.Screen
+					name="HourAddScreen"
+					component={HourAddScreen}
+				/>
+				
+
+				<Stack.Screen
+					name="WarningEditScreen"
+					component={WarningEditScreen}
 				/>
 				
 			</Stack.Navigator>

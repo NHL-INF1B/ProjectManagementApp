@@ -5,10 +5,11 @@ import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
+import Header from "../../components/Header/Header";
 
 const ChangePassword = ({ route }) => {
     //get the userId from the last page.
-    const { userId } = route.params;
+    const { userId, projectId } = route.params;
 
     //regex to check if the password is safe
     const PASS_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,254}$/;
@@ -79,6 +80,7 @@ const ChangePassword = ({ route }) => {
 
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
             <View style={Styles.head}>
                     <Circle name={"account"} size={80} color={"black"} text={"Wachtwoord veranderen"} />
             </View>

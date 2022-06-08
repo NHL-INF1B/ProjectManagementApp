@@ -8,6 +8,7 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import QRCode from 'react-native-qrcode-svg';
 import styles from "./styles";
 import Circle from "../../components/Circle/Circle";
+import Header from "../../components/Header/Header";
 
 
 const InviteMembers = ({route}) => {
@@ -24,7 +25,7 @@ const InviteMembers = ({route}) => {
   //regex to check if the email is valid
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   //to get the projectId from the projectpage.
-  const { projectId } = route.params;
+  const { projectId, userId } = route.params;
 
   //does its thing when you open the page
   useEffect(() => {
@@ -105,6 +106,7 @@ const InviteMembers = ({route}) => {
 
   return (
     <SafeAreaView style={Styles.SafeAreaView}>
+      <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
       <View>
         <Circle name={"send"} size={50} color={"black"} text={"Uitnodigingen"} />
       </View>

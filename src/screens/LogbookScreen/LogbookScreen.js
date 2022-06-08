@@ -35,7 +35,7 @@ export default function LogbookScreen(){
     }, [isFocused]);
 
     const getRole = (userId, projectId) => {
-        fetch("http://localhost/PMA/PmaAPI/handlers/logbook/getRoleIdHandler.php", {
+        fetch("http://localhost/PMA/PmaAPI/handlers/permissions/getRoleIdHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",

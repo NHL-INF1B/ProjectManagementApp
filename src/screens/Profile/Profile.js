@@ -8,11 +8,15 @@ import Circle from "../../components/Circle/Circle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import ChangePassword from "../ChangePassword/ChangePassword";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import Header from "../../components/Header/Header";
 
 const Profile = ({ navigation }) => {
     const [isShowingDatePicker, setShowingDatePicker] = useState(false);
     const [userid, setUserId] = useState("");
+
+    const route = useRoute();
+    const projectId = route.params.projectId;
 
     const NUMMERIC_REGEX = /^[0-9]*$/;
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -125,6 +129,8 @@ const Profile = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userid} />
+
             <View style={Styles.head}>
                 <View>
                     <Circle name={"account"} size={80} color={"black"} text={"Profiel bewerken"} />
