@@ -12,9 +12,10 @@ export default StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 25,
   },
-  Name: {
+  Subtitle: {
       fontWeight: "bold",
       color: "#FFFFFF",
       fontSize: 20,
+      marginBottom: 40,
   }
 });
