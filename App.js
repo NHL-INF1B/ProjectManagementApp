@@ -30,10 +30,6 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen
-					name="PlanningOverzichtDev"
-					component={PlanningOverzichtDev}
-				/>
 
 				<Stack.Screen
 					name="LoginScreen"
@@ -112,6 +108,11 @@ export default function App() {
 				<Stack.Screen
 					name="HourEditScreen"
 					component={HourEditScreen}
+				/>
+				
+				<Stack.Screen
+				name="PlanningOverzichtDev"
+				component={PlanningOverzichtDev}
 				/>
 				
 			</Stack.Navigator>

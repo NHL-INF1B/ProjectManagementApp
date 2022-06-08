@@ -8,10 +8,16 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/Header/Header';
+import {useRoute} from "@react-navigation/native";
 
 const CreateProject = ({ navigation }) => {
   const NAME_REGEX = /^[a-zA-Z0-9 ]{3,30}$/;
   const [userId, setUserId] = useState("");
+
+  const route = useRoute();
+  const projectId = route.params.projectId;
+  
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
@@ -72,6 +78,7 @@ const CreateProject = ({ navigation }) => {
   //the screen
   return (
     <SafeAreaView style={styles.SafeAreaView}>
+      <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
       <ScrollView style={styles.root}>
         <View style={styles.div}>
           <Circle name={"account-group"} size={60} color={"black"} style={[styles.icon,]} />
