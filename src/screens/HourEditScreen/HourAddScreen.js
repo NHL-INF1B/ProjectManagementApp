@@ -27,8 +27,9 @@ Notifications.setNotificationHandler({
 
 const HourAddScreen = () => {
 
-    //notifactie toestemming vragen en alles
+    //notificatie toestemming vragen en alles
     const [expoPushToken, setExpoPushToken] = useState('');
+    const userId = 2;
     
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
@@ -202,6 +203,27 @@ const HourAddScreen = () => {
     const handleConfirm = (date) => {
         hideDatePicker();
     };
+
+    const addPoints = (userId) => {
+      try {
+        fetch("http://localhost/pma/PmaAPI/handlers/AddPoints/AddPoints.php", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+          userId: userId,
+          }),
+        })
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+        });
+      } catch (error) {
+        alert(error);
+      }
+    }
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
@@ -385,7 +407,7 @@ const HourAddScreen = () => {
                         buttonType={"blueButton"}
                         buttonText={"buttonText"}
                         text={"Toevoegen"}
-                        onPress={handleSubmit(submitData)}
+                        onPress={() => addPoints(userId)}
                     />
                 </View>
 

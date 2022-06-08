@@ -360,6 +360,3 @@ const HourEditScreen = ({navigation}) => {
 }
 
 export default HourEditScreen;
-  
-
-
