@@ -300,6 +300,7 @@ const Profile = ({ navigation }) => {
                     <View style={Styles.marginContainer}>
                         <CustomButton 
                             buttonType={"blueButton"}
+                            buttonText={"buttonText"}
                             text={"Aanpassen"}
                             onPress={handleSubmit(submitData)}
                         />

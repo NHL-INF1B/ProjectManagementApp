@@ -40,10 +40,9 @@ export default function SelectLogbookUser(){
     return(
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-
-            <Circle name={"clipboard-text"} size={60} color={"#009BAA"} />
-
-            <Text style={Styles.Title}>URENVERANTWOORDING INZIEN</Text>
+            <View>
+                <Circle name={"clipboard-text"} size={60} color={"#009BAA"} text={"Urenverantwoording\nInzien"} />
+            </View>
             <Text style={Styles.Subtitle}>Projectleden</Text>
 
             <FlatList

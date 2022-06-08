@@ -164,6 +164,7 @@ const ChangePassword = ({ route }) => {
                 <View style={Styles.marginContainer}>
                     <CustomButton 
                         buttonType={"blueButton"}
+                        buttonText={"buttonText"}
                         text={"Verander Wachtwoord"}
                         onPress={handleSubmit(submitData)}
                     />
