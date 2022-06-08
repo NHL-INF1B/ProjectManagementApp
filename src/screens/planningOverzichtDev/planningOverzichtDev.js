@@ -20,7 +20,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
     const getUserData = (projectid) => {
         // console.log(projectid);
 		try {
-			fetch("http://localhost/pma/PmaAPI/handlers/planning/planningOverzicht.php", {
+			fetch("http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/planningOverzicht.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -52,7 +52,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
         });
 
         var _data = Object.values(filter_data);
-        // console.log(_data);
+        console.log(_data);
 
         return _data;
     }
