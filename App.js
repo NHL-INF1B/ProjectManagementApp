@@ -1,14 +1,18 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, Image, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
+import {React, useEffect} from "react";
+import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
+import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
+import HourAddScreen from "./src/screens/HourEditScreen/HourAddScreen";
+import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
+import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
+import WarningaddScreen from "./src/screens/WarningScreen/WarningAddScreen";
+import WarningEditScreen from "./src/screens/WarningScreen/WarningEditScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import CreateProject from "./src/screens/CreateProject/CreateProject";
-import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
@@ -19,8 +23,6 @@ import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 import SelectLogbookUser from "./src/screens/LogbookScreen/SelectLogbookUser";
 import Profile from "./src/screens/Profile/Profile";
-
-import 'react-native-gesture-handler';
 import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOverzichtDev";
 
 const Stack = createNativeStackNavigator();
@@ -31,8 +33,24 @@ export default function App() {
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen
-					name="PlanningOverzichtDev"
-					component={PlanningOverzichtDev}
+					name="HourEditScreen"
+					component={HourEditScreen}
+				/>
+				
+				<Stack.Screen
+					name="HourAddScreen"
+					component={HourAddScreen}
+				/>
+				
+
+				<Stack.Screen
+					name="WarningEditScreen"
+					component={WarningEditScreen}
+				/>
+
+				<Stack.Screen
+					name="RegisterScreen"
+					component={RegisterScreen}
 				/>
 
 				<Stack.Screen
