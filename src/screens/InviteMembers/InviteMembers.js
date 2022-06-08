@@ -136,6 +136,7 @@ const InviteMembers = ({route}) => {
       <View>
         <CustomButton 
           buttonType={"blueButton"}
+          buttonText={"buttonText"}
           text={"Uitnodigen"}
           onPress={handleSubmit(onSubmit)}
         />
@@ -152,6 +153,7 @@ const InviteMembers = ({route}) => {
       <View>
         <CustomButton 
           buttonType={"redButton"}
+          buttonText={"buttonText"}
           text={"Nieuwe Qr-code"}
           onPress={() => generateNewCode(projectId)}
         />
