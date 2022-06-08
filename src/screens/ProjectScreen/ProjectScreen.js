@@ -18,7 +18,7 @@ export default function ProjectScreen() {
     const getProjectData = (projectId) => {
         // console.log(projectId);
 		try {
-			fetch("https://inf1b.serverict.nl/handlers/projectScreen/projectScreen.php", {
+			fetch("http://localhost/PMA/PmaAPI/handlers/projectScreen/projectScreen.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -41,7 +41,7 @@ export default function ProjectScreen() {
 
     const getRoleId = (userId) =>   {
         try {
-			fetch("https://inf1b.serverict.nl/handlers/projectScreen/getRole.php", {
+			fetch("http://localhost/PMA/PmaAPI/handlers/projectScreen/getRole.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",

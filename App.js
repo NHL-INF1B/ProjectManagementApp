@@ -112,11 +112,6 @@ export default function App() {
 				name="PlanningOverzichtDev"
 				component={PlanningOverzichtDev}
 				/>
-
-				<Stack.Screen
-					name="HourEditScreen"
-					component={HourEditScreen}
-				/>
 				
 				<Stack.Screen
 					name="HourAddScreen"
