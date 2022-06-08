@@ -17,6 +17,9 @@ import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 import SelectLogbookUser from "./src/screens/LogbookScreen/SelectLogbookUser";
 import Profile from "./src/screens/Profile/Profile";
 import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOverzichtDev";
+import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
+import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
+
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
