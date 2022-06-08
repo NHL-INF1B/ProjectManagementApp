@@ -1,115 +1,80 @@
-import React from 'react';
-import { Text, View, SafeAreaView, SectionList } from 'react-native';
-import { useEffect, useState } from 'react';
-// import { FlatList } from 'react-native-gesture-handler';
-// import PlanningComp from '../../components/PlanningComp/PlanningComp';
-// import Planning from '../Planning/Planning';
+import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
-import { set } from 'react-native-reanimated';
-import Planning from '../Planning/Planning';
+import { ScrollView, View, Text, SafeAreaView, Button, Image, TouchableOpacity, Pressable, Platform, Alert, SectionList } from "react-native";
+import { useForm, Controller } from "react-hook-form";
+import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import Circle from "../../components/Circle/Circle";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+// import ChangePassword from "../ChangePassword/ChangePassword";
+import { useNavigation } from '@react-navigation/native';
 
 const PlanningOverzicht = ({ navigation }) => {
-  // const [plannings, setPlannings] = useState([]);
+    const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   readData(3, 1, 'PvA concept');
-  // }, []);
+    useEffect(() => {
+        getUserData(1);
+	}, []);
 
-  // const readData = (id, week, activiteit) => {
-  //   fetch('http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/PlanningOverzichtHandler.php', {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       id: id,
-  //       week: week,
-  //       activiteit: activiteit,
+    const getUserData = (projectid) => {
+        // console.log(projectid);
+		try {
+			fetch("http://localhost/pma/PmaAPI/handlers/planning/planningOverzicht.php", {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					projectid: projectid,
+				}),
+			})
+            .then((response) => response.json())
+            .then((response) => {
+                setData(response);
+                
+            });
+		} catch (error) {
+			alert(error);
+		}
+	};
 
-  //     }),
-  //   })
-  //     // .then((response) => response.json())
-  //     // console.log(response);
-  //     // .then((response) => {
-  //       // return response;
-  //       // console.log(response);
-  //       // for (var i = 0; i < response.length; i++) {
-  //       //   console.log(response[i][1]);
+    const filterData = (data) => {
+        var filter_data = {};
+        data.forEach(e => {
 
-  //       //   for(var titel = 0; a < response[i][1]; titel++){
-  //       //       console.log(response[i][1]);
-  //       //   }    
-  //       // }
-  //       // console.log(response);
-  //     // });
-  // };
+            if (filter_data[e.title] != undefined) {
+                filter_data[e.title].data = [...filter_data[e.title].data, ...e.data]
+            } else {
+                filter_data[e.title] = e;
+            }
+        });
 
-  const test = async () => {
-    const response = await fetch('http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/PlanningOverzichtHandler.php'); 
-    const json = await response.json();
-    console.log(json);
-    return json;    
-  }
-  
+        var _data = Object.values(filter_data);
+        // console.log(_data);
 
-  // const renderItem = ({ week, data }) => {
-  //   return ([
-  //         { title: week, data: data },
-  //       ]
-  //   );
-  // }; 
-  // console.log(renderItem);
-  
-
-  // const renderItem = input.reduce(( week, data)=> {
-  //   let activiteitGroup = week.find(x => x.activiteit === data.activiteit);
-  //   if(!activiteitGroup) {
-  //     activiteitGroup = { activiteit: data.activiteit, activiteiten: [] }
-  //     week.push(activiteitGroup);
-  //   }
-  //   dateGroup.transactions.push(data);
-  //   return week;
-  // }, []);
-  // console.log(render)
-
-  // ];
-  // console.log(responseData);
-  // for (let i = 0; i < responseData.length; i++) {
-    // const element = array[i];
-
-
-  // }
-
-  // const DATA = [
-  //     { }
-  // ]
-
-  // const x = {readData};
-  
-
-  return (
-    <SafeAreaView style={Styles.container}>
-      <SectionList
-        sections={[  
-          {title: 'A', data: []},  
-      ]}  
-        renderItem={({ item }) => (
-          <View style={Styles.row}>
-            <Text>{item.title}</Text>
-            <Text>{item.id}</Text>
-          </View>
-        )}
-        renderSectionHeader={({ section }) => (
-          <View style={Styles.sectionHeader}>
-            <Text>{section.title}</Text>
-          </View>
-        )}
-
-        keyExtractor={item => item.id}
-      />
-    </SafeAreaView>
-  );
+        return _data;
+    }
+    
+    return (
+        <SafeAreaView style={Styles.SafeAreaView}>
+            <SectionList
+                sections={filterData(data)}
+                keyExtractor={(item) => item}
+                renderItem={({ item }) => (
+                    <View style={Styles.row}>
+                        <Text>{item}</Text>
+                    </View>
+                )}
+                renderSectionHeader={({ section: { title } }) => (
+                    <Text style={Styles.sectionHeader}>
+                        {title}
+                    </Text>
+                )}
+            />
+        </SafeAreaView>
+    );
 }
 
 export default PlanningOverzicht;
