@@ -20,6 +20,7 @@ import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 import 'react-native-gesture-handler';
 import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOverzichtDev";
+import MemberOverview from "./src/screens/MemberOverview/MemberOverview";
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -27,7 +28,12 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator screenOptions={{ headerShown: false }}>
+			<Stack.Navigator screenOptions={{ headerShown: false }}>	
+				<Stack.Screen
+					name="MemberOverview"
+					component={MemberOverview}
+				/>
+
 				<Stack.Screen
 					name="PlanningOverzichtDev"
 					component={PlanningOverzichtDev}

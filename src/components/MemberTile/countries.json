@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "name": "Voorzitter"
+    },
+    {
+        "id": "2",
+        "name": "Vice-Voorzitter"
+    },
+    {
+        "id": "3",
+        "name": "Planner"
+    },
+    {
+        "id": "4",
+        "name": "Kwaliteitscontroleur"
+    },
+    {
+        "id": "5",
+        "name": "Notulist"
+    },
+    {
+        "id": "6",
+        "name": "Projectlid"
+    }
+  ]
