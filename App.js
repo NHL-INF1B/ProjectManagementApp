@@ -1,7 +1,4 @@
-import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import {React, useEffect} from "react";
-import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import HourAddScreen from "./src/screens/HourEditScreen/HourAddScreen";
 import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
 import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
@@ -28,26 +25,6 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen
-					name="HourAddScreen"
-					component={HourAddScreen}
-				/>
-
-				<Stack.Screen
-					name="HourEditScreen"
-					component={HourEditScreen}
-				/>
-				
-
-				<Stack.Screen
-					name="WarningEditScreen"
-					component={WarningEditScreen}
-				/>
-
-				<Stack.Screen
-					name="RegisterScreen"
-					component={RegisterScreen}
-				/>
 
 				<Stack.Screen
 					name="LoginScreen"
@@ -120,6 +97,31 @@ export default function App() {
 				/>
 
 				
+				<Stack.Screen
+				name="PlanningOverzichtDev"
+				component={PlanningOverzichtDev}
+				/>
+				
+				<Stack.Screen
+					name="HourAddScreen"
+					component={HourAddScreen}
+				/>
+				
+
+				<Stack.Screen
+					name="WarningEditScreen"
+					component={WarningEditScreen}
+				/>
+				
+				<Stack.Screen
+					name="WarningaddScreen"
+					component={WarningaddScreen}
+				/>	
+					
+				<Stack.Screen
+					name="HourEditScreen"
+					component={HourEditScreen}
+				/>							
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
