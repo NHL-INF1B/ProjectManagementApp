@@ -59,7 +59,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
     
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <SectionList
+            <SectionList style={Styles.sectionList}
                 sections={filterData(data)}
                 keyExtractor={(item) => item}
                 renderItem={({ item }) => (
