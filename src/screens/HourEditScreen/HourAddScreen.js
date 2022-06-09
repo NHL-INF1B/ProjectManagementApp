@@ -1,4 +1,4 @@
-import { ScrollView, View, SafeAreaView, Pressable, Text, Button } from 'react-native';
+import { ScrollView, View, SafeAreaView, Pressable, Text } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
@@ -7,7 +7,8 @@ import Header from '../../components/Header/Header';
 import { useForm, Controller } from "react-hook-form";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useRoute } from "@react-navigation/native";
+import HourTimer from '../../components/HourTimer/HourTimer';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 
@@ -24,6 +25,7 @@ Notifications.setNotificationHandler({
     await Notifications.cancelAllScheduledNotificationsAsync();
     await schedulePushNotification();
 };
+
 
 const HourAddScreen = () => {
 
@@ -46,23 +48,13 @@ const HourAddScreen = () => {
     });
 
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
-  
+    const TIME_REGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+
     const submitData = (data) => {
         planNotification();
         sendDataToAPI(data);
         alert("De gegevens zijn opgeslagen");
     };
-
-    const timerStarter = (data) => {
-        startTimer(data);
-        alert("De timer is gestart");
-    }
-
-    const timerStop = (data) => {
-        planNotification();
-        stopTimer(data);
-        alert("De timer is gestopt");
-    }
 
     //Inserting the data into the database
     const sendDataToAPI = (data) => {
@@ -79,6 +71,8 @@ const HourAddScreen = () => {
                     date: data.date,
                     time_start: data.time_start,
                     time_end: data.time_end,
+                    user_id: user_id,
+                    project_id: project_id,
                 }),
             })
             .then((response) => response.json())
@@ -89,66 +83,8 @@ const HourAddScreen = () => {
                 setValue("date", response.date);
                 setValue("time_start", response.time_start);
                 setValue("time_end", response.time_end);
-                catchFeedback(response);
-            });
-        } catch (error) {
-            alert(error);
-        }
-    };
-
-    //Saves the current timestamp & inserts it into the database as the start_time along with the other data via the handler file
-    const startTimer = (data) => {
-        try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditStartHandler.php", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    title: data.title,
-                    description: data.description,
-                    date: data.date,
-                    time_start: data.time_start,
-                    time_end: data.time_end,
-                }),
-            })
-            .then((response) => response.json())
-            .then((response) => {
-                console.log(response);
-                setValue("title", response.title);
-                setValue("description", response.description);
-                setValue("date", response.date);
-                setValue("time_start", response.time_start);
-                setValue("time_end", response.time_end);
-                catchFeedback(response);
-            });
-        } catch (error) {
-            alert(error);
-        }
-    };
-
-    //Saves the current timestamp & updates it into the database as the end_time via the handler file
-    const stopTimer = (data) => {
-        try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditStopHandler.php", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    id: data.id,
-                    title: data.title,
-                    description: data.description,
-                    date: data.date,
-                    time_start: data.time_start,
-                    time_end: data.time_end,
-                }),
-            })
-            .then((response) => response.json())
-            .then((response) => {
-                console.log(response);
+                setValue("user_id", response.user_id);
+                setValue("project_id", response.project_id);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -162,34 +98,34 @@ const HourAddScreen = () => {
 
     const catchFeedback = (response) => {
         switch (response) {
-            case "data_updated":
-              alert("De gegevens zijn geüpdate");
-              break;
+            case "title_incorrect":
+                alert("De activiteit is incorrect");
+                break;
+            case "description_incorrect":
+                alert("De beschrijving is incorrect");
+                break;
+            case "date_incorrect":
+                alert("De datum is incorrect");
+                break;
+            case "time_start_incorrect":
+                alert("De start tijd is incorrect");
+                break;
+            case "time_end_incorrect":
+                alert("De eind tijd is incorrect");
+                break;
+            case "title_timer_incorrect":
+                alert("De activiteit is incorrect");
+                break;
+            case "description_timer_incorrect":
+                alert("De beschrijving is incorrect");
+                break;
             default:
-              console.log('Data not defined');
-              break;
+                console.log("De gegevens zijn opgeslagen");
+                break;
           }
 	};
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [isTimeStartPickerVisible, setTimeStartPickerVisibility] = useState(false);
-    const [isTimeStopPickerVisible, setTimeStopPickerVisibility] = useState(false);
-
-    const showTimeStartPicker = () => {
-        setTimeStartPickerVisibility(true);
-    };
-
-    const hideTimeStartPicker = () => {
-        setTimeStartPickerVisibility(false);
-    };
-
-    const showTimeStopPicker = () => {
-        setTimeStopPickerVisibility(true);
-    };
-
-    const hideTimeStopPicker = () => {
-        setTimeStopPickerVisibility(false);
-    };
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -202,6 +138,10 @@ const HourAddScreen = () => {
     const handleConfirm = (date) => {
         hideDatePicker();
     };
+
+    const route = useRoute();
+    const userId = route.params.userId;
+    const projectId = route.params.projectId;
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
@@ -309,6 +249,7 @@ const HourAddScreen = () => {
                                         value={getValues("date")}
                                         errorText={errors?.date?.message}
                                         titleText="Datum"
+                                        onc
                                         />
                                     </View>
                                 )}
@@ -318,66 +259,60 @@ const HourAddScreen = () => {
                     )
                 }
 
-                {/* Time start */}
-                <View>
+                {/* Time_start */}
+                <View style={styles.marginBottom1}>
                     <Controller
                         name="time_start"
                         control={control}
                         rules={{
                             required: { value: true, message: 'Start tijd is verplicht' },
+                            maxLength: {
+                                value: 5,
+                                message: 'Maximaal 5 tekens lang',
+                            },
                             pattern: {
+                                value:TIME_REGEX,
                                 message: 'Start tijd is incorrect'
                             },
                         }}
                         render={({ field: { onChange, value } }) => (
-                        <View style={styles.marginBottom1}>
-                            <Text style={styles.subtitle}>START TIJD</Text>
-                            <CustomButton
-                                buttonType={"lightBlueButton"}
-                                buttonText={"buttonTextBlack"}
-                                text={"Kies een start tijd"}
-                                onPress={showTimeStartPicker}
+                            <CustomTextInput 
+                                placeholder="Start tijd" 
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                errorText={errors?.time_start?.message} 
+                                titleText="Start tijd"
                             />
-                                <DateTimePickerModal
-                                    isVisible={isTimeStartPickerVisible}
-                                    mode="time"
-                                    onConfirm={handleConfirm}
-                                    onCancel={hideTimeStartPicker}
-                                />
-                        </View>
                         )}
-                    />   
+                    />
                 </View>
 
-                {/* Time end */}
-                <View>
+                {/* Time_end */}
+                <View style={styles.marginBottom1}>
                     <Controller
                         name="time_end"
                         control={control}
                         rules={{
                             required: { value: true, message: 'Eind tijd is verplicht' },
+                            maxLength: {
+                                value: 5,
+                                message: 'Maximaal 5 tekens lang',
+                            },
                             pattern: {
+                                value:TIME_REGEX,
                                 message: 'Eind tijd is incorrect'
                             },
                         }}
                         render={({ field: { onChange, value } }) => (
-                        <View style={styles.marginBottom1}>
-                            <Text style={styles.subtitle}>EIND TIJD</Text>
-                            <CustomButton
-                                buttonType={"lightBlueButton"}
-                                buttonText={"buttonTextBlack"}
-                                text={"Kies een eind tijd"}
-                                onPress={showTimeStopPicker}
+                            <CustomTextInput 
+                                placeholder="Eind tijd" 
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                errorText={errors?.time_end?.message} 
+                                titleText="Eind tijd"
                             />
-                                <DateTimePickerModal
-                                    isVisible={isTimeStopPickerVisible}
-                                    mode="time"
-                                    onConfirm={handleConfirm}
-                                    onCancel={hideTimeStopPicker}
-                                />
-                        </View>
                         )}
-                    />   
+                    />
                 </View>
 
                 <View style={styles.marginBottom5}>
@@ -389,75 +324,8 @@ const HourAddScreen = () => {
                     />
                 </View>
 
-                <View style={styles.marginBottom5}>
-                    <Circle name={"timer"} size={60} color={"black"} text={"Timer"} />
-                </View>
-
-                {/* Title */}
-                <View style={styles.marginBottom1}>
-                    <Controller
-                        name="title"
-                        control={control}
-                        rules={{
-                            required: { value: true, message: 'Activiteit is verplicht' },
-                            maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
-                            }
-                        }}
-                        render={({ field: { onChange, value } }) => (
-                            <CustomTextInput 
-                                placeholder="Activiteit" 
-                                onChangeText={(text) => onChange(text)} 
-                                value={value} 
-                                errorText={errors?.title?.message} 
-                                titleText="Activiteit"
-                            />
-                        )}
-                    />
-                </View>
-
-                {/* Description */}
-                <View style={styles.marginBottom1}>
-                    <Controller
-                        name="description"
-                        control={control}
-                        rules={{
-                            required: { value: true, message: 'Beschrijving is verplicht' },
-                            maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
-                            }
-                        }}
-                        render={({ field: { onChange, value } }) => (
-                            <CustomTextInput 
-                                placeholder="Beschrijving" 
-                                onChangeText={(text) => onChange(text)} 
-                                value={value} 
-                                errorText={errors?.description?.message} 
-                                titleText="Beschrijving"
-                            />
-                        )}
-                    />
-                </View>
-
-                <View style={styles.marginBottom1}>
-                    <CustomButton 
-                        buttonType={"greenButton"}
-                        buttonText={"buttonText"}
-                        text={"Start"}
-                        onPress={handleSubmit(timerStarter)}
-                    />
-                </View>
-
-                <View style={styles.marginBottom1}>
-                    <CustomButton 
-                        buttonType={"redButton"}
-                        buttonText={"buttonText"}
-                        text={"Stop"}
-                        onPress={handleSubmit(timerStop)}
-                    />
-                </View>
+                <HourTimer />
+                
             </ScrollView>
         </SafeAreaView>
     );
