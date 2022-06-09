@@ -6,8 +6,14 @@ export default StyleSheet.create({
     backgroundColor: "#009BAA",
     paddingHorizontal: 15,
     flex: 1,
-    // flexWrap: "wrap",
+//     flexWrap: "wrap",
     alignItems: "center",
+  },
+  Tiles: {
+    backgroundColor: "#009BAA",
+    flex: 1,
+    flexDirection: "row",
+//     flexWrap: "wrap",
   },
   Img: {
     height: 157,
@@ -25,5 +31,6 @@ export default StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     width: "100%",
+    height: "25%",
   },
 });

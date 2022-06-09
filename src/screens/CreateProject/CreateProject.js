@@ -106,7 +106,6 @@ const CreateProject = ({ navigation }) => {
 
         <CustomButton
           buttonType={"blueButton"}
-          buttonText={"buttonText"}
           text={"Aanmaken"}
           onPress={handleSubmit(onSubmit)}
         />
