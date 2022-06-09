@@ -7,7 +7,8 @@ export default StyleSheet.create({
 		flex: 1,
 	},
     row: {
-        paddingHorizontal: 10,
+        // paddingHorizontal: 10,
+		flexDirection: 'row', 
         paddingVertical: 5,
 		backgroundColor: "white",
 		borderWidth: 2,
@@ -15,6 +16,10 @@ export default StyleSheet.create({
         justifyContent: 'center',
 		textAlign: 'left',
 		fontWeight: 'bold',
+		justifyContent: 'space-between',
+		// padding: 10,
+		marginBottom: 10,
+		
 
 	},
 	sectionHeader: {
@@ -32,5 +37,13 @@ export default StyleSheet.create({
       	// fontWeight: 'bold',
       	fontSize: 20,
 		backgroundColor: "#00aabb",
-	}
+		
+		
+	},
+	icon: {
+		textAlign: 'right',
+		// flexDirection: 'row',
+		// marginLeft: '19%',
+		// marginTop: '19%',
+	},
 });
