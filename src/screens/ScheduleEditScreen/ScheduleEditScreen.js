@@ -177,6 +177,7 @@ const ScheduleEditScreen = ({ navigation }) => {
                 <View>
                     <CustomButton 
                         buttonType={"redButton"}
+                        buttonText={"buttonText"}
                         text={"Verwijderen"}
                         onPress={() =>
                             Alert.alert("Weet je zeker dat je deze planning wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
