@@ -19,7 +19,7 @@ import Profile from "./src/screens/Profile/Profile";
 import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOverzichtDev";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
-
+import Scorebord from "./src/screens/Scorebord/Scorebord";
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -32,6 +32,11 @@ export default function App() {
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
+				/>
+
+				<Stack.Screen
+					name="Scorebord"
+					component={Scorebord}
 				/>
 
 

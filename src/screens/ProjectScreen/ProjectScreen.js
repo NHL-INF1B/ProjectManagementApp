@@ -98,7 +98,7 @@ export default function ProjectScreen() {
                             <Tile text="Leden" image="account-group" screen="MemberScreen" projectId={projectId} userId={userId} />
                         </View>
                         <View style={Styles.column}>
-                            <Tile text="Scorebord" image="star" screen="ScoreScreen" projectId={projectId} userId={userId} />
+                            <Tile text="Scorebord" image="star" screen="Scorebord" projectId={projectId} userId={userId} />
                         </View>
                     </View>
                     {isVoorzitter ? (
