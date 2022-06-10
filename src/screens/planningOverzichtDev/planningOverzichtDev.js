@@ -9,6 +9,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import ChangePassword from "../ChangePassword/ChangePassword";
 import { useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons'; 
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const PlanningOverzichtDev = ({ navigation }) => {
     const [data, setData] = useState([]);
@@ -20,7 +24,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
     const getUserData = (projectid) => {
         // console.log(projectid);
 		try {
-			fetch("http://localhost/pma/PmaAPI/handlers/planning/planningOverzicht.php", {
+			fetch("http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/planningOverzicht.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -52,19 +56,20 @@ const PlanningOverzichtDev = ({ navigation }) => {
         });
 
         var _data = Object.values(filter_data);
-        // console.log(_data);
+        console.log(_data);
 
         return _data;
     }
     
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <SectionList
+            <SectionList style={Styles.sectionList} 
                 sections={filterData(data)}
                 keyExtractor={(item) => item}
                 renderItem={({ item }) => (
                     <View style={Styles.row}>
                         <Text>{item}</Text>
+                        <FontAwesome style={Styles.icon} name="pencil-square-o" size={24} color="black" />
                     </View>
                 )}
                 renderSectionHeader={({ section: { title } }) => (

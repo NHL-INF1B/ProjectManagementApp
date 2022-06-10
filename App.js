@@ -30,11 +30,11 @@ export default function App() {
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>	
 				<Stack.Screen
-					name="MemberOverview"
-					component={MemberOverview}
+					name="PlanningOverzichtDev"
+					component={PlanningOverzichtDev}
 				/>
 
-				<Stack.Screen
+				{/* <Stack.Screen
 					name="PlanningOverzichtDev"
 					component={PlanningOverzichtDev}
 				/>
@@ -106,7 +106,7 @@ export default function App() {
 				<Stack.Screen
 					name="LogbookScreen"
 					component={LogbookScreen}
-				/>
+				/> */}
 				
 			</Stack.Navigator>
 		</NavigationContainer>
