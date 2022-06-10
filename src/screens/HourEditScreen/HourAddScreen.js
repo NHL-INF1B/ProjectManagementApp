@@ -119,6 +119,9 @@ const HourAddScreen = () => {
             case "description_timer_incorrect":
                 alert("De beschrijving is incorrect");
                 break;
+            case "times_invalid":
+                alert("De tijden zijn ongeldig");
+                break;
             default:
                 console.log("De gegevens zijn opgeslagen");
                 break;
