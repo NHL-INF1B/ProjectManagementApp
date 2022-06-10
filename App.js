@@ -20,6 +20,7 @@ import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOve
 import MemberOverview from "./src/screens/MemberOverview/MemberOverview";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
+import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -30,6 +31,16 @@ export default function App() {
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen
+					name="LoginScreen"
+					component={LoginScreen}
+				/>
+
+				<Stack.Screen
+					name="RegisterScreen"
+					component={RegisterScreen}
+				/>
+
+				<Stack.Screen
 					name="MemberOverview"
 					component={MemberOverview}
 				/>	
@@ -38,12 +49,6 @@ export default function App() {
 					name="PlanningOverzichtDev"
 					component={PlanningOverzichtDev}
 				/>
-
-				<Stack.Screen
-					name="LoginScreen"
-					component={LoginScreen}
-				/>
-
 
 				<Stack.Screen 
 					name="ChangePassword"
