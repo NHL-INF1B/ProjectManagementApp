@@ -11,6 +11,8 @@ import ChangePassword from "../ChangePassword/ChangePassword";
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const PlanningOverzichtDev = ({ navigation }) => {
     const [data, setData] = useState([]);

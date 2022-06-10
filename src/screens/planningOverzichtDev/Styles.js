@@ -7,7 +7,6 @@ export default StyleSheet.create({
 		flex: 1,
 	},
     row: {
-        // paddingHorizontal: 10,
 		flexDirection: 'row', 
         paddingVertical: 5,
 		backgroundColor: "white",
@@ -17,13 +16,11 @@ export default StyleSheet.create({
 		textAlign: 'left',
 		fontWeight: 'bold',
 		justifyContent: 'space-between',
-		// padding: 10,
 		marginBottom: 10,
 		
 
 	},
 	sectionHeader: {
-		// backgroundColor: '#efefef',
 		backgroundColor: "#00aabb",
 		color: 'white',
 		
@@ -33,8 +30,6 @@ export default StyleSheet.create({
 		paddingHorizontal: 20,
         paddingVertical: 10,
 		textAlign: 'left',
-      	// color: "#00aabb",
-      	// fontWeight: 'bold',
       	fontSize: 20,
 		backgroundColor: "#00aabb",
 		
@@ -42,8 +37,5 @@ export default StyleSheet.create({
 	},
 	icon: {
 		textAlign: 'right',
-		// flexDirection: 'row',
-		// marginLeft: '19%',
-		// marginTop: '19%',
 	},
 });
