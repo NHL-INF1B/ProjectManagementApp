@@ -99,7 +99,7 @@ export default function LogbookScreen(){
 
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <Header GoToType="Edit" GoTo="HourEditScreen" CenterGoTo={CenterGoTo} ReturnType="Back" projectId={projectId} userId={userId} />
+            <Header GoToType="Edit" GoTo="HourAddScreen" CenterGoTo={CenterGoTo} ReturnType="Back" projectId={projectId} userId={userId} />
 
             <Text style={Styles.Title}>URENVERANTWOORDING</Text>
             <Text style={Styles.Subtitle}>{selectedUserName}</Text>
