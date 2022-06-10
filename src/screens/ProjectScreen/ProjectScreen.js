@@ -5,6 +5,7 @@ import Tile from '../../components/Tile/Tile';
 import Header from '../../components/Header/Header';
 import { useRoute } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
+import handlerPath from '../../../env';
 
 export default function ProjectScreen() {
 
@@ -18,7 +19,7 @@ export default function ProjectScreen() {
     const getProjectData = (projectId) => {
         // console.log(projectId);
 		try {
-			fetch("http://localhost/PMA/PmaAPI/handlers/projectScreen/projectScreen.php", {
+			fetch(handlerPath + "projectScreen/projectScreen.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -41,7 +42,7 @@ export default function ProjectScreen() {
 
     const getRoleId = (userId) =>   {
         try {
-			fetch("http://localhost/PMA/PmaAPI/handlers/projectScreen/getRole.php", {
+			fetch(handlerPath + "projectScreen/getRole.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",

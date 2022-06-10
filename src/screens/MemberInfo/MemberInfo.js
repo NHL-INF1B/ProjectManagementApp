@@ -5,6 +5,7 @@ import Styles from "./Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from "../../components/Circle/Circle";
 import ShowProfileInfo from "../../components/ShowProfileInfo/ShowProfileInfo";
+import handlerPath from "../../../env";
 
 const MemberInfo = () => {
   //declaring the const where the info goes into.
@@ -36,7 +37,7 @@ const MemberInfo = () => {
   const getMemberInfo = (memberId) => {
     try {
       fetch(
-        "https://inf1b.serverict.nl/handlers/memberInfoHandler/memberInfoHandler.php",
+        handlerPath + "memberInfoHandler/memberInfoHandler.php",
         {
           method: "POST",
           headers: {

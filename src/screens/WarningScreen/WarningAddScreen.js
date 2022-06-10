@@ -5,6 +5,7 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import handlerPath from '../../../env';
 // import SelectDropdown from 'react-native-select-dropdown';
 
 const WarningAddScreen = () => {
@@ -13,7 +14,7 @@ const WarningAddScreen = () => {
   
     const sendDataToAPI = (reason, user_id, project_id) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningInsertHandler.php", {
+            fetch(handlerPath + "warning/warningInsertHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",

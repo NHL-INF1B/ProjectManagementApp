@@ -10,6 +10,7 @@ import CustomButton from '../../components/CustomButton/CustomButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header/Header';
 import {useRoute} from "@react-navigation/native";
+import handlerPath from "../../../env";
 
 const CreateProject = ({ navigation }) => {
   const NAME_REGEX = /^[a-zA-Z0-9 ]{3,30}$/;
@@ -54,7 +55,7 @@ const CreateProject = ({ navigation }) => {
 
   const sendDataToAPI = (ProjectNaam, userid) => {
     try {
-      fetch("https://inf1b.serverict.nl/handlers/createproject/createProjectHandler.php", {
+      fetch(handlerPath + "createproject/createProjectHandler.php", {
         method: "POST",
         headers: {
           Accept: "application/json",

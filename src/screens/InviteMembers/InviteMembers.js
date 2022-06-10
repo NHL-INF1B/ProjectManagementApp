@@ -9,6 +9,7 @@ import QRCode from 'react-native-qrcode-svg';
 import styles from "./styles";
 import Circle from "../../components/Circle/Circle";
 import Header from "../../components/Header/Header";
+import handlerPath from "../../../env";
 
 
 const InviteMembers = ({route}) => {
@@ -36,7 +37,7 @@ const InviteMembers = ({route}) => {
   const sendDataToAPI = (projectId) => {
     try {
       fetch(
-        "https://inf1b.serverict.nl/handlers/InviteMembers/InviteMembers.php",
+        handlerPath + "InviteMembers/InviteMembers.php",
         {
           method: "POST",
           headers: {
@@ -60,7 +61,7 @@ const InviteMembers = ({route}) => {
   const generateNewCode = (projectId) => {
     try {
       fetch(
-        "https://inf1b.serverict.nl/handlers/InviteMembers/generateNewCode.php",
+        handlerPath + "InviteMembers/generateNewCode.php",
         {
           method: "POST",
           headers: {
