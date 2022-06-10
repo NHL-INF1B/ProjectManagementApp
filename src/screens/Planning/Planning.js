@@ -50,13 +50,13 @@ const Planning = () => {
       <Text style={[styles.title, styles.marginBottom25]}>Planning Toevoegen</Text>
       </View>
       <View style={styles.div}>
-      <Text style={styles.subtitle}>Activiteit</Text>
+      <Text style={styles.subtitle}>ACTIVITEIT</Text>
       </View>
       <View style={styles.div}>
       <TextInput style={styles.textInput} onChangeText={setActiviteit} placeholder="Activiteit" value={Activiteit}  />
       </View>
       <View style={styles.div}>
-      <Text style={styles.subtitle}>Weeknummer</Text>
+      <Text style={styles.subtitle}>WEEKNUMMER</Text>
       </View>
       <View style={styles.div}>
       <TextInput style={styles.textInput} onChangeText={setWeeknummer} placeholder="Weeknummer" value={Weeknummer}  />

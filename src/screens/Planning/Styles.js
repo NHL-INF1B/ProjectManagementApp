@@ -13,17 +13,20 @@ export default StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+
     },
     title: {
       textAlign: 'center',
       color: 'white',
       fontWeight: 'bold',
       fontSize: 20,
+      
     },
     subtitle: {
       textAlign: 'center',
       color: 'white',
       fontWeight: 'bold',
+      
     },
     input: {
       textAlign: 'center',
