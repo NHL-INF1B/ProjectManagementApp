@@ -8,11 +8,16 @@ import Circle from "../../components/Circle/Circle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import ChangePassword from "../ChangePassword/ChangePassword";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import Header from "../../components/Header/Header";
+import handlerPath from "../../../env";
 
 const Profile = ({ navigation }) => {
     const [isShowingDatePicker, setShowingDatePicker] = useState(false);
     const [userid, setUserId] = useState("");
+
+    const route = useRoute();
+    const projectId = route.params.projectId;
 
     const NUMMERIC_REGEX = /^[0-9]*$/;
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -61,7 +66,7 @@ const Profile = ({ navigation }) => {
     const getUserData = (userId) => {
         console.log(userId);
 		try {
-			fetch("https://inf1b.serverict.nl/handlers/profile/profileFetch.php", {
+			fetch(handlerPath + "profile/profileFetch.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -87,7 +92,7 @@ const Profile = ({ navigation }) => {
 
     const sendUpdateData = (data) => {
         try {
-			fetch("https://inf1b.serverict.nl/handlers/profile/profileEdit.php", {
+			fetch(handlerPath + "profile/profileEdit.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -125,6 +130,8 @@ const Profile = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userid} />
+
             <View style={Styles.head}>
                 <View>
                     <Circle name={"account"} size={80} color={"black"} text={"Profiel bewerken"} />
@@ -294,6 +301,7 @@ const Profile = ({ navigation }) => {
                     <View style={Styles.marginContainer}>
                         <CustomButton 
                             buttonType={"blueButton"}
+                            buttonText={"buttonText"}
                             text={"Aanpassen"}
                             onPress={handleSubmit(submitData)}
                         />

@@ -85,12 +85,12 @@ const Styles = StyleSheet.create({
 function CheckCenterGoTo({ CenterGoTo, CenterNavigateTo }){
     if(CenterGoTo !== "None"){
         return (
-        <Pressable
-            onPress={CenterNavigateTo}>
-            <View style={Styles.Center}>
+        <View style={Styles.Center}>
+            <Pressable
+                onPress={CenterNavigateTo}>
                 <MaterialCommunityIcons name="account-supervisor" size={40} color="black" />
-            </View>
-        </Pressable>
+            </Pressable>
+        </View>
         )
     } else{
         return (

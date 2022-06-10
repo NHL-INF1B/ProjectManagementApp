@@ -6,16 +6,10 @@ export default StyleSheet.create({
       backgroundColor: "#009BAA",
       flex: 1,
     },
-    title: {
-      textAlign: 'center',
-      color: 'white',
-      fontWeight: 'bold',
-      fontSize: 20,
-    },
-    subtitle: {
-      textAlign: 'center',
-      color: 'white',
-      fontWeight: 'bold',
+    icon: {
+      alignSelf: 'center',
+      marginTop: 'auto',
+      marginBottom: 'auto',
     },
     marginTop1: {
       marginTop: '1%',
@@ -28,10 +22,5 @@ export default StyleSheet.create({
     },
     marginBottom5: {
       marginBottom: '5%',
-    },
-    errorText: {
-      textAlign: "center",
-      color: "red",
-      fontWeight: "bold",
-    },
+    }
   });

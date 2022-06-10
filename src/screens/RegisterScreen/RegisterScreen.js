@@ -6,6 +6,7 @@ import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import handlerPath from "../../../env";
 
 const RegisterScreen = ({ navigation }) => {
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,7 +49,7 @@ const RegisterScreen = ({ navigation }) => {
   ) => {
     try {
       fetch(
-        "https://inf1b.serverict.nl/handlers/registration/registrationHandler.php",
+        handlerPath + "registration/registrationHandler.php",
         {
           method: "POST",
           headers: {
@@ -274,6 +275,7 @@ const RegisterScreen = ({ navigation }) => {
           <View style={{ marginBottom: 20 }}>
             <CustomButton
               buttonType={"blueButton"}
+              buttonText={"buttonText"}
               text={"Registreren"}
               onPress={handleSubmit(onSubmit)}
             />

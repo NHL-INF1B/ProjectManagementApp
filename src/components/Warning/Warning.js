@@ -1,6 +1,7 @@
 import  { React, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
+import handlerPath from '../../../env';
 
 function Warning(props) {
     const [name, setName] = useState("");
@@ -11,7 +12,7 @@ function Warning(props) {
 
     const getUsername = (userid) => {
         try {
-            fetch("https://inf1b.serverict.nl/handlers/warning/warningUsernameFetch.php", {
+            fetch(handlerPath + "warning/warningUsernameFetch.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",

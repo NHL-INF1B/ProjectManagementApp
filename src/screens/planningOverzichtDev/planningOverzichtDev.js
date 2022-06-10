@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import handlerPath from "../../../env";
 
 const PlanningOverzichtDev = ({ navigation }) => {
     const [data, setData] = useState([]);
@@ -24,7 +25,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
     const getUserData = (projectid) => {
         // console.log(projectid);
 		try {
-			fetch("http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/planningOverzicht.php", {
+			fetch(handlerPath + "planning/planningOverzicht.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",

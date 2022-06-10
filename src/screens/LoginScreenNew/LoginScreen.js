@@ -16,6 +16,7 @@ import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { CommonActions } from "@react-navigation/native";
+import handlerPath from "../../../env";
 
 const LoginScreen = ({ navigation }) => {
 
@@ -83,7 +84,7 @@ const LoginScreen = ({ navigation }) => {
 
   const sendDataToAPI = (email, password) => {
     try {
-      fetch("https://inf1b.serverict.nl/handlers/login/loginHandler.php", {
+      fetch(handlerPath + "login/loginHandler.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -203,6 +204,7 @@ const LoginScreen = ({ navigation }) => {
         <View style={{ marginBottom: 20 }}>
           <CustomButton 
             buttonType={"blueButton"}
+            buttonText={"buttonText"}
             text={"Log in"}
             onPress={handleSubmit(onSubmit)}
           />
