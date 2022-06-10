@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import ChangePassword from "../ChangePassword/ChangePassword";
 import { useNavigation } from '@react-navigation/native';
+import handlerPath from "../../../env";
 
 const PlanningOverzichtDev = ({ navigation }) => {
     const [data, setData] = useState([]);
@@ -20,7 +21,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
     const getUserData = (projectid) => {
         // console.log(projectid);
 		try {
-			fetch("http://localhost/pma/PmaAPI/handlers/planning/planningOverzicht.php", {
+			fetch(handlerPath + "planning/planningOverzicht.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",

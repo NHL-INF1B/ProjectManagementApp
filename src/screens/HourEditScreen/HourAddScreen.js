@@ -11,6 +11,7 @@ import { useRoute } from "@react-navigation/native";
 import HourTimer from '../../components/HourTimer/HourTimer';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
+import handlerPath from "../../../env";
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -59,7 +60,7 @@ const HourAddScreen = () => {
     //Inserting the data into the database
     const sendDataToAPI = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditInsertHandler.php", {
+            fetch(handlerPath + "houredit/houreditInsertHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",

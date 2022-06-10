@@ -6,6 +6,7 @@ import Circle from "../../components/Circle/Circle";
 import Activity from '../../components/Activity/Activity';
 import { useRoute, useIsFocused } from "@react-navigation/native";
 import { FlatList } from 'react-native-gesture-handler';
+import handlerPath from '../../../env';
 
 export default function LogbookScreen(){
 
@@ -35,7 +36,7 @@ export default function LogbookScreen(){
     }, [isFocused]);
 
     const getRole = (userId, projectId) => {
-        fetch("http://localhost/PMA/PmaAPI/handlers/permissions/getRoleIdHandler.php", {
+        fetch(handlerPath + "permissions/getRoleIdHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -54,7 +55,7 @@ export default function LogbookScreen(){
     }
 
     const getLogbook = (userId, projectId) => {
-        fetch("http://localhost/PMA/PmaAPI/handlers/logbook/getLogbookDataHandler.php", {
+        fetch(handlerPath + "logbook/getLogbookDataHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -73,7 +74,7 @@ export default function LogbookScreen(){
     }
 
     const getUserName = (userId) => {
-        fetch("http://localhost/PMA/PmaAPI/handlers/logbook/getUserNameHandler.php", {
+        fetch(handlerPath + "logbook/getUserNameHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './Styles';
-import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
+import { Text, SafeAreaView, View, ScrollView, Image } from 'react-native';
 import { useRoute } from "@react-navigation/native";
 import Circle from "./../../components/Circle/Circle";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import Header from '../../components/Header/Header';
 import { FlatList } from 'react-native-gesture-handler';
 import LogbookUser from '../../components/LogbookUser/LogbookUser';
+import handlerPath from '../../../env';
 
 export default function SelectLogbookUser(){
 
@@ -20,7 +21,7 @@ export default function SelectLogbookUser(){
     }, []);
 
     const getUser = (projectId) => {
-        fetch("http://localhost/PMA/PmaAPI/handlers/logbook/getLogbookUsersHandler.php", {
+        fetch(handlerPath + "logbook/getLogbookUsersHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",

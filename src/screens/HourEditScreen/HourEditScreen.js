@@ -7,6 +7,7 @@ import { useForm, Controller } from "react-hook-form";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import Header from '../../components/Header/Header';
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import handlerPath from '../../../env';
 
 
 const HourEditScreen = ({navigation}) => {
@@ -73,7 +74,7 @@ const HourEditScreen = ({navigation}) => {
 
     //Selecting the data from the database based on id
     const readData = (id) => {
-        fetch('http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditSelectHandler.php', {
+        fetch(handlerPath + 'houredit/houreditSelectHandler.php', {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -97,7 +98,7 @@ const HourEditScreen = ({navigation}) => {
     //Updating the data based on id
     const editActivity = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditUpdateHandler.php", {
+            fetch(handlerPath + "houredit/houreditUpdateHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -125,7 +126,7 @@ const HourEditScreen = ({navigation}) => {
     //Deleting an activity based on id
     const deleteActivity = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditDeleteHandler.php", {
+            fetch(handlerPath + "houredit/houreditDeleteHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
