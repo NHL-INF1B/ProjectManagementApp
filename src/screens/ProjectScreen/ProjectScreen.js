@@ -80,10 +80,10 @@ export default function ProjectScreen() {
                 <ScrollView>
                     <View style={Styles.row}>
                         <View style={Styles.column}>
-                            <Tile text="Teamcode" image="book" screen="TeamcodeScreen" projectId={projectId} userId={userId} />
+                            <Tile text="Teamcode" image="book" screen="" projectId={projectId} userId={userId} />
                         </View>
                         <View style={Styles.column}>
-                            <Tile text="Planning" image="calendar" screen="PlanningScreen" projectId={projectId} userId={userId} />
+                            <Tile text="Planning" image="calendar" screen="PlanningOverzichtDev" projectId={projectId} userId={userId} />
                         </View>
                     </View>
                     <View style={Styles.row}>
@@ -96,10 +96,10 @@ export default function ProjectScreen() {
                     </View>
                     <View style={Styles.row}>
                         <View style={Styles.column}>
-                            <Tile text="Leden" image="account-group" screen="MemberScreen" projectId={projectId} userId={userId} />
+                            <Tile text="Leden" image="account-group" screen="MemberOverview" projectId={projectId} userId={userId} />
                         </View>
                         <View style={Styles.column}>
-                            <Tile text="Scorebord" image="star" screen="ScoreScreen" projectId={projectId} userId={userId} />
+                            <Tile text="Scorebord" image="star" screen="" projectId={projectId} userId={userId} />
                         </View>
                     </View>
                     {isVoorzitter ? (

@@ -59,6 +59,7 @@ function MemberTile(props) {
                 .then((response) => response.text())
                 // .then((response) => response.json())
                 .then((response) => {
+                    console.log('membertile ' + response)
                     alert('Rol is veranderd');
                 });
         } catch (error) {
@@ -111,7 +112,7 @@ function MemberTile(props) {
                 </View>
 
                 <Pressable style={Styles.ArrowContainer} onPress={() =>
-                    navigation.navigate(MemberInfo, {
+                    navigation.navigate('MemberInfo', {
                         id: props.id
                     })}>
                     <MaterialCommunityIcons name={"chevron-right"} size={50} color={"black"} />

@@ -12,6 +12,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import MemberTile from "../../components/MemberTile/MemberTile";
 
 import membertjes from "./membertjes.json";
+import handlerPath from "../../../env";
 
 const MemberOverview = ({ navigation }) => {
     const [member, setMembers] = useState([]);
@@ -22,12 +23,15 @@ const MemberOverview = ({ navigation }) => {
     const userId = route.params.userId;
 
     useEffect(() => {
+        console.log('hij is er op gekomen')
+        console.log(userId)
+        console.log(projectId)
         getRole(userId, projectId);
     }, []);
 
     const getMembers = (userId, projectId) => {
         try {
-            fetch("http://localhost/pma/PmaAPI/handlers/projectMembers/fetchProjectMembers.php", {
+            fetch(handlerPath + "projectMembers/fetchProjectMembers.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -41,7 +45,7 @@ const MemberOverview = ({ navigation }) => {
                 // .then((response) => response.text())
                 .then((response) => response.json())
                 .then((response) => {
-                    // console.log(response);
+                    console.log('memberoverviewGetMembers ' + response)
                     setMembers(response);
                 });
         } catch (error) {
@@ -51,7 +55,7 @@ const MemberOverview = ({ navigation }) => {
 
     const getRole =  (userId, projectId) => {
         try {
-            fetch("http://localhost/pma/PmaAPI/handlers/projectMembers/fetchRole.php", {
+            fetch(handlerPath + "projectMembers/fetchRole.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -64,6 +68,7 @@ const MemberOverview = ({ navigation }) => {
                 // .then((response) => response.text())
                 .then((response) => response.json())
                 .then((response) => {
+                    console.log('memberoverviewGetRole ' + response)
                     setRoleName(response);
                     getMembers(userId, projectId);
                 });
