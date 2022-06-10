@@ -8,27 +8,81 @@ import Circle from "../../components/Circle/Circle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import ChangePassword from "../ChangePassword/ChangePassword";
-import members from './members.json';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import MemberTile from "../../components/MemberTile/MemberTile";
+
+import membertjes from "./membertjes.json";
 
 const MemberOverview = ({ navigation }) => {
     const [member, setMembers] = useState([]);
-    
+    const [roleName, setRoleName] = useState('');
+
+    const route = useRoute();
+    const projectId = 1;//route.params.projectId;
+    const userId = 1;//route.params.userId;
 
     useEffect(() => {
-        setMembers(members);
+        getRole(userId, projectId);
     }, []);
+
+    const getMembers = (userId, projectId) => {
+        try {
+            fetch("http://localhost/pma/PmaAPI/handlers/projectMembers/fetchProjectMembers.php", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    projectId: projectId
+                }),
+            })
+                // .then((response) => response.text())
+                .then((response) => response.json())
+                .then((response) => {
+                    // console.log(response);
+                    setMembers(response);
+                });
+        } catch (error) {
+            alert(error);
+        }
+    }
+
+    const getRole =  (userId, projectId) => {
+        try {
+            fetch("http://localhost/pma/PmaAPI/handlers/projectMembers/fetchRole.php", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: userId
+                }),
+            })
+                // .then((response) => response.text())
+                .then((response) => response.json())
+                .then((response) => {
+                    setRoleName(response);
+                    getMembers(userId, projectId);
+                });
+        } catch (error) {
+            alert(error);
+        }
+    }
 
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <FlatList
                 data={member}
                 keyExtractor={(member) => member.id.toString()}
-                renderItem={({ item }) => 
-                    <MemberTile 
-                        item={item}
-                        id={item.id} 
+                renderItem={({ item }) =>
+                    <MemberTile
+                        id={item.id}
+                        name={item.name}
+                        role={item.role}
+                        userRole={roleName}
                     />
                 }
             />

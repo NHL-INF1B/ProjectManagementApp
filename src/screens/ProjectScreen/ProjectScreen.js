@@ -41,7 +41,7 @@ export default function ProjectScreen() {
                             <Tile text="Uitnodigingen" image="account-plus" screen="InviteMembers" projectId={projectId} userId={userId} />
                         </View>
                         <View style={Styles.column}>
-                            <Tile text="Leden" image="account-group" screen="MemberScreen" projectId={projectId} userId={userId} />
+                            <Tile text="Leden" image="account-group" screen="MemberOverview" projectId={projectId} userId={userId} />
                         </View>
                     </View>
                     <View style={Styles.row}>
