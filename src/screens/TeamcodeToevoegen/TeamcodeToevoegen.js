@@ -2,10 +2,12 @@
 
 import { Text, ScrollView, View, Button, Platform, SafeAreaView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
-import * as DocumentPicker from "expo-document-picker";
+import { useForm, Controller } from "react-hook-form";
+import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
+import * as DocumentPicker from 'expo-document-picker';
 
 const TeamcodeToevoegen = () => {
   const projectid = 1;
