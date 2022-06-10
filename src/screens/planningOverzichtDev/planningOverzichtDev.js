@@ -13,12 +13,19 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useRoute } from "@react-navigation/native";
+import PlanningButton from '../../components/PlanningButton/PlanningButton';
 
 const PlanningOverzichtDev = ({ navigation }) => {
     const [data, setData] = useState([]);
+    // const route = useRoute();
+    // const projectId = route.params.projectId;
+    // const id = route.params.id;
 
     useEffect(() => {
         getUserData(1);
+        // getPlanningId(planningId, 1);
+        // getProjectData(projectId);
 	}, []);
 
     const getUserData = (projectid) => {
@@ -32,6 +39,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
 				},
 				body: JSON.stringify({
 					projectid: projectid,
+                    // id: id,
 				}),
 			})
             .then((response) => response.json())
@@ -43,6 +51,30 @@ const PlanningOverzichtDev = ({ navigation }) => {
 			alert(error);
 		}
 	};
+
+    // const getPlanningId = (planningId) =>   {
+    //     try {
+	// 		fetch(handlerPath + "projectScreen/getRole.php", {
+	// 			method: "POST",
+	// 			headers: {
+	// 				Accept: "application/json",
+	// 				"Content-Type": "application/json",
+	// 			},
+	// 			body: JSON.stringify({
+    //                 planningId: planningId,
+	// 			}),
+	// 		})
+    //         // .then((response) => response.text())
+    //         .then((response) => response.json())
+    //         .then((response) => {
+    //             console.log(response);
+    //             setRoleId(response[0].planningId);
+    //             console.log(response[0].planningId);
+    //         });
+	// 	} catch (error) {
+	// 		alert(error);
+	// 	}
+    // }
 
     const filterData = (data) => {
         var filter_data = {};
@@ -69,7 +101,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
                 renderItem={({ item }) => (
                     <View style={Styles.row}>
                         <Text>{item}</Text>
-                        <FontAwesome style={Styles.icon} name="pencil-square-o" size={24} color="black" />
+                        <PlanningButton style={Styles.icon} name="pencil-square-o" screen="ScheduleEditScreen" size={24} projectId={1} id={3} />
                     </View>
                 )}
                 renderSectionHeader={({ section: { title } }) => (
@@ -78,6 +110,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
                     </Text>
                 )}
             />
+            
         </SafeAreaView>
     );
 }

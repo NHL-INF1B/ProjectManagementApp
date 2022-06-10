@@ -34,11 +34,6 @@ export default function App() {
 					component={PlanningOverzichtDev}
 				/>
 
-				{/* <Stack.Screen
-					name="PlanningOverzichtDev"
-					component={PlanningOverzichtDev}
-				/>
-
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
@@ -106,7 +101,7 @@ export default function App() {
 				<Stack.Screen
 					name="LogbookScreen"
 					component={LogbookScreen}
-				/> */}
+				/>
 				
 			</Stack.Navigator>
 		</NavigationContainer>
