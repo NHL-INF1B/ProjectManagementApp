@@ -1,10 +1,11 @@
 import { Text, ScrollView, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import CustomTextInputOld from '../../components/CustomTextInput/CustomTextInputOld';
+// import CustomTextInputOld from '../../components/CustomTextInput/CustomTextInputOld';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import handlerPath from '../../../env';
 
 const WarningAddScreen = () => {
     const [member, setMember] = useState('');
@@ -12,7 +13,7 @@ const WarningAddScreen = () => {
 
     const editWarning = (reason) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningUpdateHandler.php", {
+            fetch(handlerPath + "warning/warningUpdateHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -34,7 +35,7 @@ const WarningAddScreen = () => {
 
     const deleteWarning = (reason) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningDeleteHandler.php", {
+            fetch(handlerPath + "warning/warningDeleteHandler.php", {
                 method: "DELETE",
                 headers: {
                     Accept: "application/json",

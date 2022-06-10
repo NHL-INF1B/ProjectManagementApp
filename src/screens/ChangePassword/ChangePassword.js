@@ -6,6 +6,7 @@ import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
 import Header from "../../components/Header/Header";
+import handlerPath from "../../../env";
 
 const ChangePassword = ({ route }) => {
     //get the userId from the last page.
@@ -31,7 +32,7 @@ const ChangePassword = ({ route }) => {
     //send and fetch the feedback from the API.
     const sendUpdateData = (data) => {
         try {
-			fetch("http://localhost/pma/PmaAPI/handlers/changePassword/changePassword.php", {
+			fetch(handlerPath + "changePassword/changePassword.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
