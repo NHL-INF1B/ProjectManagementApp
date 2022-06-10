@@ -28,13 +28,13 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator screenOptions={{ headerShown: false }}>	
+			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen
-					name="PlanningOverzichtDev"
-					component={PlanningOverzichtDev}
-				/>
+					name="MemberOverview"
+					component={MemberOverview}
+				/>	
 
-				{/* <Stack.Screen
+				<Stack.Screen
 					name="PlanningOverzichtDev"
 					component={PlanningOverzichtDev}
 				/>
@@ -60,7 +60,6 @@ export default function App() {
 				  options={{
 					gestureEnabled: false,
 				  }}
-				  			  
     	    	/>
 				
 				<Stack.Screen
@@ -106,7 +105,7 @@ export default function App() {
 				<Stack.Screen
 					name="LogbookScreen"
 					component={LogbookScreen}
-				/> */}
+				/>
 				
 			</Stack.Navigator>
 		</NavigationContainer>

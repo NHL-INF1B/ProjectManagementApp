@@ -18,8 +18,8 @@ const MemberOverview = ({ navigation }) => {
     const [roleName, setRoleName] = useState('');
 
     const route = useRoute();
-    const projectId = 1;//route.params.projectId;
-    const userId = 1;//route.params.userId;
+    const projectId = route.params.projectId;
+    const userId = route.params.userId;
 
     useEffect(() => {
         getRole(userId, projectId);
