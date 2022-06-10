@@ -5,11 +5,13 @@ import Styles from "./Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from "../../components/Circle/Circle";
 import ShowProfileInfo from "../../components/ShowProfileInfo/ShowProfileInfo";
+import { useRoute } from "@react-navigation/native";
 import handlerPath from "../../../env";
 
 const MemberInfo = () => {
   //declaring the const where the info goes into.
-  const memberId = 10; //temporary until the members page is made.
+  const route = useRoute();
+  const memberId = route.params.id;
   const [name, setName] = useState("-");
   const [email, setEmail] = useState("-");
   const [dateOfBirth, setDateOfBirth] = useState("-");
