@@ -2,46 +2,14 @@ import { SafeAreaView, View, Pressable, ScrollView, Text } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
+import { useRoute } from "@react-navigation/native";
 import Circle from '../../components/Circle/Circle';
 import { useForm, Controller } from "react-hook-form";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import Header from '../../components/Header/Header';
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 
-
 const HourEditScreen = ({navigation}) => {
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [isTimeStartPickerVisible, setTimeStartPickerVisibility] = useState(false);
-    const [isTimeStopPickerVisible, setTimeStopPickerVisibility] = useState(false);
-
-    const showTimeStartPicker = () => {
-        setTimeStartPickerVisibility(true);
-    };
-
-    const hideTimeStartPicker = () => {
-        setTimeStartPickerVisibility(false);
-    };
-
-    const showTimeStopPicker = () => {
-        setTimeStopPickerVisibility(true);
-    };
-
-    const hideTimeStopPicker = () => {
-        setTimeStopPickerVisibility(false);
-    };
-
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
-    };
-
-    const hideDatePicker = () => {
-        setDatePickerVisibility(false);
-    };
-
-    const handleConfirm = (date) => {
-        hideDatePicker();
-    };
-
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             title: "",
@@ -53,26 +21,25 @@ const HourEditScreen = ({navigation}) => {
     });
 
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+    const TIME_REGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     
-    const id = 1;
     useEffect(() => {
         readData(id);
     }, []);
 
     const updateData = (data) => {
         editActivity(data);
-        readData(id);
         alert("De gegevens zijn succesvol aangepast");
+        readData(id);
     };
 
     const deleteData = (data) => {
         deleteActivity(data);
-        readData(id);
-        alert("De gegevens zijn succesvol verwijderd");
+        navigation.navigate("LogbookScreen");
     };
 
     //Selecting the data from the database based on id
-    const readData = (id) => {
+    const readData = (data) => {
         fetch('http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditSelectHandler.php', {
             method: "POST",
             headers: {
@@ -81,6 +48,11 @@ const HourEditScreen = ({navigation}) => {
             },
             body: JSON.stringify({
                 id: id,
+                title: data.title,
+                description: data.description,
+                date: data.date,
+                time_start: data.time_start,
+                time_end: data.time_end,
             })
         })
         .then((response) => response.json())
@@ -110,6 +82,8 @@ const HourEditScreen = ({navigation}) => {
                     date: data.date,
                     time_start: data.time_start,
                     time_end: data.time_end,
+                    user_id: user_id,
+                    project_id, project_id,
                 }),
             })
             .then((response) => response.json())
@@ -135,7 +109,7 @@ const HourEditScreen = ({navigation}) => {
                     id: id,
                 }),
             })
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((response) => {
                 console.log(response);
                 catchFeedback(response);
@@ -152,13 +126,34 @@ const HourEditScreen = ({navigation}) => {
     const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":
-              alert("De gegevens zijn geüpdate");
-              break;
+                alert("De gegevens zijn geüpdate");
+                break;
+            case "data_deleted":
+                alert("De gegevens zijn verwijderd");
+                break;
             default:
-              console.log('Data not defined');
-              break;
+                console.log('Success');
+                break;
           }
 	};
+
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        hideDatePicker();
+    };
+
+    const route = useRoute();
+    const user_id = route.params.userId;
+    const project_id = route.params.projectId;
     
     return (
         <SafeAreaView style={styles.SafeAreaView}>
@@ -275,66 +270,62 @@ const HourEditScreen = ({navigation}) => {
                     )
                 }
 
-                {/* Time start */}
-                <View>
+                {/* Time_start */}
+                <View style={styles.marginBottom1}>
                     <Controller
                         name="time_start"
                         control={control}
                         rules={{
                             required: { value: true, message: 'Start tijd is verplicht' },
+                            maxLength: {
+                                value: 5,
+                                message: 'Start tijd is ongeldig',
+                            },
                             pattern: {
+                                value:TIME_REGEX,
                                 message: 'Start tijd is incorrect'
                             },
                         }}
                         render={({ field: { onChange, value } }) => (
-                        <View style={styles.marginBottom1}>
-                            <Text style={styles.subtitle}>START TIJD</Text>
-                            <CustomButton
-                                buttonType={"lightBlueButton"}
-                                buttonText={"buttonTextBlack"}
-                                text={"Kies een start tijd"}
-                                onPress={showTimeStartPicker}
+                            <CustomTextInput 
+                                placeholder="Start tijd" 
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                errorText={errors?.time_start?.message} 
+                                titleText="Start tijd"
+                                maxLength={5}
                             />
-                                <DateTimePickerModal
-                                    isVisible={isTimeStartPickerVisible}
-                                    mode="time"
-                                    onConfirm={handleConfirm}
-                                    onCancel={hideTimeStartPicker}
-                                />
-                        </View>
                         )}
-                    />   
+                    />
                 </View>
 
-                {/* Time end */}
-                <View>
+                {/* Time_end */}
+                <View style={styles.marginBottom1}>
                     <Controller
                         name="time_end"
                         control={control}
                         rules={{
                             required: { value: true, message: 'Eind tijd is verplicht' },
+                            maxLength: {
+                                value: 5,
+                                message: 'Eind tijd is ongeldig',
+                            },
                             pattern: {
+                                value:TIME_REGEX,
                                 message: 'Eind tijd is incorrect'
                             },
                         }}
                         render={({ field: { onChange, value } }) => (
-                        <View style={styles.marginBottom1}>
-                            <Text style={styles.subtitle}>EIND TIJD</Text>
-                            <CustomButton
-                                buttonType={"lightBlueButton"}
-                                buttonText={"buttonTextBlack"}
-                                text={"Kies een eind tijd"}
-                                onPress={showTimeStopPicker}
+                            <CustomTextInput 
+                                placeholder="Eind tijd" 
+                                onChangeText={(text) => onChange(text)} 
+                                value={value} 
+                                errorText={errors?.time_end?.message} 
+                                titleText="Eind tijd"
+                                maxLength={5}
                             />
-                            <DateTimePickerModal
-                                isVisible={isTimeStopPickerVisible}
-                                mode="time"
-                                onConfirm={handleConfirm}
-                                onCancel={hideTimeStopPicker}
-                            />
-                        </View>
                         )}
-                    />   
+                    />
                 </View>
 
                 <View style={styles.marginBottom1}>

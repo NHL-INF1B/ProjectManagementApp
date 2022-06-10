@@ -6,7 +6,7 @@ import Circle from '../../components/Circle/Circle';
 import Header from '../../components/Header/Header';
 import { useForm, Controller } from "react-hook-form";
 import CustomButton from '../../components/CustomButton/CustomButton';
-import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import DatePicker from 'react-native-modern-datepicker';
 import { useRoute } from "@react-navigation/native";
 import HourTimer from '../../components/HourTimer/HourTimer';
 import * as Notifications from 'expo-notifications';
@@ -26,7 +26,6 @@ Notifications.setNotificationHandler({
     await schedulePushNotification();
 };
 
-
 const HourAddScreen = () => {
 
     //notifactie toestemming vragen en alles
@@ -34,8 +33,7 @@ const HourAddScreen = () => {
     
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
-}, []);
-
+    }, []);
 
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
@@ -143,8 +141,8 @@ const HourAddScreen = () => {
     };
 
     const route = useRoute();
-    const userId = route.params.userId;
-    const projectId = route.params.projectId;
+    const user_id = route.params.userId;
+    const project_id = route.params.projectId;
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
@@ -317,6 +315,11 @@ const HourAddScreen = () => {
                         )}
                     />
                 </View>
+
+                <View>
+                    <Text>{errors?.times_invalid?.message}</Text>
+                </View>
+
 
                 <View style={styles.marginBottom5}>
                     <CustomButton 
