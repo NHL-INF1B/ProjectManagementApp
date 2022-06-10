@@ -4,6 +4,7 @@ import Warning from '../../components/Warning/Warning';
 import Styles from "./Styles";
 import { useRoute } from "@react-navigation/native";
 import Header from '../../components/Header/Header';
+import handlerPath from '../../../env';
 
 const WarningScreen = ({ navigation }) => {
     const route = useRoute();
@@ -21,7 +22,7 @@ const WarningScreen = ({ navigation }) => {
     }, []);
 
     const readData = (projectId) => {
-        fetch('https://inf1b.serverict.nl/handlers/warning/warninghandler.php', {
+        fetch(handlerPath + 'warning/warninghandler.php', {
             method: 'post',
             headers: {
                 Accept: 'application/json',
@@ -39,7 +40,7 @@ const WarningScreen = ({ navigation }) => {
     };
 
     const getRole = (userId, projectId) => {
-        fetch("http://localhost/PMA/PmaAPI/handlers/permissions/getRoleIdHandler.php", {
+        fetch(handlerPath + "permissions/getRoleIdHandler.php", {
             method: "POST",
             headers: {
                 Accept: "application/json",

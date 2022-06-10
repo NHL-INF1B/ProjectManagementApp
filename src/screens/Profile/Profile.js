@@ -10,6 +10,7 @@ import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import ChangePassword from "../ChangePassword/ChangePassword";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Header from "../../components/Header/Header";
+import handlerPath from "../../../env";
 
 const Profile = ({ navigation }) => {
     const [isShowingDatePicker, setShowingDatePicker] = useState(false);
@@ -65,7 +66,7 @@ const Profile = ({ navigation }) => {
     const getUserData = (userId) => {
         console.log(userId);
 		try {
-			fetch("https://inf1b.serverict.nl/handlers/profile/profileFetch.php", {
+			fetch(handlerPath + "profile/profileFetch.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -91,7 +92,7 @@ const Profile = ({ navigation }) => {
 
     const sendUpdateData = (data) => {
         try {
-			fetch("https://inf1b.serverict.nl/handlers/profile/profileEdit.php", {
+			fetch(handlerPath + "profile/profileEdit.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",

@@ -17,8 +17,10 @@ import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 import SelectLogbookUser from "./src/screens/LogbookScreen/SelectLogbookUser";
 import Profile from "./src/screens/Profile/Profile";
 import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOverzichtDev";
+import MemberOverview from "./src/screens/MemberOverview/MemberOverview";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
+import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -28,12 +30,25 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
 				/>
 
+				<Stack.Screen
+					name="RegisterScreen"
+					component={RegisterScreen}
+				/>
+
+				<Stack.Screen
+					name="MemberOverview"
+					component={MemberOverview}
+				/>	
+
+				<Stack.Screen
+					name="PlanningOverzichtDev"
+					component={PlanningOverzichtDev}
+				/>
 
 				<Stack.Screen 
 					name="ChangePassword"
@@ -46,7 +61,6 @@ export default function App() {
 				  options={{
 					gestureEnabled: false,
 				  }}
-				  			  
     	    	/>
 				
 				<Stack.Screen
@@ -97,12 +111,6 @@ export default function App() {
 				<Stack.Screen
 					name="SelectLogbookUser"
 					component={SelectLogbookUser}
-				/>
-
-				
-				<Stack.Screen
-				name="PlanningOverzichtDev"
-				component={PlanningOverzichtDev}
 				/>
 				
 				<Stack.Screen

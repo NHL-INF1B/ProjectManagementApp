@@ -6,6 +6,7 @@ import { useForm, Controller } from "react-hook-form";
 import Circle from '../../components/Circle/Circle';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { useRoute } from "@react-navigation/native";
+import handlerPath from '../../../env';
 
 const HourAddScreen = () => {
 
@@ -29,7 +30,7 @@ const HourAddScreen = () => {
     //Saves the current timestamp & inserts it into the database as the start_time along with the other data via the handler file
     const startTimer = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditStartHandler.php", {
+            fetch(handlerPath + "houredit/houreditStartHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -63,7 +64,7 @@ const HourAddScreen = () => {
     //Saves the current timestamp & updates it into the database as the end_time via the handler file
     const stopTimer = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditStopHandler.php", {
+            fetch(handlerPath + "houredit/houreditStopHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
