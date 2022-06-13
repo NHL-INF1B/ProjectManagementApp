@@ -204,7 +204,6 @@ const LoginScreen = ({ navigation }) => {
         <View style={{ marginBottom: 20 }}>
           <CustomButton 
             buttonType={"blueButton"}
-            buttonText={"buttonText"}
             text={"Log in"}
             onPress={handleSubmit(onSubmit)}
           />
