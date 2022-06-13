@@ -1,5 +1,5 @@
 import { ScrollView, View, SafeAreaView } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
@@ -8,7 +8,7 @@ import Circle from '../../components/Circle/Circle';
 import { useRoute } from "@react-navigation/native";
 import CustomButton from '../../components/CustomButton/CustomButton';
 
-const WarningAddScreen = (navigation) => {
+const WarningAddScreen = ()  => {
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             project_member: "",
@@ -16,53 +16,22 @@ const WarningAddScreen = (navigation) => {
         }
     });
 
-    useEffect(() => {
-        readData(id);
-    }, []);
-
-    const updateData = (data) => {
-        editWarning(data);
-        readData(id);
+    const submitData = (data) => {
+        sendDataToAPI(data);
+        alert("De gegevens zijn opgeslagen");
     };
 
-    const deleteData = (data) => {
-        deleteWarning(data);
-        navigation.navigate("WarningScreen");
-    };
 
-    //Selecting the data from the database based on id
-    const readData = (data) => {
-        fetch('http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningEditSelectHandler.php', {
-            method: "POST",
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: id,
-                reason: data.reason,
-
-            })
-        })
-        .then((response) => response.json())
-        .then((response) => {
-            // setValue("project_member", response.project_member);
-            setValue("reason", response.reason);
-            catchFeedback(response);
-        })
-    };
-
-    //Updating the data based on id
-    const editWarning = (data) => {
+    //Inserting the data into the database
+    const sendDataToAPI = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningUpdateHandler.php", {
+            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningInsertHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: id,
                     reason: data.reason,
                     user_id: user_id,
                     project_id: project_id,
@@ -71,29 +40,9 @@ const WarningAddScreen = (navigation) => {
             .then((response) => response.json())
             .then((response) => {
                 console.log(response);
-                catchFeedback(response);
-            });
-        } catch (error) {
-            alert(error);
-        }
-    };
-
-     //Deleting a warning based on id
-    const deleteWarning = (data) => {
-        try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningDeleteHandler.php", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    id: id,
-                }),
-            })
-            .then((response) => response.json())
-            .then((response) => {
-                console.log(response);
+                setValue("reason", response.reason);
+                setValue("user_id", response.user_id);
+                setValue("project_id", response.project_id);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -103,28 +52,28 @@ const WarningAddScreen = (navigation) => {
 
     const catchFeedback = (response) => {
         switch (response) {
-            case "data_updated":
-                alert("De gegevens zijn aangepast");
+            case "project_member_incorrect":
+                alert("Het projectlid is incorrect");
                 break;
-            case "data_deleted":
-                alert("De gegevens zijn verwijderd");
+            case "reason_incorrect":
+                alert("De reden is incorrect");
                 break;
             default:
-              console.log('Success');
-              break;
+                console.log("De gegevens zijn opgeslagen");
+                break;
           }
 	};
 
     const route = useRoute();
-    const user_id = route.params.userId;
     const project_id = route.params.projectId;
+    const user_id = route.params.userId;
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
             <ScrollView style={styles.SafeAreaView}>
                 <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
                 <View style={styles.marginBottom5}>
-                    <Circle name={"alert-circle"} size={60} color={"#000000"} text={"Waarschuwing\nBewerken"} />
+                    <Circle name={"alert-circle"} size={60} color={"#000000"} text={"Waarschuwing\nToevoegen"} />
                 </View>
 
                 {/* Project_member */}
@@ -175,24 +124,14 @@ const WarningAddScreen = (navigation) => {
                     />
                 </View>
 
-                <View style={styles.marginBottom1}>
-                    <CustomButton 
-                        buttonType={"blueButton"}
-                        buttonText={"buttonText"}
-                        text={"Bewerken"}
-                        onPress={handleSubmit(updateData)}
-                    />
-                </View>
-
                 <View style={styles.marginBottom5}>
                     <CustomButton 
                         buttonType={"redButton"}
                         buttonText={"buttonText"}
-                        text={"Verwijderen"}
-                        onPress={handleSubmit(deleteData)}
+                        text={"Toekennen"}
+                        onPress={handleSubmit(submitData)}
                     />
                 </View>
-
             </ScrollView>
         </SafeAreaView>
     );
