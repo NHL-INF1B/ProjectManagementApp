@@ -40,7 +40,7 @@ export default function ProjectScreen() {
 		}
 	};
 
-    const getRoleId = (userId) =>   {
+    const getRoleId = (userId, projectId) =>   {
         try {
 			fetch(handlerPath + "projectScreen/getRole.php", {
 				method: "POST",
@@ -50,6 +50,7 @@ export default function ProjectScreen() {
 				},
 				body: JSON.stringify({
                     userId: userId,
+                    projectId: projectId,
 				}),
 			})
             // .then((response) => response.text())
@@ -57,7 +58,7 @@ export default function ProjectScreen() {
             .then((response) => {
                 console.log(response);
                 setRoleId(response[0].roleId);
-                console.log(response[0].roleId)
+                console.log(response[0].roleId);
                 if(response[0].roleId == 1 || response[0].roleId == 2){
                     setVoorzitter(true);
                 };
@@ -69,7 +70,7 @@ export default function ProjectScreen() {
 
     useEffect(() => {
         getProjectData(projectId, userId);
-        getRoleId(userId);
+        getRoleId(userId, projectId);
       }, []);
     
     return (

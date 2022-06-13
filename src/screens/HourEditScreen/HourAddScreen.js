@@ -11,6 +11,7 @@ import { useRoute } from "@react-navigation/native";
 import HourTimer from '../../components/HourTimer/HourTimer';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
+import handlerPath from '../../../env';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -20,7 +21,7 @@ Notifications.setNotificationHandler({
     }),
   });
 
-  async function planNotification() {
+async function planNotification() {
     Notifications.getAllScheduledNotificationsAsync();
     await Notifications.cancelAllScheduledNotificationsAsync();
     await schedulePushNotification();
@@ -28,7 +29,7 @@ Notifications.setNotificationHandler({
 
 const HourAddScreen = () => {
 
-    //notifactie toestemming vragen en alles
+    //Notifactie toestemming vragen en alles
     const [expoPushToken, setExpoPushToken] = useState('');
     
     useEffect(() => {
@@ -57,7 +58,7 @@ const HourAddScreen = () => {
     //Inserting the data into the database
     const sendDataToAPI = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditInsertHandler.php", {
+            fetch(handlerPath + "houredit/houreditInsertHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -69,8 +70,8 @@ const HourAddScreen = () => {
                     date: data.date,
                     time_start: data.time_start,
                     time_end: data.time_end,
-                    user_id: user_id,
-                    project_id: project_id,
+                    userId: userId,
+                    projectId: projectId,
                 }),
             })
             .then((response) => response.json())
@@ -81,8 +82,8 @@ const HourAddScreen = () => {
                 setValue("date", response.date);
                 setValue("time_start", response.time_start);
                 setValue("time_end", response.time_end);
-                setValue("user_id", response.user_id);
-                setValue("project_id", response.project_id);
+                setValue("userId", response.userId);
+                setValue("projectId", response.projectId);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -141,8 +142,8 @@ const HourAddScreen = () => {
     };
 
     const route = useRoute();
-    const user_id = route.params.userId;
-    const project_id = route.params.projectId;
+    const userId = route.params.userId;
+    const projectId = route.params.projectId;
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
