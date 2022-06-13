@@ -1,8 +1,8 @@
 import {React, useEffect} from "react";
 import HourAddScreen from "./src/screens/HourEditScreen/HourAddScreen";
 import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
-import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
-import WarningaddScreen from "./src/screens/WarningScreen/WarningAddScreen";
+import WarningScreen from "./src/screens/WarningScreen/WarningScreen"
+import WarningAddScreen from "./src/screens/WarningScreen/WarningAddScreen";;
 import WarningEditScreen from "./src/screens/WarningScreen/WarningEditScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -109,6 +109,11 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="WarningAddScreen"
+					component={WarningAddScreen}
+				/>	
+
+				<Stack.Screen
 					name="SelectLogbookUser"
 					component={SelectLogbookUser}
 				/>
@@ -123,11 +128,6 @@ export default function App() {
 					name="WarningEditScreen"
 					component={WarningEditScreen}
 				/>
-				
-				<Stack.Screen
-					name="WarningaddScreen"
-					component={WarningaddScreen}
-				/>	
 					
 				<Stack.Screen
 					name="HourEditScreen"

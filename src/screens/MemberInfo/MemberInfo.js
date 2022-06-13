@@ -7,6 +7,7 @@ import Circle from "../../components/Circle/Circle";
 import ShowProfileInfo from "../../components/ShowProfileInfo/ShowProfileInfo";
 import { useRoute } from "@react-navigation/native";
 import handlerPath from "../../../env";
+import Header from '../../components/Header/Header';
 
 const MemberInfo = () => {
   //declaring the const where the info goes into.
@@ -78,9 +79,12 @@ const MemberInfo = () => {
     }
   };
 
-  //the screen
+  var GoToType = "None";
+  var GoTo = "None";
+
   return (
     <SafeAreaView style={Styles.SafeAreaView}>
+      <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" />
       <View style={Styles.person}>
         <Circle name="account" color="black" size={90} style={Styles.Circle} />
       </View>

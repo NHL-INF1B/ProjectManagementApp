@@ -10,8 +10,7 @@ import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import ChangePassword from "../ChangePassword/ChangePassword";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import MemberTile from "../../components/MemberTile/MemberTile";
-
-import membertjes from "./membertjes.json";
+import Header from '../../components/Header/Header';
 import handlerPath from "../../../env";
 
 const MemberOverview = ({ navigation }) => {
@@ -23,9 +22,6 @@ const MemberOverview = ({ navigation }) => {
     const userId = route.params.userId;
 
     useEffect(() => {
-        console.log('hij is er op gekomen')
-        console.log(userId)
-        console.log(projectId)
         getRole(userId, projectId);
     }, []);
 
@@ -77,8 +73,12 @@ const MemberOverview = ({ navigation }) => {
         }
     }
 
+    var GoToType = "None";
+    var GoTo = "None";
+
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
             <FlatList
                 data={member}
                 keyExtractor={(member) => member.id.toString()}

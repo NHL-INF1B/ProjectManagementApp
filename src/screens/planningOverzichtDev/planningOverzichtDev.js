@@ -14,6 +14,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import handlerPath from "../../../env";
+import Header from '../../components/Header/Header';
 
 const PlanningOverzichtDev = ({ navigation }) => {
     const [data, setData] = useState([]);
@@ -61,9 +62,13 @@ const PlanningOverzichtDev = ({ navigation }) => {
 
         return _data;
     }
+
+    var GoToType = "None";
+    var GoTo = "None";
     
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" />
             <SectionList style={Styles.sectionList} 
                 sections={filterData(data)}
                 keyExtractor={(item) => item}
