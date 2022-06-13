@@ -5,6 +5,7 @@ import { Picker, onOpen } from 'react-native-actions-sheet-picker';
 import allRoles from './countries.json';
 import MemberInfo from '../../screens/MemberInfo/MemberInfo';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import handlerPath from '../../../env';
 
 
 
@@ -45,7 +46,7 @@ function MemberTile(props) {
         console.log(role.id);
 
         try {
-            fetch("http://localhost/pma/PmaAPI/handlers/projectMembers/updateRole.php", {
+            fetch(handlerPath + "projectMembers/updateRole.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
