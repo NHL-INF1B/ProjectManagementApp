@@ -22,6 +22,7 @@ import MemberOverview from "./src/screens/MemberOverview/MemberOverview";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
+import Scorebord from "./src/screens/Scorebord/Scorebord";
 
 
 const Stack = createNativeStackNavigator();
@@ -138,7 +139,12 @@ export default function App() {
 				<Stack.Screen
 					name="HourEditScreen"
 					component={HourEditScreen}
-				/>							
+				/>			
+
+				<Stack.Screen
+					name="Scorebord"
+					component={Scorebord}
+				/>					
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
