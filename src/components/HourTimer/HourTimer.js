@@ -1,8 +1,9 @@
 import { ScrollView, View, SafeAreaView } from 'react-native';
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import { useForm, Controller } from "react-hook-form";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from '../../components/Circle/Circle';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { useRoute } from "@react-navigation/native";
@@ -10,8 +11,11 @@ import handlerPath from '../../../env';
 
 const HourAddScreen = () => {
 
+    const [id, setId] = useState("-");
+
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
+            id: "",
             title_timer: "",
             description_timer: "",
         }
@@ -19,6 +23,7 @@ const HourAddScreen = () => {
 
     const timerStarter = (data) => {
         startTimer(data);
+        storeData(data);
         alert("De timer is gestart");
     }
 
@@ -39,25 +44,28 @@ const HourAddScreen = () => {
                 body: JSON.stringify({
                     title: data.title_timer,
                     description: data.description_timer,
-                    user_id: user_id,
-                    project_id: project_id,
+                    userId: userId,
+                    projectId: projectId,
                 }),
             })
             .then((response) => response.json())
             .then((response) => {
                 console.log(response);
-                setValue("id", response.id)
+                setValue("id", response.id);
                 setValue("title", response.title);
                 setValue("description", response.description);
                 setValue("date", response.date);
                 setValue("time_start", response.time_start);
                 setValue("time_end", response.time_end);
-                setValue("user_id", response.user_id);
-                setValue("project_id", response.project_id);
+                setValue("userId", response.userId);
+                setValue("projectId", response.projectId);
+                setId(response.id);
+                storeData(response.id);
                 catchFeedback(response);
+
             });
         } catch (error) {
-            alert(error);
+            console.log(error);
         }
     };
 
@@ -71,23 +79,20 @@ const HourAddScreen = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: data.id,
-                    title: data.title,
-                    description: data.description,
-                    date: data.date,
-                    time_start: data.time_start,
+                    id: id,
                     time_end: data.time_end,
-                    user_id: user_id,
-                    project_id: project_id,
+                    userId: userId,
+                    projectId: projectId,
                 }),
             })
-            .then((response) => response.json())
+            .then((response) => response.text())
             .then((response) => {
                 console.log(response);
                 catchFeedback(response);
+                removeValue(); //If you want to remove the stored data
             });
         } catch (error) {
-            alert(error);
+            console.log(error);
         }
     };
 
@@ -119,6 +124,45 @@ const HourAddScreen = () => {
                 break;
           }
 	};
+
+    useEffect(() => {
+    const data = getData();
+    data.then((data) => {
+        if (data !== undefined) {
+            console.log(data);
+            setId(data);
+        }
+        });    
+    }, []);
+     
+    const getData = async () => {
+        try {
+          const jsonValue = await AsyncStorage.getItem("@timer_data");
+          if (jsonValue !== null) {
+            return JSON.parse(jsonValue);
+          }
+        } catch (e) {
+          alert(e);
+        }
+    };
+    
+    const storeData = async (data) => {
+    try {
+        const jsonValue = JSON.stringify(data);
+        await AsyncStorage.setItem("@timer_data", jsonValue);
+    } catch (e) {
+        alert(e);
+    }
+    };
+    
+    const removeValue = async () => {
+        try {
+            await AsyncStorage.removeItem("@timer_data");
+        } catch (e) {
+            console.log(e);
+        }
+        console.log("Data has been removed");
+    };
 
     const route = useRoute();
     const userId = route.params.userId;

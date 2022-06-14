@@ -7,10 +7,35 @@ export default StyleSheet.create({
 		flex: 1,
 	},
     row: {
-        paddingHorizontal: 20,
-        paddingVertical: 10,
+		flexDirection: 'row', 
+        paddingVertical: 5,
+		backgroundColor: "white",
+		borderWidth: 2,
+        borderRadius: 9,
+        justifyContent: 'center',
+		textAlign: 'left',
+		fontWeight: 'bold',
+		justifyContent: 'space-between',
+		marginBottom: 10,
+		
+
 	},
 	sectionHeader: {
-		backgroundColor: '#efefef',
+		backgroundColor: "#00aabb",
+		color: 'white',
+		
+	},
+	sectionList: {
+		flex: 1,
+		paddingHorizontal: 20,
+        paddingVertical: 10,
+		textAlign: 'left',
+      	fontSize: 20,
+		backgroundColor: "#00aabb",
+		
+		
+	},
+	icon: {
+		textAlign: 'right',
 	},
 });

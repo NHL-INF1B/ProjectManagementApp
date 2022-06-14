@@ -84,10 +84,12 @@ const CreateProject = ({ navigation }) => {
         <View style={styles.div}>
           <Circle name={"account-group"} size={60} color={"black"} style={[styles.icon,]} />
         </View>
+
         <View style={styles.div}>
           <Text style={[styles.title, styles.marginBottom25, styles.marginTop50, styles.sampleText,]}>PROJECT AANMAKEN</Text>
         </View>
-        <View style={styles.inputContainer}>
+
+        <View style={[styles.inputContainer, styles.marginBottom25]}>
           <Controller
             name="name"
             control={control}

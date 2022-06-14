@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
         padding: 13,
         alignSelf: "center",
         textAlign: 'center',
-        borderWidth: 1,
-        padding: '0.4%',
         backgroundColor: 'white',
         width: '70%',
         borderWidth: 3,

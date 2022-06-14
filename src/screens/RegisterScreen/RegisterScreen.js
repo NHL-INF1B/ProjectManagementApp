@@ -275,7 +275,6 @@ const RegisterScreen = ({ navigation }) => {
           <View style={{ marginBottom: 20 }}>
             <CustomButton
               buttonType={"blueButton"}
-              buttonText={"buttonText"}
               text={"Registreren"}
               onPress={handleSubmit(onSubmit)}
             />

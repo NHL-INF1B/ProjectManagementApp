@@ -1,12 +1,13 @@
 import {React, useEffect} from "react";
 import HourAddScreen from "./src/screens/HourEditScreen/HourAddScreen";
 import HourEditScreen from "./src/screens/HourEditScreen/HourEditScreen";
-import WarningScreen from "./src/screens/WarningScreen/WarningScreen";
-import WarningaddScreen from "./src/screens/WarningScreen/WarningAddScreen";
+import WarningScreen from "./src/screens/WarningScreen/WarningScreen"
+import WarningAddScreen from "./src/screens/WarningScreen/WarningAddScreen";;
 import WarningEditScreen from "./src/screens/WarningScreen/WarningEditScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreateProject from "./src/screens/CreateProject/CreateProject";
+import EditProject from "./src/screens/CreateProject/EditProject";
 import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
@@ -17,9 +18,12 @@ import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 import SelectLogbookUser from "./src/screens/LogbookScreen/SelectLogbookUser";
 import Profile from "./src/screens/Profile/Profile";
 import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOverzichtDev";
+import MemberOverview from "./src/screens/MemberOverview/MemberOverview";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
+import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import Scorebord from "./src/screens/Scorebord/Scorebord";
+
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -28,17 +32,25 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-
 				<Stack.Screen
 					name="LoginScreen"
 					component={LoginScreen}
 				/>
 
 				<Stack.Screen
-					name="Scorebord"
-					component={Scorebord}
+					name="RegisterScreen"
+					component={RegisterScreen}
 				/>
 
+				<Stack.Screen
+					name="MemberOverview"
+					component={MemberOverview}
+				/>	
+
+				<Stack.Screen
+					name="PlanningOverzichtDev"
+					component={PlanningOverzichtDev}
+				/>
 
 				<Stack.Screen 
 					name="ChangePassword"
@@ -51,7 +63,6 @@ export default function App() {
 				  options={{
 					gestureEnabled: false,
 				  }}
-				  			  
     	    	/>
 				
 				<Stack.Screen
@@ -80,6 +91,11 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="EditProject"
+					component={EditProject}
+				/>
+
+				<Stack.Screen
 					name="WarningScreen"
 					component={WarningScreen}
 				/>
@@ -100,14 +116,13 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="WarningAddScreen"
+					component={WarningAddScreen}
+				/>	
+
+				<Stack.Screen
 					name="SelectLogbookUser"
 					component={SelectLogbookUser}
-				/>
-
-				
-				<Stack.Screen
-				name="PlanningOverzichtDev"
-				component={PlanningOverzichtDev}
 				/>
 				
 				<Stack.Screen
@@ -120,16 +135,16 @@ export default function App() {
 					name="WarningEditScreen"
 					component={WarningEditScreen}
 				/>
-				
-				<Stack.Screen
-					name="WarningaddScreen"
-					component={WarningaddScreen}
-				/>	
 					
 				<Stack.Screen
 					name="HourEditScreen"
 					component={HourEditScreen}
-				/>							
+				/>			
+
+				<Stack.Screen
+					name="Scorebord"
+					component={Scorebord}
+				/>					
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

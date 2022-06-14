@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from 'react';
-import { View, SafeAreaView, FlatList, Text } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
 import Warning from '../../components/Warning/Warning';
 import Styles from "./Styles";
 import { useRoute } from "@react-navigation/native";
