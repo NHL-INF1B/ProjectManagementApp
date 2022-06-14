@@ -20,4 +20,10 @@ export default StyleSheet.create({
   marginBottom5: {
     marginBottom: '5%',
   },
+  nothingFound: {
+    marginTop: 50,
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    fontsize: 25,
+  }
 });

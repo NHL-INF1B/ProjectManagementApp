@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from 'react';
-import { SafeAreaView, FlatList } from 'react-native';
+import { Text, SafeAreaView, FlatList } from 'react-native';
 import Warning from '../../components/Warning/Warning';
 import Styles from "./Styles";
 import { useRoute } from "@react-navigation/native";
@@ -66,10 +66,11 @@ const WarningScreen = ({ navigation }) => {
         var GoTo = "None";
     }
 
-    return (
-        <SafeAreaView style={Styles.SafeAreaView}>
-            <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-            <FlatList 
+    function checkData(warnings){
+        if(warnings == "NO_DATA"){
+            return(<Text style={Styles.nothingFound}>Er zijn geen waarschuwingen uitgedeelt</Text>)
+        } else{
+            return(<FlatList 
                 data={warnings}
                 keyExtractor={(warning) => warning.id.toString()}
                 renderItem={({ item }) => 
@@ -78,7 +79,16 @@ const WarningScreen = ({ navigation }) => {
                         reason={item.reason} 
                     />
                 }
-            />
+            />)
+        }
+    }
+
+    return (
+        <SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+
+            {checkData(warnings)}
+            
         </SafeAreaView>
     );
 }

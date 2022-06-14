@@ -23,4 +23,11 @@ export default StyleSheet.create({
     color: "red",
     fontWeight: "bold",
   },
+  nothingFound: {
+    marginTop: 50,
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    fontsize: 25,
+    textAlign: "center",
+  }
 });
