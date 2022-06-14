@@ -7,6 +7,7 @@ import WarningEditScreen from "./src/screens/WarningScreen/WarningEditScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreateProject from "./src/screens/CreateProject/CreateProject";
+import EditProject from "./src/screens/CreateProject/EditProject";
 import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import ScheduleEditScreen from "./src/screens/ScheduleEditScreen/ScheduleEditScreen";
 import MemberInfo from "./src/screens/MemberInfo/MemberInfo";
@@ -86,6 +87,11 @@ export default function App() {
 				<Stack.Screen
 					name="CreateProject"
 					component={CreateProject}
+				/>
+
+				<Stack.Screen
+					name="EditProject"
+					component={EditProject}
 				/>
 
 				<Stack.Screen

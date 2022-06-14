@@ -30,7 +30,7 @@ const HourEditScreen = ({navigation}) => {
     const updateData = (data) => {
         editActivity(data);
         alert("De gegevens zijn succesvol aangepast");
-        readData(id);
+        readData();
     };
 
     const deleteData = (data) => {
@@ -69,7 +69,7 @@ const HourEditScreen = ({navigation}) => {
     //Updating the data based on id
     const editActivity = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditUpdateHandler.php", {
+            fetch(handlerPath + "houredit/houreditUpdateHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -99,7 +99,7 @@ const HourEditScreen = ({navigation}) => {
     //Deleting an activity based on id
     const deleteActivity = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditDeleteHandler.php", {
+            fetch(handlerPath + "houredit/houreditDeleteHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -154,6 +154,7 @@ const HourEditScreen = ({navigation}) => {
     const route = useRoute();
     const user_id = route.params.userId;
     const project_id = route.params.projectId;
+    const id = route.params.id;
     
     return (
         <SafeAreaView style={styles.SafeAreaView}>

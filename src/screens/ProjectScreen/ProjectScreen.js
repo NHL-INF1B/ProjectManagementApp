@@ -53,7 +53,6 @@ export default function ProjectScreen() {
                     projectId: projectId,
 				}),
 			})
-            // .then((response) => response.text())
             .then((response) => response.json())
             .then((response) => {
                 console.log(response);
@@ -74,45 +73,49 @@ export default function ProjectScreen() {
       }, []);
     
     return (
-            <SafeAreaView style={Styles.Container}>
+        <SafeAreaView style={Styles.Container}>
+            {isVoorzitter ? (
                 <Header GoToType="Edit" GoTo="EditProject" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-                <Image style={Styles.Img} source={require("../../assets/images/logo.png")} />
-                <Text style={Styles.ProjectName}>{projectName}</Text>
-                <ScrollView>
+            ) : (
+                <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+            )}
+            <Image style={Styles.Img} source={require("../../assets/images/logo.png")} />
+            <Text style={Styles.ProjectName}>{projectName}</Text>
+            <ScrollView>
+                <View style={Styles.row}>
+                    <View style={Styles.column}>
+                        <Tile text="Teamcode" image="book" screen="" projectId={projectId} userId={userId} />
+                    </View>
+                    <View style={Styles.column}>
+                        <Tile text="Planning" image="calendar" screen="PlanningOverzichtDev" projectId={projectId} userId={userId} />
+                    </View>
+                </View>
+                <View style={Styles.row}>
+                    <View style={Styles.column}>
+                        <Tile text="Urenverwantwoording" image="clipboard-text" screen="LogbookScreen" projectId={projectId} userId={userId} />
+                    </View>
+                    <View style={Styles.column}>
+                        <Tile text="Waarschuwingen" image="exclamation-thick" screen="WarningScreen" projectId={projectId} userId={userId} />
+                    </View>
+                </View>
+                <View style={Styles.row}>
+                    <View style={Styles.column}>
+                        <Tile text="Leden" image="account-group" screen="MemberOverview" projectId={projectId} userId={userId} />
+                    </View>
+                    <View style={Styles.column}>
+                        <Tile text="Scorebord" image="star" screen="" projectId={projectId} userId={userId} />
+                    </View>
+                </View>
+                {isVoorzitter ? (
                     <View style={Styles.row}>
                         <View style={Styles.column}>
-                            <Tile text="Teamcode" image="book" screen="" projectId={projectId} userId={userId} />
-                        </View>
-                        <View style={Styles.column}>
-                            <Tile text="Planning" image="calendar" screen="PlanningOverzichtDev" projectId={projectId} userId={userId} />
+                            <Tile text="Uitnodigingen" image="account-plus" screen="InviteMembers" projectId={projectId} userId={userId} />
                         </View>
                     </View>
-                    <View style={Styles.row}>
-                        <View style={Styles.column}>
-                            <Tile text="Urenverwantwoording" image="clipboard" screen="LogbookScreen" projectId={projectId} userId={userId} />
-                        </View>
-                        <View style={Styles.column}>
-                            <Tile text="Waarschuwingen" image="exclamation-thick" screen="WarningScreen" projectId={projectId} userId={userId} />
-                        </View>
-                    </View>
-                    <View style={Styles.row}>
-                        <View style={Styles.column}>
-                            <Tile text="Leden" image="account-group" screen="MemberOverview" projectId={projectId} userId={userId} />
-                        </View>
-                        <View style={Styles.column}>
-                            <Tile text="Scorebord" image="star" screen="" projectId={projectId} userId={userId} />
-                        </View>
-                    </View>
-                    {isVoorzitter ? (
-                        <View style={Styles.row}>
-                            <View style={Styles.column}>
-                                <Tile text="Uitnodigingen" image="account-plus" screen="InviteMembers" projectId={projectId} userId={userId} />
-                            </View>
-                        </View>
-                    ) : (
-                        <View style={Styles.row}></View>
-                    )}
-                </ScrollView>
-            </SafeAreaView>
+                ) : (
+                    <View style={Styles.row}></View>
+                )}
+            </ScrollView>
+        </SafeAreaView>
     );
 }
