@@ -5,6 +5,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import Header from "../../components/Header/Header";
+import handlerPath from "../../../env";
 
 
 const Scorebord = ({ route }) => {
