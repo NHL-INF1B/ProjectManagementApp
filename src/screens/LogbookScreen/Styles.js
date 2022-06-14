@@ -16,6 +16,8 @@ export default StyleSheet.create({
       fontWeight: "bold",
       color: "#FFFFFF",
       fontSize: 20,
-      marginBottom: 40,
-  }
+  },
+  marginBottom5: {
+    marginBottom: '5%',
+  },
 });
