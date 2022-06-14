@@ -15,9 +15,9 @@ import handlerPath from '../../../env';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
-      shouldShowAlert: true,
-      shouldPlaySound: false,
-      shouldSetBadge: false,
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
     }),
   });
 
@@ -29,7 +29,7 @@ async function planNotification() {
 
 const HourAddScreen = () => {
 
-    //Notifactie toestemming vragen en alles
+    //Asking for permission for the notification
     const [expoPushToken, setExpoPushToken] = useState('');
     
     useEffect(() => {
@@ -87,7 +87,7 @@ const HourAddScreen = () => {
                 catchFeedback(response);
             });
         } catch (error) {
-            alert(error);
+            console.log(error);
         }
     };
 
@@ -331,6 +331,7 @@ const HourAddScreen = () => {
                     />
                 </View>
 
+                {/* The timer part of the page */}
                 <HourTimer />
                 
             </ScrollView>
@@ -338,49 +339,52 @@ const HourAddScreen = () => {
     );
 }
 
-//set how the notifications looks and when it goes off.
+//Set the look of the notifications and set when it triggers
 async function schedulePushNotification() {
     const identifier = await Notifications.scheduleNotificationAsync({
-      content: {
-        title: "Project Management App",
-        body: 'Vergeet je logboek vandaag niet in te vullen!',
-      },
-      trigger: { seconds: 60 * 24 },
+        content: {
+            title: "Project Management App",
+            body: 'Vergeet je logboek vandaag niet in te vullen!',
+        },
+    trigger: { seconds: 60 * 24 },
     });
     console.log(identifier);
     return identifier;
   }
   
-  //ask for permission to give notifications
-  async function registerForPushNotificationsAsync() {
-    let token;
-    if (Device.isDevice) {
-      const { status: existingStatus } = await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      if (existingStatus !== 'granted') {
+//Ask for permission to give notifications
+async function registerForPushNotificationsAsync() {
+let token;
+if (Device.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+
+    if (existingStatus !== 'granted') {
         const { status } = await Notifications.requestPermissionsAsync();
         finalStatus = status;
-      }
-      if (finalStatus !== 'granted') {
+    }
+
+    if (finalStatus !== 'granted') {
         alert('Failed to get push token for push notification!');
         return;
-      }
-      token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log(token);
-    } else {
-      alert('Must use physical device for Push Notifications');
     }
-  
-    if (Platform.OS === 'android') {
-      Notifications.setNotificationChannelAsync('default', {
-        name: 'default',
-        importance: Notifications.AndroidImportance.MAX,
-        vibrationPattern: [0, 250, 250, 250],
-        lightColor: '#FF231F7C',
-      });
-    }
-  
-    return token;
-  }
 
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+} else {
+    alert('Must use physical device for Push Notifications');
+}
+
+if (Platform.OS === 'android') {
+    Notifications.setNotificationChannelAsync('default', {
+    name: 'default',
+    importance: Notifications.AndroidImportance.MAX,
+    vibrationPattern: [0, 250, 250, 250],
+    lightColor: '#FF231F7C',
+    });
+}
+
+return token;
+
+}
 export default HourAddScreen;

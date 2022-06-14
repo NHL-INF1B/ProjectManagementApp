@@ -23,6 +23,7 @@ const HourAddScreen = () => {
 
     const timerStarter = (data) => {
         startTimer(data);
+        storeData(data);
         alert("De timer is gestart");
     }
 
@@ -59,11 +60,12 @@ const HourAddScreen = () => {
                 setValue("userId", response.userId);
                 setValue("projectId", response.projectId);
                 setId(response.id);
+                storeData(response.id);
                 catchFeedback(response);
 
             });
         } catch (error) {
-            alert(error);
+            console.log(error);
         }
     };
 
@@ -83,14 +85,14 @@ const HourAddScreen = () => {
                     projectId: projectId,
                 }),
             })
-            .then((response) => response.json())
+            .then((response) => response.text())
             .then((response) => {
                 console.log(response);
                 catchFeedback(response);
                 removeValue(); //If you want to remove the stored data
             });
         } catch (error) {
-            alert(error);
+            console.log(error);
         }
     };
 
@@ -118,46 +120,46 @@ const HourAddScreen = () => {
                 alert("De beschrijving is incorrect");
                 break;
             default:
-                storeData(response[0]);
                 console.log("De gegevens zijn opgeslagen");
                 break;
           }
 	};
-
-    const getData = async () => {
-        try {
-            const jsonValue = await AsyncStorage.getItem("timer_id");
-            if (jsonValue !== null) {
-                return JSON.parse(jsonValue);
-            }
-        } catch (e) {
-            alert(e);
-        }
-    };
 
     useEffect(() => {
     const data = getData();
     data.then((data) => {
         if (data !== undefined) {
             console.log(data);
-            setId(data["id"]);
+            setId(data);
         }
         });    
     }, []);
      
-    const storeData = async () => {
+    const getData = async () => {
         try {
-            await AsyncStorage.setItem('timer_id', id)
+          const jsonValue = await AsyncStorage.getItem("@timer_data");
+          if (jsonValue !== null) {
+            return JSON.parse(jsonValue);
+          }
         } catch (e) {
-            console.log(e);
+          alert(e);
         }
+    };
+    
+    const storeData = async (data) => {
+    try {
+        const jsonValue = JSON.stringify(data);
+        await AsyncStorage.setItem("@timer_data", jsonValue);
+    } catch (e) {
+        alert(e);
+    }
     };
     
     const removeValue = async () => {
         try {
-            await AsyncStorage.removeItem("@timer_id");
+            await AsyncStorage.removeItem("@timer_data");
         } catch (e) {
-            alert(e);
+            console.log(e);
         }
         console.log("Data has been removed");
     };
