@@ -10,6 +10,7 @@ import CustomButton from '../../components/CustomButton/CustomButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header/Header';
 import {useRoute} from "@react-navigation/native";
+import handlerPath from "../../../env";
 
 const CreateProject = ({ navigation }) => {
   const NAME_REGEX = /^[a-zA-Z0-9 ]{3,30}$/;
@@ -54,7 +55,7 @@ const CreateProject = ({ navigation }) => {
 
   const sendDataToAPI = (ProjectNaam, userid) => {
     try {
-      fetch("https://inf1b.serverict.nl/handlers/createproject/createProjectHandler.php", {
+      fetch(handlerPath + "createproject/createProjectHandler.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -83,10 +84,12 @@ const CreateProject = ({ navigation }) => {
         <View style={styles.div}>
           <Circle name={"account-group"} size={60} color={"black"} style={[styles.icon,]} />
         </View>
+
         <View style={styles.div}>
           <Text style={[styles.title, styles.marginBottom25, styles.marginTop50, styles.sampleText,]}>PROJECT AANMAKEN</Text>
         </View>
-        <View style={styles.inputContainer}>
+
+        <View style={[styles.inputContainer, styles.marginBottom25]}>
           <Controller
             name="name"
             control={control}
@@ -113,6 +116,7 @@ const CreateProject = ({ navigation }) => {
 
         <CustomButton
           buttonType={"blueButton"}
+          buttonText={"buttonText"}
           text={"Aanmaken"}
           onPress={handleSubmit(onSubmit)}
         />

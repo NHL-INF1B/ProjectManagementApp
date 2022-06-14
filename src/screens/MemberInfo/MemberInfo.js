@@ -5,10 +5,14 @@ import Styles from "./Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from "../../components/Circle/Circle";
 import ShowProfileInfo from "../../components/ShowProfileInfo/ShowProfileInfo";
+import { useRoute } from "@react-navigation/native";
+import handlerPath from "../../../env";
+import Header from '../../components/Header/Header';
 
 const MemberInfo = () => {
   //declaring the const where the info goes into.
-  const memberId = 10; //temporary until the members page is made.
+  const route = useRoute();
+  const memberId = route.params.id;
   const [name, setName] = useState("-");
   const [email, setEmail] = useState("-");
   const [dateOfBirth, setDateOfBirth] = useState("-");
@@ -36,7 +40,7 @@ const MemberInfo = () => {
   const getMemberInfo = (memberId) => {
     try {
       fetch(
-        "https://inf1b.serverict.nl/handlers/memberInfoHandler/memberInfoHandler.php",
+        handlerPath + "memberInfoHandler/memberInfoHandler.php",
         {
           method: "POST",
           headers: {
@@ -75,9 +79,12 @@ const MemberInfo = () => {
     }
   };
 
-  //the screen
+  var GoToType = "None";
+  var GoTo = "None";
+
   return (
     <SafeAreaView style={Styles.SafeAreaView}>
+      <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" />
       <View style={Styles.person}>
         <Circle name="account" color="black" size={90} style={Styles.Circle} />
       </View>

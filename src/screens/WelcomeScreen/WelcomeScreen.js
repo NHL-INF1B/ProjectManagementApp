@@ -38,7 +38,7 @@ const WelcomeScreen = ({ navigation }) => {
         try {
             await AsyncStorage.removeItem('@user_data')
         } catch(e) {
-            alert(e);
+            console.log(e);
         }
     };
 
@@ -50,7 +50,7 @@ const WelcomeScreen = ({ navigation }) => {
                return JSON.parse(jsonValue);
             }
         } catch (e) {
-            alert(e);
+            console.log(e);
         }
     };
 

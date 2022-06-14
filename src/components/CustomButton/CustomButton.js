@@ -8,7 +8,7 @@ const CustomButton = (props) => {
                 {...props}
                 style={styles[props.buttonType]}
               >
-                <Text style={styles[props.buttonText]}>{props.text}</Text>
+                <Text style={styles.buttonText}>{props.text}</Text>
             </TouchableOpacity>
         </View>
 	);
@@ -51,26 +51,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#008528',
       },
-      lightBlueButton: {
-        alignSelf: "center",
-        alignItems: "center",
-        backgroundColor: "white",
-        color: "black",
-        fontWeight: "bold",
-        padding: 4,
-        width: '70%',
-        borderWidth: 3,
-        borderRadius: 10,
-        borderColor: '#009BAA',
-      },
       buttonText: {
         color:"white", 
         textTransform:"uppercase", 
         fontWeight: "bold",
-      },
-      buttonTextBlack: {
-        color:"#707070",
-      },
+      }
 });
 
 export default CustomButton;
