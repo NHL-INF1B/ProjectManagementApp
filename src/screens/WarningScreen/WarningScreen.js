@@ -68,7 +68,7 @@ const WarningScreen = ({ navigation }) => {
 
     function checkData(warnings){
         if(warnings == "NO_DATA"){
-            return(<Text style={Styles.nothingFound}>Iedereen gedraagt zich gewoon</Text>)
+            return(<Text style={Styles.nothingFound}>Er zijn geen waarschuwingen uitgedeelt</Text>)
         } else{
             return(<FlatList 
                 data={warnings}
