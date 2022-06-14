@@ -8,6 +8,7 @@ import { useForm, Controller } from "react-hook-form";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import Header from '../../components/Header/Header';
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import handlerPath from '../../../env';
 
 const HourEditScreen = ({navigation}) => {
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
@@ -35,12 +36,19 @@ const HourEditScreen = ({navigation}) => {
 
     const deleteData = (data) => {
         deleteActivity(data);
-        navigation.navigate("LogbookScreen");
+        alert("De gegevens zijn succesvol verwijderd");
+        navigation.navigate("LogbookScreen",
+        {
+            projectId,
+            userId,
+        }
+        );
+        // readData(id);
     };
 
     //Selecting the data from the database based on id
-    const readData = (data) => {
-        fetch('http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditSelectHandler.php', {
+    const readData = () => {
+        fetch(handlerPath + "houredit/houreditSelectHandler.php", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -48,11 +56,6 @@ const HourEditScreen = ({navigation}) => {
             },
             body: JSON.stringify({
                 id: id,
-                title: data.title,
-                description: data.description,
-                date: data.date,
-                time_start: data.time_start,
-                time_end: data.time_end,
             })
         })
         .then((response) => response.json())
@@ -82,8 +85,8 @@ const HourEditScreen = ({navigation}) => {
                     date: data.date,
                     time_start: data.time_start,
                     time_end: data.time_end,
-                    user_id: user_id,
-                    project_id, project_id,
+                    userId: userId,
+                    projectId, projectId,
                 }),
             })
             .then((response) => response.json())
@@ -109,7 +112,6 @@ const HourEditScreen = ({navigation}) => {
                     id: id,
                 }),
             })
-            .then((response) => response.json())
             .then((response) => {
                 console.log(response);
                 catchFeedback(response);
@@ -152,8 +154,8 @@ const HourEditScreen = ({navigation}) => {
     };
 
     const route = useRoute();
-    const user_id = route.params.userId;
-    const project_id = route.params.projectId;
+    const userId = route.params.userId;
+    const projectId = route.params.projectId;
     const id = route.params.id;
     
     return (
