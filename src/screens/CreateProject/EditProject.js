@@ -60,7 +60,7 @@ const EditProject = ({ navigation }) => {
     };
 
     //Selecting the data from the database based on id
-    const readData = (data) => {
+    const readData = () => {
         fetch(handlerPath + "createproject/selectProjectHandler.php", {
             method: "POST",
             headers: {
@@ -83,7 +83,7 @@ const EditProject = ({ navigation }) => {
     //Updating the data based on id
     const editProject = (data) => {
         try {
-            fetch(handlerPath + "createproject/editProjectHandler.php", {
+            fetch(handlerPath + "editproject/editProjectHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -108,7 +108,7 @@ const EditProject = ({ navigation }) => {
     //Deleting a project based on id
     const deleteProject = (data) => {
         try {
-            fetch(handlerPath + "createproject/deleteProjectHandler.php", {
+            fetch(handlerPath + "editproject/deleteProjectHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -118,7 +118,7 @@ const EditProject = ({ navigation }) => {
                     id: projectId,
                 }),
             })
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((response) => {
                 console.log(response);
                 catchFeedback(response);
