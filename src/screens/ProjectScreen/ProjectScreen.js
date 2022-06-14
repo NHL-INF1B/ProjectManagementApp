@@ -1,6 +1,6 @@
 import React, { useEffect, useState }from 'react';
 import Styles from './Styles';
-import { Text, SafeAreaView, ScrollView, Image, View } from 'react-native';
+import { Text, SafeAreaView, ScrollView, Image, View, Pressable } from 'react-native';
 import Tile from '../../components/Tile/Tile';
 import Header from '../../components/Header/Header';
 import { useRoute } from "@react-navigation/native";
@@ -79,7 +79,9 @@ export default function ProjectScreen() {
             ) : (
                 <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
             )}
-            <Image style={Styles.Img} source={require("../../assets/images/logo.png")} />
+            <Pressable onPress={() => navigation.navigate("WelcomeScreen")}>
+                <Image style={Styles.Img} source={require("../../assets/images/logo.png")} />
+            </Pressable>
             <Text style={Styles.ProjectName}>{projectName}</Text>
             <ScrollView>
                 <View style={Styles.row}>
