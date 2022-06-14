@@ -19,7 +19,7 @@ const Scorebord = ({ route }) => {
 
     const getScoreBordData = (projectId) => {
         try {
-			fetch("http://localhost/PMA/PmaAPI/handlers/scorebord/scorebord.php", {
+			fetch(handlerPath + "scorebord/scorebord.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
