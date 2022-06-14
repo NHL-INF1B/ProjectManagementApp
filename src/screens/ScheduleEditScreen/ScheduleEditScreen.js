@@ -5,6 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
+import handlerPath from "../../../env";
 
 const ScheduleEditScreen = ({ navigation }) => {
     const scheduleId = 1; //Temp until previous page is made. Usually it will be send when calling this page.
@@ -27,7 +28,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 
     const getScheduleData = (scheduleId) => {
 		try {
-			fetch("https://inf1b.serverict.nl/handlers/planning/planningEditFetch.php", {
+			fetch(handlerPath + "planning/planningEditFetch.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -50,7 +51,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 
     const sendUpdateData = (data) => {
         try {
-			fetch("https://inf1b.serverict.nl/handlers/planning/planningEdit.php", {
+			fetch(handlerPath + "planning/planningEdit.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -74,7 +75,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 
     const sendRemoveData = () => {
         try {
-			fetch("https://inf1b.serverict.nl/handlers/planning/planningDelete.php", {
+			fetch(handlerPath + "planning/planningDelete.php", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
@@ -169,6 +170,7 @@ const ScheduleEditScreen = ({ navigation }) => {
                 <View style={Styles.marginContainer}>
                     <CustomButton 
                         buttonType={"blueButton"}
+                        buttonText={"buttonText"}
                         text={"Bewerken"}
                         onPress={handleSubmit(submitData)}
                     />
