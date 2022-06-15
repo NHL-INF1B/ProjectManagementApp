@@ -86,7 +86,7 @@ export default function ProjectScreen() {
             <ScrollView>
                 <View style={Styles.row}>
                     <View style={Styles.column}>
-                        <Tile text="Teamcode" image="book" screen="" projectId={projectId} userId={userId} />
+                        <Tile text="Teamcode" image="book" screen="TeamcodeInzien" projectId={projectId} userId={userId} />
                     </View>
                     <View style={Styles.column}>
                         <Tile text="Planning" image="calendar" screen="PlanningOverzichtDev" projectId={projectId} userId={userId} />
