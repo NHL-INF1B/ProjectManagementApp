@@ -23,7 +23,7 @@ import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import Scorebord from "./src/screens/Scorebord/Scorebord";
-import TeamcodeToevoegen from "./src/screens/TeamcodeToevoegen/TeamcodeToevoegen";
+
 
 const Stack = createNativeStackNavigator();
 //Name en component moeten gelijk zijn aan de naam van het scherm.
@@ -32,19 +32,44 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-			
-			<Stack.Screen
-					name="TeamcodeToevoegen"
-					component={TeamcodeToevoegen}
+				<Stack.Screen
+					name="LoginScreen"
+					component={LoginScreen}
 				/>
-			<Stack.Screen
+
+				<Stack.Screen
 					name="RegisterScreen"
 					component={RegisterScreen}
 				/>
+
 				<Stack.Screen
-					name="TeamcodeToevoegen"
-					component={TeamcodeToevoegen}
+					name="MemberOverview"
+					component={MemberOverview}
+				/>	
+
+				<Stack.Screen
+					name="PlanningOverzichtDev"
+					component={PlanningOverzichtDev}
 				/>
+
+				<Stack.Screen 
+					name="ChangePassword"
+					component={ChangePassword}
+				/>
+
+				<Stack.Screen
+        		  name='WelcomeScreen'
+	        	  component={WelcomeScreen}	
+				  options={{
+					gestureEnabled: false,
+				  }}
+    	    	/>
+				
+				<Stack.Screen
+					name="ShowProjects"
+					component={ShowProjects}
+				/>
+
 				<Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
@@ -96,9 +121,15 @@ export default function App() {
 				/>	
 
 				<Stack.Screen
-					name="ScoreScreen"
-					component={""}
+					name="SelectLogbookUser"
+					component={SelectLogbookUser}
 				/>
+				
+				<Stack.Screen
+					name="HourAddScreen"
+					component={HourAddScreen}
+				/>
+				
 
 				<Stack.Screen
 					name="WarningEditScreen"
