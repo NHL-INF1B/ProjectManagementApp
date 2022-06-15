@@ -42,10 +42,6 @@ export default function App() {
 					component={RegisterScreen}
 				/>
 				<Stack.Screen
-					name="TeamcodeToevoegen"
-					component={TeamcodeToevoegen}
-				/>
-				<Stack.Screen
 					name="ProjectScreen"
 					component={ProjectScreen}
 				/>
