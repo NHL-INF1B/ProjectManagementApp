@@ -21,7 +21,7 @@ export default StyleSheet.create({
 
 	},
 	sectionHeader: {
-		backgroundColor: "#00aabb",
+		backgroundColor: "#009BAA",
 		color: 'white',
 		
 	},
@@ -31,7 +31,7 @@ export default StyleSheet.create({
         paddingVertical: 10,
 		textAlign: 'left',
       	fontSize: 20,
-		backgroundColor: "#00aabb",
+		backgroundColor: "#009BAA",
 		
 		
 	},

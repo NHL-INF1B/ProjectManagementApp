@@ -37,6 +37,7 @@ const HourAddScreen = () => {
     const timerStop = (data) => {
         stopTimer(data);
         alert("De timer is gestopt");
+        addPoints(userId, projectId);
     }
 
     //add points when they add urenverantwoording
@@ -90,8 +91,8 @@ const HourAddScreen = () => {
                 setValue("userId", response.userId);
                 setValue("projectId", response.projectId);
                 setId(response.id);
-                storeData(response.id);
                 catchFeedback(response);
+                storeData(response.id);
 
             });
         } catch (error) {
@@ -120,7 +121,6 @@ const HourAddScreen = () => {
                 console.log(response);
                 catchFeedback(response);
                 removeValue(); //If you want to remove the stored data
-                addPoints(userId, projectId);
             });
         } catch (error) {
             console.log(error);

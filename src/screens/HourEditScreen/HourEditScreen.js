@@ -43,7 +43,6 @@ const HourEditScreen = ({navigation}) => {
             userId,
         }
         );
-        // readData(id);
     };
 
     //Selecting the data from the database based on id
