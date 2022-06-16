@@ -8,7 +8,7 @@ import Circle from "../../components/Circle/Circle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import ChangePassword from "../ChangePassword/ChangePassword";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import ReactDOM from "react-dom";
@@ -19,12 +19,16 @@ import Header from '../../components/Header/Header';
 const PlanningOverzichtDev = ({ navigation }) => {
     const [data, setData] = useState([]);
 
+    const route = useRoute();
+    const userId = route.params.userId;
+    const projectId = route.params.projectId;
+
     useEffect(() => {
-        getUserData(1);
+        getUserData(projectId);
 	}, []);
 
-    const getUserData = (projectid) => {
-        // console.log(projectid);
+    const getUserData = (projectId) => {
+        // console.log(projectId);
 		try {
 			fetch(handlerPath + "planning/planningOverzicht.php", {
 				method: "POST",
@@ -33,7 +37,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					projectid: projectid,
+					projectid: projectId,
 				}),
 			})
             .then((response) => response.json())
