@@ -24,10 +24,10 @@ const PlanningOverzichtDev = ({ navigation }) => {
     const projectId = route.params.projectId;
 
     useEffect(() => {
-        getUserData(projectId);
+        getPlanning(projectId);
 	}, []);
 
-    const getUserData = (projectId) => {
+    const getPlanning = (projectId) => {
         // console.log(projectId);
 		try {
 			fetch(handlerPath + "planning/planningOverzicht.php", {
