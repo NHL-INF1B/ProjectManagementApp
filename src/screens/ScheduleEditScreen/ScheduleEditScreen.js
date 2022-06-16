@@ -6,9 +6,15 @@ import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
 import handlerPath from "../../../env";
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const ScheduleEditScreen = ({ navigation }) => {
     const scheduleId = 1; //Temp until previous page is made. Usually it will be send when calling this page.
+
+    const route = useRoute();
+    const projectId = route.params.projectId;
+    const userId = route.params.userId;
+    const planningId = route.params.item;
     const NUMMERIC_REGEX = /^[0-9]*$/;
 
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
@@ -138,6 +144,8 @@ const ScheduleEditScreen = ({ navigation }) => {
                         )}
                     />
                 </View>
+
+                <Text>{planningId}</Text>
 
                 <View style={Styles.marginContainer}>
                     <Controller
