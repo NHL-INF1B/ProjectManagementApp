@@ -10,8 +10,7 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import * as DocumentPicker from 'expo-document-picker';
 
 const TeamcodeToevoegen = () => {
-  const projectid = 1;
-
+const projectId = route.params.projectId;
   const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "application/pdf",
@@ -57,7 +56,7 @@ const TeamcodeToevoegen = () => {
         },
         body: JSON.stringify({
           base64: data.uri,
-          projectid: projectid
+          projectid: projectId
         }),
       })
         // .then((response) => response.text())
