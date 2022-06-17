@@ -89,7 +89,7 @@ export default function ProjectScreen() {
                         <Tile text="Teamcode" image="book" screen="TeamcodeInzien" projectId={projectId} userId={userId} />
                     </View>
                     <View style={Styles.column}>
-                        <Tile text="Planning" image="calendar" screen="PlanningOverzichtDev" projectId={projectId} userId={userId} />
+                        <Tile text="Planning" image="calendar" screen="PlanningOverview" projectId={projectId} userId={userId} />
                     </View>
                 </View>
                 <View style={Styles.row}>

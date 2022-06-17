@@ -17,13 +17,13 @@ import InviteMembers from "./src/screens/InviteMembers/InviteMembers";
 import ChangePassword from "./src/screens/ChangePassword/ChangePassword";
 import SelectLogbookUser from "./src/screens/LogbookScreen/SelectLogbookUser";
 import Profile from "./src/screens/Profile/Profile";
-import PlanningOverzichtDev from "./src/screens/planningOverzichtDev/planningOverzichtDev";
 import MemberOverview from "./src/screens/MemberOverview/MemberOverview";
 import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import TeamcodeToevoegen from "./src/screens/TeamcodeToevoegen/TeamcodeToevoegen";
 import Scorebord from "./src/screens/Scorebord/Scorebord";
+import PlanningOverview from "./src/screens/planningOverview/planningOverview";
 
 
 const Stack = createNativeStackNavigator();
@@ -46,11 +46,6 @@ export default function App() {
 				<Stack.Screen
 					name="MemberOverview"
 					component={MemberOverview}
-				/>	
-
-				<Stack.Screen
-					name="PlanningOverzichtDev"
-					component={PlanningOverzichtDev}
 				/>
 
 				<Stack.Screen 
@@ -149,6 +144,12 @@ export default function App() {
 					name="Scorebord"
 					component={Scorebord}
 				/>						
+
+				<Stack.Screen
+					name="PlanningOverview"
+					component={PlanningOverview}
+				/>
+
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
