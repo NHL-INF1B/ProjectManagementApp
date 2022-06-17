@@ -6,15 +6,15 @@ import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
 import handlerPath from "../../../env";
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import Header from "../../components/Header/Header";
 
 const ScheduleEditScreen = ({ navigation }) => {
-    const scheduleId = 1; //Temp until previous page is made. Usually it will be send when calling this page.
 
     const route = useRoute();
     const projectId = route.params.projectId;
     const userId = route.params.userId;
-    const planningId = route.params.item;
+    const scheduleId = route.params.planningId;
     const NUMMERIC_REGEX = /^[0-9]*$/;
 
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
@@ -105,11 +105,11 @@ const ScheduleEditScreen = ({ navigation }) => {
         switch (response) {
             case "data_updated":
               alert("Data is geüpdatet");
-              navigation.navigate("ScheduleEditScreen"); //kan ook planning scherm worden
+              navigation.goBack();
               break;
             case "data_deleted":
               alert("De planning is verwijderd");
-              navigation.navigate("ScheduleEditScreen"); //moet planning scherm worden
+              navigation.goBack();
               break;
             default:
               console.log('not defined');
@@ -119,6 +119,8 @@ const ScheduleEditScreen = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+
             <View style={Styles.head}>
                 <View>
                     <Circle name={"calendar-month"} size={60} color={"black"} text={"planning bewerken"} />
@@ -145,7 +147,7 @@ const ScheduleEditScreen = ({ navigation }) => {
                     />
                 </View>
 
-                <Text>{planningId}</Text>
+                <Text>{scheduleId}</Text>
 
                 <View style={Styles.marginContainer}>
                     <Controller

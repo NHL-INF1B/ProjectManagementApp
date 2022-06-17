@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
 import { View, Text, SafeAreaView, Pressable, SectionList } from "react-native";
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useIsFocused } from '@react-navigation/native';
 import handlerPath from "../../../env";
 import Header from '../../components/Header/Header';
 import { FlatList } from 'react-native-gesture-handler';
@@ -11,12 +11,13 @@ const PlanningOverview = ({ navigation }) => {
     const [planning, setPlanning] = useState([]);
 
     const route = useRoute();
+    const isFocused = useIsFocused();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
 
     useEffect(() => {
         getPlanning(projectId);
-	}, []);
+	}, [isFocused]);
 
     const getPlanning = (projectId) => {
         // console.log(projectId);
