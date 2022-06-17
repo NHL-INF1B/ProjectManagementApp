@@ -2,12 +2,13 @@ import {React, useEffect, useState} from 'react';
 import { Text, SafeAreaView, FlatList } from 'react-native';
 import Warning from '../../components/Warning/Warning';
 import Styles from "./Styles";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useIsFocused } from "@react-navigation/native";
 import Header from '../../components/Header/Header';
 import handlerPath from '../../../env';
 
 const WarningScreen = ({ navigation }) => {
     const route = useRoute();
+    const isFocused = useIsFocused();
     const projectId = route.params.projectId;
     const userId = route.params.userId;
     
@@ -19,7 +20,7 @@ const WarningScreen = ({ navigation }) => {
     useEffect(() => {
         readData(projectId);
         getRole(userId, projectId)
-    }, []);
+    }, [isFocused]);
 
     const readData = (projectId) => {
         fetch(handlerPath + 'warning/warninghandler.php', {

@@ -3,7 +3,7 @@ import Styles from './Styles';
 import { Text, SafeAreaView, ScrollView, Image, View, Pressable } from 'react-native';
 import Tile from '../../components/Tile/Tile';
 import Header from '../../components/Header/Header';
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useIsFocused } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import handlerPath from '../../../env';
 
@@ -15,6 +15,7 @@ export default function ProjectScreen() {
     const [projectName, setProjectName] = useState("-");
     const [roleId, setRoleId] = useState("6")
     const [isVoorzitter, setVoorzitter] = useState(false);
+    const isFocused = useIsFocused();
 
     const getProjectData = (projectId) => {
         // console.log(projectId);
@@ -70,7 +71,7 @@ export default function ProjectScreen() {
     useEffect(() => {
         getProjectData(projectId, userId);
         getRoleId(userId, projectId);
-      }, []);
+      }, [isFocused]);
     
     return (
         <SafeAreaView style={Styles.Container}>
