@@ -3,7 +3,7 @@ import Styles from './Styles';
 import { SafeAreaView, FlatList } from 'react-native';
 import Tile from '../../components/Tile/Tile';
 import Header from '../../components/Header/Header';
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useIsFocused } from "@react-navigation/native";
 import handlerPath from '../../../env';
 
 export default function ShowProjects(){
@@ -12,10 +12,11 @@ export default function ShowProjects(){
     const userId = route.params.userId;
     const projectId = route.params.projectId;
     const [projects, setProjects] = useState([]);
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         getProjects(userId);
-    }, []);
+    }, [isFocused]);
 
     const getProjects = (userId) => {
         fetch(handlerPath + "showProjects/showProjectsHandler.php", {

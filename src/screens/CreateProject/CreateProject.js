@@ -48,6 +48,7 @@ const CreateProject = ({ navigation }) => {
 
   const onSubmit = (data) => {
     sendDataToAPI(data.name, userId);
+    navigation.goBack();
   };
 
   const sendDataToAPI = (ProjectNaam, userid) => {

@@ -5,10 +5,14 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import Header from '../../components/Header/Header';
 import Circle from '../../components/Circle/Circle';
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import CustomButton from '../../components/CustomButton/CustomButton';
+import handlerPath from '../../../env';
 
 const WarningAddScreen = ()  => {
+
+    const navigation = useNavigation();
+
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             project_member: "",
@@ -18,6 +22,7 @@ const WarningAddScreen = ()  => {
 
     const submitData = (data) => {
         sendDataToAPI(data);
+        navigation.goBack();
         alert("De gegevens zijn opgeslagen");
     };
 
@@ -25,7 +30,7 @@ const WarningAddScreen = ()  => {
     // Inserting the data into the database
     const sendDataToAPI = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningInsertHandler.php", {
+            fetch(handlerPath + "warning/warningInsertHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",

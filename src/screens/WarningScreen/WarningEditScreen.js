@@ -32,7 +32,7 @@ const WarningAddScreen = (navigation) => {
 
     // Selecting the data from the database based on id
     const readData = (data) => {
-        fetch('http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningEditSelectHandler.php', {
+        fetch(handlerPath + 'warning/warningEditSelectHandler.php', {
             method: "POST",
             headers: {
                 Accept: 'application/json',
