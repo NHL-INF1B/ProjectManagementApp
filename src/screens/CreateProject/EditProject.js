@@ -38,6 +38,7 @@ const EditProject = ({ navigation }) => {
 
     const updateData = (data) => {
         editProject(data);
+        navigation.goBack();
         alert("De gegevens zijn succesvol aangepast");
         readData();
     };
