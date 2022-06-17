@@ -33,7 +33,7 @@ export default function SelectLogbookUser(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            ;
             setUser(response);
         })
     }

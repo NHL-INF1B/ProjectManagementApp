@@ -30,7 +30,7 @@ const WarningAddScreen = (navigation) => {
         navigation.navigate("WarningScreen");
     };
 
-    //Selecting the data from the database based on id
+    // Selecting the data from the database based on id
     const readData = (data) => {
         fetch('http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningEditSelectHandler.php', {
             method: "POST",
@@ -46,7 +46,6 @@ const WarningAddScreen = (navigation) => {
         })
         .then((response) => response.json())
         .then((response) => {
-            // setValue("project_member", response.project_member);
             setValue("reason", response.reason);
             catchFeedback(response);
         })
@@ -70,7 +69,7 @@ const WarningAddScreen = (navigation) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -93,7 +92,7 @@ const WarningAddScreen = (navigation) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 catchFeedback(response);
             });
         } catch (error) {

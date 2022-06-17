@@ -30,7 +30,7 @@ export default function ShowProjects(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            ;
             setProjects(response);
         })
     }

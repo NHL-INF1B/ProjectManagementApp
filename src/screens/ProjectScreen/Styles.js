@@ -6,19 +6,19 @@ export default StyleSheet.create({
     backgroundColor: "#009BAA",
     paddingHorizontal: 15,
     flex: 1,
-    // flexWrap: "wrap",
-    alignItems: "center",
   },
   Img: {
-    height: 157,
-    width: 157,
-    marginTop: 30,
+    height: 150,
+    width: 150,
+  },
+  Center: {
+    alignSelf: "center",
   },
   ProjectName: {
     fontSize: 25,
     color: "white",
     fontWeight: "bold",
-    margin: 30,
+    alignSelf: "center",
   },
   row: {
     display: "flex",

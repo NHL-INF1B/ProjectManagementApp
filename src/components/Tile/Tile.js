@@ -56,16 +56,4 @@ const Styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 25,
     },
-    Uitloggen: {
-        minWidth: 135,
-        maxWidth: 135,
-        minHeight: 141,
-        maxHeight: 141,
-        backgroundColor: 'red',
-        borderColor: '#707070',
-        borderRadius: 10,
-        flex: 1,
-        alignItems: 'center',
-        margin: 15,
-    },
 });

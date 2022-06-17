@@ -32,7 +32,7 @@ const Scorebord = ({ route }) => {
 			})
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 setProjectMembers(response);
                 
             });

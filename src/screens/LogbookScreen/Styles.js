@@ -24,6 +24,6 @@ export default StyleSheet.create({
     marginTop: 50,
     color: "#FFFFFF",
     fontWeight: "bold",
-    fontsize: 25,
+    fontSize: 25,
   }
 });

@@ -49,7 +49,7 @@ export default function LogbookScreen(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            ;
             setRole(response);
         })
     }
@@ -68,7 +68,7 @@ export default function LogbookScreen(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            ;
             setLogbook(response);
         })
     }
@@ -86,7 +86,7 @@ export default function LogbookScreen(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            ;
             setUserName(response);
         })
     }

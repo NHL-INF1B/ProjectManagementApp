@@ -1,13 +1,6 @@
-import { React, useEffect, useMemo, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
-import { ScrollView, View, Text, FlatList, SafeAreaView, Button, Image, TouchableOpacity, Pressable, Platform, Alert } from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
-import CustomButton from "../../components/CustomButton/CustomButton";
-import Circle from "../../components/Circle/Circle";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
-import ChangePassword from "../ChangePassword/ChangePassword";
+import { FlatList, SafeAreaView } from "react-native";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import MemberTile from "../../components/MemberTile/MemberTile";
 import Header from '../../components/Header/Header';
@@ -25,6 +18,7 @@ const MemberOverview = ({ navigation }) => {
         getRole(userId, projectId);
     }, []);
 
+    // Get the members of the project
     const getMembers = (userId, projectId) => {
         try {
             fetch(handlerPath + "projectMembers/fetchProjectMembers.php", {
@@ -38,10 +32,8 @@ const MemberOverview = ({ navigation }) => {
                     projectId: projectId
                 }),
             })
-                // .then((response) => response.text())
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log('memberoverviewGetMembers ' + response)
                     setMembers(response);
                 });
         } catch (error) {
@@ -49,6 +41,7 @@ const MemberOverview = ({ navigation }) => {
         }
     }
 
+    // Get the current roles from the members of the project
     const getRole =  (userId, projectId) => {
         try {
             fetch(handlerPath + "projectMembers/fetchRole.php", {
@@ -61,10 +54,8 @@ const MemberOverview = ({ navigation }) => {
                     userId: userId
                 }),
             })
-                // .then((response) => response.text())
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log('memberoverviewGetRole ' + response)
                     setRoleName(response);
                     getMembers(userId, projectId);
                 });

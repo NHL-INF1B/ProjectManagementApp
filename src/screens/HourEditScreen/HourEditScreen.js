@@ -45,7 +45,7 @@ const HourEditScreen = ({navigation}) => {
         );
     };
 
-    //Selecting the data from the database based on id
+    // Selecting the data from the database based on id
     const readData = () => {
         fetch(handlerPath + "houredit/houreditSelectHandler.php", {
             method: "POST",
@@ -68,7 +68,7 @@ const HourEditScreen = ({navigation}) => {
         })
     };
 
-    //Updating the data based on id
+    // Updating the data based on id
     const editActivity = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditUpdateHandler.php", {
@@ -90,7 +90,7 @@ const HourEditScreen = ({navigation}) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -98,7 +98,7 @@ const HourEditScreen = ({navigation}) => {
         }
     };
 
-    //Deleting an activity based on id
+    // Deleting an activity based on id
     const deleteActivity = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditDeleteHandler.php", {
@@ -112,7 +112,7 @@ const HourEditScreen = ({navigation}) => {
                 }),
             })
             .then((response) => {
-                console.log(response);
+                ;
                 catchFeedback(response);
             });
         } catch (error) {

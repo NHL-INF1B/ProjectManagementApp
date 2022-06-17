@@ -59,7 +59,7 @@ const EditProject = ({ navigation }) => {
         }
     };
 
-    //Selecting the data from the database based on id
+    // Selecting the data from the database based on id
     const readData = () => {
         fetch(handlerPath + "createproject/selectProjectHandler.php", {
             method: "POST",
@@ -80,7 +80,7 @@ const EditProject = ({ navigation }) => {
         })
     };
 
-    //Updating the data based on id
+    // Updating the data based on id
     const editProject = (data) => {
         try {
             fetch(handlerPath + "editproject/editProjectHandler.php", {
@@ -97,7 +97,7 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -105,7 +105,7 @@ const EditProject = ({ navigation }) => {
         }
     };
 
-    //Deleting a project based on id
+    // Deleting a project based on id
     const deleteProject = (data) => {
         try {
             fetch(handlerPath + "editproject/deleteProjectHandler.php", {
@@ -120,7 +120,7 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 catchFeedback(response);
             });
         } catch (error) {

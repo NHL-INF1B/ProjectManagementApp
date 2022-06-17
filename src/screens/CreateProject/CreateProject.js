@@ -50,9 +50,6 @@ const CreateProject = ({ navigation }) => {
     sendDataToAPI(data.name, userId);
   };
 
-  //the things where the info goes in.
-  // const [ProjectNaam, setProjectNaam] = useState('');
-
   const sendDataToAPI = (ProjectNaam, userid) => {
     try {
       fetch(handlerPath + "createproject/createProjectHandler.php", {
@@ -68,7 +65,7 @@ const CreateProject = ({ navigation }) => {
       })
         .then((response) => response.text())
         .then((response) => {
-          console.log(response);
+          ;
           alert('Project aangemaakt');
         });
     } catch (error) {
@@ -76,7 +73,6 @@ const CreateProject = ({ navigation }) => {
     }
   };
 
-  //the screen
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />

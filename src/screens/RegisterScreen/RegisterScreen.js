@@ -36,8 +36,7 @@ const RegisterScreen = ({ navigation }) => {
       data.dateOfBirth,
       data.password,
       data.password_repeat
-    );
-    console.log(data);
+    )
   };
 
   const sendDataToAPI = (
@@ -65,10 +64,9 @@ const RegisterScreen = ({ navigation }) => {
           }),
         }
       )
-        // .then((response) => response.text())
         .then((response) => response.json())
         .then((response) => {
-          // console.log(response);
+          
           catchFeedback(response);
         });
     } catch (error) {
@@ -77,8 +75,6 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   const catchFeedback = (response) => {
-    // console.log(response);
-
     switch (response[0]) {
       case "name_incorrect":
         alert("De naam is verkeerd.");

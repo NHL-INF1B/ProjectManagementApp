@@ -64,7 +64,6 @@ const Profile = ({ navigation }) => {
     };
 
     const getUserData = (userId) => {
-        console.log(userId);
 		try {
 			fetch(handlerPath + "profile/profileFetch.php", {
 				method: "POST",
@@ -76,7 +75,6 @@ const Profile = ({ navigation }) => {
 					userId: userId,
 				}),
 			})
-            // .then((response) => response.text())
             .then((response) => response.json())
             .then((response) => {
                 setValue("name", response.name);
@@ -107,7 +105,6 @@ const Profile = ({ navigation }) => {
                     discord: data.discord,
 				}),
 			})
-				// .then((response) => response.text())
 				.then((response) => response.json())
 				.then((response) => {
                     catchFeedback(response);
@@ -123,7 +120,7 @@ const Profile = ({ navigation }) => {
               alert("Data is geüpdatet");
               break;
             default:
-              console.log('not defined');
+              console.log('Data not defined');
               break;
           }
 	};

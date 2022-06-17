@@ -11,7 +11,7 @@ import handlerPath from '../../../env';
 
 const HourAddScreen = () => {
 
-    //Asking for permission for the notification
+    // Asking for permission for the notification
     const [expoPushToken, setExpoPushToken] = useState('');
     
     // useEffect(() => {
@@ -40,7 +40,7 @@ const HourAddScreen = () => {
         addPoints(userId, projectId);
     }
 
-    //add points when they add urenverantwoording
+    // Add points when they add urenverantwoording
     const addPoints = (userId, projectId) => {
         try {
           fetch(handlerPath + "AddPoints/AddPoints.php", {
@@ -56,14 +56,13 @@ const HourAddScreen = () => {
           })
           .then((response) => response.json())
           .then((response) => {
-            console.log(response);
           });
         } catch (error) {
           alert(error);
         }
       }
 
-    //Saves the current timestamp & inserts it into the database as the start_time along with the other data via the handler file
+    // Saves the current timestamp & inserts it into the database as the start_time along with the other data via the handler file
     const startTimer = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditStartHandler.php", {
@@ -81,7 +80,6 @@ const HourAddScreen = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setValue("id", response.id);
                 setValue("title", response.title);
                 setValue("description", response.description);
@@ -100,7 +98,7 @@ const HourAddScreen = () => {
         }
     };
 
-    //Saves the current timestamp & updates it into the database as the end_time via the handler file
+    // Saves the current timestamp & updates it into the database as the end_time via the handler file
     const stopTimer = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditStopHandler.php", {
@@ -118,9 +116,9 @@ const HourAddScreen = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 catchFeedback(response);
-                removeValue(); //If you want to remove the stored data
+                removeValue(); 
             });
         } catch (error) {
             console.log(error);
@@ -160,7 +158,6 @@ const HourAddScreen = () => {
     const data = getData();
     data.then((data) => {
         if (data !== undefined) {
-            console.log(data);
             setId(data);
         }
         });    
@@ -192,7 +189,7 @@ const HourAddScreen = () => {
         } catch (e) {
             console.log(e);
         }
-        console.log("Data has been removed");
+        console.log("De gegevens zijn verwijderd");
     };
 
     const route = useRoute();
@@ -276,7 +273,7 @@ const HourAddScreen = () => {
     );
 }
 
-//Set the look of the notifications and set when it triggers
+// // Set the look of the notifications and set when it triggers
 // async function schedulePushNotification() {
 //     const identifier = await Notifications.scheduleNotificationAsync({
 //         content: {
@@ -285,11 +282,10 @@ const HourAddScreen = () => {
 //         },
 //     trigger: { seconds: 60 * 24 },
 //     });
-//     console.log(identifier);
 //     return identifier;
 //   }
   
-// //Ask for permission to give notifications
+// // Ask for permission to give notifications
 // async function registerForPushNotificationsAsync() {
 // let token;
 // if (Device.isDevice) {
@@ -307,7 +303,6 @@ const HourAddScreen = () => {
 //     }
 
 //     token = (await Notifications.getExpoPushTokenAsync()).data;
-//     console.log(token);
 // } else {
 //     alert('Must use physical device for Push Notifications');
 // }

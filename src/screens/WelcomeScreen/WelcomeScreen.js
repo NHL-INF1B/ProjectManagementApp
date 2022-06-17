@@ -12,7 +12,6 @@ const WelcomeScreen = ({ navigation }) => {
     useFocusEffect(
         React.useCallback(() => {
             const onBackPress = () => {
-                // navigation.navigate('LoginScreen');
                 return true;
             };
 
@@ -33,7 +32,7 @@ const WelcomeScreen = ({ navigation }) => {
     const [name, setName] = useState("-");
     const [userId, setUserId] = useState("-");
 
-    // Data verwijderen
+    // Delete data from async storage
     const removeValue = async () => {
         try {
             await AsyncStorage.removeItem('@user_data')
@@ -42,7 +41,7 @@ const WelcomeScreen = ({ navigation }) => {
         }
     };
 
-    // Data ophalen
+    // Get data from async storage
     const getData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem("@user_data");

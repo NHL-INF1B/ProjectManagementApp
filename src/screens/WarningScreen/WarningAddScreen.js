@@ -22,7 +22,7 @@ const WarningAddScreen = ()  => {
     };
 
 
-    //Inserting the data into the database
+    // Inserting the data into the database
     const sendDataToAPI = (data) => {
         try {
             fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningInsertHandler.php", {
@@ -39,7 +39,7 @@ const WarningAddScreen = ()  => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 setValue("reason", response.reason);
                 setValue("user_id", response.user_id);
                 setValue("project_id", response.project_id);

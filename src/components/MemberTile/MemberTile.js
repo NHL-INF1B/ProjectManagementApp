@@ -21,7 +21,6 @@ function MemberTile(props) {
     useEffect(() => {
         setRoles(allRoles);
         setRoleName(props.role);
-        // console.log(props.role)
         if (props.userRole == 'voorzitter') {
             setIsVoorzitter(true);
         }
@@ -43,7 +42,6 @@ function MemberTile(props) {
     }
 
     const updateRole = (role, userId) => {
-        console.log(role.id);
 
         try {
             fetch(handlerPath + "projectMembers/updateRole.php", {
@@ -60,7 +58,6 @@ function MemberTile(props) {
                 .then((response) => response.text())
                 // .then((response) => response.json())
                 .then((response) => {
-                    console.log('membertile ' + response)
                     alert('Rol is veranderd');
                 });
         } catch (error) {

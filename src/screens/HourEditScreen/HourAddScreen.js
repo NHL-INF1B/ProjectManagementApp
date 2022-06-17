@@ -29,7 +29,7 @@ import handlerPath from '../../../env';
 
 const HourAddScreen = () => {
 
-    //Asking for permission for the notification
+    // Asking for permission for the notification
     const [expoPushToken, setExpoPushToken] = useState('');
     
     // useEffect(() => {
@@ -46,7 +46,7 @@ const HourAddScreen = () => {
         }
     });
 
-    //add points when they add urenverantwoording
+    // Add points when the user adds hours
     const addPoints = (userId, projectId) => {
         try {
           fetch(handlerPath + "AddPoints/AddPoints.php", {
@@ -62,7 +62,7 @@ const HourAddScreen = () => {
           })
           .then((response) => response.json())
           .then((response) => {
-            console.log(response);
+            ;
           });
         } catch (error) {
           alert(error);
@@ -77,7 +77,7 @@ const HourAddScreen = () => {
         alert("De gegevens zijn opgeslagen");
     };
 
-    //Inserting the data into the database
+    // Inserting the data into the database
     const sendDataToAPI = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditInsertHandler.php", {
@@ -98,7 +98,7 @@ const HourAddScreen = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 setValue("title", response.title);
                 setValue("description", response.description);
                 setValue("date", response.date);
@@ -345,7 +345,6 @@ const HourAddScreen = () => {
                     <Text>{errors?.times_invalid?.message}</Text>
                 </View>
 
-
                 <View style={styles.marginBottom5}>
                     <CustomButton 
                         buttonType={"blueButton"}
@@ -363,7 +362,7 @@ const HourAddScreen = () => {
     );
 }
 
-//Set the look of the notifications and set when it triggers
+// // Set the look of the notifications and set when it triggers
 // async function schedulePushNotification() {
 //     const identifier = await Notifications.scheduleNotificationAsync({
 //         content: {
@@ -372,11 +371,10 @@ const HourAddScreen = () => {
 //         },
 //     trigger: { seconds: 60 * 24 },
 //     });
-//     console.log(identifier);
 //     return identifier;
 //   }
   
-// //Ask for permission to give notifications
+// // Ask for permission to give notifications
 // async function registerForPushNotificationsAsync() {
 // let token;
 // if (Device.isDevice) {
@@ -394,7 +392,6 @@ const HourAddScreen = () => {
 //     }
 
 //     token = (await Notifications.getExpoPushTokenAsync()).data;
-//     console.log(token);
 // } else {
 //     alert('Must use physical device for Push Notifications');
 // }

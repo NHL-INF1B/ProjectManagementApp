@@ -25,7 +25,6 @@ function Warning(props) {
             .then((response) => response.text())
             // .then((response) => response.json())
             .then((response) => {
-                console.log(JSON.parse(response));
                 // ========================== Hier mag nog een functie komen voor het afhandelen van errors
                 setName(JSON.parse(response));
             });
