@@ -171,8 +171,8 @@ const Profile = ({ navigation }) => {
                                     message: 'Dit email is niet correct'
                                 },
                                 maxLength: {
-                                    value: 50,
-                                    message: 'Maximaal 50 karakters lang',
+                                    value: 100,
+                                    message: 'Maximaal 100 karakters lang',
                                 }
                             }}
                             render={({ field: { onChange, value } }) => (
@@ -256,8 +256,8 @@ const Profile = ({ navigation }) => {
                                     message: 'Telefoonnummer mag alleen cijfers bevatten'
                                 },
                                 maxLength: {
-                                    value: 50,
-                                    message: 'Maximaal 50 cijfers lang',
+                                    value: 20,
+                                    message: 'Maximaal 20 cijfers lang',
                                 }
                             }}
                             render={({ field: { onChange, value } }) => (
