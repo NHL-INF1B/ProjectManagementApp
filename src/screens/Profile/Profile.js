@@ -130,9 +130,7 @@ const Profile = ({ navigation }) => {
             <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userid} />
 
             <View style={Styles.head}>
-                <View>
-                    <Circle name={"account"} size={80} color={"black"} text={"Profiel bewerken"} />
-                </View>
+                <Circle name={"account"} size={80} color={"black"} text={"Profiel bewerken"} />
             </View>
             
             <View style={Styles.content}>
