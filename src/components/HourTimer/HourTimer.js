@@ -235,8 +235,8 @@ const HourAddScreen = () => {
                         rules={{
                             required: { value: true, message: 'Beschrijving is verplicht' },
                             maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
+                                value: 100,
+                                message: 'Maximaal 100 tekens lang',
                             }
                         }}
                         render={({ field: { onChange, value } }) => (

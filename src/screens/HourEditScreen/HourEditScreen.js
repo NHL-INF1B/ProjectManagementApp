@@ -31,7 +31,7 @@ const HourEditScreen = ({navigation}) => {
     const updateData = (data) => {
         editActivity(data);
         alert("De gegevens zijn succesvol aangepast");
-        readData();
+        readData(id);
     };
 
     const deleteData = (data) => {
@@ -197,8 +197,8 @@ const HourEditScreen = ({navigation}) => {
                         rules={{
                             required: { value: true, message: 'Beschrijving is verplicht' },
                             maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
+                                value: 100,
+                                message: 'Maximaal 100 tekens lang',
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
