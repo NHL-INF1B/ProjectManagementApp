@@ -260,7 +260,7 @@ const HourAddScreen = () => {
                     />
                 </View>
 
-                <View style={styles.marginBottom1}>
+                <View style={styles.marginBottom5}>
                     <CustomButton 
                         buttonType={"redButton"}
                         buttonText={"buttonText"}

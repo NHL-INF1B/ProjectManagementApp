@@ -112,7 +112,7 @@ const ScheduleEditScreen = ({ navigation }) => {
               navigation.goBack();
               break;
             default:
-              console.log('not defined');
+              console.log('Data not defined');
               break;
           }
 	};

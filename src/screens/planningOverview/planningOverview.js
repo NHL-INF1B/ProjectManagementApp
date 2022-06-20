@@ -34,7 +34,6 @@ const PlanningOverview = ({ navigation }) => {
 			})
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setPlanning(response);
                 
             });

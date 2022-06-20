@@ -171,8 +171,8 @@ const HourAddScreen = () => {
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
             <ScrollView style={styles.SafeAreaView}>
-                <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
                 <View style={styles.marginBottom5}>
                     <Circle name={"clipboard-text"} size={60} color={"#000000"} text={"Urenverantwoording\nToevoegen"} />
                 </View>

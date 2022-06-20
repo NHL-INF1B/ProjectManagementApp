@@ -18,7 +18,6 @@ export default function ProjectScreen() {
     const isFocused = useIsFocused();
 
     const getProjectData = (projectId) => {
-        // console.log(projectId);
 		try {
 			fetch(handlerPath + "projectScreen/projectScreen.php", {
 				method: "POST",
@@ -32,7 +31,6 @@ export default function ProjectScreen() {
 			})
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setProjectName(response[0].projectName);
             });
 		} catch (error) {
