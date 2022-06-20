@@ -18,7 +18,9 @@ import PlanningButton from '../../components/PlanningButton/PlanningButton';
 
 const PlanningOverzichtDev = ({ navigation }) => {
     const [data, setData] = useState([]);
-    // const route = useRoute();
+    const route = useRoute();
+    const projectId = 1;
+    const id = 3;
     // const projectId = route.params.projectId;
     // const id = route.params.id;
 
@@ -28,7 +30,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
         // getProjectData(projectId);
 	}, []);
 
-    const getUserData = (projectid) => {
+    const getUserData = (projectid, id) => {
         // console.log(projectid);
 		try {
 			fetch("http://localhost:8080/PmaAPI/handlers/PlanningOverzicht/planningOverzicht.php", {
@@ -39,7 +41,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
 				},
 				body: JSON.stringify({
 					projectid: projectid,
-                    // id: id,
+                    id: id,
 				}),
 			})
             .then((response) => response.json())
@@ -101,7 +103,7 @@ const PlanningOverzichtDev = ({ navigation }) => {
                 renderItem={({ item }) => (
                     <View style={Styles.row}>
                         <Text>{item}</Text>
-                        <PlanningButton style={Styles.icon} name="pencil-square-o" screen="ScheduleEditScreen" size={24} projectId={1} id={3} />
+                        <PlanningButton style={Styles.icon} name="pencil-square-o" screen="ScheduleEditScreen" size={24} projectId={1} id={3}/>
                     </View>
                 )}
                 renderSectionHeader={({ section: { title } }) => (

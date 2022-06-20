@@ -14,8 +14,8 @@ export default function PlanningButton({ projectId, id }){
         <Pressable 
             onPress={() =>
             navigation.navigate(screen, {
-                projectId: projectId,
-                id: id,
+                projectId: 1,
+                id: 3,
             })}>
 
             <View>
