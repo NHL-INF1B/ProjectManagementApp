@@ -155,6 +155,10 @@ export default function App() {
 					name="TeamcodeInzien"
 					component={TeamcodeInzien}
 				/>
+				<Stack.Screen
+					name="PlanningAdd"
+					component={PlanningAdd}
+				/>
 
 				<Stack.Screen
 					name="PlanningAdd"
