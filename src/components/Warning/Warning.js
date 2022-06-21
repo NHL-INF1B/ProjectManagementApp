@@ -1,16 +1,20 @@
 import  { React, useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import handlerPath from '../../../env';
+import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
+
 
 function Warning(props) {
+    const navigation = useNavigation();
     const [name, setName] = useState("");
 
     useEffect(() => {
         getUsername(props.person);
     }, []);
 
-    const getUsername = (userid) => {
+    const getUsername = (userId) => {
         try {
             fetch(handlerPath + "warning/warningUsernameFetch.php", {
             method: "POST",
@@ -19,7 +23,7 @@ function Warning(props) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                userid: userid,
+                userid: userId,
             }),
             })
             .then((response) => response.text())
@@ -43,6 +47,18 @@ function Warning(props) {
                 <View style={Styles.textContainer}>
                     <Text style={Styles.nameText}>{name}</Text>
                     <Text style={Styles.reasonText}>Reden: {props.reason}</Text>
+                </View>
+
+                <View style={Styles.change}>
+                    <Pressable
+                        onPress={() => navigation.navigate("WarningEditScreen", {
+                            userId: props.userId,
+                            projectId: props.projectId,
+                            warningId: props.warningId,
+                        })}
+                    >   
+                            <FontAwesome style={Styles.icon} name="pencil-square-o" size={24} color="black" />
+                        </Pressable>
                 </View>
             </View>
         </View>
@@ -73,7 +89,7 @@ const Styles = StyleSheet.create({
         justifyContent: "center",
     },
     textContainer : {
-        minWidth: "70%",
+        minWidth: "60%",
         flexShrink: 1,
         color: "white",
         fontWeight: "bold",
@@ -88,4 +104,9 @@ const Styles = StyleSheet.create({
         color: "white", 
         fontWeight: "bold",
     },
+    change: {
+        minWidth: "10%", 
+        alignItems: "center",
+        justifyContent: "center",
+    }
 });
