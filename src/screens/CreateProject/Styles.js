@@ -1,6 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Platform, StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+    SafeAreaView: {
+      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      backgroundColor: "#009BAA",
+      flex: 1,
+    },
     root: {
       flex: 1,
       backgroundColor: '#009BAA',
@@ -43,18 +49,6 @@ export default StyleSheet.create({
       borderRadius: 5,
       marginBottom: 5,
     },
-    buttonBlue: {
-      backgroundColor: '#005AAA',
-      borderColor: '#066BC9',
-    },
-    buttonGreen: {
-      backgroundColor: 'green',
-      borderColor: '#008528',
-    },
-    buttonRed: {
-      backgroundColor: 'red',
-      borderColor: '#CB0005',
-    },
     arrow: {
       textAlign: 'right',
       marginTop: 15,
@@ -65,7 +59,12 @@ export default StyleSheet.create({
     marginTop50: {
       marginTop: 50,
     },
-
+    marginBottom5: {
+      marginBottom: '5%',
+    },
+    marginBottom1: {
+      marginBottom: '1%',
+    },
     marginBottom25: {
       marginBottom: 25,
     },

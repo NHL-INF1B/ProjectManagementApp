@@ -1,20 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform, StatusBar } from "react-native";
 
 export default StyleSheet.create({
-    root: {
-      backgroundColor: '#009BAA',
-    },
-    circle: {
-      width: 100,
-      height: 100,
-      borderWidth: 1,
-      borderRadius: 100,
-      borderColor: 'black',
-      backgroundColor: 'white',
-      },
-    icon: {
-      marginLeft: '19%',
-      marginTop: '19%',
+    SafeAreaView: {
+      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      backgroundColor: "#009BAA",
+      flex: 1,
     },
     title: {
       textAlign: 'center',
@@ -27,46 +17,21 @@ export default StyleSheet.create({
       color: 'white',
       fontWeight: 'bold',
     },
-    input: {
-      textAlign: 'center',
-      borderWidth: 1,
-      borderColor: '#009BAA',
-      padding: 1,
-      width: '50%',
-      marginLeft: 90,
-      backgroundColor: 'white',
-      borderRadius: 5,
+    marginTop1: {
+      marginTop: '1%',
     },
-    button: {
-      width: '50%',
-      marginLeft: 90,
-      textAlign: 'center',
-      padding: 6,
-      color: 'white',
-      fontWeight: 'bold',
-      borderRadius: 5,
-      marginBottom: 5,
+    marginBottom1: {
+      marginBottom: '1%',
     },
-    buttonBlue: {
-      backgroundColor: '#005AAA',
-      borderColor: '#066BC9',
+    marginTop5: {
+      marginTop: '5%',
     },
-    buttonGreen: {
-      backgroundColor: 'green',
-      borderColor: '#008528',
+    marginBottom5: {
+      marginBottom: '5%',
     },
-    buttonRed: {
-      backgroundColor: 'red',
-      borderColor: '#CB0005',
+    errorText: {
+      textAlign: "center",
+      color: "red",
+      fontWeight: "bold",
     },
-    arrow: {
-      textAlign: 'right',
-      marginTop: 15,
-    },
-    marginTop25: {
-      marginTop: 5,
-    },
-    marginBottom25: {
-      marginBottom: 25,
-    }
   });
