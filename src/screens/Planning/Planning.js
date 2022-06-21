@@ -6,11 +6,17 @@ import React, { useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
+import { useRoute } from "@react-navigation/native";
+import Header from '../../components/Header/Header';
 
 const Planning = () => {
   const [Activiteit, setActiviteit] = useState('');
   const [Weeknummer, setWeeknummer] = useState('');
   //const [PlanningNaam, setPlanningNaam] = useState('');
+
+  const route = useRoute();
+    const userId = route.params.userId;
+    const projectId = route.params.projectId;
 
 
   const sendDataToAPI = (activiteit, week, project_id) => {
@@ -42,6 +48,7 @@ const Planning = () => {
 
   return (
     <ScrollView style={styles.root}>
+      <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
       <MaterialCommunityIcons style={styles.arrow}  name="arrow-left-thick" size={60} color={'black'} />
       <View style={[styles.div, styles.marginBottom50]}>
       <Circle name={"calendar-month"} size={60} color={"Black"} style={styles.icon} />
