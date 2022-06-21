@@ -12,7 +12,7 @@ export default function App() {
   const projectId = route.params.projectId;
   return (
     <SafeAreaView style={Styles.SafeAreaView}>
-      <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+      <Header GoToType="Add" GoTo="TeamcodeToevoegen" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
       <ScrollView>
         <WebView 
           source={{uri: 'https://inf1b.serverict.nl/uploads/teamcodes/teamcode'+ projectId + '.pdf'}} 

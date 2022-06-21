@@ -74,7 +74,7 @@ const ChangePassword = ({ route }) => {
                 alert("Het wachtwoord is veranderd");
                 break;
             default:
-              console.log('undefined');
+              //
               break;
           }
 	};

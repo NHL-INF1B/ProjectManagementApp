@@ -64,7 +64,7 @@ const WarningAddScreen = ()  => {
                 alert("De reden is incorrect");
                 break;
             default:
-                console.log("De gegevens zijn opgeslagen");
+                //
                 break;
           }
 	};
