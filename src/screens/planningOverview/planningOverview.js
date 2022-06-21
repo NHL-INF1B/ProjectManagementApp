@@ -20,7 +20,6 @@ const PlanningOverview = ({ navigation }) => {
 	}, [isFocused]);
 
     const getPlanning = (projectId) => {
-        // console.log(projectId);
 		try {
 			fetch(handlerPath + "planning/planningOverzicht.php", {
 				method: "POST",

@@ -149,7 +149,7 @@ const HourAddScreen = () => {
                 alert("De beschrijving is incorrect");
                 break;
             default:
-                console.log("De gegevens zijn opgeslagen");
+                //
                 break;
           }
 	};
@@ -189,7 +189,6 @@ const HourAddScreen = () => {
         } catch (e) {
             console.log(e);
         }
-        console.log("De gegevens zijn verwijderd");
     };
 
     const route = useRoute();

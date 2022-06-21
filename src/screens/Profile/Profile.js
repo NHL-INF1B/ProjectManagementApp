@@ -120,7 +120,7 @@ const Profile = ({ navigation }) => {
               alert("Data is geüpdatet");
               break;
             default:
-              console.log('Data not defined');
+              //
               break;
           }
 	};
