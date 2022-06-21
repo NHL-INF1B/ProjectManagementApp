@@ -145,8 +145,6 @@ const HourAddScreen = () => {
                 break;
             default:
                 addPoints(userId, projectId);
-                // planNotification();
-                console.log("De gegevens zijn opgeslagen");
                 break;
           }
 	};

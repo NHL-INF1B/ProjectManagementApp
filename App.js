@@ -22,6 +22,7 @@ import LoginScreen from "./src/screens/LoginScreenNew/LoginScreen";
 import ProjectScreen from "./src/screens/ProjectScreen/ProjectScreen";
 import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import TeamcodeToevoegen from "./src/screens/TeamcodeToevoegen/TeamcodeToevoegen";
+import TeamcodeInzien from "./src/screens/TeamcodeInzien/TeamcodeInzien";
 import Scorebord from "./src/screens/Scorebord/Scorebord";
 import PlanningOverview from "./src/screens/planningOverview/planningOverview";
 import PlanningAdd from "./src/screens/PlanningAdd/PlanningAdd";
@@ -149,6 +150,10 @@ export default function App() {
 				<Stack.Screen
 					name="PlanningOverview"
 					component={PlanningOverview}
+				/>
+				<Stack.Screen
+					name="TeamcodeInzien"
+					component={TeamcodeInzien}
 				/>
 
 				<Stack.Screen
