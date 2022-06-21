@@ -24,6 +24,7 @@ import RegisterScreen from "./src/screens/RegisterScreen/RegisterScreen";
 import TeamcodeToevoegen from "./src/screens/TeamcodeToevoegen/TeamcodeToevoegen";
 import Scorebord from "./src/screens/Scorebord/Scorebord";
 import PlanningOverview from "./src/screens/planningOverview/planningOverview";
+import PlanningAdd from "./src/screens/PlanningAdd/PlanningAdd";
 
 
 const Stack = createNativeStackNavigator();
@@ -148,6 +149,11 @@ export default function App() {
 				<Stack.Screen
 					name="PlanningOverview"
 					component={PlanningOverview}
+				/>
+
+				<Stack.Screen
+					name="PlanningAdd"
+					component={PlanningAdd}
 				/>
 
 			</Stack.Navigator>

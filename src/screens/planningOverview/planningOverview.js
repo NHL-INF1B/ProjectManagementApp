@@ -14,9 +14,11 @@ const PlanningOverview = ({ navigation }) => {
     const isFocused = useIsFocused();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
+    const [isPlanner, setPlanner] = useState(false);
 
     useEffect(() => {
         getPlanning(projectId);
+        getRoleId(userId, projectId);
 	}, [isFocused]);
 
     const getPlanning = (projectId) => {
@@ -42,12 +44,38 @@ const PlanningOverview = ({ navigation }) => {
 		}
 	};
 
-    var GoToType = "None";
-    var GoTo = "None";
+    const getRoleId = (userId, projectId) =>   {
+        try {
+			fetch(handlerPath + "projectScreen/getRole.php", {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+                    userId: userId,
+                    projectId: projectId,
+				}),
+			})
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+                if(response[0].roleId == 1 || response[0].roleId == 2 || response[0].roleId == 3){
+                    setPlanner(true);
+                };
+            });
+		} catch (error) {
+			alert(error);
+		}
+    }
     
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+            {isPlanner ? (
+                <Header GoToType="Add" GoTo="PlanningAdd" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+            ) : (
+                <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+            )}
 
             <FlatList
                 data={planning}
