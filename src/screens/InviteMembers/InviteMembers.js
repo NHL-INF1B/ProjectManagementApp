@@ -51,7 +51,6 @@ const InviteMembers = ({route}) => {
       )
         .then((response) => response.json())
         .then((response) => {
-          // ;
           catchFeedback(response);
         });
     } catch (error) {
@@ -75,7 +74,6 @@ const InviteMembers = ({route}) => {
       )
         .then((response) => response.json())
         .then((response) => {
-          ;
           catchFeedback(response);
         });
     } catch (error) {
