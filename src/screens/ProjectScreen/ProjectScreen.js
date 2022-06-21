@@ -7,7 +7,7 @@ import { useRoute, useIsFocused } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import handlerPath from '../../../env';
 
-export default function ProjectScreen() {
+export default function ProjectScreen({navigation}) {
 
     const route = useRoute();
     const projectId = route.params.projectId;
