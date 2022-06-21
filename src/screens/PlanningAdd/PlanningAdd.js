@@ -72,7 +72,7 @@ const PlanningAdd = () => {
                         }}
                         render={({ field: { onChange, value } }) => (
                             <CustomTextInput
-                                placeholder="activity"
+                                placeholder="activiteit"
                                 onChangeText={(text) => onChange(text)}
                                 value={value}
                                 errorText={errors?.activity?.message}
