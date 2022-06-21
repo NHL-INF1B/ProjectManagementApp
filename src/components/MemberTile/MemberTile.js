@@ -99,7 +99,7 @@ function MemberTile(props) {
                                 searchable="true"
                                 placeholderText="Zoeken naar rol"
                                 closeText="Sluiten"
-                                setSelected={data => { updateRole(data, props.id), setRoleName(data.name), console.log(data) }}
+                                setSelected={data => { updateRole(data, props.id), setRoleName(data.name) }}
                             />
                         </View>
                     ) : (

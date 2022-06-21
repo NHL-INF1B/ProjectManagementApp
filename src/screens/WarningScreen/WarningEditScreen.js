@@ -109,7 +109,7 @@ const WarningAddScreen = (navigation) => {
                 alert("De gegevens zijn verwijderd");
                 break;
             default:
-              console.log('Success');
+                //
               break;
           }
 	};

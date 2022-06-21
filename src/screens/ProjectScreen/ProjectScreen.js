@@ -53,9 +53,7 @@ export default function ProjectScreen() {
 			})
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setRoleId(response[0].roleId);
-                console.log(response[0].roleId);
                 if(response[0].roleId == 1 || response[0].roleId == 2){
                     setVoorzitter(true);
                 };
