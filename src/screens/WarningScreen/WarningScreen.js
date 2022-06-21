@@ -74,9 +74,13 @@ const WarningScreen = ({ navigation }) => {
                 keyExtractor={(warning) => warning.id.toString()}
                 renderItem={({ item }) => 
                     <Warning 
-                        person={item.user_id} 
-                        reason={item.reason} 
-                    />
+                    person={item.userId} 
+                    reason={item.reason} 
+                    projectId={item.projectId}
+                    userId={item.userId}
+                    warningId={item.warningId}
+                />
+                
                 }
             />)
         }
