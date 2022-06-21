@@ -25,6 +25,7 @@ import TeamcodeToevoegen from "./src/screens/TeamcodeToevoegen/TeamcodeToevoegen
 import TeamcodeInzien from "./src/screens/TeamcodeInzien/TeamcodeInzien";
 import Scorebord from "./src/screens/Scorebord/Scorebord";
 import PlanningOverview from "./src/screens/planningOverview/planningOverview";
+import PlanningAdd from "./src/screens/PlanningAdd/PlanningAdd";
 
 
 const Stack = createNativeStackNavigator();
@@ -153,6 +154,10 @@ export default function App() {
 				<Stack.Screen
 					name="TeamcodeInzien"
 					component={TeamcodeInzien}
+				/>
+				<Stack.Screen
+					name="PlanningAdd"
+					component={PlanningAdd}
 				/>
 
 			</Stack.Navigator>

@@ -46,7 +46,7 @@ const PlanningOverview = ({ navigation }) => {
     
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
-            <Header GoToType={"Add"} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+            <Header GoToType={"Add"} GoTo={"PlanningAdd"} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
 
             <FlatList
                 data={planning}
