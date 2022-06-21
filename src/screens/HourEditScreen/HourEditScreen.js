@@ -31,7 +31,12 @@ const HourEditScreen = ({navigation}) => {
     const updateData = (data) => {
         editActivity(data);
         alert("De gegevens zijn succesvol aangepast");
-        readData(id);
+        navigation.navigate("LogbookScreen",
+        {
+            projectId,
+            userId,
+        }
+        );
     };
 
     const deleteData = (data) => {

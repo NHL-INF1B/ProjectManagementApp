@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './Styles';
-import { SafeAreaView, FlatList } from 'react-native';
+import { SafeAreaView, FlatList, ScrollView, View } from 'react-native';
 import Tile from '../../components/Tile/Tile';
 import Header from '../../components/Header/Header';
 import { useRoute, useIsFocused } from "@react-navigation/native";
@@ -39,14 +39,14 @@ export default function ShowProjects(){
     return (
         <SafeAreaView style={Styles.Container}>
             <Header GoToType="Add" GoTo="CreateProject" CenterGoTo="None" ReturnType="Home" projectId={projectId} userId={userId} />
-            <FlatList
-                numColumns={2}
-                data={projects}
-                keyExtractor={(project) => project.id}
-                renderItem={({item}) =>
-                    <Tile text={item.name} image="account-group" screen="ProjectScreen" projectId={item.project_id} userId={userId} />
-                }
-            />
+                <FlatList
+                    numColumns={2}
+                    data={projects}
+                    keyExtractor={(project) => project.id}
+                    renderItem={({item}) =>
+                        <Tile text={item.name} image="account-group" screen="ProjectScreen" projectId={item.project_id} userId={userId} />
+                    }
+                />     
         </SafeAreaView>
     )
 }

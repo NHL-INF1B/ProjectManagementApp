@@ -6,6 +6,12 @@ export default StyleSheet.create({
     backgroundColor: "#009BAA",
     flex: 1,
   },
+  Title: {
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    fontSize: 25,
+    textAlign: "center",
+  },
   marginTop1: {
     marginTop: '1%',
   },
@@ -27,7 +33,7 @@ export default StyleSheet.create({
     marginTop: 50,
     color: "#FFFFFF",
     fontWeight: "bold",
-    fontsize: 25,
+    fontSize: 25,
     textAlign: "center",
-  }
+  },
 });
