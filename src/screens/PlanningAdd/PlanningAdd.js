@@ -5,6 +5,9 @@ import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
 import { useForm, Controller } from "react-hook-form";
 import CustomButton from '../../components/CustomButton/CustomButton';
+import Header from '../../components/Header/Header';
+import { useRoute } from "@react-navigation/native";
+import handlerPath from '../../../env';
 
 const PlanningAdd = () => {
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
@@ -14,10 +17,17 @@ const PlanningAdd = () => {
         }
     });
 
+    const submitData = (data) => {
+        sendDataToAPI(data);
+    };
 
-    const sendDataToAPI = (activiteit, week, project_id) => {
+    const route = useRoute();
+    const userId = route.params.userId;
+    const projectId = route.params.projectId;
+
+    const sendDataToAPI = (data) => {
         try {
-            fetch("http://localhost:8080/PmaAPI/handlers/planning/planningHandler.php", {
+            fetch(handlerPath + "planning/planningHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -25,9 +35,9 @@ const PlanningAdd = () => {
                 },
                 body: JSON.stringify({
                     // planning: planning,
-                    week: week,
-                    activiteit: activiteit,
-                    project_id: project_id,
+                    week: data.weeknummer,
+                    activiteit: data.activity,
+                    project_id: projectId,
                 }),
             })
                 //.then((response) => response.text())
@@ -43,6 +53,7 @@ const PlanningAdd = () => {
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
             <ScrollView>
                 <View>
                     <Circle name={"calendar-month"} size={60} color={"black"} text={"Planning Toevoegen"} />
@@ -53,7 +64,7 @@ const PlanningAdd = () => {
                         name="activity"
                         control={control}
                         rules={{
-                            required: { value: true, message: 'activity is verplicht' },
+                            required: { value: true, message: 'activiteit is verplicht' },
                             maxLength: {
                                 value: 50,
                                 message: 'Maximaal 50 tekens lang',
@@ -65,7 +76,7 @@ const PlanningAdd = () => {
                                 onChangeText={(text) => onChange(text)}
                                 value={value}
                                 errorText={errors?.activity?.message}
-                                titleText="activity"
+                                titleText="activiteit"
                             />
                         )}
                     />
@@ -98,7 +109,7 @@ const PlanningAdd = () => {
                     <CustomButton
                         buttonType={"blueButton"}
                         text={"Toevoegen"}
-                        onPress={handleSubmit()}
+                        onPress={handleSubmit(submitData)}
                     />
                 </View>
             </ScrollView>
