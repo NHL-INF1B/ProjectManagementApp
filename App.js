@@ -160,11 +160,6 @@ export default function App() {
 					component={PlanningAdd}
 				/>
 
-				<Stack.Screen
-					name="PlanningAdd"
-					component={PlanningAdd}
-				/>
-
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
