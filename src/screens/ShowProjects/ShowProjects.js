@@ -38,7 +38,6 @@ export default function ShowProjects(){
 
     return (
         <SafeAreaView style={Styles.Container}>
-            <ScrollView>
             <Header GoToType="Add" GoTo="CreateProject" CenterGoTo="None" ReturnType="Home" projectId={projectId} userId={userId} />
                 <FlatList
                     numColumns={2}
@@ -48,7 +47,6 @@ export default function ShowProjects(){
                         <Tile text={item.name} image="account-group" screen="ProjectScreen" projectId={item.project_id} userId={userId} />
                     }
                 />     
-            </ScrollView>
         </SafeAreaView>
     )
 }
