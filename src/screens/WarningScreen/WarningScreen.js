@@ -67,16 +67,20 @@ const WarningScreen = ({ navigation }) => {
 
     function checkData(warnings){
         if(warnings == "NO_DATA"){
-            return(<Text style={Styles.nothingFound}>Er zijn geen waarschuwingen uitgedeelt</Text>)
+            return(<Text style={Styles.nothingFound}>Er zijn nog geen waarschuwingen uitgedeeld</Text>)
         } else{
             return(<FlatList 
                 data={warnings}
                 keyExtractor={(warning) => warning.id.toString()}
                 renderItem={({ item }) => 
                     <Warning 
-                        person={item.user_id} 
-                        reason={item.reason} 
-                    />
+                    person={item.userId} 
+                    reason={item.reason} 
+                    projectId={item.projectId}
+                    userId={item.userId}
+                    warningId={item.warningId}
+                />
+                
                 }
             />)
         }
@@ -85,6 +89,8 @@ const WarningScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+
+            <Text style={Styles.Title}>WAARSCHUWINGEN</Text>
 
             {checkData(warnings)}
             

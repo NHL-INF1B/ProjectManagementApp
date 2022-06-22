@@ -7,6 +7,7 @@ import Header from '../../components/Header/Header';
 import Circle from '../../components/Circle/Circle';
 import { useRoute } from "@react-navigation/native";
 import CustomButton from '../../components/CustomButton/CustomButton';
+import handlerPath from '../../../env';
 
 const WarningAddScreen = (navigation) => {
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
@@ -17,12 +18,12 @@ const WarningAddScreen = (navigation) => {
     });
 
     useEffect(() => {
-        readData(id);
+        readData(warningId);
     }, []);
 
     const updateData = (data) => {
         editWarning(data);
-        readData(id);
+        readData(warningId);
     };
 
     const deleteData = (data) => {
@@ -39,9 +40,7 @@ const WarningAddScreen = (navigation) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: id,
-                reason: data.reason,
-
+                id: warningId,
             })
         })
         .then((response) => response.json())
@@ -54,22 +53,21 @@ const WarningAddScreen = (navigation) => {
     //Updating the data based on id
     const editWarning = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningUpdateHandler.php", {
+            fetch(handlerPath + "warning/warningUpdateHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: id,
+                    id: warningId,
                     reason: data.reason,
-                    user_id: user_id,
-                    project_id: project_id,
+                    user_id: userId,
+                    project_id: projectId,
                 }),
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -80,19 +78,18 @@ const WarningAddScreen = (navigation) => {
      //Deleting a warning based on id
     const deleteWarning = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningDeleteHandler.php", {
+            fetch(handlerPath + "warning/warningDeleteHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: id,
+                    id: warningId,
                 }),
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -115,8 +112,9 @@ const WarningAddScreen = (navigation) => {
 	};
 
     const route = useRoute();
-    const user_id = route.params.userId;
-    const project_id = route.params.projectId;
+    const userId = route.params.userId;
+    const warningId = route.params.warningId;
+    const projectId = route.params.projectId;
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>

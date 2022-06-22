@@ -68,7 +68,7 @@ const PlanningAdd = () => {
                             required: { value: true, message: 'activiteit is verplicht' },
                             maxLength: {
                                 value: 50,
-                                message: 'Maximaal 50 tekens lang',
+                                message: 'De Maximale lengte voor een planning is 50 tekens',
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
