@@ -33,7 +33,7 @@ export default function SelectLogbookUser(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            ;
             setUser(response);
         })
     }
@@ -41,7 +41,7 @@ export default function SelectLogbookUser(){
     return(
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-            <View>
+            <View style={Styles.marginBottom5}>
                 <Circle name={"clipboard-text"} size={60} color={"#000000"} text={"Urenverantwoording\nInzien"} />
             </View>
             <Text style={Styles.Subtitle}>Projectleden</Text>

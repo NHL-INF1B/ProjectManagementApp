@@ -12,7 +12,6 @@ const WelcomeScreen = ({ navigation }) => {
     useFocusEffect(
         React.useCallback(() => {
             const onBackPress = () => {
-                // navigation.navigate('LoginScreen');
                 return true;
             };
 
@@ -33,7 +32,7 @@ const WelcomeScreen = ({ navigation }) => {
     const [name, setName] = useState("-");
     const [userId, setUserId] = useState("-");
 
-    // Data verwijderen
+    // Delete data from async storage
     const removeValue = async () => {
         try {
             await AsyncStorage.removeItem('@user_data')
@@ -42,7 +41,7 @@ const WelcomeScreen = ({ navigation }) => {
         }
     };
 
-    // Data ophalen
+    // Get data from async storage
     const getData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem("@user_data");
@@ -69,39 +68,33 @@ const WelcomeScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={Styles.container}>
             <Image 
-                style={Styles.img}
+                style={Styles.img} 
                 source={require('./../../assets/images/logo.png')}
             />
             <Text style={Styles.welkom}>Welkom, {name}</Text>
             <SafeAreaView style={Styles.safeAreaView}>
                 <View style={Styles.row}>
-                    <View style={Styles.column}>
-                        <Tile text="Projecten" image="account-group" screen="ShowProjects" projectId={projectId} userId={userId} />
-                    </View>
-                    <View style={Styles.column}>
-                        <Tile text="Profiel" image="card-account-details" screen="ProfileScreen" projectId={projectId} userId={userId} />
-                    </View>
+                    <Tile text="Projecten" image="account-group" screen="ShowProjects" projectId={projectId} userId={userId} />
+                    <Tile text="Profiel" image="card-account-details" screen="ProfileScreen" projectId={projectId} userId={userId} />
                 </View>
 
                 <View style={Styles.row}>
-                    <View style={Styles.column}>
-                        <Pressable
-                            onPress={() => {
-                                const uitlog = removeValue();
-                                uitlog.then((uitlog) => 
-                                navigation.navigate("LoginScreen", 
-                                {
-                                    projectId, 
-                                    userId,
-                                }
-                                ))
-                            }}>
-                            <View style={Styles.uitloggen}>
-                                <MaterialCommunityIcons name="logout" screen="LoginScreen" size={55} color="white" style={Styles.icon} />
-                                <Text style={Styles.text}>Uitloggen</Text>
-                            </View>
-                        </Pressable>
-                    </View>
+                    <Pressable
+                        onPress={() => {
+                            const uitlog = removeValue();
+                            uitlog.then((uitlog) => 
+                            navigation.navigate("LoginScreen", 
+                            {
+                                projectId, 
+                                userId,
+                            }
+                            ))
+                        }}>
+                        <View style={Styles.uitloggen}>
+                            <MaterialCommunityIcons name="logout" screen="LoginScreen" size={55} color="white" style={Styles.icon} />
+                            <Text style={Styles.text}>Uitloggen</Text>
+                        </View>
+                    </Pressable>
                 </View>
                 <StatusBar style="auto" />
             </SafeAreaView>

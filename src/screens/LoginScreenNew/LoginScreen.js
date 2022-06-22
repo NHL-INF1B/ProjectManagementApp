@@ -21,12 +21,11 @@ import handlerPath from "../../../env";
 const LoginScreen = ({ navigation }) => {
 
   useEffect(() => {
-    // removeValue(); //If you want to remove the stored data for testing
+    // removeValue();
     const data = getData();
     data.then((data) => {
       if (data != null) {
-        console.log(data);
-        navigation.navigate("WelcomeScreen"); //Needs to go to welcomescreen
+        navigation.navigate("WelcomeScreen");
       }
     });    
   }, []);
@@ -78,8 +77,6 @@ const LoginScreen = ({ navigation }) => {
     } catch (e) {
       alert(e);
     }
-
-    console.log("Done.");
   };
 
   const sendDataToAPI = (email, password) => {
@@ -95,10 +92,9 @@ const LoginScreen = ({ navigation }) => {
           password: password,
         }),
       })
-        // .then((response) => response.text())
         .then((response) => response.json())
         .then((response) => {
-          // console.log(response);
+          // ;
           catchFeedback(response);
         });
     } catch (error) {
@@ -107,10 +103,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const catchFeedback = (response) => {
-    console.log(response);
-
-    // console.log(response);
-    // console.log(response.length);
+    ;
 
     for (let index = 0; index < response.length; index++) {
       switch (response[index]) {
@@ -130,13 +123,7 @@ const LoginScreen = ({ navigation }) => {
           alert("Deze inloggegevens kloppen niet.");
           break;
 
-        default: //Needs to go to welcomescreen
-          //Succes
-          console.log(response[0].id);
-          console.log(response[0].name);
-          console.log(response[0].email);
-          console.log(response[0].dateOfBirth);
-
+        default: 
           storeData(response[0]);
           navigation.navigate("WelcomeScreen");
           break;

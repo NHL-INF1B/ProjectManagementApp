@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './Styles';
-import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
 import Header from '../../components/Header/Header';
-import Circle from "../../components/Circle/Circle";
 import Activity from '../../components/Activity/Activity';
 import { useRoute, useIsFocused } from "@react-navigation/native";
 import { FlatList } from 'react-native-gesture-handler';
@@ -49,7 +48,7 @@ export default function LogbookScreen(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            ;
             setRole(response);
         })
     }
@@ -68,7 +67,7 @@ export default function LogbookScreen(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            ;
             setLogbook(response);
         })
     }
@@ -86,7 +85,7 @@ export default function LogbookScreen(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            ;
             setUserName(response);
         })
     }
@@ -97,6 +96,20 @@ export default function LogbookScreen(){
         var CenterGoTo = "None";
     }
 
+    function checkData(logbook){
+        if(logbook == "NO_DATA"){
+            return(<Text style={Styles.nothingFound}>Er zijn nog geen uren genoteerd</Text>);
+        } else{
+            return(<FlatList
+                data={logbook}
+                keyExtractor={(logbook) => logbook.id}
+                renderItem={({item}) =>
+                    <Activity id={item.id} Name={item.title} Description={item.description} Date={item.date} Start={item.time_start} End={item.time_end} userId={userId} projectId={projectId} />
+                }
+            />);
+        }
+    }
+
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType="Add" GoTo="HourAddScreen" CenterGoTo={CenterGoTo} ReturnType="Back" projectId={projectId} userId={userId} />
@@ -104,13 +117,8 @@ export default function LogbookScreen(){
             <Text style={Styles.Title}>URENVERANTWOORDING</Text>
             <Text style={Styles.Subtitle}>{selectedUserName}</Text>
 
-            <FlatList
-                data={logbook}
-                keyExtractor={(logbook) => logbook.id}
-                renderItem={({item}) =>
-                    <Activity id={item.id} Name={item.title} Description={item.description} Date={item.date} Start={item.time_start} End={item.time_end} userId={userId} projectId={projectId} />
-                }
-            />
+            {checkData(logbook)}
+            
         </SafeAreaView>
     )
 }

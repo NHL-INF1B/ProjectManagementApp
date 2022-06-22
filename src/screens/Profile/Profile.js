@@ -64,7 +64,6 @@ const Profile = ({ navigation }) => {
     };
 
     const getUserData = (userId) => {
-        console.log(userId);
 		try {
 			fetch(handlerPath + "profile/profileFetch.php", {
 				method: "POST",
@@ -76,7 +75,6 @@ const Profile = ({ navigation }) => {
 					userId: userId,
 				}),
 			})
-            // .then((response) => response.text())
             .then((response) => response.json())
             .then((response) => {
                 setValue("name", response.name);
@@ -107,7 +105,6 @@ const Profile = ({ navigation }) => {
                     discord: data.discord,
 				}),
 			})
-				// .then((response) => response.text())
 				.then((response) => response.json())
 				.then((response) => {
                     catchFeedback(response);
@@ -123,7 +120,7 @@ const Profile = ({ navigation }) => {
               alert("Data is geüpdatet");
               break;
             default:
-              console.log('not defined');
+              //
               break;
           }
 	};
@@ -133,9 +130,7 @@ const Profile = ({ navigation }) => {
             <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userid} />
 
             <View style={Styles.head}>
-                <View>
-                    <Circle name={"account"} size={80} color={"black"} text={"Profiel bewerken"} />
-                </View>
+                <Circle name={"account"} size={80} color={"black"} text={"Profiel bewerken"} />
             </View>
             
             <View style={Styles.content}>
@@ -174,8 +169,8 @@ const Profile = ({ navigation }) => {
                                     message: 'Dit email is niet correct'
                                 },
                                 maxLength: {
-                                    value: 50,
-                                    message: 'Maximaal 50 karakters lang',
+                                    value: 100,
+                                    message: 'Maximaal 100 karakters lang',
                                 }
                             }}
                             render={({ field: { onChange, value } }) => (
@@ -259,8 +254,8 @@ const Profile = ({ navigation }) => {
                                     message: 'Telefoonnummer mag alleen cijfers bevatten'
                                 },
                                 maxLength: {
-                                    value: 50,
-                                    message: 'Maximaal 50 cijfers lang',
+                                    value: 20,
+                                    message: 'Maximaal 20 cijfers lang',
                                 }
                             }}
                             render={({ field: { onChange, value } }) => (

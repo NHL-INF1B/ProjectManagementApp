@@ -38,14 +38,10 @@ const EditProject = ({ navigation }) => {
 
     const updateData = (data) => {
         editProject(data);
-        alert("De gegevens zijn succesvol aangepast");
-        readData();
     };
 
     const deleteData = (data) => {
         deleteProject(data);
-        navigation.navigate("WelcomeScreen");
-        alert("De gegevens zijn succesvol verwijderd");
     };
 
     const getData = async () => {
@@ -59,8 +55,8 @@ const EditProject = ({ navigation }) => {
         }
     };
 
-    //Selecting the data from the database based on id
-    const readData = (data) => {
+    // Selecting the data from the database based on id
+    const readData = () => {
         fetch(handlerPath + "createproject/selectProjectHandler.php", {
             method: "POST",
             headers: {
@@ -80,10 +76,10 @@ const EditProject = ({ navigation }) => {
         })
     };
 
-    //Updating the data based on id
+    // Updating the data based on id
     const editProject = (data) => {
         try {
-            fetch(handlerPath + "createproject/editProjectHandler.php", {
+            fetch(handlerPath + "editproject/editProjectHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -97,7 +93,6 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -105,10 +100,10 @@ const EditProject = ({ navigation }) => {
         }
     };
 
-    //Deleting a project based on id
+    // Deleting a project based on id
     const deleteProject = (data) => {
         try {
-            fetch(handlerPath + "createproject/deleteProjectHandler.php", {
+            fetch(handlerPath + "editproject/deleteProjectHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -118,9 +113,8 @@ const EditProject = ({ navigation }) => {
                     id: projectId,
                 }),
             })
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -131,13 +125,15 @@ const EditProject = ({ navigation }) => {
     const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":
-                alert("De gegevens zijn geüpdate");
+                navigation.goBack();
+                alert("De gegevens zijn succesvol aangepast");
                 break;
             case "data_deleted":
-                alert("De gegevens zijn verwijderd");
+                navigation.navigate("WelcomeScreen");
+                alert("De gegevens zijn succesvol verwijderd");
                 break;
             default:
-                console.log('Success');
+                //
                 break;
           }
 	};
