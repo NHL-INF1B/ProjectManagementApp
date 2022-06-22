@@ -60,9 +60,8 @@ export default function ShowProjects(){
     return (
         <SafeAreaView style={Styles.Container}>
             <Header GoToType="Add" GoTo="CreateProject" CenterGoTo="None" ReturnType="Home" projectId={projectId} userId={userId} />
-                <ScrollView>
-                    {checkData(projects)}
-                </ScrollView>
+                
+                {checkData(projects)}
 
         </SafeAreaView>
     )
