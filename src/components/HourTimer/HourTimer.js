@@ -126,7 +126,7 @@ const HourAddScreen = () => {
     };
 
     const catchFeedback = (response) => {
-        switch (response) {
+        switch (response[0]) {
             case "title_incorrect":
                 alert("De activiteit is incorrect");
                 break;
