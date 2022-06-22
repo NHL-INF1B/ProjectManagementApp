@@ -27,11 +27,11 @@ export default function ShowProjects(){
             },
             body: JSON.stringify({
                 userId: userId,
-            }),
+            })
         })
         .then((response) => response.json())
         .then((response) => {
-            ;
+            console.log(response);
             setProjects(response);
         })
     }
@@ -39,14 +39,23 @@ export default function ShowProjects(){
     return (
         <SafeAreaView style={Styles.Container}>
             <Header GoToType="Add" GoTo="CreateProject" CenterGoTo="None" ReturnType="Home" projectId={projectId} userId={userId} />
-                <FlatList
-                    numColumns={2}
-                    data={projects}
-                    keyExtractor={(project) => project.id}
-                    renderItem={({item}) =>
-                        <Tile text={item.name} image="account-group" screen="ProjectScreen" projectId={item.project_id} userId={userId} />
-                    }
-                />     
+                <ScrollView>
+                    <FlatList
+                        numColumns={2}
+                        data={projects}
+                        keyExtractor={(project) => project.project_id}
+                        renderItem={({ item }) =>
+                            <Tile 
+                            text={item.name} 
+                            image="account-group" 
+                            screen="ProjectScreen" 
+                            projectId={item.project_id} 
+                            userId={userId} 
+                            />
+                        }
+                    />  
+                </ScrollView>
+
         </SafeAreaView>
     )
 }
