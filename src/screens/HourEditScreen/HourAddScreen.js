@@ -62,7 +62,6 @@ const HourAddScreen = () => {
           })
           .then((response) => response.json())
           .then((response) => {
-            ;
           });
         } catch (error) {
           alert(error);
@@ -74,7 +73,6 @@ const HourAddScreen = () => {
 
     const submitData = (data) => {
         sendDataToAPI(data);
-        alert("De gegevens zijn opgeslagen");
     };
 
     // Inserting the data into the database
@@ -98,7 +96,6 @@ const HourAddScreen = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
                 setValue("title", response.title);
                 setValue("description", response.description);
                 setValue("date", response.date);
@@ -118,7 +115,7 @@ const HourAddScreen = () => {
     }
 
     const catchFeedback = (response) => {
-        switch (response) {
+        switch (response[0]) {
             case "title_incorrect":
                 alert("De activiteit is incorrect");
                 break;
@@ -143,7 +140,10 @@ const HourAddScreen = () => {
             case "times_invalid":
                 alert("De tijden zijn ongeldig");
                 break;
+            case "times_equal":
+                alert("De tijden zijn gelijk.");
             default:
+                alert("De gegevens zijn opgeslagen");
                 addPoints(userId, projectId);
                 break;
           }
