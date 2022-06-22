@@ -68,6 +68,18 @@ const PlanningOverview = ({ navigation }) => {
 			alert(error);
 		}
     }
+
+    function checkData(planning){
+        if(planning == "NO_DATA"){
+            return(<Text style={Styles.nothingFound}>Er is nog geen planning</Text>)
+        } else{
+            return(<FlatList
+                data={planning}
+                keyExtractor={(planning) => planning.id}
+                renderItem={({item}) => <Planning projectId={projectId} userId={userId} planningId={item.id} week={item.week} activiteit={item.activiteit} />}
+            /> )
+        }
+    }
     
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
@@ -77,11 +89,7 @@ const PlanningOverview = ({ navigation }) => {
                 <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
             )}
 
-            <FlatList
-                data={planning}
-                keyExtractor={(planning) => planning.id}
-                renderItem={({item}) => <Planning projectId={projectId} userId={userId} planningId={item.id} week={item.week} activiteit={item.activiteit} />}
-            />
+            {checkData(planning)}
 
         </SafeAreaView>
     );

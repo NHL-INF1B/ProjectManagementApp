@@ -6,5 +6,12 @@ export default StyleSheet.create({
         backgroundColor: "#009BAA",
         flex: 1,
         alignItems: 'center',
-	}
+	},
+        nothingFound: {
+            marginTop: 50,
+            color: "#FFFFFF",
+            fontWeight: "bold",
+            fontSize: 25,
+            textAlign: "center",
+        },
 });

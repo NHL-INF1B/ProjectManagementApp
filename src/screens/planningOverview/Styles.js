@@ -12,8 +12,13 @@ export default StyleSheet.create({
         paddingVertical: 10,
 		textAlign: 'left',
       	fontSize: 20,
-		backgroundColor: "#009BAA",
-		
-		
+		backgroundColor: "#009BAA",	
+	},
+	nothingFound: {
+		marginTop: 50,
+		color: "#FFFFFF",
+		fontWeight: "bold",
+		fontSize: 25,
+		textAlign: "center",
 	},
 });
