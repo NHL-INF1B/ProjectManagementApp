@@ -90,7 +90,7 @@ export default function ProjectScreen({navigation}) {
                 </View>
                 <View style={Styles.row}>
                     <View style={Styles.column}>
-                        <Tile text="Urenverwantwoording" image="clipboard-text" screen="LogbookScreen" projectId={projectId} userId={userId} />
+                        <Tile text="Urenverantwoording" image="clipboard-text" screen="LogbookScreen" projectId={projectId} userId={userId} />
                     </View>
                     <View style={Styles.column}>
                         <Tile text="Waarschuwingen" image="exclamation-thick" screen="WarningScreen" projectId={projectId} userId={userId} />
