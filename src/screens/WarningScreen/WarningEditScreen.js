@@ -7,6 +7,7 @@ import Header from '../../components/Header/Header';
 import Circle from '../../components/Circle/Circle';
 import { useRoute } from "@react-navigation/native";
 import CustomButton from '../../components/CustomButton/CustomButton';
+import handlerPath from '../../../env';
 
 const WarningAddScreen = (navigation) => {
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
@@ -17,12 +18,12 @@ const WarningAddScreen = (navigation) => {
     });
 
     useEffect(() => {
-        readData(id);
+        readData(warningId);
     }, []);
 
     const updateData = (data) => {
         editWarning(data);
-        readData(id);
+        readData(warningId);
     };
 
     const deleteData = (data) => {
@@ -30,23 +31,21 @@ const WarningAddScreen = (navigation) => {
         navigation.navigate("WarningScreen");
     };
 
-    //Selecting the data from the database based on id
+    // Selecting the data from the database based on id
     const readData = (data) => {
-        fetch('http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningEditSelectHandler.php', {
+        fetch(handlerPath + 'warning/warningEditSelectHandler.php', {
             method: "POST",
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: id,
-                reason: data.reason,
-
+                id: warningId,
+                reason: data.reason
             })
         })
         .then((response) => response.json())
         .then((response) => {
-            // setValue("project_member", response.project_member);
             setValue("reason", response.reason);
             catchFeedback(response);
         })
@@ -55,14 +54,14 @@ const WarningAddScreen = (navigation) => {
     //Updating the data based on id
     const editWarning = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningUpdateHandler.php", {
+            fetch(handlerPath + "warning/warningUpdateHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: id,
+                    id: warningId,
                     reason: data.reason,
                     user_id: user_id,
                     project_id: project_id,
@@ -70,7 +69,6 @@ const WarningAddScreen = (navigation) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -81,19 +79,18 @@ const WarningAddScreen = (navigation) => {
      //Deleting a warning based on id
     const deleteWarning = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningDeleteHandler.php", {
+            fetch(handlerPath + "warning/warningDeleteHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: id,
+                    id: warningId,
                 }),
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -110,13 +107,14 @@ const WarningAddScreen = (navigation) => {
                 alert("De gegevens zijn verwijderd");
                 break;
             default:
-              console.log('Success');
+                //
               break;
           }
 	};
 
     const route = useRoute();
     const user_id = route.params.userId;
+    const warningId = route.params.warningId;
     const project_id = route.params.projectId;
 
     return (

@@ -48,10 +48,8 @@ const CreateProject = ({ navigation }) => {
 
   const onSubmit = (data) => {
     sendDataToAPI(data.name, userId);
+    navigation.goBack();
   };
-
-  //the things where the info goes in.
-  // const [ProjectNaam, setProjectNaam] = useState('');
 
   const sendDataToAPI = (ProjectNaam, userid) => {
     try {
@@ -68,7 +66,7 @@ const CreateProject = ({ navigation }) => {
       })
         .then((response) => response.text())
         .then((response) => {
-          console.log(response);
+          ;
           alert('Project aangemaakt');
         });
     } catch (error) {
@@ -76,7 +74,6 @@ const CreateProject = ({ navigation }) => {
     }
   };
 
-  //the screen
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />

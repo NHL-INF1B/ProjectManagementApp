@@ -11,6 +11,13 @@ import handlerPath from '../../../env';
 
 const HourAddScreen = () => {
 
+    // Asking for permission for the notification
+    const [expoPushToken, setExpoPushToken] = useState('');
+    
+    // useEffect(() => {
+    //     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    // }, []);
+
     const [id, setId] = useState("-");
 
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
@@ -30,9 +37,32 @@ const HourAddScreen = () => {
     const timerStop = (data) => {
         stopTimer(data);
         alert("De timer is gestopt");
+        addPoints(userId, projectId);
     }
 
-    //Saves the current timestamp & inserts it into the database as the start_time along with the other data via the handler file
+    // Add points when they add urenverantwoording
+    const addPoints = (userId, projectId) => {
+        try {
+          fetch(handlerPath + "AddPoints/AddPoints.php", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+            userId: userId,
+            projectId: projectId
+            }),
+          })
+          .then((response) => response.json())
+          .then((response) => {
+          });
+        } catch (error) {
+          alert(error);
+        }
+      }
+
+    // Saves the current timestamp & inserts it into the database as the start_time along with the other data via the handler file
     const startTimer = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditStartHandler.php", {
@@ -50,7 +80,6 @@ const HourAddScreen = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setValue("id", response.id);
                 setValue("title", response.title);
                 setValue("description", response.description);
@@ -60,8 +89,8 @@ const HourAddScreen = () => {
                 setValue("userId", response.userId);
                 setValue("projectId", response.projectId);
                 setId(response.id);
-                storeData(response.id);
                 catchFeedback(response);
+                storeData(response.id);
 
             });
         } catch (error) {
@@ -69,7 +98,7 @@ const HourAddScreen = () => {
         }
     };
 
-    //Saves the current timestamp & updates it into the database as the end_time via the handler file
+    // Saves the current timestamp & updates it into the database as the end_time via the handler file
     const stopTimer = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditStopHandler.php", {
@@ -85,11 +114,11 @@ const HourAddScreen = () => {
                     projectId: projectId,
                 }),
             })
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 catchFeedback(response);
-                removeValue(); //If you want to remove the stored data
+                removeValue(); 
             });
         } catch (error) {
             console.log(error);
@@ -120,7 +149,7 @@ const HourAddScreen = () => {
                 alert("De beschrijving is incorrect");
                 break;
             default:
-                console.log("De gegevens zijn opgeslagen");
+                //
                 break;
           }
 	};
@@ -129,7 +158,6 @@ const HourAddScreen = () => {
     const data = getData();
     data.then((data) => {
         if (data !== undefined) {
-            console.log(data);
             setId(data);
         }
         });    
@@ -161,7 +189,6 @@ const HourAddScreen = () => {
         } catch (e) {
             console.log(e);
         }
-        console.log("Data has been removed");
     };
 
     const route = useRoute();
@@ -207,8 +234,8 @@ const HourAddScreen = () => {
                         rules={{
                             required: { value: true, message: 'Beschrijving is verplicht' },
                             maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
+                                value: 100,
+                                message: 'Maximaal 100 tekens lang',
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
@@ -232,7 +259,7 @@ const HourAddScreen = () => {
                     />
                 </View>
 
-                <View style={styles.marginBottom1}>
+                <View style={styles.marginBottom5}>
                     <CustomButton 
                         buttonType={"redButton"}
                         buttonText={"buttonText"}
@@ -244,5 +271,52 @@ const HourAddScreen = () => {
         </SafeAreaView>
     );
 }
+
+// // Set the look of the notifications and set when it triggers
+// async function schedulePushNotification() {
+//     const identifier = await Notifications.scheduleNotificationAsync({
+//         content: {
+//             title: "Project Management App",
+//             body: 'Vergeet je logboek vandaag niet in te vullen!',
+//         },
+//     trigger: { seconds: 60 * 24 },
+//     });
+//     return identifier;
+//   }
+  
+// // Ask for permission to give notifications
+// async function registerForPushNotificationsAsync() {
+// let token;
+// if (Device.isDevice) {
+//     const { status: existingStatus } = await Notifications.getPermissionsAsync();
+//     let finalStatus = existingStatus;
+
+//     if (existingStatus !== 'granted') {
+//         const { status } = await Notifications.requestPermissionsAsync();
+//         finalStatus = status;
+//     }
+
+//     if (finalStatus !== 'granted') {
+//         alert('Failed to get push token for push notification!');
+//         return;
+//     }
+
+//     token = (await Notifications.getExpoPushTokenAsync()).data;
+// } else {
+//     alert('Must use physical device for Push Notifications');
+// }
+
+// if (Platform.OS === 'android') {
+//     Notifications.setNotificationChannelAsync('default', {
+//     name: 'default',
+//     importance: Notifications.AndroidImportance.MAX,
+//     vibrationPattern: [0, 250, 250, 250],
+//     lightColor: '#FF231F7C',
+//     });
+// }
+
+// return token;
+
+// }
 
 export default HourAddScreen;

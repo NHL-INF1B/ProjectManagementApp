@@ -5,10 +5,14 @@ import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
 import Header from '../../components/Header/Header';
 import Circle from '../../components/Circle/Circle';
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import CustomButton from '../../components/CustomButton/CustomButton';
+import handlerPath from '../../../env';
 
 const WarningAddScreen = ()  => {
+
+    const navigation = useNavigation();
+
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             project_member: "",
@@ -18,14 +22,15 @@ const WarningAddScreen = ()  => {
 
     const submitData = (data) => {
         sendDataToAPI(data);
+        navigation.goBack();
         alert("De gegevens zijn opgeslagen");
     };
 
 
-    //Inserting the data into the database
+    // Inserting the data into the database
     const sendDataToAPI = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningInsertHandler.php", {
+            fetch(handlerPath + "warning/warningInsertHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -39,7 +44,7 @@ const WarningAddScreen = ()  => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                ;
                 setValue("reason", response.reason);
                 setValue("user_id", response.user_id);
                 setValue("project_id", response.project_id);
@@ -59,7 +64,7 @@ const WarningAddScreen = ()  => {
                 alert("De reden is incorrect");
                 break;
             default:
-                console.log("De gegevens zijn opgeslagen");
+                //
                 break;
           }
 	};

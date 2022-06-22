@@ -10,7 +10,7 @@ export default StyleSheet.create({
 		marginBottom: 12,
 	},
 	head: {
-		flex: 1,
+		marginBottom: 15,
 		backgroundColor: "#009BAA",
 		justifyContent: "center",
 		alignItems: "center",

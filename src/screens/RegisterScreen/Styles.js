@@ -27,6 +27,7 @@ export default StyleSheet.create({
     color: "white",
     textTransform: "uppercase",
     textDecorationLine: "underline",
+    marginBottom: 25,
   },
   logo: {
 		resizeMode: "center",

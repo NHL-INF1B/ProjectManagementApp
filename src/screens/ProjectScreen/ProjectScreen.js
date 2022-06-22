@@ -1,13 +1,13 @@
 import React, { useEffect, useState }from 'react';
 import Styles from './Styles';
-import { Text, SafeAreaView, ScrollView, Image, View } from 'react-native';
+import { Text, SafeAreaView, ScrollView, Image, View, Pressable } from 'react-native';
 import Tile from '../../components/Tile/Tile';
 import Header from '../../components/Header/Header';
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useIsFocused } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import handlerPath from '../../../env';
 
-export default function ProjectScreen() {
+export default function ProjectScreen({navigation}) {
 
     const route = useRoute();
     const projectId = route.params.projectId;
@@ -15,9 +15,9 @@ export default function ProjectScreen() {
     const [projectName, setProjectName] = useState("-");
     const [roleId, setRoleId] = useState("6")
     const [isVoorzitter, setVoorzitter] = useState(false);
+    const isFocused = useIsFocused();
 
     const getProjectData = (projectId) => {
-        // console.log(projectId);
 		try {
 			fetch(handlerPath + "projectScreen/projectScreen.php", {
 				method: "POST",
@@ -29,10 +29,8 @@ export default function ProjectScreen() {
 					projectId: projectId,
 				}),
 			})
-            // .then((response) => response.text())
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setProjectName(response[0].projectName);
             });
 		} catch (error) {
@@ -55,9 +53,7 @@ export default function ProjectScreen() {
 			})
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setRoleId(response[0].roleId);
-                console.log(response[0].roleId);
                 if(response[0].roleId == 1 || response[0].roleId == 2){
                     setVoorzitter(true);
                 };
@@ -70,7 +66,7 @@ export default function ProjectScreen() {
     useEffect(() => {
         getProjectData(projectId, userId);
         getRoleId(userId, projectId);
-      }, []);
+      }, [isFocused]);
     
     return (
         <SafeAreaView style={Styles.Container}>
@@ -79,15 +75,17 @@ export default function ProjectScreen() {
             ) : (
                 <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
             )}
-            <Image style={Styles.Img} source={require("../../assets/images/logo.png")} />
+            <Pressable onPress={() => navigation.navigate("WelcomeScreen")}>
+                <Image style={Styles.Img} source={require("../../assets/images/logo.png")} />
+            </Pressable>
             <Text style={Styles.ProjectName}>{projectName}</Text>
             <ScrollView>
                 <View style={Styles.row}>
                     <View style={Styles.column}>
-                        <Tile text="Teamcode" image="book" screen="" projectId={projectId} userId={userId} />
+                        <Tile text="Teamcode" image="book" screen="TeamcodeInzien" projectId={projectId} userId={userId} />
                     </View>
                     <View style={Styles.column}>
-                        <Tile text="Planning" image="calendar" screen="PlanningOverzichtDev" projectId={projectId} userId={userId} />
+                        <Tile text="Planning" image="calendar" screen="PlanningOverview" projectId={projectId} userId={userId} />
                     </View>
                 </View>
                 <View style={Styles.row}>
@@ -103,7 +101,7 @@ export default function ProjectScreen() {
                         <Tile text="Leden" image="account-group" screen="MemberOverview" projectId={projectId} userId={userId} />
                     </View>
                     <View style={Styles.column}>
-                        <Tile text="Scorebord" image="star" screen="" projectId={projectId} userId={userId} />
+                        <Tile text="Scorebord" image="star" screen="Scorebord" projectId={projectId} userId={userId} />
                     </View>
                 </View>
                 {isVoorzitter ? (
