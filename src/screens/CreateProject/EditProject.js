@@ -38,15 +38,10 @@ const EditProject = ({ navigation }) => {
 
     const updateData = (data) => {
         editProject(data);
-        navigation.goBack();
-        alert("De gegevens zijn succesvol aangepast");
-        readData();
     };
 
     const deleteData = (data) => {
         deleteProject(data);
-        navigation.navigate("WelcomeScreen");
-        alert("De gegevens zijn succesvol verwijderd");
     };
 
     const getData = async () => {
@@ -98,7 +93,6 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -121,7 +115,6 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -132,10 +125,12 @@ const EditProject = ({ navigation }) => {
     const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":
-                alert("De gegevens zijn geüpdate");
+                navigation.goBack();
+                alert("De gegevens zijn succesvol aangepast");
                 break;
             case "data_deleted":
-                alert("De gegevens zijn verwijderd");
+                navigation.navigate("WelcomeScreen");
+                alert("De gegevens zijn succesvol verwijderd");
                 break;
             default:
                 //
