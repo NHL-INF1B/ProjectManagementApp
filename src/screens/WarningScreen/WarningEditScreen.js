@@ -41,6 +41,7 @@ const WarningAddScreen = (navigation) => {
             },
             body: JSON.stringify({
                 id: warningId,
+                reason: data.reason
             })
         })
         .then((response) => response.json())
@@ -62,8 +63,8 @@ const WarningAddScreen = (navigation) => {
                 body: JSON.stringify({
                     id: warningId,
                     reason: data.reason,
-                    user_id: userId,
-                    project_id: projectId,
+                    user_id: user_id,
+                    project_id: project_id,
                 }),
             })
             .then((response) => response.json())
@@ -112,9 +113,9 @@ const WarningAddScreen = (navigation) => {
 	};
 
     const route = useRoute();
-    const userId = route.params.userId;
+    const user_id = route.params.userId;
     const warningId = route.params.warningId;
-    const projectId = route.params.projectId;
+    const project_id = route.params.projectId;
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
