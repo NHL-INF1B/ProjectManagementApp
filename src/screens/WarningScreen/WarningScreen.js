@@ -74,10 +74,10 @@ const WarningScreen = ({ navigation }) => {
                 keyExtractor={(warning) => warning.id.toString()}
                 renderItem={({ item }) => 
                     <Warning 
-                    person={item.userId} 
+                    person={item.user_id} 
                     reason={item.reason} 
                     projectId={item.projectId}
-                    userId={item.userId}
+                    userId={item.user_id}
                     warningId={item.warningId}
                 />
                 
