@@ -1,4 +1,4 @@
-import { Text, ScrollView, Pressable, View, Button, TextInput, SafeAreaView } from 'react-native';
+import { ScrollView, View, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
@@ -48,6 +48,7 @@ const PlanningAdd = () => {
         } catch (error) {
             alert(error);
         }
+        alert("De gegevens zijn opgeslagen");
     };
 
 
