@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
-import { ScrollView, View, Text, SafeAreaView, Button, Image, TouchableOpacity, Pressable, Platform, Alert } from "react-native";
+import { View, Text, SafeAreaView, Alert } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
@@ -147,7 +147,6 @@ const ScheduleEditScreen = ({ navigation }) => {
                     />
                 </View>
 
-                <Text>{scheduleId}</Text>
 
                 <View style={Styles.marginContainer}>
                     <Controller
@@ -190,12 +189,15 @@ const ScheduleEditScreen = ({ navigation }) => {
                     <CustomButton 
                         buttonType={"redButton"}
                         text={"Verwijderen"}
-                        onPress={() =>
-                            Alert.alert("Weet je zeker dat je deze planning wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
-                                { text: "Verwijderen", onPress: () => sendRemoveData() },
-                                { text: "Annuleren" },
-                            ])
-                        }
+                        // onPress={() => 
+                        //     Alert.alert("Weet je zeker dat je deze planning wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!",
+                        //     [   
+                        //         { text: "Verwijderen", onPress: () => sendRemoveData() },
+                        //         { text: "Annuleren" },
+                        //     ]
+                        //     )
+                        // }
+                        onPress={handleSubmit(sendRemoveData)}
                     />
                 </View>
             </View>
