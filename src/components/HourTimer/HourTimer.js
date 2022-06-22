@@ -116,7 +116,6 @@ const HourAddScreen = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
                 catchFeedback(response);
                 removeValue(); 
             });
