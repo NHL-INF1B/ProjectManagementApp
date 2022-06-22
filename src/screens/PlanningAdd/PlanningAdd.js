@@ -1,4 +1,4 @@
-import { Text, ScrollView, Pressable, View, Button, TextInput, SafeAreaView } from 'react-native';
+import { ScrollView, View, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
@@ -48,6 +48,7 @@ const PlanningAdd = () => {
         } catch (error) {
             alert(error);
         }
+        alert("De gegevens zijn opgeslagen");
     };
 
 
@@ -67,12 +68,12 @@ const PlanningAdd = () => {
                             required: { value: true, message: 'activiteit is verplicht' },
                             maxLength: {
                                 value: 50,
-                                message: 'Maximaal 50 tekens lang',
+                                message: 'De Maximale lengte voor een planning is 50 tekens',
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
                             <CustomTextInput
-                                placeholder="activity"
+                                placeholder="activiteit"
                                 onChangeText={(text) => onChange(text)}
                                 value={value}
                                 errorText={errors?.activity?.message}

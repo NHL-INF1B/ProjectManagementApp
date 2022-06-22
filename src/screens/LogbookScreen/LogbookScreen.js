@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './Styles';
-import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
 import Header from '../../components/Header/Header';
-import Circle from "../../components/Circle/Circle";
 import Activity from '../../components/Activity/Activity';
 import { useRoute, useIsFocused } from "@react-navigation/native";
 import { FlatList } from 'react-native-gesture-handler';
