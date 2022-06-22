@@ -1,4 +1,4 @@
-import { SafeAreaView, View, Pressable, ScrollView, Text } from 'react-native';
+import { SafeAreaView, View, Pressable, ScrollView, Text, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
@@ -349,12 +349,16 @@ const HourEditScreen = ({navigation}) => {
                         buttonType={"redButton"}
                         buttonText={"buttonText"}
                         text={"Verwijderen"}
-                        onPress={handleSubmit(deleteData)}
+                        onPress={() =>
+                            Alert.alert("Weet je zeker dat je deze urenverantwoording wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
+                                { text: "Verwijderen", onPress: () => handleSubmit(deleteData) },
+                                { text: "Annuleren" },
+                            ])
+                        }
                     />
                 </View>
             </ScrollView>
         </SafeAreaView>
     );
 }
-
 export default HourEditScreen;

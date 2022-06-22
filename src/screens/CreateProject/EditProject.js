@@ -1,4 +1,4 @@
-import { Text, ScrollView, View } from 'react-native';
+import { Text, ScrollView, View, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
@@ -188,7 +188,12 @@ const EditProject = ({ navigation }) => {
                     buttonType={"redButton"}
                     buttonText={"buttonText"}
                     text={"Verwijderen"}
-                    onPress={handleSubmit(deleteData)}
+                    onPress={() =>
+                        Alert.alert("Weet je zeker dat je dit project wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
+                            { text: "Verwijderen", onPress: () => handleSubmit(deleteData) },
+                            { text: "Annuleren" },
+                        ])
+                    }
                 />
             </View>
 
