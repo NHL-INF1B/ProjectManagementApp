@@ -1,4 +1,4 @@
-import { ScrollView, View, SafeAreaView } from 'react-native';
+import { ScrollView, View, SafeAreaView, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
@@ -187,7 +187,12 @@ const WarningAddScreen = (navigation) => {
                         buttonType={"redButton"}
                         buttonText={"buttonText"}
                         text={"Verwijderen"}
-                        onPress={handleSubmit(deleteData)}
+                        onPress={() =>
+                            Alert.alert("Weet je zeker dat je deze waarschuwing wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
+                                { text: "Verwijderen", onPress: () => handleSubmit(deleteData) },
+                                { text: "Annuleren" },
+                            ])
+                        }
                     />
                 </View>
 
@@ -195,7 +200,6 @@ const WarningAddScreen = (navigation) => {
         </SafeAreaView>
     );
 }
-
 export default WarningAddScreen;
   
 
