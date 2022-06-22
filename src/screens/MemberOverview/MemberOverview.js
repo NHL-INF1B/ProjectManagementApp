@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
-import { FlatList, SafeAreaView } from "react-native";
+import { Text, FlatList, SafeAreaView } from "react-native";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import MemberTile from "../../components/MemberTile/MemberTile";
 import Header from '../../components/Header/Header';
@@ -67,21 +67,31 @@ const MemberOverview = ({ navigation }) => {
     var GoToType = "None";
     var GoTo = "None";
 
+    function checkData(members){
+        if(members == "NO_DATA"){
+            return(<Text style={Styles.nothingFound}>Er zijn nog geen andere projectleden in dit project.</Text>)
+        }else{
+            return(
+                <FlatList
+                    data={member}
+                    keyExtractor={(member) => member.id.toString()}
+                    renderItem={({ item }) =>
+                        <MemberTile
+                            id={item.id}
+                            name={item.name}
+                            role={item.role}
+                            userRole={roleName}
+                        />
+                    }
+                />)
+        }
+    }
+
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-            <FlatList
-                data={member}
-                keyExtractor={(member) => member.id.toString()}
-                renderItem={({ item }) =>
-                    <MemberTile
-                        id={item.id}
-                        name={item.name}
-                        role={item.role}
-                        userRole={roleName}
-                    />
-                }
-            />
+            
+            {checkData(member)}
         </SafeAreaView>
     );
 }
