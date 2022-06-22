@@ -95,7 +95,6 @@ const HourEditScreen = ({navigation}) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -138,7 +137,6 @@ const HourEditScreen = ({navigation}) => {
                 alert("De gegevens zijn verwijderd");
                 break;
             default:
-                //
                 break;
           }
 	};
