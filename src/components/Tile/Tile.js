@@ -35,8 +35,8 @@ export default function Tile({ text, image, screen, projectId, userId }){
 const Styles = StyleSheet.create({
     Tile: {
         minWidth: 135,
+        minHeight: 145,
         maxWidth: 135,
-        minHeight: 141,
         maxHeight: 141,
         backgroundColor: "white",
         borderColor: "#707070",

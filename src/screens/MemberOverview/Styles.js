@@ -32,5 +32,12 @@ export default StyleSheet.create({
 	dropdown: {
 		border: 1,
 		backgroundColor: "white",
-	}
+	},
+	nothingFound: {
+		marginTop: 50,
+		color: "#FFFFFF",
+		fontWeight: "bold",
+		fontSize: 25,
+		textAlign: "center",
+	  },
 });

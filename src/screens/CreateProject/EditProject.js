@@ -1,4 +1,4 @@
-import { Text, ScrollView, View } from 'react-native';
+import { Text, ScrollView, View, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
@@ -38,15 +38,10 @@ const EditProject = ({ navigation }) => {
 
     const updateData = (data) => {
         editProject(data);
-        navigation.goBack();
-        alert("De gegevens zijn succesvol aangepast");
-        readData();
     };
 
     const deleteData = (data) => {
         deleteProject(data);
-        navigation.navigate("WelcomeScreen");
-        alert("De gegevens zijn succesvol verwijderd");
     };
 
     const getData = async () => {
@@ -98,7 +93,6 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -121,7 +115,6 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
                 catchFeedback(response);
             });
         } catch (error) {
@@ -132,10 +125,12 @@ const EditProject = ({ navigation }) => {
     const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":
-                alert("De gegevens zijn geüpdate");
+                navigation.goBack();
+                alert("De gegevens zijn succesvol aangepast");
                 break;
             case "data_deleted":
-                alert("De gegevens zijn verwijderd");
+                navigation.navigate("WelcomeScreen");
+                alert("De gegevens zijn succesvol verwijderd");
                 break;
             default:
                 //
@@ -193,7 +188,12 @@ const EditProject = ({ navigation }) => {
                     buttonType={"redButton"}
                     buttonText={"buttonText"}
                     text={"Verwijderen"}
-                    onPress={handleSubmit(deleteData)}
+                    onPress={() =>
+                        Alert.alert("Weet je zeker dat je dit project wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
+                            { text: "Verwijderen", onPress: () => handleSubmit(deleteData) },
+                            { text: "Annuleren" },
+                        ])
+                    }
                 />
             </View>
 

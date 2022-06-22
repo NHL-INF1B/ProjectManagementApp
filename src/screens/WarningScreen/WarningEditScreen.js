@@ -1,4 +1,4 @@
-import { ScrollView, View, SafeAreaView } from 'react-native';
+import { ScrollView, View, SafeAreaView, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
@@ -41,6 +41,7 @@ const WarningAddScreen = (navigation) => {
             },
             body: JSON.stringify({
                 id: warningId,
+                reason: data.reason
             })
         })
         .then((response) => response.json())
@@ -62,8 +63,8 @@ const WarningAddScreen = (navigation) => {
                 body: JSON.stringify({
                     id: warningId,
                     reason: data.reason,
-                    user_id: userId,
-                    project_id: projectId,
+                    user_id: user_id,
+                    project_id: project_id,
                 }),
             })
             .then((response) => response.json())
@@ -112,9 +113,9 @@ const WarningAddScreen = (navigation) => {
 	};
 
     const route = useRoute();
-    const userId = route.params.userId;
+    const user_id = route.params.userId;
     const warningId = route.params.warningId;
-    const projectId = route.params.projectId;
+    const project_id = route.params.projectId;
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
@@ -186,7 +187,12 @@ const WarningAddScreen = (navigation) => {
                         buttonType={"redButton"}
                         buttonText={"buttonText"}
                         text={"Verwijderen"}
-                        onPress={handleSubmit(deleteData)}
+                        onPress={() =>
+                            Alert.alert("Weet je zeker dat je deze waarschuwing wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
+                                { text: "Verwijderen", onPress: () => handleSubmit(deleteData) },
+                                { text: "Annuleren" },
+                            ])
+                        }
                     />
                 </View>
 
@@ -194,7 +200,6 @@ const WarningAddScreen = (navigation) => {
         </SafeAreaView>
     );
 }
-
 export default WarningAddScreen;
   
 

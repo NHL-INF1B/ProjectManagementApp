@@ -14,7 +14,7 @@ function Warning(props) {
         getUsername(props.person);
     }, []);
 
-    const getUsername = (userId) => {
+    const getUsername = (userid) => {
         try {
             fetch(handlerPath + "warning/warningUsernameFetch.php", {
             method: "POST",
@@ -23,7 +23,7 @@ function Warning(props) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                userid: userId,
+                userid: userid,
             }),
             })
             .then((response) => response.text())
@@ -52,7 +52,7 @@ function Warning(props) {
                 <View style={Styles.change}>
                     <Pressable
                         onPress={() => navigation.navigate("WarningEditScreen", {
-                            userId: props.userId,
+                            userId: props.user_id,
                             projectId: props.projectId,
                             warningId: props.warningId,
                         })}
