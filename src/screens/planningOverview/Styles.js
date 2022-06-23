@@ -24,7 +24,7 @@ export default StyleSheet.create({
     },
 	sectionHeader: {
 		alignSelf: "center",
-		width: "90%",
+		width: "80%",
 		backgroundColor: "#009BAA",
 		fontWeight:"bold",
 		color: 'white',
