@@ -82,7 +82,6 @@ const HourEditScreen = ({navigation}) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                alert(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -151,7 +150,6 @@ const HourEditScreen = ({navigation}) => {
                 { projectId,  userId });
                 break;
             default:
-                //
                 break;
           }
 	};

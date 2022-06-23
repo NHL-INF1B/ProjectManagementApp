@@ -141,7 +141,8 @@ const HourAddScreen = () => {
                 alert("De tijden zijn ongeldig");
                 break;
             case "times_equal":
-                alert("De tijden zijn gelijk.");
+                alert("De tijden zijn gelijk");
+                break;
             default:
                 alert("De gegevens zijn opgeslagen");
                 addPoints(userId, projectId);

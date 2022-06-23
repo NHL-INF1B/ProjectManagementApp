@@ -10,7 +10,4 @@ export default StyleSheet.create({
     marginContainer: {
       marginBottom: 12,
     },
-    marginBottom50: {
-      marginBottom: 50,
-    },
   });

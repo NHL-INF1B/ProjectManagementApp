@@ -53,7 +53,6 @@ const MemberInfo = () => {
       )
         .then((response) => response.json())
         .then((response) => {
-          // ;
           catchFeedback(response);
         });
     } catch (error) {
@@ -63,8 +62,6 @@ const MemberInfo = () => {
 
   // Catch the feeback from the API
   const catchFeedback = (response) => {
-    ;
-
     switch (response[0]) {
       case "user_not_exists":
         alert("Deze gebruiker bestaat niet");

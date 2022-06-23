@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity, Pressable } from 'react-nativ
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Picker, onOpen } from 'react-native-actions-sheet-picker';
 import allRoles from './countries.json';
-import MemberInfo from '../../screens/MemberInfo/MemberInfo';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import handlerPath from '../../../env';
 
@@ -37,7 +36,6 @@ function MemberTile(props) {
     }, [roles, query]);
 
     const capitalizeFirstLetter = (string) => {
-        // return string;
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
@@ -56,7 +54,6 @@ function MemberTile(props) {
                 }),
             })
                 .then((response) => response.text())
-                // .then((response) => response.json())
                 .then((response) => {
                     alert('Rol is veranderd');
                 });
@@ -157,16 +154,6 @@ const Styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    nameText: {
-        color: "white",
-        fontWeight: "bold",
-        textDecorationLine: 'underline',
-        fontSize: 20,
-    },
-    reasonText: {
-        color: "white",
-        fontWeight: "bold",
-    },
     dropdown: {
         marginTop: 5,
         marginBottom: 5,
@@ -181,7 +168,6 @@ const Styles = StyleSheet.create({
         minWidth: "75%",
         flexShrink: 1,
         color: "#009BAA",
-
     },
     dropdownArrow: {
         minWidth: "25%",

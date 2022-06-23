@@ -1,4 +1,4 @@
-import { ScrollView, View, SafeAreaView, Alert } from 'react-native';
+import { ScrollView, View, SafeAreaView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
@@ -9,10 +9,10 @@ import { useRoute } from "@react-navigation/native";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import handlerPath from '../../../env';
 
-const WarningAddScreen = ( {navigation} ) => {
+const WarningEditScreen = ({navigation}) => {
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
-            project_member: "",
+            name: "",
             reason: "",
         }
     });
@@ -23,19 +23,16 @@ const WarningAddScreen = ( {navigation} ) => {
 
     const updateData = (data) => {
         editWarning(data);
-        readData(warningId);
-        alert("De gegevens zijn aangepast");
-        navigation.goBack();
+        alert("De gegevens zijn succesvol aangepast");
     };
 
     const deleteData = (data) => {
         deleteWarning(data);
-        alert("De gegevens zijn verwijderd");
-        navigation.goBack();
+        alert("De gegevens zijn succesvol verwijderd");
     };
-
+    
     // Selecting the data from the database based on id
-    const readData = (data) => {
+    const readData = () => {
         fetch(handlerPath + 'warning/warningEditSelectHandler.php', {
             method: "POST",
             headers: {
@@ -44,12 +41,12 @@ const WarningAddScreen = ( {navigation} ) => {
             },
             body: JSON.stringify({
                 id: warningId,
-                reason: data.reason
             })
         })
         .then((response) => response.json())
         .then((response) => {
             setValue("reason", response.reason);
+            setValue("name", response.name); 
             catchFeedback(response);
         })
     };
@@ -66,8 +63,6 @@ const WarningAddScreen = ( {navigation} ) => {
                 body: JSON.stringify({
                     id: warningId,
                     reason: data.reason,
-                    user_id: user_id,
-                    project_id: project_id,
                 }),
             })
             .then((response) => response.json())
@@ -80,7 +75,7 @@ const WarningAddScreen = ( {navigation} ) => {
     };
 
      //Deleting a warning based on id
-    const deleteWarning = (data) => {
+    const deleteWarning = () => {
         try {
             fetch(handlerPath + "warning/warningDeleteHandler.php", {
                 method: "POST",
@@ -92,7 +87,6 @@ const WarningAddScreen = ( {navigation} ) => {
                     id: warningId,
                 }),
             })
-            .then((response) => response.json())
             .then((response) => {
                 catchFeedback(response);
             });
@@ -130,22 +124,16 @@ const WarningAddScreen = ( {navigation} ) => {
                 {/* Project_member */}
                 <View style={styles.marginBottom1}>
                     <Controller
-                        name="project_member"
+                        name="name"
                         control={control}
-                        rules={{
-                            required: { value: true, message: 'Projectlid is verplicht' },
-                            maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
-                            }
-                        }}
                         render={({ field: { onChange, value } }) => (
                             <CustomTextInput 
-                                placeholder="Selecteer een projectlid" 
+                                placeholder="Selecteer een projectlid"
                                 onChangeText={(text) => onChange(text)} 
                                 value={value} 
                                 errorText={errors?.project_member?.message} 
                                 titleText="Projectlid"
+                                editable={false}
                             />
                         )}
                     />
@@ -197,12 +185,12 @@ const WarningAddScreen = ( {navigation} ) => {
                         }
                     />
                 </View>
-
             </ScrollView>
         </SafeAreaView>
     );
 }
-export default WarningAddScreen;
+
+export default WarningEditScreen;
   
 
 
