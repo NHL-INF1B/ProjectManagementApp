@@ -24,6 +24,7 @@ const PlanningAdd = () => {
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
+    const NUMMERIC_REGEX = /^[0-9]*$/;
 
     const sendDataToAPI = (data) => {
         try {
@@ -88,11 +89,16 @@ const PlanningAdd = () => {
                         name="weeknummer"
                         control={control}
                         rules={{
-                            required: { value: true, message: 'weeknummer is verplicht' },
+                            required: { value: true, message: 'Week is verplicht' },
+                            pattern: {
+                                value: NUMMERIC_REGEX,
+                                message: 'Week mag alleen cijfers bevatten'
+                            },
                             maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
+                                value: 3,
+                                message: 'Maximaal 3 cijfers lang',
                             }
+
                         }}
                         render={({ field: { onChange, value } }) => (
                             <CustomTextInput

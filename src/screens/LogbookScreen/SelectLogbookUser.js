@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './Styles';
-import { Text, SafeAreaView, View, ScrollView, Image } from 'react-native';
+import { Text, SafeAreaView, View } from 'react-native';
 import { useRoute } from "@react-navigation/native";
 import Circle from "./../../components/Circle/Circle";
-import CustomButton from '../../components/CustomButton/CustomButton';
 import Header from '../../components/Header/Header';
 import { FlatList } from 'react-native-gesture-handler';
 import LogbookUser from '../../components/LogbookUser/LogbookUser';
@@ -44,7 +43,7 @@ export default function SelectLogbookUser(){
             <View style={Styles.marginBottom5}>
                 <Circle name={"clipboard-text"} size={60} color={"#000000"} text={"Urenverantwoording\nInzien"} />
             </View>
-            <Text style={Styles.Subtitle}>Projectleden</Text>
+            <Text style={Styles.subtitle}>Projectleden</Text>
 
             <FlatList
                 data={user}
