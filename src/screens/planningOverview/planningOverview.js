@@ -5,6 +5,7 @@ import handlerPath from "../../../env";
 import Header from '../../components/Header/Header';
 import { useRoute, useIsFocused } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
+import { createWatchCompilerHost } from "typescript";
 
 const PlanningOverview = ({ navigation }) => {
     const [userData, setUserData] = useState([]);
@@ -96,11 +97,11 @@ const PlanningOverview = ({ navigation }) => {
         var GoToType = "None";
     }
 
-
-    return (
-        <SafeAreaView style={Styles.SafeAreaView}>
-            <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-            <SectionList style={Styles.sectionList}
+    function checkData(userData){
+        if(userData == "NO_DATA"){
+            return(<Text style={Styles.nothingFound}>Er is nog geen planning</Text>)
+        } else{
+            return(<SectionList style={Styles.sectionList}
                 sections={filterData(userData)}
                 keyExtractor={(item) => item}
                 renderItem={({ item }) => (
@@ -131,7 +132,15 @@ const PlanningOverview = ({ navigation }) => {
                         {title}
                     </Text>
                 )}
-            />
+            />)
+        }
+    }
+
+    return (
+        <SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+            
+            {checkData(userData)}
         </SafeAreaView>
     );
 }
