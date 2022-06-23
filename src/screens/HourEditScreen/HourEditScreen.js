@@ -41,13 +41,7 @@ const HourEditScreen = ({navigation}) => {
 
     const deleteData = (data) => {
         deleteActivity(data);
-        alert("De gegevens zijn succesvol verwijderd");
-        navigation.navigate("LogbookScreen",
-        {
-            projectId,
-            userId,
-        }
-        );
+        console.log("je bent hier");
     };
 
     // Selecting the data from the database based on id
@@ -119,6 +113,7 @@ const HourEditScreen = ({navigation}) => {
             .then((response) => {
                 ;
                 catchFeedback(response);
+                console.log(response);
             });
         } catch (error) {
             alert(error);

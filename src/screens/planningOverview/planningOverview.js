@@ -80,17 +80,42 @@ const PlanningOverview = ({ navigation }) => {
             /> )
         }
     }
-    
-    return (
-        <SafeAreaView style={Styles.SafeAreaView}>
-            {isPlanner ? (
-                <Header GoToType="Add" GoTo="PlanningAdd" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-            ) : (
-                <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-            )}
+
+    function checkData(userData){
+        if(userData == "NO_DATA"){
+            return(<Text style={Styles.nothingFound}>Er is nog geen planning.</Text>)
+        } else{
+            return(<SectionList style={Styles.sectionList}
+                sections={filterData(userData)}
+                keyExtractor={(item) => item}
+                renderItem={({ item }) => (
+                    <View style={Styles.row}>
+                        {/* item[0] = NAME */}
+                        {/* item[1] = ID */}
+
+                        <View style={Styles.activity}>
+                            <Text style={Styles.activityText}>{item[0]}</Text>
+                        </View>
 
             {checkData(planning)}
 
+                    </View>
+                )}
+                renderSectionHeader={({ section: { title } }) => (
+                    <Text style={Styles.sectionHeader}>
+                        {title}
+                    </Text>
+                )}
+            />)
+        }
+    }
+
+
+    return (
+        <SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+            
+            {checkData(userData)}
         </SafeAreaView>
     );
 }
