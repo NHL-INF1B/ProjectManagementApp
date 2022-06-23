@@ -35,7 +35,6 @@ const WarningScreen = ({ navigation }) => {
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
             setWarnings(response);
         })
     };

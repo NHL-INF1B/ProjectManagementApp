@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './Styles';
-import { SafeAreaView, FlatList, ScrollView, View } from 'react-native';
+import { SafeAreaView, FlatList, ScrollView, View, Text } from 'react-native';
 import Tile from '../../components/Tile/Tile';
 import Header from '../../components/Header/Header';
 import { useRoute, useIsFocused } from "@react-navigation/native";
@@ -31,30 +31,36 @@ export default function ShowProjects(){
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
             setProjects(response);
         })
+    }
+
+    function checkData(projects){
+        if(projects == "NO_DATA"){
+            return(<Text style={Styles.nothingFound}>Je bent nog geen deel van een project.</Text>)
+        } else{
+            return(<FlatList
+                numColumns={2}
+                data={projects}
+                keyExtractor={(project) => project.project_id}
+                renderItem={({ item }) =>
+                    <Tile 
+                    text={item.name} 
+                    image="account-group" 
+                    screen="ProjectScreen" 
+                    projectId={item.project_id} 
+                    userId={userId} 
+                    />
+                }
+            /> )
+        }
     }
 
     return (
         <SafeAreaView style={Styles.Container}>
             <Header GoToType="Add" GoTo="CreateProject" CenterGoTo="None" ReturnType="Home" projectId={projectId} userId={userId} />
-                <ScrollView>
-                    <FlatList
-                        numColumns={2}
-                        data={projects}
-                        keyExtractor={(project) => project.project_id}
-                        renderItem={({ item }) =>
-                            <Tile 
-                            text={item.name} 
-                            image="account-group" 
-                            screen="ProjectScreen" 
-                            projectId={item.project_id} 
-                            userId={userId} 
-                            />
-                        }
-                    />  
-                </ScrollView>
+                
+                {checkData(projects)}
 
         </SafeAreaView>
     )
