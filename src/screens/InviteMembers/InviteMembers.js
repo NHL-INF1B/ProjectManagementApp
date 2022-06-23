@@ -97,7 +97,7 @@ const InviteMembers = ({route}) => {
   };
 
   const onSubmit = (data) => {
-    Linking.openURL("mailto:"+ data.email +"?subject=Test&body=Hallo%0D%0ADit is een linkje naar de app " + name + "%0D%0ADe link om deel te nemen aan het project is " + urlMail);
+    Linking.openURL("mailto:"+ data.email +"?subject=Uitnodiging voor project " + name + "&body=Beste%0D%0AHierbij ben je uitgenodigd voor het project " + name + "%0D%0ADe link om deel te nemen aan het project is " + urlMail);
   };
   
   return (
