@@ -6,6 +6,7 @@ export default StyleSheet.create({
 		backgroundColor: "#009BAA",
 		flex: 1,
 	},
+
     row:{
         flex: 1,
         flexDirection: "row",
@@ -37,11 +38,17 @@ export default StyleSheet.create({
         paddingVertical: 10,
 		textAlign: 'left',
       	fontSize: 22,
-		backgroundColor: "#009BAA",
+		// backgroundColor: "#009BAA",
+		// backgroundColor: "#00aabb",
+
+	},
+	test: {
+		textAlign: 'left'
+
 	},
 
     activity: {
-        minWidth: "90%",
+        minWidth: "80%",
         flexShrink: 1,
     },
     change: {
@@ -56,12 +63,5 @@ export default StyleSheet.create({
 	icon: {
 		textAlign: 'right',
 		fontWeight: 'bold',
-	},
-	nothingFound: {
-		marginTop: 50,
-		color: "#FFFFFF",
-		fontWeight: "bold",
-		fontSize: 25,
-		textAlign: "center",
 	},
 });

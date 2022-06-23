@@ -114,7 +114,7 @@ const PlanningOverview = ({ navigation }) => {
                         </View>
 
                         <View style={Styles.change}>
-                            <Pressable
+                            <Pressable 
                                 onPress={() => navigation.navigate("ScheduleEditScreen", {
                                     projectId,
                                     userId,
