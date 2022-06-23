@@ -5,7 +5,6 @@ import handlerPath from "../../../env";
 import Header from '../../components/Header/Header';
 import { useRoute, useIsFocused } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
-import { createWatchCompilerHost } from "typescript";
 
 const PlanningOverview = ({ navigation }) => {
     const [userData, setUserData] = useState([]);
