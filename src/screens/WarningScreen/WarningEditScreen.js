@@ -1,5 +1,5 @@
-import { ScrollView, View, SafeAreaView } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import { ScrollView, View, SafeAreaView, Alert } from 'react-native';
+import React, { useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
@@ -24,11 +24,13 @@ const WarningEditScreen = ({navigation}) => {
     const updateData = (data) => {
         editWarning(data);
         alert("De gegevens zijn succesvol aangepast");
+        navigation.goBack();
     };
 
     const deleteData = (data) => {
         deleteWarning(data);
         alert("De gegevens zijn succesvol verwijderd");
+        navigation.goBack();
     };
     
     // Selecting the data from the database based on id
@@ -179,7 +181,7 @@ const WarningEditScreen = ({navigation}) => {
                         text={"Verwijderen"}
                         onPress={() =>
                             Alert.alert("Weet je zeker dat je deze waarschuwing wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
-                                { text: "Verwijderen", onPress: () => handleSubmit(deleteData) },
+                                { text: "Verwijderen", onPress: deleteData },
                                 { text: "Annuleren" },
                             ])
                         }
