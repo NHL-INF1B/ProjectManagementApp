@@ -1,16 +1,20 @@
-import { ScrollView, View, Platform, SafeAreaView } from 'react-native';
-import { useRoute } from "@react-navigation/native";
-import React from 'react';
+import { Text, ScrollView, View, Button, Platform, SafeAreaView } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React, { useState } from 'react';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
+import { useForm, Controller } from "react-hook-form";
 import CustomButton from '../../components/CustomButton/CustomButton';
-import Header from '../../components/Header/Header';
 import * as DocumentPicker from 'expo-document-picker';
-import handlerPath from '../../../env';
+import Header from '../../components/Header/Header';
+import { useRoute } from "@react-navigation/native";
+
 
 const TeamcodeToevoegen = () => {
   const route = useRoute();
+  const userId = route.params.userId;
   const projectId = route.params.projectId;
+
   const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "application/pdf",
@@ -40,11 +44,15 @@ const TeamcodeToevoegen = () => {
   }
 
   const postDocument = (data) => {
+    console.log(data);
+    console.log(data.uri);
+    const fileUri = data.uri;
     const formData = new FormData();
     formData.append('document', data);
+    console.log(formData);
 
     try {
-      fetch(handlerPath + "teamcode/teamcodeAdd.php", {
+      fetch("http://localhost/PMA/PmaAPI/handlers/teamcode/teamcodeAdd.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -55,10 +63,11 @@ const TeamcodeToevoegen = () => {
           projectid: projectId
         }),
       })
-      .then((response) => response.json())
-      .then((response) => {
-        alert('De teamcode is geüpload');
-      });
+        // .then((response) => response.text())
+        .then((response) => response.json())
+        .then((response) => {
+          alert('Teamcode geupload');
+        });
     } catch (error) {
       alert(error);
     }
@@ -66,18 +75,24 @@ const TeamcodeToevoegen = () => {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
       <ScrollView style={styles.root}>
-        <View style={styles.marginBottom25}>
-          <Circle name={"book"} size={60} color={"#000000"} text={"Teamcode Toevoegen"} />
+      <Header GoToType="" GoTo="" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+        <View style={styles.div}>
+          <Circle style={[styles.icon]} name={"book"} size={60} color={"black"} />
         </View>
-        <View>
-          <CustomButton 
+        <View style={styles.div}>
+          <Text style={[styles.title, styles.marginTop50, styles.sampleText,]}>TEAMCODE TOEVOEGEN</Text>
+        </View>
+        <View style={styles.div}>
+          <Text style={[styles.subtitle, styles.sampleText]}>TEAMCODE</Text>
+        </View>
+        <View style={styles.marginContainer}>
+          <CustomButton
             buttonType={"blueButton"}
-            buttonText={"buttonText"}
-            text={"Selecteer bestand"}
+            text={"Selecteer Bestand"}
             onPress={pickDocument}
           />
+          
         </View>
       </ScrollView>
     </SafeAreaView>
