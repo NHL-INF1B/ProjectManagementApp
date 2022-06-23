@@ -12,22 +12,11 @@ export default StyleSheet.create({
     fontSize: 25,
     textAlign: "center",
   },
-  marginTop1: {
-    marginTop: '1%',
-  },
   marginBottom1: {
     marginBottom: '1%',
   },
-  marginTop5: {
-    marginTop: '5%',
-  },
   marginBottom5: {
     marginBottom: '5%',
-  },
-  errorText: {
-    textAlign: "center",
-    color: "red",
-    fontWeight: "bold",
   },
   nothingFound: {
     marginTop: 50,

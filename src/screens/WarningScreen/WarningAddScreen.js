@@ -17,8 +17,8 @@ const WarningAddScreen = () => {
     const user_id = route.params.userId;
 
     const [query, setQuery] = useState('');
-    const [members, setMembers] = useState([]); //List of members in project
-    const [selectedMember, setSelectedMember] = useState('Selecteer projectlid'); //Used for putting title of dropdown
+    const [members, setMembers] = useState([]); //List of members in the project
+    const [selectedMember, setSelectedMember] = useState('Selecteer projectlid'); //Used for setting the title of dropdown
 
     const navigation = useNavigation();
 
@@ -40,7 +40,6 @@ const WarningAddScreen = () => {
     }, [members, query]);
 
     const submitData = (data) => {
-        console.log(data);
         sendDataToAPI(data);
         navigation.goBack();
         alert("De gegevens zijn opgeslagen");
@@ -61,7 +60,6 @@ const WarningAddScreen = () => {
             })
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log(response)
                     setMembers(response)
                 });
         } catch (error) {
@@ -86,7 +84,6 @@ const WarningAddScreen = () => {
             })
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log(response);
                     setValue("reason", response.reason);
                     setValue("user_id", response.user_id);
                     setValue("project_id", response.project_id);

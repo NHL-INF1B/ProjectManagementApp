@@ -25,27 +25,12 @@ export default StyleSheet.create({
 		alignSelf: "center",
 		marginTop: 30,
 	},
-	titel: {
+	title: {
 		alignSelf: "center",
 		fontWeight: "bold",
 		fontSize: 30,
 		color: "white",
 		margin: 10,
-	},
-	button:	{
-		width: "70%",
-		textAlign: "center",
-		padding: 13,
-		color: "white",
-		fontWeight: "bold",
-		borderWidth: 3,
-		borderRadius: 10,
-		backgroundColor: "#005AAA",
-		borderColor: "#066BC9",
-		alignSelf: "center",
-		color:"white", 
-		textTransform:"uppercase", 
-		fontWeight: "bold"
 	},
 	registreren: {
 		alignSelf: "center",

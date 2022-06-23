@@ -1,14 +1,13 @@
 import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
-import { ScrollView, View, Text, SafeAreaView, Button, Image, TouchableOpacity, Pressable, Platform, Alert } from "react-native";
+import { ScrollView, View, Text, SafeAreaView, Pressable } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
-import ChangePassword from "../ChangePassword/ChangePassword";
-import { useNavigation, useRoute } from '@react-navigation/native';
+import DatePicker from 'react-native-modern-datepicker';
+import { useRoute } from '@react-navigation/native';
 import Header from "../../components/Header/Header";
 import handlerPath from "../../../env";
 
@@ -120,7 +119,6 @@ const Profile = ({ navigation }) => {
               alert("Data is geüpdatet");
               break;
             default:
-              //
               break;
           }
 	};

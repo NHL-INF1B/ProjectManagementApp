@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
 import { Text, FlatList, SafeAreaView } from "react-native";
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import MemberTile from "../../components/MemberTile/MemberTile";
 import Header from '../../components/Header/Header';
 import handlerPath from "../../../env";

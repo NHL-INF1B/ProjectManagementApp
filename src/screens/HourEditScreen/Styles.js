@@ -6,25 +6,8 @@ export default StyleSheet.create({
       backgroundColor: "#009BAA",
       flex: 1,
     },
-    title: {
-      textAlign: 'center',
-      color: 'white',
-      fontWeight: 'bold',
-      fontSize: 20,
-    },
-    subtitle: {
-      textAlign: 'center',
-      color: 'white',
-      fontWeight: 'bold',
-    },
-    marginTop1: {
-      marginTop: '1%',
-    },
     marginBottom1: {
       marginBottom: '1%',
-    },
-    marginTop5: {
-      marginTop: '5%',
     },
     marginBottom5: {
       marginBottom: '5%',
