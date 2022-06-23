@@ -41,7 +41,8 @@ const EditProject = ({ navigation }) => {
     };
 
     const deleteData = (data) => {
-        deleteProject(data);
+        deleteProject(data); 
+        console.log("je bent heir gekomen");
     };
 
     const getData = async () => {
@@ -93,6 +94,7 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
+                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -115,6 +117,7 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
+                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -190,7 +193,7 @@ const EditProject = ({ navigation }) => {
                     text={"Verwijderen"}
                     onPress={() =>
                         Alert.alert("Weet je zeker dat je dit project wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
-                            { text: "Verwijderen", onPress: () => handleSubmit(deleteData) },
+                            { text: "Verwijderen", onPress: deleteData },
                             { text: "Annuleren" },
                         ])
                     }

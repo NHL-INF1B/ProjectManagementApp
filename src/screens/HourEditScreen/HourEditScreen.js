@@ -30,24 +30,11 @@ const HourEditScreen = ({navigation}) => {
 
     const updateData = (data) => {
         editActivity(data);
-        alert("De gegevens zijn succesvol aangepast");
-        navigation.navigate("LogbookScreen",
-        {
-            projectId,
-            userId,
-        }
-        );
     };
 
     const deleteData = (data) => {
         deleteActivity(data);
-        alert("De gegevens zijn succesvol verwijderd");
-        navigation.navigate("LogbookScreen",
-        {
-            projectId,
-            userId,
-        }
-        );
+        console.log("test");
     };
 
     // Selecting the data from the database based on id
@@ -95,7 +82,7 @@ const HourEditScreen = ({navigation}) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                ;
+                alert(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -116,8 +103,9 @@ const HourEditScreen = ({navigation}) => {
                     id: id,
                 }),
             })
+            .then((response) => response.json())
             .then((response) => {
-                ;
+                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -131,11 +119,36 @@ const HourEditScreen = ({navigation}) => {
 
     const catchFeedback = (response) => {
         switch (response) {
+            case "title_incorrect":
+                alert("De titel is verkeerd.");
+                break;
+            case "description_incorrect":
+                alert("De omschrijving is verkeerd.");
+                break;
+            case "date_incorrect":
+                alert("De datum is verkeerd.");
+                break;
+            case "time_start_incorrect":
+                alert("De starttijd is verkeerd.");
+                break;
+            case "time_end_incorrect":
+                alert("De eindtijd is verkeerd.");
+                break;
+            case "times_invalid":
+                alert("De eindtijd is eerder dan de begintijd");
+                break;
+            case "times_equal":
+                alert("De tijden zijn gelijk.");
+                break;
             case "data_updated":
-                alert("De gegevens zijn geüpdate");
+                alert("De gegevens zijn succesvol aangepast");
+                navigation.navigate("LogbookScreen",
+                { projectId,  userId });
                 break;
             case "data_deleted":
-                alert("De gegevens zijn verwijderd");
+                alert("De gegevens zijn succesvol verwijderd");
+                navigation.navigate("LogbookScreen",
+                { projectId,  userId });
                 break;
             default:
                 //
@@ -351,7 +364,7 @@ const HourEditScreen = ({navigation}) => {
                         text={"Verwijderen"}
                         onPress={() =>
                             Alert.alert("Weet je zeker dat je deze urenverantwoording wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
-                                { text: "Verwijderen", onPress: () => handleSubmit(deleteData) },
+                                { text: "Verwijderen", onPress: deleteData },
                                 { text: "Annuleren" },
                             ])
                         }

@@ -9,7 +9,7 @@ import { useRoute } from "@react-navigation/native";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import handlerPath from '../../../env';
 
-const WarningAddScreen = (navigation) => {
+const WarningAddScreen = ( {navigation} ) => {
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             project_member: "",
@@ -24,11 +24,14 @@ const WarningAddScreen = (navigation) => {
     const updateData = (data) => {
         editWarning(data);
         readData(warningId);
+        alert("De gegevens zijn aangepast");
+        navigation.goBack();
     };
 
     const deleteData = (data) => {
         deleteWarning(data);
-        navigation.navigate("WarningScreen");
+        alert("De gegevens zijn verwijderd");
+        navigation.goBack();
     };
 
     // Selecting the data from the database based on id
@@ -107,7 +110,6 @@ const WarningAddScreen = (navigation) => {
                 alert("De gegevens zijn verwijderd");
                 break;
             default:
-                //
               break;
           }
 	};
@@ -189,7 +191,7 @@ const WarningAddScreen = (navigation) => {
                         text={"Verwijderen"}
                         onPress={() =>
                             Alert.alert("Weet je zeker dat je deze waarschuwing wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
-                                { text: "Verwijderen", onPress: () => handleSubmit(deleteData) },
+                                { text: "Verwijderen", onPress: deleteData },
                                 { text: "Annuleren" },
                             ])
                         }
