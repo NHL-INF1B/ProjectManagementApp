@@ -5,7 +5,6 @@ export default StyleSheet.create({
     backgroundColor: "#009BAA",
     paddingHorizontal: 15,
     flex: 1,
-    // flexWrap: "wrap",
     alignItems: "center",
   },
   Img: {

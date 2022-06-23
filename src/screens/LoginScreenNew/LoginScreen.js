@@ -141,7 +141,7 @@ const LoginScreen = ({ navigation }) => {
           />
         </View>
 
-        <Text style={Styles.titel}>Inloggen</Text>
+        <Text style={Styles.title}>Inloggen</Text>
 
         <View style={Styles.inputContainer}>
           <Controller

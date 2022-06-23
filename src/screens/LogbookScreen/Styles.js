@@ -7,12 +7,12 @@ export default StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-  Title: {
+  title: {
     fontWeight: "bold",
     color: "#FFFFFF",
     fontSize: 25,
   },
-  Subtitle: {
+  subtitle: {
       fontWeight: "bold",
       color: "#FFFFFF",
       fontSize: 20,

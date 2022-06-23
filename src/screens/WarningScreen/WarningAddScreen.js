@@ -17,8 +17,8 @@ const WarningAddScreen = () => {
     const user_id = route.params.userId;
 
     const [query, setQuery] = useState('');
-    const [members, setMembers] = useState([]); //List of members in project
-    const [selectedMember, setSelectedMember] = useState('Selecteer projectlid'); //Used for putting title of dropdown
+    const [members, setMembers] = useState([]); //List of members in the project
+    const [selectedMember, setSelectedMember] = useState('Selecteer projectlid'); //Used for setting the title of dropdown
 
     const navigation = useNavigation();
 

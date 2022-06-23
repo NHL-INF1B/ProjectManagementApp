@@ -1,12 +1,13 @@
 import { ScrollView, View, SafeAreaView } from 'react-native';
 import { React, useEffect, useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
-import styles from './Styles';
+// import styles from './Styles';
 import { useForm, Controller } from "react-hook-form";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from '../../components/Circle/Circle';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { useRoute } from "@react-navigation/native";
+import { StyleSheet, Platform, StatusBar } from "react-native";
 import handlerPath from '../../../env';
 
 const HourAddScreen = () => {
@@ -317,5 +318,19 @@ const HourAddScreen = () => {
 // return token;
 
 // }
+
+const styles = StyleSheet.create({
+    SafeAreaView: {
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        backgroundColor: "#009BAA",
+        flex: 1,
+      },
+      marginBottom1: {
+        marginBottom: '1%',
+      },
+      marginBottom5: {
+        marginBottom: '5%',
+      }
+});
 
 export default HourAddScreen;

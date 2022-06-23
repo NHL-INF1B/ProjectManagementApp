@@ -44,7 +44,7 @@ export default function SelectLogbookUser(){
             <View style={Styles.marginBottom5}>
                 <Circle name={"clipboard-text"} size={60} color={"#000000"} text={"Urenverantwoording\nInzien"} />
             </View>
-            <Text style={Styles.Subtitle}>Projectleden</Text>
+            <Text style={Styles.subtitle}>Projectleden</Text>
 
             <FlatList
                 data={user}

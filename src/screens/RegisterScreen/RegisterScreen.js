@@ -112,7 +112,7 @@ const RegisterScreen = ({ navigation }) => {
         />
       </View>
 
-      <Text style={Styles.titel}>Registreren</Text>
+      <Text style={Styles.title}>Registreren</Text>
 
       <View style={Styles.content}>
         <ScrollView>
