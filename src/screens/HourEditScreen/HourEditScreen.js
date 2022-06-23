@@ -34,7 +34,6 @@ const HourEditScreen = ({navigation}) => {
 
     const deleteData = (data) => {
         deleteActivity(data);
-        console.log("test");
     };
 
     // Selecting the data from the database based on id
@@ -104,7 +103,6 @@ const HourEditScreen = ({navigation}) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {

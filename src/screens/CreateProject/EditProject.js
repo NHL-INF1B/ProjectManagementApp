@@ -42,7 +42,6 @@ const EditProject = ({ navigation }) => {
 
     const deleteData = (data) => {
         deleteProject(data); 
-        console.log("je bent heir gekomen");
     };
 
     const getData = async () => {
@@ -117,7 +116,6 @@ const EditProject = ({ navigation }) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
