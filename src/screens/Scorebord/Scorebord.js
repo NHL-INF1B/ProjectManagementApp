@@ -72,6 +72,7 @@ const Scorebord = ({ route }) => {
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+            <Text style={Styles.title}>Scorebord</Text>
                 <FlatList
                     data={projectMembers}
                     renderItem={renderItem}

@@ -20,7 +20,7 @@ export default StyleSheet.create({
       textAlign: 'center',
       color: 'white',
       fontWeight: 'bold',
-      fontSize: 20,
+      fontSize: 25,
     },
     marginTop25: {
       marginTop: 25,
@@ -39,7 +39,7 @@ export default StyleSheet.create({
     successMessage: {
       color: '#FFFFFF',
       fontWeight: 'bold',
-      fontSize: 25,
+      fontSize: 20,
       textAlign: 'center',
     },
     pdf: {

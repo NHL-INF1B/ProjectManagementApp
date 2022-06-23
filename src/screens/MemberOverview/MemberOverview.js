@@ -90,6 +90,7 @@ const MemberOverview = ({ navigation }) => {
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+            <Text style={Styles.title}>Projectleden</Text>
             
             {checkData(member)}
         </SafeAreaView>
