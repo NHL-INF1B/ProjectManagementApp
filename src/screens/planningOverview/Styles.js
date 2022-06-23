@@ -6,6 +6,7 @@ export default StyleSheet.create({
 		backgroundColor: "#009BAA",
 		flex: 1,
 	},
+
     row:{
         flex: 1,
         flexDirection: "row",
@@ -23,7 +24,7 @@ export default StyleSheet.create({
     },
 	sectionHeader: {
 		alignSelf: "center",
-		width: "90%",
+		width: "80%",
 		backgroundColor: "#009BAA",
 		fontWeight:"bold",
 		color: 'white',
@@ -37,11 +38,17 @@ export default StyleSheet.create({
         paddingVertical: 10,
 		textAlign: 'left',
       	fontSize: 22,
-		backgroundColor: "#009BAA",
+		// backgroundColor: "#009BAA",
+		// backgroundColor: "#00aabb",
+
+	},
+	test: {
+		textAlign: 'left'
+
 	},
 
     activity: {
-        minWidth: "90%",
+        minWidth: "80%",
         flexShrink: 1,
     },
     change: {
