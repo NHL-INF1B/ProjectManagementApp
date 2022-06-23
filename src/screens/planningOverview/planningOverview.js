@@ -68,7 +68,7 @@ const PlanningOverview = ({ navigation }) => {
 			alert(error);
 		}
     }
-    
+
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             {isPlanner ? (
