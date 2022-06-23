@@ -17,6 +17,7 @@ export default function App() {
   return (
     <SafeAreaView style={Styles.SafeAreaView}>
       <Header GoToType="Add" GoTo="TeamcodeToevoegen" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+      <Text style={Styles.title}>Teamcode</Text>
         <Text style={Styles.successMessage}>Het bestand is gedownload</Text>
         
         <WebView 

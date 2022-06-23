@@ -64,4 +64,17 @@ export default StyleSheet.create({
 		textAlign: 'right',
 		fontWeight: 'bold',
 	},
+	nothingFound: {
+		marginTop: 50,
+		color: "#FFFFFF",
+		fontWeight: "bold",
+		fontSize: 25,
+		textAlign: "center",
+	},
+	title: {
+		fontWeight: "bold",
+		color: "#FFFFFF",
+		fontSize: 25,
+		alignSelf: "center",
+	  },
 });
