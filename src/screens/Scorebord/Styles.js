@@ -45,6 +45,12 @@ export default StyleSheet.create({
         fontWeight: "bold",
         fontSize: 18,
         paddingLeft: 5,
-    }
+    },
+    title: {
+		fontWeight: "bold",
+		color: "#FFFFFF",
+		fontSize: 25,
+		alignSelf: "center",
+	  },
 
 });

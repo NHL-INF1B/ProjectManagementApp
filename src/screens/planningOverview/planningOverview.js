@@ -139,7 +139,8 @@ const PlanningOverview = ({ navigation }) => {
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-            
+            <Text style={Styles.title}>Planning</Text>
+
             {checkData(userData)}
         </SafeAreaView>
     );
