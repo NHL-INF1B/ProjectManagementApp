@@ -6,14 +6,6 @@ export default StyleSheet.create({
 		backgroundColor: "#009BAA",
 		flex: 1,
 	},
-	sectionList: {
-		flex: 1,
-		paddingHorizontal: 20,
-        paddingVertical: 10,
-		textAlign: 'left',
-      	fontSize: 20,
-		backgroundColor: "#009BAA",	
-	},
 	nothingFound: {
 		marginTop: 50,
 		color: "#FFFFFF",

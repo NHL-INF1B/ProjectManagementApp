@@ -6,22 +6,17 @@ import {
   Text,
   SafeAreaView,
   Image,
-  TouchableOpacity,
   Pressable,
-  BackHandler,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
-import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import { CommonActions } from "@react-navigation/native";
 import handlerPath from "../../../env";
 
 const LoginScreen = ({ navigation }) => {
 
   useEffect(() => {
-    // removeValue();
     const data = getData();
     data.then((data) => {
       if (data != null) {

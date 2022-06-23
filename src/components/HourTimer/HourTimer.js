@@ -1,7 +1,6 @@
 import { ScrollView, View, SafeAreaView } from 'react-native';
 import { React, useEffect, useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
-// import styles from './Styles';
 import { useForm, Controller } from "react-hook-form";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from '../../components/Circle/Circle';
