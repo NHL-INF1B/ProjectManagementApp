@@ -18,13 +18,13 @@ export default StyleSheet.create({
         margin: 8,
         borderWidth: 3,
         borderRadius: 20,
-        borderColor: '#00AABB',
+        borderColor: '#009BAA',
         backgroundColor:'white',
     },
 	sectionHeader: {
 		alignSelf: "center",
 		width: "90%",
-		backgroundColor: "#00aabb",
+		backgroundColor: "#009BAA",
 		fontWeight:"bold",
 		color: 'white',
 		minWidth: "80%",
@@ -37,7 +37,7 @@ export default StyleSheet.create({
         paddingVertical: 10,
 		textAlign: 'left',
       	fontSize: 22,
-		backgroundColor: "#00aabb",
+		backgroundColor: "#009BAA",
 	},
 
     activity: {

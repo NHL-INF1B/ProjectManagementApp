@@ -9,14 +9,37 @@ import { FontAwesome } from '@expo/vector-icons';
 const PlanningOverview = ({ navigation }) => {
     const [userData, setUserData] = useState([]);
     const [planningId, setPlanningId] = useState('');
+    
+    const [role, setRole] = useState([]);
+    const roleId = role.role_id;
 
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         getUserData(projectId);
-    }, []);
+        getRole(userId, projectId);
+    }, [isFocused]);
+
+    const getRole = (userId, projectId) => {
+        fetch(handlerPath + "permissions/getRoleIdHandler.php", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId: userId,
+                projectId: projectId,
+            }),
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            setRole(response);
+        })
+    }
 
     const getUserData = (projectid) => {
         try {
@@ -65,11 +88,18 @@ const PlanningOverview = ({ navigation }) => {
         return _data;
     }
 
-    var GoToType = "None";
-    var GoTo = "None";
+    if(roleId == 1 || roleId == 2 || roleId == 3){
+        var GoTo = "PlanningAdd";
+        var GoToType = "Add";
+    } else{
+        var GoTo = "None";
+        var GoToType = "None";
+    }
+
 
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
+            <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
             <SectionList style={Styles.sectionList}
                 sections={filterData(userData)}
                 keyExtractor={(item) => item}
