@@ -7,16 +7,32 @@ import Circle from '../../components/Circle/Circle';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { useRoute } from "@react-navigation/native";
 import { StyleSheet, Platform, StatusBar } from "react-native";
+import * as Notifications from 'expo-notifications';
+import * as Device from 'expo-device';
 import handlerPath from '../../../env';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+    }),
+  });
+
+async function planNotification() {
+    Notifications.getAllScheduledNotificationsAsync();
+    await Notifications.cancelAllScheduledNotificationsAsync();
+    await schedulePushNotification();
+};
 
 const HourAddScreen = () => {
 
     // Asking for permission for the notification
     const [expoPushToken, setExpoPushToken] = useState('');
     
-    // useEffect(() => {
-    //     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
-    // }, []);
+    useEffect(() => {
+        registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    }, []);
 
     const [id, setId] = useState("-");
 
@@ -35,9 +51,10 @@ const HourAddScreen = () => {
     }
 
     const timerStop = (data) => {
+        planNotification();
+        addPoints(userId, projectId);
         stopTimer(data);
         alert("De timer is gestopt");
-        addPoints(userId, projectId);
     }
 
     // Add points when they add urenverantwoording
@@ -271,52 +288,50 @@ const HourAddScreen = () => {
     );
 }
 
-// // Set the look of the notifications and set when it triggers
-// async function schedulePushNotification() {
-//     const identifier = await Notifications.scheduleNotificationAsync({
-//         content: {
-//             title: "Project Management App",
-//             body: 'Vergeet je logboek vandaag niet in te vullen!',
-//         },
-//     trigger: { seconds: 60 * 24 },
-//     });
-//     return identifier;
-//   }
+// Set the look of the notifications and set when it triggers
+async function schedulePushNotification() {
+    const identifier = await Notifications.scheduleNotificationAsync({
+        content: {
+            title: "Project Management App",
+            body: 'Vergeet je logboek vandaag niet in te vullen!',
+        },
+    trigger: { seconds: 30 },
+    });
+    return identifier;
+  }
   
-// // Ask for permission to give notifications
-// async function registerForPushNotificationsAsync() {
-// let token;
-// if (Device.isDevice) {
-//     const { status: existingStatus } = await Notifications.getPermissionsAsync();
-//     let finalStatus = existingStatus;
+// Ask for permission to give notifications
+async function registerForPushNotificationsAsync() {
+    let token;
+    if (Device.isDevice) {
+        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
 
-//     if (existingStatus !== 'granted') {
-//         const { status } = await Notifications.requestPermissionsAsync();
-//         finalStatus = status;
-//     }
+        if (existingStatus !== 'granted') {
+            const { status } = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
 
-//     if (finalStatus !== 'granted') {
-//         alert('Failed to get push token for push notification!');
-//         return;
-//     }
+        if (finalStatus !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+        }
 
-//     token = (await Notifications.getExpoPushTokenAsync()).data;
-// } else {
-//     alert('Must use physical device for Push Notifications');
-// }
+        token = (await Notifications.getExpoPushTokenAsync()).data;
+    } else {
+        alert('Must use physical device for Push Notifications');
+    }
 
-// if (Platform.OS === 'android') {
-//     Notifications.setNotificationChannelAsync('default', {
-//     name: 'default',
-//     importance: Notifications.AndroidImportance.MAX,
-//     vibrationPattern: [0, 250, 250, 250],
-//     lightColor: '#FF231F7C',
-//     });
-// }
-
-// return token;
-
-// }
+    if (Platform.OS === 'android') {
+        Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+        });
+    }
+    return token;
+}
 
 const styles = StyleSheet.create({
     SafeAreaView: {
