@@ -35,22 +35,37 @@ const PlanningAdd = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    // planning: planning,
                     week: data.weeknummer,
                     activiteit: data.activity,
                     project_id: projectId,
                 }),
             })
-                //.then((response) => response.text())
                 .then((response) => response.json())
                 .then((response) => {
-                    // catchFeedback(response);
+                    catchFeedback(response);
                 });
         } catch (error) {
             alert(error);
         }
-        alert("De gegevens zijn opgeslagen");
     };
+
+    //catch the feedback from the API
+    const catchFeedback = (response) => {
+        switch (response[0]) {
+            case "week_incorrect":
+              alert("De week is verkeerd.");
+              break;
+            case "activiteit_incorrect":
+              alert("De activiteit is verkeerd.");
+              break;
+            case "project_id_incorrect":
+              alert("Het project id is verkeerd.");
+              break;
+            default:
+                alert("De gegevens zijn opgeslagen");
+              break;
+          }
+	};
 
 
     return (
