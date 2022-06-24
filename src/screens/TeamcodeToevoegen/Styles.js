@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { Dimensions, Platform, StyleSheet } from 'react-native';
+import { Dimensions, Platform, StyleSheet, StatusBar } from 'react-native';
 
 export default StyleSheet.create({
     SafeAreaView: {

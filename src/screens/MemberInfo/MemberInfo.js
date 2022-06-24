@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Styles from "./Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -75,15 +75,14 @@ const MemberInfo = () => {
     }
   };
 
-  var GoToType = "None";
-  var GoTo = "None";
-
   return (
     <SafeAreaView style={Styles.SafeAreaView}>
-      <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" />
+      <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
+
       <View style={Styles.person}>
-        <Circle name="account" color="black" size={90} style={Styles.Circle} />
+        <Circle name="account" color="black" size={90} text={"Projectlid"} />
       </View>
+
       <ShowProfileInfo
         name={name}
         iconName="account"

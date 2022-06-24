@@ -117,8 +117,8 @@ const WarningEditScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
-            <ScrollView style={styles.SafeAreaView}>
-                <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
+            <ScrollView>
                 <View style={styles.marginBottom5}>
                     <Circle name={"alert-circle"} size={60} color={"#000000"} text={"Waarschuwing\nBewerken"} />
                 </View>

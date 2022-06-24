@@ -27,14 +27,13 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 5,
     borderRadius: 15,
-    textAlign: "left",
   },
   icon: {
-    width: "10%",
+    width: "12%",
     alignSelf: "center",
   },
   input: {
-    width: "90%",
+    width: "95%",
     padding: 13,
   },
 });
