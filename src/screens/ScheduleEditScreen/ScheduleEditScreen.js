@@ -32,7 +32,7 @@ const ScheduleEditScreen = ({ navigation }) => {
         sendUpdateData(data);
     };
 
-    const getScheduleData = (scheduleId) => {
+    const getScheduleData = () => {
 		try {
 			fetch(handlerPath + "planning/planningEditFetch.php", {
 				method: "POST",
@@ -43,13 +43,12 @@ const ScheduleEditScreen = ({ navigation }) => {
 				body: JSON.stringify({
 					scheduleId: scheduleId,
 				}),
-			})
-				// .then((response) => response.text())
-				.then((response) => response.json())
-				.then((response) => {
-                    setValue("activity", response[0].activity);
-                    setValue("week", response[0].week);
-				});
+			})  
+            .then((response) => response.json())
+            .then((response) => {
+                setValue("week", response.week);
+                setValue("activity", response.activity);
+            });
 		} catch (error) {
 			alert(error);
 		}
@@ -69,7 +68,6 @@ const ScheduleEditScreen = ({ navigation }) => {
                     scheduleId : scheduleId,
 				}),
 			})
-				// .then((response) => response.text())
 				.then((response) => response.json())
 				.then((response) => {
                     catchFeedback(response);
@@ -91,7 +89,6 @@ const ScheduleEditScreen = ({ navigation }) => {
                     scheduleId : scheduleId,
 				}),
 			})
-				// .then((response) => response.text())
 				.then((response) => response.json())
 				.then((response) => {
                     catchFeedback(response);
@@ -112,7 +109,6 @@ const ScheduleEditScreen = ({ navigation }) => {
               navigation.goBack();
               break;
             default:
-              //
               break;
           }
 	};
