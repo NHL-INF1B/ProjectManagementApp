@@ -23,12 +23,11 @@ export default function LogbookScreen(){
 
     useEffect(() => {
         
-        getRole(userId, projectId);
-        
         if(viewing == "viewing"){
             getUserName(selectedUserId);
             getLogbook(selectedUserId, projectId);
         } else{
+            getRole(userId, projectId);
             getLogbook(userId, projectId);
             getUserName(userId);
         }
