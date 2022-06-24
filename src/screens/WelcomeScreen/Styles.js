@@ -53,4 +53,7 @@ export default StyleSheet.create({
     color: "white",
     fontWeight: "bold",
   },
+  marginBottom: {
+    marginBottom: 25,
+  },
 });
