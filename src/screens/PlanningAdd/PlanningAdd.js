@@ -72,8 +72,8 @@ const PlanningAdd = () => {
         <SafeAreaView style={styles.SafeAreaView}>
             <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
             <ScrollView>
-                <View>
-                    <Circle name={"calendar-month"} size={60} color={"black"} text={"Planning Toevoegen"} />
+                <View style={styles.marginBottom}>
+                    <Circle name={"calendar-month"} size={60} color={"black"} text={"Planning Toevoegen"}/>
                 </View>
 
                 <View style={styles.marginContainer}>

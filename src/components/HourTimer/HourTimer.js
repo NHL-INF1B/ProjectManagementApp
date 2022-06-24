@@ -275,7 +275,7 @@ const HourAddScreen = () => {
                     />
                 </View>
 
-                <View style={styles.marginBottom5}>
+                <View style={styles.marginBottom50}>
                     <CustomButton 
                         buttonType={"redButton"}
                         buttonText={"buttonText"}
@@ -338,13 +338,18 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
         backgroundColor: "#009BAA",
         flex: 1,
+        // marginBottom: 50,
       },
       marginBottom1: {
         marginBottom: '1%',
       },
       marginBottom5: {
         marginBottom: '5%',
-      }
+      },
+      
+    marginBottom50: {
+      marginBottom: 50,
+    },
 });
 
 export default HourAddScreen;
