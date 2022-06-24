@@ -32,7 +32,6 @@ export default function SelectLogbookUser(){
         })
         .then((response) => response.json())
         .then((response) => {
-            ;
             setUser(response);
         })
     }
