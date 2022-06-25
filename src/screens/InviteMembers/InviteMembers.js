@@ -13,6 +13,7 @@ import handlerPath from "../../../env";
 
 
 const InviteMembers = ({route}) => {
+  //The const for the input data.
   const [urlMail, setUrlMail] = useState("-");
   const [urlQr, setUrlQr] = useState("-");
   const [name, setName] =  useState("-");
@@ -23,8 +24,10 @@ const InviteMembers = ({route}) => {
       email: "",
     },
   });
+
   // Regex to check if the email is valid
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   // Get the projectId from the projectpage
   const { projectId, userId } = route.params;
 
@@ -57,6 +60,8 @@ const InviteMembers = ({route}) => {
       alert(error);
     }
   };
+
+  //generate a new code for the qrcode
   const generateNewCode = (projectId) => {
     try {
       fetch(
@@ -83,7 +88,6 @@ const InviteMembers = ({route}) => {
 
   // Catch the feeback from the API
   const catchFeedback = (response) => {
-    ;
     setToken(response[0].newQrcode);
     switch (response[0]) {
       case "project_not_exists":
@@ -96,6 +100,7 @@ const InviteMembers = ({route}) => {
     }
   };
 
+  //open mail app with an email when the button is pressed.
   const onSubmit = (data) => {
     Linking.openURL("mailto:"+ data.email +"?subject=Uitnodiging voor project " + name + "&body=Beste%0D%0AHierbij ben je uitgenodigd voor het project " + name + "%0D%0ADe link om deel te nemen aan het project is " + urlMail);
   };

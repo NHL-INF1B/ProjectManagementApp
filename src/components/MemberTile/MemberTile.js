@@ -9,6 +9,7 @@ import handlerPath from '../../../env';
 
 
 function MemberTile(props) {
+    //declaring the const.
     const navigation = useNavigation();
     const [roles, setRoles] = useState([]);
     const [query, setQuery] = useState('');
@@ -16,7 +17,7 @@ function MemberTile(props) {
     const [dropdownButton, setDropdownButton] = useState('chevron-down');
     const [isVoorzitter, setIsVoorzitter] = useState(false);
 
-
+    //when the page opens set the roles and get the role name.
     useEffect(() => {
         setRoles(allRoles);
         setRoleName(props.role);
@@ -25,6 +26,7 @@ function MemberTile(props) {
         }
     }, []);
 
+    //filter the data.
     const filteredData = useMemo(() => {
         if (roles && roles.length > 0) {
             return roles.filter((item) =>
@@ -39,8 +41,8 @@ function MemberTile(props) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    //update the role and give an alert.
     const updateRole = (role, userId) => {
-
         try {
             fetch(handlerPath + "projectMembers/updateRole.php", {
                 method: "POST",

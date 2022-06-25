@@ -9,15 +9,17 @@ import handlerPath from "../../../env";
 
 
 const Scorebord = ({ route }) => {
-
+    //declaring the const.
     const [projectMembers, setProjectMembers] = useState([]);
     const projectId = route.params.projectId;
     const userId = route.params.userId;
 
+    //get the the scorebord data when the page opens.
     useEffect(() => {
         getScoreBordData(projectId);
 	}, []);
 
+    //get the scorebord data from a project and get feedback
     const getScoreBordData = (projectId) => {
         try {
 			fetch(handlerPath + "scorebord/scorebord.php", {
@@ -32,7 +34,6 @@ const Scorebord = ({ route }) => {
 			})
             .then((response) => response.json())
             .then((response) => {
-                ;
                 setProjectMembers(response);
                 
             });
@@ -41,6 +42,7 @@ const Scorebord = ({ route }) => {
 		}
     }
 
+    //make a tile to show the projectmember with their score.
     const Item = ({ item }) => (
         <View style={Styles.miniContainer}>
             <View style={Styles.iconContainer}>
@@ -60,7 +62,6 @@ const Scorebord = ({ route }) => {
       );
 
       const renderItem = ({ item }) => {
-    
         return (
           <Item
             item={item}

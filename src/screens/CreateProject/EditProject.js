@@ -15,9 +15,11 @@ const EditProject = ({ navigation }) => {
     const NAME_REGEX = /^[a-zA-Z0-9 ]{3,30}$/;
     const [userId, setUserId] = useState("");
 
+    //Get the projectId from the last page.
     const route = useRoute();
     const projectId = route.params.projectId;
   
+    //The const for the input data.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             name: "",
@@ -26,6 +28,7 @@ const EditProject = ({ navigation }) => {
         }
     });
 
+    //When the page opens.
     useEffect(() => {
         readData(projectId);
         const data = getData();
@@ -36,14 +39,17 @@ const EditProject = ({ navigation }) => {
         });
     }, []);
 
+    //send input data to edit project.
     const updateData = (data) => {
         editProject(data);
     };
 
+    //send input data to delete project.
     const deleteData = (data) => {
         deleteProject(data); 
     };
 
+    //get the data from the async storage.
     const getData = async () => {
         try {
         const jsonValue = await AsyncStorage.getItem("@user_data");
@@ -123,6 +129,7 @@ const EditProject = ({ navigation }) => {
         }
     };
 
+    //catch the feedback from the API's and giving an alert.
     const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":

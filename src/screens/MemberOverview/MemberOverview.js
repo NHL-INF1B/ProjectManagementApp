@@ -7,13 +7,16 @@ import Header from '../../components/Header/Header';
 import handlerPath from "../../../env";
 
 const MemberOverview = ({ navigation }) => {
+    //declaring the const
     const [member, setMembers] = useState([]);
     const [roleName, setRoleName] = useState('');
 
+    //get teh projectid and user id from the last page.
     const route = useRoute();
     const projectId = route.params.projectId;
     const userId = route.params.userId;
 
+    //get the role of the user when the page opens.
     useEffect(() => {
         getRole(userId, projectId);
     }, []);
@@ -67,6 +70,7 @@ const MemberOverview = ({ navigation }) => {
     var GoToType = "None";
     var GoTo = "None";
 
+    //check if there is any data to show the user.
     function checkData(members){
         if(members == "NO_DATA"){
             return(<Text style={Styles.nothingFound}>Er zijn nog geen andere projectleden in dit project.</Text>)

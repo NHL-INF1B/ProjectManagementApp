@@ -15,7 +15,7 @@ const ChangePassword = ({ route }) => {
     // Regex to check if the password is safe
     const PASS_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,254}$/;
 
-    // The variables for the input data
+    // The const for the input data
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             oldPassword: "",

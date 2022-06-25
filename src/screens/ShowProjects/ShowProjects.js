@@ -7,17 +7,19 @@ import { useRoute, useIsFocused } from "@react-navigation/native";
 import handlerPath from '../../../env';
 
 export default function ShowProjects(){
-
+    //declaring the const.
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
     const [projects, setProjects] = useState([]);
     const isFocused = useIsFocused();
 
+    //get all the proejct when the page opens.
     useEffect(() => {
         getProjects(userId);
     }, [isFocused]);
 
+    //get all the projects of a user.
     const getProjects = (userId) => {
         fetch(handlerPath + "showProjects/showProjectsHandler.php", {
             method: "POST",
@@ -35,6 +37,7 @@ export default function ShowProjects(){
         })
     }
 
+    //check if there is data to show.
     function checkData(projects){
         if(projects == "NO_DATA"){
             return(<Text style={Styles.nothingFound}>Je bent nog geen deel van een project.</Text>)

@@ -11,10 +11,12 @@ import { useRoute } from "@react-navigation/native";
 
 
 const TeamcodeToevoegen = () => {
+  //get the userid and projectid from the last page.
   const route = useRoute();
   const userId = route.params.userId;
   const projectId = route.params.projectId;
 
+  //pick a document to add.
   const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "application/pdf",
@@ -43,6 +45,7 @@ const TeamcodeToevoegen = () => {
     });
   }
 
+  //post the document
   const postDocument = (data) => {
     console.log(data);
     console.log(data.uri);
@@ -63,7 +66,6 @@ const TeamcodeToevoegen = () => {
           projectid: projectId
         }),
       })
-        // .then((response) => response.text())
         .then((response) => response.json())
         .then((response) => {
           alert('Teamcode geupload');

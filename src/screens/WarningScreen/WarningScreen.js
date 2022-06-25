@@ -7,21 +7,24 @@ import Header from '../../components/Header/Header';
 import handlerPath from '../../../env';
 
 const WarningScreen = ({ navigation }) => {
+    //get the projectid and userid from the last page.
     const route = useRoute();
     const isFocused = useIsFocused();
     const projectId = route.params.projectId;
     const userId = route.params.userId;
     
+    //declaring the const.
     const [role, setRole] = useState([]);
     const roleId = role.role_id;
-
     const [warnings, setWarnings] = useState([]);
 
+    //read the data and get role from the user when the page opens.
     useEffect(() => {
         readData(projectId);
         getRole(userId, projectId)
     }, [isFocused]);
 
+    //read the data from a project and set the warnings.
     const readData = (projectId) => {
         fetch(handlerPath + 'warning/warninghandler.php', {
             method: 'post',
@@ -39,6 +42,7 @@ const WarningScreen = ({ navigation }) => {
         })
     };
 
+    //get the role of the user.
     const getRole = (userId, projectId) => {
         fetch(handlerPath + "permissions/getRoleIdHandler.php", {
             method: "POST",
@@ -57,6 +61,7 @@ const WarningScreen = ({ navigation }) => {
         })
     }
 
+    //check if user is voorzitter or vice voorzitter.
     if(roleId == 1 || roleId == 2){
         var GoToType = "Add";
         var GoTo = "WarningAddScreen";
@@ -65,6 +70,7 @@ const WarningScreen = ({ navigation }) => {
         var GoTo = "None";
     }
 
+    //check if there is data to show.
     function checkData(warnings){
         if(warnings == "NO_DATA"){
             return(<Text style={Styles.nothingFound}>Er zijn nog geen waarschuwingen uitgedeeld</Text>)

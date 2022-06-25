@@ -11,12 +11,14 @@ import Header from "../../components/Header/Header";
 
 const ScheduleEditScreen = ({ navigation }) => {
 
+    //get the projectid, userid and scheduleid form the last page.
     const route = useRoute();
     const projectId = route.params.projectId;
     const userId = route.params.userId;
     const scheduleId = route.params.planningId;
     const NUMMERIC_REGEX = /^[0-9]*$/;
 
+    //declaring the const.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             activity: "",
@@ -24,14 +26,17 @@ const ScheduleEditScreen = ({ navigation }) => {
         }
     });
 
+    //get the schedule data when the page opens.
     useEffect(() => {
         getScheduleData(scheduleId);
 	}, []);
 
+    //send the data when the button is pressed.
     const submitData = (data) => {
         sendUpdateData(data);
     };
 
+    //get the schedule data and get feedback
     const getScheduleData = () => {
 		try {
 			fetch(handlerPath + "planning/planningEditFetch.php", {
@@ -54,6 +59,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 		}
 	};
 
+    //send the updated data and get the feedback.
     const sendUpdateData = (data) => {
         try {
 			fetch(handlerPath + "planning/planningEdit.php", {
@@ -77,6 +83,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 		}
     }
 
+    //remove the data that is send and get feedback.
     const sendRemoveData = () => {
         try {
 			fetch(handlerPath + "planning/planningDelete.php", {
@@ -98,6 +105,7 @@ const ScheduleEditScreen = ({ navigation }) => {
 		}
     }
 
+    //catch the feedback from the API and give an alert.
 	const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":

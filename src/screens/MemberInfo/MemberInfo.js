@@ -19,6 +19,7 @@ const MemberInfo = () => {
   const [phoneNumber, setPhoneNumber] = useState("-");
   const [discord, setDiscord] = useState("-");
 
+  //get data from the async storage
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("@member_data");

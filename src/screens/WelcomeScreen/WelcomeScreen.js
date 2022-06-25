@@ -9,6 +9,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const WelcomeScreen = ({ navigation }) => {
 
+    //disables the user going back to the login page with the back button on the phone.
     useFocusEffect(
         React.useCallback(() => {
             const onBackPress = () => {
@@ -29,6 +30,7 @@ const WelcomeScreen = ({ navigation }) => {
         }, []),
     );
 
+    //declaring the const.
     const [name, setName] = useState("-");
     const [userId, setUserId] = useState("-");
 
@@ -53,6 +55,7 @@ const WelcomeScreen = ({ navigation }) => {
         }
     };
 
+    //when the page opens get data.D
     useEffect(() => {
         const data = getData();
         data.then((data) => {

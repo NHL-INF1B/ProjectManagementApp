@@ -15,7 +15,7 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import handlerPath from "../../../env";
 
 const LoginScreen = ({ navigation }) => {
-
+  //get data when the page opens.
   useEffect(() => {
     const data = getData();
     data.then((data) => {
@@ -25,8 +25,7 @@ const LoginScreen = ({ navigation }) => {
     });    
   }, []);
 
-  
-
+  //declaring the const.
   const [errorText, setErrorText] = useState("");
   const EMAIL_REGEX =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -42,10 +41,12 @@ const LoginScreen = ({ navigation }) => {
     },
   });
 
+  //send the data to the api when the button is pressed
   const onSubmit = (data) => {
     sendDataToAPI(data.email, data.password);
   };
 
+  //get the data from the async storage
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("@user_data");
@@ -57,6 +58,7 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  //store the data in the async storage
   const storeData = async (value) => {
     try {
       const jsonValue = JSON.stringify(value);
@@ -66,6 +68,7 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  //remoce a value from the async storage
   const removeValue = async () => {
     try {
       await AsyncStorage.removeItem("@user_data");
@@ -74,6 +77,7 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  //send data to the API and get feedback.
   const sendDataToAPI = (email, password) => {
     try {
       fetch(handlerPath + "login/loginHandler.php", {
@@ -89,7 +93,6 @@ const LoginScreen = ({ navigation }) => {
       })
         .then((response) => response.json())
         .then((response) => {
-          // ;
           catchFeedback(response);
         });
     } catch (error) {
@@ -97,9 +100,8 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  //catch the feedback from the API and give an alert.
   const catchFeedback = (response) => {
-    ;
-
     for (let index = 0; index < response.length; index++) {
       switch (response[index]) {
         case "email_incorrect":

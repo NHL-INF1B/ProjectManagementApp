@@ -11,6 +11,7 @@ import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import handlerPath from '../../../env';
 
+//Set the notifiction handler
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
@@ -19,9 +20,15 @@ Notifications.setNotificationHandler({
     }),
   });
 
+  //function to plan the notifications
 async function planNotification() {
+    //get all the scheduled pushnotifications
     Notifications.getAllScheduledNotificationsAsync();
+
+    //cancel all the scheduled notifications.
     await Notifications.cancelAllScheduledNotificationsAsync();
+
+    //schedule a new notification.
     await schedulePushNotification();
 };
 
@@ -30,12 +37,13 @@ const HourAddScreen = () => {
     // Asking for permission for the notification
     const [expoPushToken, setExpoPushToken] = useState('');
     
+    //ask for permission when the page opens.
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
     }, []);
 
+    //declaring the const.
     const [id, setId] = useState("-");
-
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             id: "",
@@ -44,12 +52,14 @@ const HourAddScreen = () => {
         }
     });
 
+    //start the timer when the button is pushed.
     const timerStarter = (data) => {
         startTimer(data);
         storeData(data);
         alert("De timer is gestart");
     }
 
+    //stop the timer when the button is pushed.
     const timerStop = (data) => {
         planNotification();
         addPoints(userId, projectId);
@@ -141,6 +151,7 @@ const HourAddScreen = () => {
         }
     };
 
+    //catch the feedback from the API and give an alert.
     const catchFeedback = (response) => {
         switch (response) {
             case "title_incorrect":
@@ -165,11 +176,11 @@ const HourAddScreen = () => {
                 alert("De beschrijving is incorrect");
                 break;
             default:
-                //
                 break;
           }
 	};
 
+    //get the data when the page opens
     useEffect(() => {
     const data = getData();
     data.then((data) => {
@@ -179,6 +190,7 @@ const HourAddScreen = () => {
         });    
     }, []);
      
+    //get the data from the async storage.
     const getData = async () => {
         try {
           const jsonValue = await AsyncStorage.getItem("@timer_data");
@@ -190,6 +202,7 @@ const HourAddScreen = () => {
         }
     };
     
+    //store the data to the async storage.
     const storeData = async (data) => {
     try {
         const jsonValue = JSON.stringify(data);
@@ -199,6 +212,7 @@ const HourAddScreen = () => {
     }
     };
     
+    //remove a value from the async storage.
     const removeValue = async () => {
         try {
             await AsyncStorage.removeItem("@timer_data");
@@ -207,6 +221,7 @@ const HourAddScreen = () => {
         }
     };
 
+    //get the userid and projectid from the last page.
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;

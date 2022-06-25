@@ -7,13 +7,16 @@ import { useNavigation } from "@react-navigation/native";
 
 
 function Warning(props) {
+    //declaring the const.
     const navigation = useNavigation();
     const [name, setName] = useState("");
 
+    //get the username when the page opens.
     useEffect(() => {
         getUsername(props.person);
     }, []);
 
+    //get the username of the user.
     const getUsername = (userid) => {
         try {
             fetch(handlerPath + "warning/warningUsernameFetch.php", {

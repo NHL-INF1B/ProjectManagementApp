@@ -9,16 +9,18 @@ import LogbookUser from '../../components/LogbookUser/LogbookUser';
 import handlerPath from '../../../env';
 
 export default function SelectLogbookUser(){
-
+    //declaring the const and getting the userid and project id from the last page.
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
     const [user, setUser] = useState([]);
 
+    //get the user when the page opens.
     useEffect(() => {
         getUser(projectId);
     }, []);
 
+    //get the user
     const getUser = (projectId) => {
         fetch(handlerPath + "logbook/getLogbookUsersHandler.php", {
             method: "POST",
