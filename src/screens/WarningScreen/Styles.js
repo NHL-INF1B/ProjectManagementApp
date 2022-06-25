@@ -13,10 +13,10 @@ export default StyleSheet.create({
     textAlign: "center",
   },
   marginBottom1: {
-    marginBottom: '1%',
+    marginBottom: "1%",
   },
   marginBottom5: {
-    marginBottom: '5%',
+    marginBottom: "5%",
   },
   nothingFound: {
     marginTop: 50,
@@ -36,11 +36,11 @@ export default StyleSheet.create({
     padding: 10,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: '#009BAA',
+    borderColor: "#009BAA",
     backgroundColor: "white",
   },
   dropdownText: {
-    flexDirection:"row",
+    flexDirection: "row",
     alignSelf: "center",
     flexShrink: 1,
     color: "#009BAA",

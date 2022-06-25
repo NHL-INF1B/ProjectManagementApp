@@ -1,21 +1,34 @@
 import { React, useState } from "react";
 import Styles from "./Styles";
-import { View, Text, ScrollView, Pressable, Image, SafeAreaView, } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Pressable,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 import handlerPath from "../../../env";
 
 const RegisterScreen = ({ navigation }) => {
-  const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const EMAIL_REGEX =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const PASS_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,254}$/;
   const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
   const [isShowingDatePicker, setShowingDatePicker] = useState(false);
 
-  const { control, handleSubmit, formState: { errors }, getValues, } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm({
     defaultValues: {
       name: "",
       dateOfBirth: "",
@@ -27,7 +40,7 @@ const RegisterScreen = ({ navigation }) => {
 
   const replaceAll = (string, search, replace) => {
     return string.split(search).join(replace);
-  }
+  };
 
   const onSubmit = (data) => {
     sendDataToAPI(
@@ -36,7 +49,7 @@ const RegisterScreen = ({ navigation }) => {
       data.dateOfBirth,
       data.password,
       data.password_repeat
-    )
+    );
   };
 
   const sendDataToAPI = (
@@ -47,26 +60,22 @@ const RegisterScreen = ({ navigation }) => {
     confirmPassword
   ) => {
     try {
-      fetch(
-        handlerPath + "registration/registrationHandler.php",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            dateOfBirth: dateOfBirth,
-            password: password,
-            confirmPassword: confirmPassword,
-          }),
-        }
-      )
+      fetch(handlerPath + "registration/registrationHandler.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          dateOfBirth: dateOfBirth,
+          password: password,
+          confirmPassword: confirmPassword,
+        }),
+      })
         .then((response) => response.json())
         .then((response) => {
-          
           catchFeedback(response);
         });
     } catch (error) {
@@ -142,24 +151,40 @@ const RegisterScreen = ({ navigation }) => {
                 name="dateOfBirth"
                 control={control}
                 rules={{
-                  required: { value: true, message: 'Geboortedatum is verplicht' },
+                  required: {
+                    value: true,
+                    message: "Geboortedatum is verplicht",
+                  },
                   pattern: {
                     value: DATE_REGEX,
-                    message: 'Geboortedatum is incorrect'
+                    message: "Geboortedatum is incorrect",
                   },
                 }}
                 render={({ field: { onChange, value } }) => (
                   <DatePicker
-                    style={{ width: "70%", alignSelf: "center", borderWidth: 3, borderRadius: 10, borderColor: '#00AABB', }}
-                    onSelectedChange={date => onChange(replaceAll(date, "/", "-"))}
+                    style={{
+                      width: "70%",
+                      alignSelf: "center",
+                      borderWidth: 3,
+                      borderRadius: 10,
+                      borderColor: "#00AABB",
+                    }}
+                    onSelectedChange={(date) =>
+                      onChange(replaceAll(date, "/", "-"))
+                    }
                     current={getValues("dateOfBirth")}
                     mode="calendar"
-                    maximumDate={new Date().toJSON().slice(0, 10).replace(/-/g, '/')}
+                    maximumDate={new Date()
+                      .toJSON()
+                      .slice(0, 10)
+                      .replace(/-/g, "/")}
                   />
                 )}
               />
               {errors?.dateOfBirth?.message && (
-                <Text style={Styles.errorText}>{errors?.dateOfBirth?.message}</Text>
+                <Text style={Styles.errorText}>
+                  {errors?.dateOfBirth?.message}
+                </Text>
               )}
             </View>
           ) : (
@@ -169,10 +194,10 @@ const RegisterScreen = ({ navigation }) => {
                   name="dateOfBirth"
                   control={control}
                   rules={{
-                    required: { value: true, message: 'Datum is verplicht' },
+                    required: { value: true, message: "Datum is verplicht" },
                     pattern: {
                       value: DATE_REGEX,
-                      message: 'Datum is incorrect'
+                      message: "Datum is incorrect",
                     },
                   }}
                   render={({ field: { onChange, value } }) => (
@@ -191,8 +216,7 @@ const RegisterScreen = ({ navigation }) => {
                 />
               </Pressable>
             </View>
-          )
-          }
+          )}
 
           <View style={Styles.inputContainer}>
             <Controller

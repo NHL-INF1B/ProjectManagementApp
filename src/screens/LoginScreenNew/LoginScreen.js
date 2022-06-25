@@ -15,17 +15,14 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import handlerPath from "../../../env";
 
 const LoginScreen = ({ navigation }) => {
-
   useEffect(() => {
     const data = getData();
     data.then((data) => {
       if (data != null) {
         navigation.navigate("WelcomeScreen");
       }
-    });    
+    });
   }, []);
-
-  
 
   const [errorText, setErrorText] = useState("");
   const EMAIL_REGEX =
@@ -98,8 +95,6 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const catchFeedback = (response) => {
-    ;
-
     for (let index = 0; index < response.length; index++) {
       switch (response[index]) {
         case "email_incorrect":
@@ -118,7 +113,7 @@ const LoginScreen = ({ navigation }) => {
           alert("Deze inloggegevens kloppen niet.");
           break;
 
-        default: 
+        default:
           storeData(response[0]);
           navigation.navigate("WelcomeScreen");
           break;
@@ -184,7 +179,7 @@ const LoginScreen = ({ navigation }) => {
         </View>
 
         <View style={{ marginBottom: 20 }}>
-          <CustomButton 
+          <CustomButton
             buttonType={"blueButton"}
             text={"Log in"}
             onPress={handleSubmit(onSubmit)}

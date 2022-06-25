@@ -13,17 +13,17 @@ export default StyleSheet.create({
     fontSize: 25,
   },
   subtitle: {
-      fontWeight: "bold",
-      color: "#FFFFFF",
-      fontSize: 20,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    fontSize: 20,
   },
   marginBottom5: {
-    marginBottom: '5%',
+    marginBottom: "5%",
   },
   nothingFound: {
     marginTop: 50,
     color: "#FFFFFF",
     fontWeight: "bold",
     fontSize: 25,
-  }
+  },
 });

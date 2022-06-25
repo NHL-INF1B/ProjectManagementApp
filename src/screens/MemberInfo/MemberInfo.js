@@ -7,7 +7,7 @@ import Circle from "../../components/Circle/Circle";
 import ShowProfileInfo from "../../components/ShowProfileInfo/ShowProfileInfo";
 import { useRoute } from "@react-navigation/native";
 import handlerPath from "../../../env";
-import Header from '../../components/Header/Header';
+import Header from "../../components/Header/Header";
 
 const MemberInfo = () => {
   // Declaring the const where the information will be stored
@@ -38,19 +38,16 @@ const MemberInfo = () => {
   // Get the info from the member which is selected
   const getMemberInfo = (memberId) => {
     try {
-      fetch(
-        handlerPath + "memberInfoHandler/memberInfoHandler.php",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            memberId: memberId,
-          }),
-        }
-      )
+      fetch(handlerPath + "memberInfoHandler/memberInfoHandler.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          memberId: memberId,
+        }),
+      })
         .then((response) => response.json())
         .then((response) => {
           catchFeedback(response);

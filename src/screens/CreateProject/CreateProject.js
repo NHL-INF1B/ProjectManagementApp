@@ -1,32 +1,31 @@
-import { Text, ScrollView, View, Pressable, Button } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React, { useEffect, useState } from 'react';
-import styles from './Styles';
-import Circle from '../../components/Circle/Circle';
+import { Text, ScrollView, View, Pressable, Button } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import styles from "./Styles";
+import Circle from "../../components/Circle/Circle";
 import { useForm, Controller } from "react-hook-form";
-import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import CustomButton from '../../components/CustomButton/CustomButton';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Header from '../../components/Header/Header';
-import {useRoute} from "@react-navigation/native";
+import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "../../components/Header/Header";
+import { useRoute } from "@react-navigation/native";
 import handlerPath from "../../../env";
 
 const CreateProject = ({ navigation }) => {
   const NAME_REGEX = /^[a-zA-Z0-9 ]{3,30}$/;
   const [userId, setUserId] = useState("");
-
   const route = useRoute();
   const projectId = route.params.projectId;
-  
-
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      name: '',
-    }
+      name: "",
+    },
   });
 
+  //happens when the page opens.
   useEffect(() => {
+    //get the data from the async and set userId
     const data = getData();
     data.then((data) => {
       if (data !== undefined) {
@@ -35,6 +34,7 @@ const CreateProject = ({ navigation }) => {
     });
   }, []);
 
+  //get the data from the async.
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("@user_data");
@@ -46,11 +46,13 @@ const CreateProject = ({ navigation }) => {
     }
   };
 
+  // When the button is pressed, send data to the API
   const onSubmit = (data) => {
     sendDataToAPI(data.name, userId);
     navigation.goBack();
   };
 
+  // Send and catch the feedback from the API
   const sendDataToAPI = (ProjectNaam, userid) => {
     try {
       fetch(handlerPath + "createproject/createProjectHandler.php", {
@@ -61,13 +63,12 @@ const CreateProject = ({ navigation }) => {
         },
         body: JSON.stringify({
           name: ProjectNaam,
-          userid: userid
+          userid: userid,
         }),
       })
         .then((response) => response.text())
         .then((response) => {
-          ;
-          alert('Project aangemaakt');
+          alert("Project aangemaakt");
         });
     } catch (error) {
       alert(error);
@@ -76,14 +77,35 @@ const CreateProject = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
+      <Header
+        GoToType="None"
+        GoTo="None"
+        CenterGoTo="None"
+        ReturnType="Back"
+        projectId={projectId}
+        userId={userId}
+      />
       <ScrollView style={styles.root}>
         <View style={styles.div}>
-          <Circle name={"account-group"} size={60} color={"black"} style={[styles.icon,]} />
+          <Circle
+            name={"account-group"}
+            size={60}
+            color={"black"}
+            style={[styles.icon]}
+          />
         </View>
 
         <View style={styles.div}>
-          <Text style={[styles.title, styles.marginBottom25, styles.marginTop50, styles.sampleText,]}>PROJECT AANMAKEN</Text>
+          <Text
+            style={[
+              styles.title,
+              styles.marginBottom25,
+              styles.marginTop50,
+              styles.sampleText,
+            ]}
+          >
+            PROJECT AANMAKEN
+          </Text>
         </View>
 
         <View style={[styles.inputContainer, styles.marginBottom25]}>
@@ -91,14 +113,16 @@ const CreateProject = ({ navigation }) => {
             name="name"
             control={control}
             rules={{
-              required: { value: true, message: 'Projectnaam is verplicht' },
+              required: { value: true, message: "Projectnaam is verplicht" },
               pattern: {
                 value: NAME_REGEX,
-                message: 'Projectnaam moet tussen de 3 en 30 karakters bevatten én mag geen speciale karakters bevatten.',
+                message:
+                  "Projectnaam moet tussen de 3 en 30 karakters bevatten én mag geen speciale karakters bevatten.",
               },
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomTextInput style={styles.div}
+              <CustomTextInput
+                style={styles.div}
                 placeholder="Projectnaam"
                 placeholderTextColor="#707070"
                 onChangeText={(text) => onChange(text)}
@@ -109,7 +133,6 @@ const CreateProject = ({ navigation }) => {
             )}
           />
         </View>
-
 
         <CustomButton
           buttonType={"blueButton"}
