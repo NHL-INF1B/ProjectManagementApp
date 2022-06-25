@@ -10,6 +10,7 @@ import CustomButton from '../../components/CustomButton/CustomButton';
 import handlerPath from '../../../env';
 
 const WarningEditScreen = ({navigation}) => {
+    //declaring the const.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             name: "",
@@ -17,16 +18,19 @@ const WarningEditScreen = ({navigation}) => {
         }
     });
 
+    //read the data when the page opens.
     useEffect(() => {
         readData(warningId);
     }, []);
 
+    //update the warning
     const updateData = (data) => {
         editWarning(data);
         alert("De gegevens zijn succesvol aangepast");
         navigation.goBack();
     };
 
+    //delete the warning
     const deleteData = (data) => {
         deleteWarning(data);
         alert("De gegevens zijn succesvol verwijderd");
@@ -76,7 +80,7 @@ const WarningEditScreen = ({navigation}) => {
         }
     };
 
-     //Deleting a warning based on id
+    //Deleting a warning based on id
     const deleteWarning = () => {
         try {
             fetch(handlerPath + "warning/warningDeleteHandler.php", {
@@ -97,6 +101,7 @@ const WarningEditScreen = ({navigation}) => {
         }
     };
 
+    //catch the feedback from the API and give an alert.
     const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":
@@ -110,6 +115,7 @@ const WarningEditScreen = ({navigation}) => {
           }
 	};
 
+    //get the userid, warningid and projectid from the last page.
     const route = useRoute();
     const user_id = route.params.userId;
     const warningId = route.params.warningId;

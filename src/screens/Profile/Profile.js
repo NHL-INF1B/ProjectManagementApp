@@ -12,17 +12,21 @@ import Header from "../../components/Header/Header";
 import handlerPath from "../../../env";
 
 const Profile = ({ navigation }) => {
+    //declaring the const.
     const [isShowingDatePicker, setShowingDatePicker] = useState(false);
     const [userid, setUserId] = useState("");
 
+    //get the projectid from the last page.
     const route = useRoute();
     const projectId = route.params.projectId;
 
+    //declaring all the regex to check if number, email, discord and date are correct.
     const NUMMERIC_REGEX = /^[0-9]*$/;
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const DISCORD_REGEX = /^.{3,32}#[0-9]{4}$/;
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
+    //declaring the const.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             name: "",
@@ -37,6 +41,7 @@ const Profile = ({ navigation }) => {
         return string.split(search).join(replace);
     }
 
+    //get data when the page opens.
     useEffect(() => {
         const data = getData();
         data.then((data) => {
@@ -47,6 +52,7 @@ const Profile = ({ navigation }) => {
         });
 	}, []);
 
+    //get the data from the async storage.
     const getData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem("@user_data");
@@ -58,10 +64,12 @@ const Profile = ({ navigation }) => {
         }
     };
 
+    //send data to api when the button is pressed.
     const submitData = (data) => {
         sendUpdateData(data);
     };
 
+    //get the user data.
     const getUserData = (userId) => {
 		try {
 			fetch(handlerPath + "profile/profileFetch.php", {
@@ -87,6 +95,7 @@ const Profile = ({ navigation }) => {
 		}
 	};
 
+    //send the updated data to the API and get feedback.
     const sendUpdateData = (data) => {
         try {
 			fetch(handlerPath + "profile/profileEdit.php", {
@@ -113,6 +122,7 @@ const Profile = ({ navigation }) => {
 		}
     }
 
+    //catch the feedback from the API
 	const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":

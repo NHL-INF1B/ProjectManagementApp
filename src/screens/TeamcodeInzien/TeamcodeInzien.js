@@ -7,6 +7,7 @@ import Header from "../../components/Header/Header";
 import Styles from "../TeamcodeToevoegen/Styles";
 
 export default function App() {
+  //get the userid and projectid from the last page.
   const route = useRoute();
   const userId = route.params.userId;
   const projectId = route.params.projectId;

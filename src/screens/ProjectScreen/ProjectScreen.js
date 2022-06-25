@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import handlerPath from '../../../env';
 
 export default function ProjectScreen({navigation}) {
-
+    //declare the const and get the projectid and userid from the last page.
     const route = useRoute();
     const projectId = route.params.projectId;
     const userId = route.params.userId;
@@ -17,6 +17,7 @@ export default function ProjectScreen({navigation}) {
     const [isVoorzitter, setVoorzitter] = useState(false);
     const isFocused = useIsFocused();
 
+    //get the projectdata.
     const getProjectData = (projectId) => {
 		try {
 			fetch(handlerPath + "projectScreen/projectScreen.php", {
@@ -38,6 +39,7 @@ export default function ProjectScreen({navigation}) {
 		}
 	};
 
+    //get the roleid of the user.
     const getRoleId = (userId, projectId) =>   {
         try {
 			fetch(handlerPath + "projectScreen/getRole.php", {
@@ -63,6 +65,7 @@ export default function ProjectScreen({navigation}) {
 		}
     }
 
+    //get the project data and roleid when the page opens.
     useEffect(() => {
         getProjectData(projectId, userId);
         getRoleId(userId, projectId);

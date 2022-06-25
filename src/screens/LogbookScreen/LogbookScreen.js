@@ -9,6 +9,7 @@ import handlerPath from '../../../env';
 
 export default function LogbookScreen(){
 
+    //declaring the const
     const route = useRoute();
     const isFocused = useIsFocused();
     const userId = route.params.userId;
@@ -21,8 +22,10 @@ export default function LogbookScreen(){
     const roleId = role.role_id;
     const selectedUserName = userName.name;
 
+    //happens when the page opens.
     useEffect(() => {
         
+        //check if the user is viewing the logbook of an other user or not
         if(viewing == "viewing"){
             getUserName(selectedUserId);
             getLogbook(selectedUserId, projectId);
@@ -33,6 +36,7 @@ export default function LogbookScreen(){
         }
     }, [isFocused]);
 
+    //get the role of the user.
     const getRole = (userId, projectId) => {
         fetch(handlerPath + "permissions/getRoleIdHandler.php", {
             method: "POST",
@@ -47,11 +51,11 @@ export default function LogbookScreen(){
         })
         .then((response) => response.json())
         .then((response) => {
-            ;
             setRole(response);
         })
     }
 
+    //get the logbook of the user.
     const getLogbook = (userId, projectId) => {
         fetch(handlerPath + "logbook/getLogbookDataHandler.php", {
             method: "POST",
@@ -66,11 +70,11 @@ export default function LogbookScreen(){
         })
         .then((response) => response.json())
         .then((response) => {
-            ;
             setLogbook(response);
         })
     }
 
+    //get the username of the user.
     const getUserName = (userId) => {
         fetch(handlerPath + "logbook/getUserNameHandler.php", {
             method: "POST",
@@ -84,17 +88,18 @@ export default function LogbookScreen(){
         })
         .then((response) => response.json())
         .then((response) => {
-            ;
             setUserName(response);
         })
     }
 
+    //check if the user is voorzitter or vice voorzitter.
     if(roleId == 1 || roleId == 2){
         var CenterGoTo = "SelectLogbookUser";
     } else{
         var CenterGoTo = "None";
     }
 
+    //check if there is any data to show.
     function checkData(logbook){
         if(logbook == "NO_DATA"){
             return(<Text style={Styles.nothingFound}>Er zijn nog geen uren genoteerd</Text>);

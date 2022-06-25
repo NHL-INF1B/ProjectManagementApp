@@ -11,6 +11,7 @@ import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import handlerPath from '../../../env';
 
 const HourEditScreen = ({navigation}) => {
+    //The const for the input data.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             title: "",
@@ -21,17 +22,21 @@ const HourEditScreen = ({navigation}) => {
         }
     });
 
+    //the regex to check the time and date.
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
     const TIME_REGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     
+    //read the data when the page opens.
     useEffect(() => {
         readData(id);
     }, []);
 
+    //update the data.
     const updateData = (data) => {
         editActivity(data);
     };
 
+    //delete the data.
     const deleteData = (data) => {
         deleteActivity(data);
     };
@@ -114,6 +119,7 @@ const HourEditScreen = ({navigation}) => {
         return string.split(search).join(replace);
     }
 
+    //catch the feedback of the API and send an alert.
     const catchFeedback = (response) => {
         switch (response) {
             case "title_incorrect":
@@ -154,18 +160,22 @@ const HourEditScreen = ({navigation}) => {
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+    //show the datepicker
     const showDatePicker = () => {
         setDatePickerVisibility(true);
     };
 
+    //hide the datepicker
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
     };
 
+    //hide the datpicker
     const handleConfirm = (date) => {
         hideDatePicker();
     };
 
+    //get the userid, projectid and id from the last page.
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;

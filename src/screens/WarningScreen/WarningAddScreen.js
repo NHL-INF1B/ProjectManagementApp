@@ -12,22 +12,26 @@ import { Picker, onOpen } from 'react-native-actions-sheet-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const WarningAddScreen = () => {
+    //getting the projectid and userid from the last page.
     const route = useRoute();
     const project_id = route.params.projectId;
     const user_id = route.params.userId;
 
+    //declaring the const.
     const [query, setQuery] = useState('');
-    const [members, setMembers] = useState([]); //List of members in the project
-    const [selectedMember, setSelectedMember] = useState('Selecteer projectlid'); //Used for setting the title of dropdown
-
     const navigation = useNavigation();
-
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             reason: "",
             userId: "",
         }
     });
+
+    //List of members in the project
+    const [members, setMembers] = useState([]);
+
+    //Used for setting the title of dropdown
+    const [selectedMember, setSelectedMember] = useState('Selecteer projectlid');
 
     const filteredData = useMemo(() => {
         if (members && members.length > 0) {
@@ -39,13 +43,14 @@ const WarningAddScreen = () => {
         }
     }, [members, query]);
 
+    //send the data to the API when the button is pressed.
     const submitData = (data) => {
         sendDataToAPI(data);
         navigation.goBack();
         alert("De gegevens zijn opgeslagen");
     };
 
-
+    //get the memberdata to show in the memberpicker.
     const getMemberData = () => {
         try {
             fetch(handlerPath + "scorebord/scorebord.php", {
@@ -94,6 +99,7 @@ const WarningAddScreen = () => {
         }
     };
 
+    //catch the feedback from the API and give an alert.
     const catchFeedback = (response) => {
         switch (response) {
             case "project_member_incorrect":

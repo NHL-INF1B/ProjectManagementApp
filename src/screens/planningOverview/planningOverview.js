@@ -7,22 +7,25 @@ import { useRoute, useIsFocused } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
 const PlanningOverview = ({ navigation }) => {
+    //declaring the const.
     const [userData, setUserData] = useState([]);
-    const [planningId, setPlanningId] = useState('');
-    
+    const [planningId, setPlanningId] = useState(''); 
     const [role, setRole] = useState([]);
     const roleId = role.role_id;
 
+    //get the userid and projectid from the last page.
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
     const isFocused = useIsFocused();
 
+    //get userdata and the role of the user when the page opens.
     useEffect(() => {
         getUserData(projectId);
         getRole(userId, projectId);
     }, [isFocused]);
 
+    //get the role of the user.
     const getRole = (userId, projectId) => {
         fetch(handlerPath + "permissions/getRoleIdHandler.php", {
             method: "POST",
@@ -41,6 +44,7 @@ const PlanningOverview = ({ navigation }) => {
         })
     }
 
+    //get the user data and get feedback
     const getUserData = (projectid) => {
         try {
             fetch(handlerPath + "planning/planningOverzicht.php", {
@@ -62,6 +66,7 @@ const PlanningOverview = ({ navigation }) => {
         }
     };
 
+    //filter the data from the API
     const filterData = (data) => {
         var filter_data = {};
 
@@ -84,10 +89,10 @@ const PlanningOverview = ({ navigation }) => {
         });
 
         var _data = Object.values(filter_data);
-
         return _data;
     }
 
+    //check if the user is voorzitter, vice voorzitter or planner.
     if(roleId == 1 || roleId == 2 || roleId == 3){
         var GoTo = "PlanningAdd";
         var GoToType = "Add";
@@ -96,6 +101,7 @@ const PlanningOverview = ({ navigation }) => {
         var GoToType = "None";
     }
 
+    //check if there is data to show.
     function checkData(userData){
         if(userData == "NO_DATA"){
             return(<Text style={Styles.nothingFound}>Er is nog geen planning</Text>)

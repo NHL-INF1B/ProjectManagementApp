@@ -13,6 +13,7 @@ import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import handlerPath from '../../../env';
 
+//Set the notifiction handler
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
@@ -21,9 +22,15 @@ Notifications.setNotificationHandler({
     }),
   });
 
+  //function to plan the notifications
 async function planNotification() {
+    //get all the scheduled push notifications.
     Notifications.getAllScheduledNotificationsAsync();
+
+    //cancel all the scheduled notifications
     await Notifications.cancelAllScheduledNotificationsAsync();
+
+    //schedule the new notification
     await schedulePushNotification();
 };
 
@@ -32,10 +39,12 @@ const HourAddScreen = () => {
     // Asking for permission for the notification
     const [expoPushToken, setExpoPushToken] = useState('');
     
+    //happens when the page opens.
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
     }, []);
 
+    //The const for the input data.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             title: "",
@@ -71,13 +80,14 @@ const HourAddScreen = () => {
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
     const TIME_REGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
 
+    //plan notifcation add points and send data to api when the button is pressed.
     const submitData = (data) => {
         planNotification();
         addPoints(userId, projectId);
         sendDataToAPI(data);
     };
 
-    // Inserting the data into the database
+    // Inserting the data into the database and getting the response.
     const sendDataToAPI = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditInsertHandler.php", {
@@ -116,6 +126,7 @@ const HourAddScreen = () => {
         return string.split(search).join(replace);
     }
 
+    //catch the feedback of the API and give an alert
     const catchFeedback = (response) => {
         switch (response[0]) {
             case "title_incorrect":
@@ -153,18 +164,22 @@ const HourAddScreen = () => {
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+    //show the datepicker
     const showDatePicker = () => {
         setDatePickerVisibility(true);
     };
 
+    //hide the datepicker
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
     };
 
+    //hide the datpicker
     const handleConfirm = (date) => {
         hideDatePicker();
     };
 
+    //get the projectid and the userid from the last page.
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;

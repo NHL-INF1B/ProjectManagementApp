@@ -10,6 +10,7 @@ import { useRoute } from "@react-navigation/native";
 import handlerPath from '../../../env';
 
 const PlanningAdd = () => {
+    //declaring the const.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             activity: "",
@@ -17,15 +18,20 @@ const PlanningAdd = () => {
         }
     });
 
+    //send data to API when the button is pressed.
     const submitData = (data) => {
         sendDataToAPI(data);
     };
 
+    //get hte userid and projectid from the last page.
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
+
+    //regex to check if number
     const NUMMERIC_REGEX = /^[0-9]*$/;
 
+    //send the data to the API and get feedback.
     const sendDataToAPI = (data) => {
         try {
             fetch(handlerPath + "planning/planningHandler.php", {
