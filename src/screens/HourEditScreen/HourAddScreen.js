@@ -24,7 +24,7 @@ Notifications.setNotificationHandler({
 
   //function to plan the notifications
 async function planNotification() {
-    //get all the scheduled push notifications.
+    //get all the scheduled pushnotifications.
     Notifications.getAllScheduledNotificationsAsync();
 
     //cancel all the scheduled notifications
