@@ -7,8 +7,8 @@ export default function Activity({ id, Name, Description, Date, Start, End, user
 
     const navigation = useNavigation();
 
-    Start = Start.substring(10, 16);
-    End = End.substring(10, 16);
+    Start = Start.substring(0, 5);
+    End = End.substring(0, 5);
 
     return(
         <View style={Styles.ActivityContainer}>

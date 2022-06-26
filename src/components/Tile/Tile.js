@@ -35,8 +35,8 @@ export default function Tile({ text, image, screen, projectId, userId }){
 const Styles = StyleSheet.create({
     Tile: {
         minWidth: 135,
+        minHeight: 145,
         maxWidth: 135,
-        minHeight: 141,
         maxHeight: 141,
         backgroundColor: "white",
         borderColor: "#707070",
@@ -55,17 +55,5 @@ const Styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         fontSize: 25,
-    },
-    Uitloggen: {
-        minWidth: 135,
-        maxWidth: 135,
-        minHeight: 141,
-        maxHeight: 141,
-        backgroundColor: 'red',
-        borderColor: '#707070',
-        borderRadius: 10,
-        flex: 1,
-        alignItems: 'center',
-        margin: 15,
     },
 });

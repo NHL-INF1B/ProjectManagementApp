@@ -9,13 +9,13 @@ import Header from "../../components/Header/Header";
 import handlerPath from "../../../env";
 
 const ChangePassword = ({ route }) => {
-    //get the userId from the last page.
+    // Get the userId from the last page
     const { userId, projectId } = route.params;
 
-    //regex to check if the password is safe
+    // Regex to check if the password is safe
     const PASS_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,254}$/;
 
-    //the variables for the input data.
+    // The const for the input data
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             oldPassword: "",
@@ -24,12 +24,12 @@ const ChangePassword = ({ route }) => {
         }
     });
 
-    //when the button gets pushed it sends data to the API
+    // When the button is pressed, send data to the API
     const submitData = (data) => {
         sendUpdateData(data);
     };
 
-    //send and fetch the feedback from the API.
+    // Send and catch the feedback from the API
     const sendUpdateData = (data) => {
         try {
 			fetch(handlerPath + "changePassword/changePassword.php", {
@@ -47,7 +47,7 @@ const ChangePassword = ({ route }) => {
 			})
 				.then((response) => response.json())
 				.then((response) => {
-                    console.log(response);
+                    ;
                     catchFeedback(response);
 				});
 		} catch (error) {
@@ -55,7 +55,7 @@ const ChangePassword = ({ route }) => {
 		}
     }
 
-    //catch the feedback from the API and give a alert.
+    // Catch the feedback from the API
     const catchFeedback = (response) => {
         switch (response[0]) {
             case "wrong_old_password":
@@ -74,7 +74,7 @@ const ChangePassword = ({ route }) => {
                 alert("Het wachtwoord is veranderd");
                 break;
             default:
-              console.log('undefined');
+              //
               break;
           }
 	};

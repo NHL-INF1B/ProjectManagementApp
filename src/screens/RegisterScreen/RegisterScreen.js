@@ -9,12 +9,13 @@ import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 import handlerPath from "../../../env";
 
 const RegisterScreen = ({ navigation }) => {
+  //declaring the regex to check the email, password and the date.
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const PASS_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,254}$/;
   const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
+  //declaring the const.
   const [isShowingDatePicker, setShowingDatePicker] = useState(false);
-
   const { control, handleSubmit, formState: { errors }, getValues, } = useForm({
     defaultValues: {
       name: "",
@@ -29,6 +30,7 @@ const RegisterScreen = ({ navigation }) => {
     return string.split(search).join(replace);
   }
 
+  //send the data to the api when the button is pressed.
   const onSubmit = (data) => {
     sendDataToAPI(
       data.name,
@@ -36,10 +38,10 @@ const RegisterScreen = ({ navigation }) => {
       data.dateOfBirth,
       data.password,
       data.password_repeat
-    );
-    console.log(data);
+    )
   };
 
+  //send the data to the api and get feedback.
   const sendDataToAPI = (
     name,
     email,
@@ -65,10 +67,8 @@ const RegisterScreen = ({ navigation }) => {
           }),
         }
       )
-        // .then((response) => response.text())
         .then((response) => response.json())
         .then((response) => {
-          // console.log(response);
           catchFeedback(response);
         });
     } catch (error) {
@@ -76,9 +76,8 @@ const RegisterScreen = ({ navigation }) => {
     }
   };
 
+  //catch the feedback from the API and give an alert.
   const catchFeedback = (response) => {
-    // console.log(response);
-
     switch (response[0]) {
       case "name_incorrect":
         alert("De naam is verkeerd.");
@@ -116,7 +115,7 @@ const RegisterScreen = ({ navigation }) => {
         />
       </View>
 
-      <Text style={Styles.titel}>Registreren</Text>
+      <Text style={Styles.title}>Registreren</Text>
 
       <View style={Styles.content}>
         <ScrollView>

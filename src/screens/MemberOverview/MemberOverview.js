@@ -1,30 +1,27 @@
-import { React, useEffect, useMemo, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
-import { ScrollView, View, Text, FlatList, SafeAreaView, Button, Image, TouchableOpacity, Pressable, Platform, Alert } from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
-import CustomButton from "../../components/CustomButton/CustomButton";
-import Circle from "../../components/Circle/Circle";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
-import ChangePassword from "../ChangePassword/ChangePassword";
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { Text, FlatList, SafeAreaView } from "react-native";
+import { useRoute } from '@react-navigation/native';
 import MemberTile from "../../components/MemberTile/MemberTile";
 import Header from '../../components/Header/Header';
 import handlerPath from "../../../env";
 
 const MemberOverview = ({ navigation }) => {
+    //declaring the const
     const [member, setMembers] = useState([]);
     const [roleName, setRoleName] = useState('');
 
+    //get teh projectid and user id from the last page.
     const route = useRoute();
     const projectId = route.params.projectId;
     const userId = route.params.userId;
 
+    //get the role of the user when the page opens.
     useEffect(() => {
         getRole(userId, projectId);
     }, []);
 
+    // Get the members of the project
     const getMembers = (userId, projectId) => {
         try {
             fetch(handlerPath + "projectMembers/fetchProjectMembers.php", {
@@ -38,10 +35,8 @@ const MemberOverview = ({ navigation }) => {
                     projectId: projectId
                 }),
             })
-                // .then((response) => response.text())
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log('memberoverviewGetMembers ' + response)
                     setMembers(response);
                 });
         } catch (error) {
@@ -49,6 +44,7 @@ const MemberOverview = ({ navigation }) => {
         }
     }
 
+    // Get the current roles from the members of the project
     const getRole =  (userId, projectId) => {
         try {
             fetch(handlerPath + "projectMembers/fetchRole.php", {
@@ -61,10 +57,8 @@ const MemberOverview = ({ navigation }) => {
                     userId: userId
                 }),
             })
-                // .then((response) => response.text())
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log('memberoverviewGetRole ' + response)
                     setRoleName(response);
                     getMembers(userId, projectId);
                 });
@@ -76,21 +70,33 @@ const MemberOverview = ({ navigation }) => {
     var GoToType = "None";
     var GoTo = "None";
 
+    //check if there is any data to show the user.
+    function checkData(members){
+        if(members == "NO_DATA"){
+            return(<Text style={Styles.nothingFound}>Er zijn nog geen andere projectleden in dit project.</Text>)
+        }else{
+            return(
+                <FlatList
+                    data={member}
+                    keyExtractor={(member) => member.id.toString()}
+                    renderItem={({ item }) =>
+                        <MemberTile
+                            id={item.id}
+                            name={item.name}
+                            role={item.role}
+                            userRole={roleName}
+                        />
+                    }
+                />)
+        }
+    }
+
     return (
         <SafeAreaView style={Styles.SafeAreaView}>
             <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
-            <FlatList
-                data={member}
-                keyExtractor={(member) => member.id.toString()}
-                renderItem={({ item }) =>
-                    <MemberTile
-                        id={item.id}
-                        name={item.name}
-                        role={item.role}
-                        userRole={roleName}
-                    />
-                }
-            />
+            <Text style={Styles.title}>Projectleden</Text>
+            
+            {checkData(member)}
         </SafeAreaView>
     );
 }

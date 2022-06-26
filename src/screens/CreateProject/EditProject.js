@@ -1,4 +1,4 @@
-import { Text, ScrollView, View } from 'react-native';
+import { Text, ScrollView, View, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import styles from './Styles';
 import Circle from '../../components/Circle/Circle';
@@ -15,9 +15,11 @@ const EditProject = ({ navigation }) => {
     const NAME_REGEX = /^[a-zA-Z0-9 ]{3,30}$/;
     const [userId, setUserId] = useState("");
 
+    //Get the projectId from the last page.
     const route = useRoute();
     const projectId = route.params.projectId;
   
+    //The const for the input data.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             name: "",
@@ -26,6 +28,7 @@ const EditProject = ({ navigation }) => {
         }
     });
 
+    //When the page opens.
     useEffect(() => {
         readData(projectId);
         const data = getData();
@@ -36,18 +39,17 @@ const EditProject = ({ navigation }) => {
         });
     }, []);
 
+    //send input data to edit project.
     const updateData = (data) => {
         editProject(data);
-        alert("De gegevens zijn succesvol aangepast");
-        readData();
     };
 
+    //send input data to delete project.
     const deleteData = (data) => {
-        deleteProject(data);
-        navigation.navigate("WelcomeScreen");
-        alert("De gegevens zijn succesvol verwijderd");
+        deleteProject(data); 
     };
 
+    //get the data from the async storage.
     const getData = async () => {
         try {
         const jsonValue = await AsyncStorage.getItem("@user_data");
@@ -59,8 +61,8 @@ const EditProject = ({ navigation }) => {
         }
     };
 
-    //Selecting the data from the database based on id
-    const readData = (data) => {
+    // Selecting the data from the database based on id
+    const readData = () => {
         fetch(handlerPath + "createproject/selectProjectHandler.php", {
             method: "POST",
             headers: {
@@ -80,10 +82,10 @@ const EditProject = ({ navigation }) => {
         })
     };
 
-    //Updating the data based on id
+    // Updating the data based on id
     const editProject = (data) => {
         try {
-            fetch(handlerPath + "createproject/editProjectHandler.php", {
+            fetch(handlerPath + "editproject/editProjectHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -105,10 +107,10 @@ const EditProject = ({ navigation }) => {
         }
     };
 
-    //Deleting a project based on id
+    // Deleting a project based on id
     const deleteProject = (data) => {
         try {
-            fetch(handlerPath + "createproject/deleteProjectHandler.php", {
+            fetch(handlerPath + "editproject/deleteProjectHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -118,9 +120,8 @@ const EditProject = ({ navigation }) => {
                     id: projectId,
                 }),
             })
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -128,16 +129,19 @@ const EditProject = ({ navigation }) => {
         }
     };
 
+    //catch the feedback from the API's and giving an alert.
     const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":
-                alert("De gegevens zijn geüpdate");
+                navigation.goBack();
+                alert("De gegevens zijn succesvol aangepast");
                 break;
             case "data_deleted":
-                alert("De gegevens zijn verwijderd");
+                navigation.navigate("WelcomeScreen");
+                alert("De gegevens zijn succesvol verwijderd");
                 break;
             default:
-                console.log('Success');
+                //
                 break;
           }
 	};
@@ -192,7 +196,12 @@ const EditProject = ({ navigation }) => {
                     buttonType={"redButton"}
                     buttonText={"buttonText"}
                     text={"Verwijderen"}
-                    onPress={handleSubmit(deleteData)}
+                    onPress={() =>
+                        Alert.alert("Weet je zeker dat je dit project wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
+                            { text: "Verwijderen", onPress: deleteData },
+                            { text: "Annuleren" },
+                        ])
+                    }
                 />
             </View>
 

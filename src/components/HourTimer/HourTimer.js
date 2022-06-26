@@ -1,18 +1,49 @@
 import { ScrollView, View, SafeAreaView } from 'react-native';
 import { React, useEffect, useState } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
-import styles from './Styles';
 import { useForm, Controller } from "react-hook-form";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Circle from '../../components/Circle/Circle';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { useRoute } from "@react-navigation/native";
+import { StyleSheet, Platform, StatusBar } from "react-native";
+import * as Notifications from 'expo-notifications';
+import * as Device from 'expo-device';
 import handlerPath from '../../../env';
+
+//Set the notifiction handler
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+    }),
+  });
+
+  //function to plan the notifications
+async function planNotification() {
+    //get all the scheduled pushnotifications
+    Notifications.getAllScheduledNotificationsAsync();
+
+    //cancel all the scheduled notifications.
+    await Notifications.cancelAllScheduledNotificationsAsync();
+
+    //schedule a new notification.
+    await schedulePushNotification();
+};
 
 const HourAddScreen = () => {
 
-    const [id, setId] = useState("-");
+    // Asking for permission for the notification
+    const [expoPushToken, setExpoPushToken] = useState('');
+    
+    //ask for permission when the page opens.
+    useEffect(() => {
+        registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    }, []);
 
+    //declaring the const.
+    const [id, setId] = useState("-");
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             id: "",
@@ -21,18 +52,44 @@ const HourAddScreen = () => {
         }
     });
 
+    //start the timer when the button is pushed.
     const timerStarter = (data) => {
         startTimer(data);
         storeData(data);
         alert("De timer is gestart");
     }
 
+    //stop the timer when the button is pushed.
     const timerStop = (data) => {
+        planNotification();
+        addPoints(userId, projectId);
         stopTimer(data);
         alert("De timer is gestopt");
     }
 
-    //Saves the current timestamp & inserts it into the database as the start_time along with the other data via the handler file
+    // Add points when they add urenverantwoording
+    const addPoints = (userId, projectId) => {
+        try {
+          fetch(handlerPath + "AddPoints/AddPoints.php", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+            userId: userId,
+            projectId: projectId
+            }),
+          })
+          .then((response) => response.json())
+          .then((response) => {
+          });
+        } catch (error) {
+          alert(error);
+        }
+      }
+
+    // Saves the current timestamp & inserts it into the database as the start_time along with the other data via the handler file
     const startTimer = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditStartHandler.php", {
@@ -50,7 +107,6 @@ const HourAddScreen = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setValue("id", response.id);
                 setValue("title", response.title);
                 setValue("description", response.description);
@@ -60,8 +116,8 @@ const HourAddScreen = () => {
                 setValue("userId", response.userId);
                 setValue("projectId", response.projectId);
                 setId(response.id);
-                storeData(response.id);
                 catchFeedback(response);
+                storeData(response.id);
 
             });
         } catch (error) {
@@ -69,7 +125,7 @@ const HourAddScreen = () => {
         }
     };
 
-    //Saves the current timestamp & updates it into the database as the end_time via the handler file
+    // Saves the current timestamp & updates it into the database as the end_time via the handler file
     const stopTimer = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditStopHandler.php", {
@@ -85,17 +141,17 @@ const HourAddScreen = () => {
                     projectId: projectId,
                 }),
             })
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
-                removeValue(); //If you want to remove the stored data
+                removeValue(); 
             });
         } catch (error) {
             console.log(error);
         }
     };
 
+    //catch the feedback from the API and give an alert.
     const catchFeedback = (response) => {
         switch (response) {
             case "title_incorrect":
@@ -120,21 +176,21 @@ const HourAddScreen = () => {
                 alert("De beschrijving is incorrect");
                 break;
             default:
-                console.log("De gegevens zijn opgeslagen");
                 break;
           }
 	};
 
+    //get the data when the page opens
     useEffect(() => {
     const data = getData();
     data.then((data) => {
         if (data !== undefined) {
-            console.log(data);
             setId(data);
         }
         });    
     }, []);
      
+    //get the data from the async storage.
     const getData = async () => {
         try {
           const jsonValue = await AsyncStorage.getItem("@timer_data");
@@ -146,6 +202,7 @@ const HourAddScreen = () => {
         }
     };
     
+    //store the data to the async storage.
     const storeData = async (data) => {
     try {
         const jsonValue = JSON.stringify(data);
@@ -155,15 +212,16 @@ const HourAddScreen = () => {
     }
     };
     
+    //remove a value from the async storage.
     const removeValue = async () => {
         try {
             await AsyncStorage.removeItem("@timer_data");
         } catch (e) {
             console.log(e);
         }
-        console.log("Data has been removed");
     };
 
+    //get the userid and projectid from the last page.
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
@@ -207,8 +265,8 @@ const HourAddScreen = () => {
                         rules={{
                             required: { value: true, message: 'Beschrijving is verplicht' },
                             maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
+                                value: 100,
+                                message: 'Maximaal 100 tekens lang',
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
@@ -232,7 +290,7 @@ const HourAddScreen = () => {
                     />
                 </View>
 
-                <View style={styles.marginBottom1}>
+                <View style={styles.marginBottom50}>
                     <CustomButton 
                         buttonType={"redButton"}
                         buttonText={"buttonText"}
@@ -244,5 +302,69 @@ const HourAddScreen = () => {
         </SafeAreaView>
     );
 }
+
+// Set the look of the notifications and set when it triggers
+async function schedulePushNotification() {
+    const identifier = await Notifications.scheduleNotificationAsync({
+        content: {
+            title: "Project Management App",
+            body: 'Vergeet je logboek vandaag niet in te vullen!',
+        },
+    trigger: { seconds: 30 },
+    });
+    return identifier;
+  }
+  
+// Ask for permission to give notifications
+async function registerForPushNotificationsAsync() {
+    let token;
+    if (Device.isDevice) {
+        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+
+        if (existingStatus !== 'granted') {
+            const { status } = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
+
+        if (finalStatus !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+        }
+
+        token = (await Notifications.getExpoPushTokenAsync()).data;
+    } else {
+        alert('Must use physical device for Push Notifications');
+    }
+
+    if (Platform.OS === 'android') {
+        Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+        });
+    }
+    return token;
+}
+
+const styles = StyleSheet.create({
+    SafeAreaView: {
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        backgroundColor: "#009BAA",
+        flex: 1,
+        // marginBottom: 50,
+      },
+      marginBottom1: {
+        marginBottom: '1%',
+      },
+      marginBottom5: {
+        marginBottom: '5%',
+      },
+      
+    marginBottom50: {
+      marginBottom: 50,
+    },
+});
 
 export default HourAddScreen;

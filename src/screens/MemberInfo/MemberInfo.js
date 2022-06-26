@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Styles from "./Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -10,7 +10,7 @@ import handlerPath from "../../../env";
 import Header from '../../components/Header/Header';
 
 const MemberInfo = () => {
-  //declaring the const where the info goes into.
+  // Declaring the const where the information will be stored
   const route = useRoute();
   const memberId = route.params.id;
   const [name, setName] = useState("-");
@@ -19,6 +19,7 @@ const MemberInfo = () => {
   const [phoneNumber, setPhoneNumber] = useState("-");
   const [discord, setDiscord] = useState("-");
 
+  //get data from the async storage
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("@member_data");
@@ -30,13 +31,12 @@ const MemberInfo = () => {
     }
   };
 
-  //get the data when you go on the page
+  // Get the data when you go on the page
   useEffect(() => {
-    // const data = getData();
     getMemberInfo(memberId);
   }, []);
 
-  //get the info from the member which is chosen.
+  // Get the info from the member which is selected
   const getMemberInfo = (memberId) => {
     try {
       fetch(
@@ -54,7 +54,6 @@ const MemberInfo = () => {
       )
         .then((response) => response.json())
         .then((response) => {
-          // console.log(response);
           catchFeedback(response);
         });
     } catch (error) {
@@ -62,10 +61,8 @@ const MemberInfo = () => {
     }
   };
 
-  //catch the feeback from the API
+  // Catch the feeback from the API
   const catchFeedback = (response) => {
-    console.log(response);
-
     switch (response[0]) {
       case "user_not_exists":
         alert("Deze gebruiker bestaat niet");
@@ -79,15 +76,14 @@ const MemberInfo = () => {
     }
   };
 
-  var GoToType = "None";
-  var GoTo = "None";
-
   return (
     <SafeAreaView style={Styles.SafeAreaView}>
-      <Header GoToType={GoToType} GoTo={GoTo} CenterGoTo="None" ReturnType="Back" />
+      <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
+
       <View style={Styles.person}>
-        <Circle name="account" color="black" size={90} style={Styles.Circle} />
+        <Circle name="account" color="black" size={90} text={"Projectlid"} />
       </View>
+
       <ShowProfileInfo
         name={name}
         iconName="account"

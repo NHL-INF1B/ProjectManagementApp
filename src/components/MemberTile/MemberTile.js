@@ -3,13 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity, Pressable } from 'react-nativ
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Picker, onOpen } from 'react-native-actions-sheet-picker';
 import allRoles from './countries.json';
-import MemberInfo from '../../screens/MemberInfo/MemberInfo';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import handlerPath from '../../../env';
 
 
 
 function MemberTile(props) {
+    //declaring the const.
     const navigation = useNavigation();
     const [roles, setRoles] = useState([]);
     const [query, setQuery] = useState('');
@@ -17,16 +17,16 @@ function MemberTile(props) {
     const [dropdownButton, setDropdownButton] = useState('chevron-down');
     const [isVoorzitter, setIsVoorzitter] = useState(false);
 
-
+    //when the page opens set the roles and get the role name.
     useEffect(() => {
         setRoles(allRoles);
         setRoleName(props.role);
-        // console.log(props.role)
         if (props.userRole == 'voorzitter') {
             setIsVoorzitter(true);
         }
     }, []);
 
+    //filter the data.
     const filteredData = useMemo(() => {
         if (roles && roles.length > 0) {
             return roles.filter((item) =>
@@ -38,13 +38,11 @@ function MemberTile(props) {
     }, [roles, query]);
 
     const capitalizeFirstLetter = (string) => {
-        // return string;
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    //update the role and give an alert.
     const updateRole = (role, userId) => {
-        console.log(role.id);
-
         try {
             fetch(handlerPath + "projectMembers/updateRole.php", {
                 method: "POST",
@@ -58,9 +56,7 @@ function MemberTile(props) {
                 }),
             })
                 .then((response) => response.text())
-                // .then((response) => response.json())
                 .then((response) => {
-                    console.log('membertile ' + response)
                     alert('Rol is veranderd');
                 });
         } catch (error) {
@@ -102,7 +98,7 @@ function MemberTile(props) {
                                 searchable="true"
                                 placeholderText="Zoeken naar rol"
                                 closeText="Sluiten"
-                                setSelected={data => { updateRole(data, props.id), setRoleName(data.name), console.log(data) }}
+                                setSelected={data => { updateRole(data, props.id), setRoleName(data.name) }}
                             />
                         </View>
                     ) : (
@@ -160,16 +156,6 @@ const Styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    nameText: {
-        color: "white",
-        fontWeight: "bold",
-        textDecorationLine: 'underline',
-        fontSize: 20,
-    },
-    reasonText: {
-        color: "white",
-        fontWeight: "bold",
-    },
     dropdown: {
         marginTop: 5,
         marginBottom: 5,
@@ -184,7 +170,6 @@ const Styles = StyleSheet.create({
         minWidth: "75%",
         flexShrink: 1,
         color: "#009BAA",
-
     },
     dropdownArrow: {
         minWidth: "25%",

@@ -13,6 +13,7 @@ import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import handlerPath from '../../../env';
 
+//Set the notifiction handler
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
@@ -21,21 +22,29 @@ Notifications.setNotificationHandler({
     }),
   });
 
+  //function to plan the notifications
 async function planNotification() {
+    //get all the scheduled pushnotifications.
     Notifications.getAllScheduledNotificationsAsync();
+
+    //cancel all the scheduled notifications
     await Notifications.cancelAllScheduledNotificationsAsync();
+
+    //schedule the new notification
     await schedulePushNotification();
 };
 
 const HourAddScreen = () => {
 
-    //Asking for permission for the notification
+    // Asking for permission for the notification
     const [expoPushToken, setExpoPushToken] = useState('');
     
+    //happens when the page opens.
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
     }, []);
 
+    //The const for the input data.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             title: "",
@@ -46,16 +55,39 @@ const HourAddScreen = () => {
         }
     });
 
+    // Add points when the user adds hours
+    const addPoints = (userId, projectId) => {
+        try {
+          fetch(handlerPath + "AddPoints/AddPoints.php", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+            userId: userId,
+            projectId: projectId
+            }),
+          })
+          .then((response) => response.json())
+          .then((response) => {
+          });
+        } catch (error) {
+          alert(error);
+        }
+      }
+
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
     const TIME_REGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
 
+    //plan notifcation add points and send data to api when the button is pressed.
     const submitData = (data) => {
         planNotification();
+        addPoints(userId, projectId);
         sendDataToAPI(data);
-        alert("De gegevens zijn opgeslagen");
     };
 
-    //Inserting the data into the database
+    // Inserting the data into the database and getting the response.
     const sendDataToAPI = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditInsertHandler.php", {
@@ -76,7 +108,6 @@ const HourAddScreen = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 setValue("title", response.title);
                 setValue("description", response.description);
                 setValue("date", response.date);
@@ -95,8 +126,9 @@ const HourAddScreen = () => {
         return string.split(search).join(replace);
     }
 
+    //catch the feedback of the API and give an alert
     const catchFeedback = (response) => {
-        switch (response) {
+        switch (response[0]) {
             case "title_incorrect":
                 alert("De activiteit is incorrect");
                 break;
@@ -121,34 +153,41 @@ const HourAddScreen = () => {
             case "times_invalid":
                 alert("De tijden zijn ongeldig");
                 break;
+            case "times_equal":
+                alert("De tijden zijn gelijk");
+                break;
             default:
-                console.log("De gegevens zijn opgeslagen");
+                alert("De gegevens zijn opgeslagen");
                 break;
           }
 	};
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+    //show the datepicker
     const showDatePicker = () => {
         setDatePickerVisibility(true);
     };
 
+    //hide the datepicker
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
     };
 
+    //hide the datpicker
     const handleConfirm = (date) => {
         hideDatePicker();
     };
 
+    //get the projectid and the userid from the last page.
     const route = useRoute();
     const userId = route.params.userId;
     const projectId = route.params.projectId;
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
             <ScrollView style={styles.SafeAreaView}>
-                <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
                 <View style={styles.marginBottom5}>
                     <Circle name={"clipboard-text"} size={60} color={"#000000"} text={"Urenverantwoording\nToevoegen"} />
                 </View>
@@ -185,8 +224,8 @@ const HourAddScreen = () => {
                         rules={{
                             required: { value: true, message: 'Beschrijving is verplicht' },
                             maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
+                                value: 100,
+                                message: 'Maximaal 100 tekens lang',
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
@@ -321,7 +360,6 @@ const HourAddScreen = () => {
                     <Text>{errors?.times_invalid?.message}</Text>
                 </View>
 
-
                 <View style={styles.marginBottom5}>
                     <CustomButton 
                         buttonType={"blueButton"}
@@ -339,52 +377,49 @@ const HourAddScreen = () => {
     );
 }
 
-//Set the look of the notifications and set when it triggers
+// Set the look of the notifications and set when it triggers
 async function schedulePushNotification() {
     const identifier = await Notifications.scheduleNotificationAsync({
         content: {
             title: "Project Management App",
             body: 'Vergeet je logboek vandaag niet in te vullen!',
         },
-    trigger: { seconds: 60 * 24 },
+    trigger: { seconds: 30 },
     });
-    console.log(identifier);
     return identifier;
   }
   
-//Ask for permission to give notifications
+// Ask for permission to give notifications
 async function registerForPushNotificationsAsync() {
-let token;
-if (Device.isDevice) {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
+    let token;
+    if (Device.isDevice) {
+        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
 
-    if (existingStatus !== 'granted') {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
+        if (existingStatus !== 'granted') {
+            const { status } = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
+
+        // if (finalStatus !== 'granted') {
+        //     alert('Failed to get push token for push notification!');
+        //     return;
+        // }
+
+        token = (await Notifications.getExpoPushTokenAsync()).data;
+    } else {
+        alert('You must ust use a physical device for Push Notifications');
     }
 
-    if (finalStatus !== 'granted') {
-        alert('Failed to get push token for push notification!');
-        return;
+    if (Platform.OS === 'android') {
+        Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+        });
     }
-
-    token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
-} else {
-    alert('Must use physical device for Push Notifications');
+    return token;
 }
 
-if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
-    name: 'default',
-    importance: Notifications.AndroidImportance.MAX,
-    vibrationPattern: [0, 250, 250, 250],
-    lightColor: '#FF231F7C',
-    });
-}
-
-return token;
-
-}
 export default HourAddScreen;

@@ -27,6 +27,7 @@ export default StyleSheet.create({
     color: "white",
     textTransform: "uppercase",
     textDecorationLine: "underline",
+    marginBottom: 25,
   },
   logo: {
 		resizeMode: "center",
@@ -35,18 +36,7 @@ export default StyleSheet.create({
 		marginBottom: 20,
 		marginTop: 30,
   },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#005AAA",
-    color: "white",
-    fontWeight: "bold",
-    padding: 13,
-    width: '70%',
-    borderWidth: 3,
-    borderRadius: 10,
-    borderColor: '#006BC9',
-  },
-  titel:  {
+  title:  {
     alignSelf: "center",
 		fontWeight: "bold",
 		fontSize: 30,

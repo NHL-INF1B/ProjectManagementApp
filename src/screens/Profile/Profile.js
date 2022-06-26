@@ -1,29 +1,32 @@
 import { React, useEffect, useState } from "react";
 import Styles from "./Styles";
-import { ScrollView, View, Text, SafeAreaView, Button, Image, TouchableOpacity, Pressable, Platform, Alert } from "react-native";
+import { ScrollView, View, Text, SafeAreaView, Pressable } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Circle from "../../components/Circle/Circle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
-import ChangePassword from "../ChangePassword/ChangePassword";
-import { useNavigation, useRoute } from '@react-navigation/native';
+import DatePicker from 'react-native-modern-datepicker';
+import { useRoute } from '@react-navigation/native';
 import Header from "../../components/Header/Header";
 import handlerPath from "../../../env";
 
 const Profile = ({ navigation }) => {
+    //declaring the const.
     const [isShowingDatePicker, setShowingDatePicker] = useState(false);
     const [userid, setUserId] = useState("");
 
+    //get the projectid from the last page.
     const route = useRoute();
     const projectId = route.params.projectId;
 
+    //declaring all the regex to check if number, email, discord and date are correct.
     const NUMMERIC_REGEX = /^[0-9]*$/;
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const DISCORD_REGEX = /^.{3,32}#[0-9]{4}$/;
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
+    //declaring the const.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             name: "",
@@ -38,6 +41,7 @@ const Profile = ({ navigation }) => {
         return string.split(search).join(replace);
     }
 
+    //get data when the page opens.
     useEffect(() => {
         const data = getData();
         data.then((data) => {
@@ -48,6 +52,7 @@ const Profile = ({ navigation }) => {
         });
 	}, []);
 
+    //get the data from the async storage.
     const getData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem("@user_data");
@@ -59,12 +64,13 @@ const Profile = ({ navigation }) => {
         }
     };
 
+    //send data to api when the button is pressed.
     const submitData = (data) => {
         sendUpdateData(data);
     };
 
+    //get the user data.
     const getUserData = (userId) => {
-        console.log(userId);
 		try {
 			fetch(handlerPath + "profile/profileFetch.php", {
 				method: "POST",
@@ -76,7 +82,6 @@ const Profile = ({ navigation }) => {
 					userId: userId,
 				}),
 			})
-            // .then((response) => response.text())
             .then((response) => response.json())
             .then((response) => {
                 setValue("name", response.name);
@@ -90,6 +95,7 @@ const Profile = ({ navigation }) => {
 		}
 	};
 
+    //send the updated data to the API and get feedback.
     const sendUpdateData = (data) => {
         try {
 			fetch(handlerPath + "profile/profileEdit.php", {
@@ -107,7 +113,6 @@ const Profile = ({ navigation }) => {
                     discord: data.discord,
 				}),
 			})
-				// .then((response) => response.text())
 				.then((response) => response.json())
 				.then((response) => {
                     catchFeedback(response);
@@ -117,13 +122,13 @@ const Profile = ({ navigation }) => {
 		}
     }
 
+    //catch the feedback from the API
 	const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":
               alert("Data is geüpdatet");
               break;
             default:
-              console.log('not defined');
               break;
           }
 	};
@@ -133,9 +138,7 @@ const Profile = ({ navigation }) => {
             <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userid} />
 
             <View style={Styles.head}>
-                <View>
-                    <Circle name={"account"} size={80} color={"black"} text={"Profiel bewerken"} />
-                </View>
+                <Circle name={"account"} size={80} color={"black"} text={"Profiel bewerken"} />
             </View>
             
             <View style={Styles.content}>
@@ -174,8 +177,8 @@ const Profile = ({ navigation }) => {
                                     message: 'Dit email is niet correct'
                                 },
                                 maxLength: {
-                                    value: 50,
-                                    message: 'Maximaal 50 karakters lang',
+                                    value: 100,
+                                    message: 'Maximaal 100 karakters lang',
                                 }
                             }}
                             render={({ field: { onChange, value } }) => (
@@ -259,8 +262,8 @@ const Profile = ({ navigation }) => {
                                     message: 'Telefoonnummer mag alleen cijfers bevatten'
                                 },
                                 maxLength: {
-                                    value: 50,
-                                    message: 'Maximaal 50 cijfers lang',
+                                    value: 20,
+                                    message: 'Maximaal 20 cijfers lang',
                                 }
                             }}
                             render={({ field: { onChange, value } }) => (

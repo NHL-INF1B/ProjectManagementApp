@@ -1,4 +1,4 @@
-import { SafeAreaView, View, Pressable, ScrollView, Text } from 'react-native';
+import { SafeAreaView, View, Pressable, ScrollView, Text, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
@@ -8,8 +8,10 @@ import { useForm, Controller } from "react-hook-form";
 import CustomButton from '../../components/CustomButton/CustomButton';
 import Header from '../../components/Header/Header';
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import handlerPath from '../../../env';
 
 const HourEditScreen = ({navigation}) => {
+    //The const for the input data.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
             title: "",
@@ -20,27 +22,28 @@ const HourEditScreen = ({navigation}) => {
         }
     });
 
+    //the regex to check the time and date.
     const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
     const TIME_REGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     
+    //read the data when the page opens.
     useEffect(() => {
         readData(id);
     }, []);
 
+    //update the data.
     const updateData = (data) => {
         editActivity(data);
-        alert("De gegevens zijn succesvol aangepast");
-        readData();
     };
 
+    //delete the data.
     const deleteData = (data) => {
         deleteActivity(data);
-        navigation.navigate("LogbookScreen");
     };
 
-    //Selecting the data from the database based on id
-    const readData = (data) => {
-        fetch('http://localhost/ReactNativeAPI/PmaAPI/handlers/houredit/houreditSelectHandler.php', {
+    // Selecting the data from the database based on id
+    const readData = () => {
+        fetch(handlerPath + "houredit/houreditSelectHandler.php", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -48,11 +51,6 @@ const HourEditScreen = ({navigation}) => {
             },
             body: JSON.stringify({
                 id: id,
-                title: data.title,
-                description: data.description,
-                date: data.date,
-                time_start: data.time_start,
-                time_end: data.time_end,
             })
         })
         .then((response) => response.json())
@@ -66,7 +64,7 @@ const HourEditScreen = ({navigation}) => {
         })
     };
 
-    //Updating the data based on id
+    // Updating the data based on id
     const editActivity = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditUpdateHandler.php", {
@@ -82,13 +80,12 @@ const HourEditScreen = ({navigation}) => {
                     date: data.date,
                     time_start: data.time_start,
                     time_end: data.time_end,
-                    user_id: user_id,
-                    project_id, project_id,
+                    userId: userId,
+                    projectId, projectId,
                 }),
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -96,7 +93,7 @@ const HourEditScreen = ({navigation}) => {
         }
     };
 
-    //Deleting an activity based on id
+    // Deleting an activity based on id
     const deleteActivity = (data) => {
         try {
             fetch(handlerPath + "houredit/houreditDeleteHandler.php", {
@@ -111,7 +108,6 @@ const HourEditScreen = ({navigation}) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -123,37 +119,66 @@ const HourEditScreen = ({navigation}) => {
         return string.split(search).join(replace);
     }
 
+    //catch the feedback of the API and send an alert.
     const catchFeedback = (response) => {
         switch (response) {
+            case "title_incorrect":
+                alert("De titel is verkeerd.");
+                break;
+            case "description_incorrect":
+                alert("De omschrijving is verkeerd.");
+                break;
+            case "date_incorrect":
+                alert("De datum is verkeerd.");
+                break;
+            case "time_start_incorrect":
+                alert("De starttijd is verkeerd.");
+                break;
+            case "time_end_incorrect":
+                alert("De eindtijd is verkeerd.");
+                break;
+            case "times_invalid":
+                alert("De eindtijd is eerder dan de begintijd");
+                break;
+            case "times_equal":
+                alert("De tijden zijn gelijk.");
+                break;
             case "data_updated":
-                alert("De gegevens zijn geüpdate");
+                alert("De gegevens zijn succesvol aangepast");
+                navigation.navigate("LogbookScreen",
+                { projectId,  userId });
                 break;
             case "data_deleted":
-                alert("De gegevens zijn verwijderd");
+                alert("De gegevens zijn succesvol verwijderd");
+                navigation.navigate("LogbookScreen",
+                { projectId,  userId });
                 break;
             default:
-                console.log('Success');
                 break;
           }
 	};
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+    //show the datepicker
     const showDatePicker = () => {
         setDatePickerVisibility(true);
     };
 
+    //hide the datepicker
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
     };
 
+    //hide the datpicker
     const handleConfirm = (date) => {
         hideDatePicker();
     };
 
+    //get the userid, projectid and id from the last page.
     const route = useRoute();
-    const user_id = route.params.userId;
-    const project_id = route.params.projectId;
+    const userId = route.params.userId;
+    const projectId = route.params.projectId;
     const id = route.params.id;
     
     return (
@@ -196,8 +221,8 @@ const HourEditScreen = ({navigation}) => {
                         rules={{
                             required: { value: true, message: 'Beschrijving is verplicht' },
                             maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
+                                value: 100,
+                                message: 'Maximaal 100 tekens lang',
                             }
                         }}
                         render={({ field: { onChange, value } }) => (
@@ -343,15 +368,16 @@ const HourEditScreen = ({navigation}) => {
                         buttonType={"redButton"}
                         buttonText={"buttonText"}
                         text={"Verwijderen"}
-                        onPress={handleSubmit(deleteData)}
+                        onPress={() =>
+                            Alert.alert("Weet je zeker dat je deze urenverantwoording wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
+                                { text: "Verwijderen", onPress: deleteData },
+                                { text: "Annuleren" },
+                            ])
+                        }
                     />
                 </View>
             </ScrollView>
         </SafeAreaView>
     );
 }
-
 export default HourEditScreen;
-  
-
-

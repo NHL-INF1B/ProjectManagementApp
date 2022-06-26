@@ -14,8 +14,8 @@ export default StyleSheet.create({
     flexWrap: "wrap",
   },
   img: {
-    height: 157,
-    width: 157,
+    height: 150,
+    width: 150,
     marginTop: 30,
   },
   row: {
@@ -50,7 +50,10 @@ export default StyleSheet.create({
   },
   welkom: {
     fontSize: 25,
-    color: "#005AAA",
+    color: "white",
     fontWeight: "bold",
+  },
+  marginBottom: {
+    marginBottom: 25,
   },
 });

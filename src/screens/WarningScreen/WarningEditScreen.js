@@ -1,5 +1,5 @@
-import { ScrollView, View, SafeAreaView } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import { ScrollView, View, SafeAreaView, Alert } from 'react-native';
+import React, { useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from '../../components/CustomTextInput/CustomTextInput';
 import styles from './Styles';
@@ -7,47 +7,52 @@ import Header from '../../components/Header/Header';
 import Circle from '../../components/Circle/Circle';
 import { useRoute } from "@react-navigation/native";
 import CustomButton from '../../components/CustomButton/CustomButton';
+import handlerPath from '../../../env';
 
-const WarningAddScreen = (navigation) => {
+const WarningEditScreen = ({navigation}) => {
+    //declaring the const.
     const { control, handleSubmit, formState: { errors }, getValues, setValue } = useForm({
         defaultValues: {
-            project_member: "",
+            name: "",
             reason: "",
         }
     });
 
+    //read the data when the page opens.
     useEffect(() => {
-        readData(id);
+        readData(warningId);
     }, []);
 
+    //update the warning
     const updateData = (data) => {
         editWarning(data);
-        readData(id);
+        alert("De gegevens zijn succesvol aangepast");
+        navigation.goBack();
     };
 
+    //delete the warning
     const deleteData = (data) => {
         deleteWarning(data);
-        navigation.navigate("WarningScreen");
+        alert("De gegevens zijn succesvol verwijderd");
+        navigation.goBack();
     };
-
-    //Selecting the data from the database based on id
-    const readData = (data) => {
-        fetch('http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningEditSelectHandler.php', {
+    
+    // Selecting the data from the database based on id
+    const readData = () => {
+        fetch(handlerPath + 'warning/warningEditSelectHandler.php', {
             method: "POST",
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: id,
-                reason: data.reason,
-
+                id: warningId,
             })
         })
         .then((response) => response.json())
         .then((response) => {
-            // setValue("project_member", response.project_member);
             setValue("reason", response.reason);
+            setValue("name", response.name); 
             catchFeedback(response);
         })
     };
@@ -55,22 +60,19 @@ const WarningAddScreen = (navigation) => {
     //Updating the data based on id
     const editWarning = (data) => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningUpdateHandler.php", {
+            fetch(handlerPath + "warning/warningUpdateHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: id,
+                    id: warningId,
                     reason: data.reason,
-                    user_id: user_id,
-                    project_id: project_id,
                 }),
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -78,22 +80,20 @@ const WarningAddScreen = (navigation) => {
         }
     };
 
-     //Deleting a warning based on id
-    const deleteWarning = (data) => {
+    //Deleting a warning based on id
+    const deleteWarning = () => {
         try {
-            fetch("http://localhost/ReactNativeAPI/PmaAPI/handlers/warning/warningDeleteHandler.php", {
+            fetch(handlerPath + "warning/warningDeleteHandler.php", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: id,
+                    id: warningId,
                 }),
             })
-            .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 catchFeedback(response);
             });
         } catch (error) {
@@ -101,6 +101,7 @@ const WarningAddScreen = (navigation) => {
         }
     };
 
+    //catch the feedback from the API and give an alert.
     const catchFeedback = (response) => {
         switch (response) {
             case "data_updated":
@@ -110,19 +111,20 @@ const WarningAddScreen = (navigation) => {
                 alert("De gegevens zijn verwijderd");
                 break;
             default:
-              console.log('Success');
               break;
           }
 	};
 
+    //get the userid, warningid and projectid from the last page.
     const route = useRoute();
     const user_id = route.params.userId;
+    const warningId = route.params.warningId;
     const project_id = route.params.projectId;
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
-            <ScrollView style={styles.SafeAreaView}>
-                <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
+            <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" />
+            <ScrollView>
                 <View style={styles.marginBottom5}>
                     <Circle name={"alert-circle"} size={60} color={"#000000"} text={"Waarschuwing\nBewerken"} />
                 </View>
@@ -130,22 +132,16 @@ const WarningAddScreen = (navigation) => {
                 {/* Project_member */}
                 <View style={styles.marginBottom1}>
                     <Controller
-                        name="project_member"
+                        name="name"
                         control={control}
-                        rules={{
-                            required: { value: true, message: 'Projectlid is verplicht' },
-                            maxLength: {
-                                value: 50,
-                                message: 'Maximaal 50 tekens lang',
-                            }
-                        }}
                         render={({ field: { onChange, value } }) => (
                             <CustomTextInput 
-                                placeholder="Selecteer een projectlid" 
+                                placeholder="Selecteer een projectlid"
                                 onChangeText={(text) => onChange(text)} 
                                 value={value} 
                                 errorText={errors?.project_member?.message} 
                                 titleText="Projectlid"
+                                editable={false}
                             />
                         )}
                     />
@@ -189,16 +185,20 @@ const WarningAddScreen = (navigation) => {
                         buttonType={"redButton"}
                         buttonText={"buttonText"}
                         text={"Verwijderen"}
-                        onPress={handleSubmit(deleteData)}
+                        onPress={() =>
+                            Alert.alert("Weet je zeker dat je deze waarschuwing wilt verwijderen?", "Er is geen mogelijkheid om dit terug te draaien!", [
+                                { text: "Verwijderen", onPress: deleteData },
+                                { text: "Annuleren" },
+                            ])
+                        }
                     />
                 </View>
-
             </ScrollView>
         </SafeAreaView>
     );
 }
 
-export default WarningAddScreen;
+export default WarningEditScreen;
   
 
 

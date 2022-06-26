@@ -6,33 +6,26 @@ import {
   Text,
   SafeAreaView,
   Image,
-  TouchableOpacity,
   Pressable,
-  BackHandler,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput/CustomTextInput";
-import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import { CommonActions } from "@react-navigation/native";
 import handlerPath from "../../../env";
 
 const LoginScreen = ({ navigation }) => {
-
+  //get data when the page opens.
   useEffect(() => {
-    // removeValue(); //If you want to remove the stored data for testing
     const data = getData();
     data.then((data) => {
       if (data != null) {
-        console.log(data);
-        navigation.navigate("WelcomeScreen"); //Needs to go to welcomescreen
+        navigation.navigate("WelcomeScreen");
       }
     });    
   }, []);
 
-  
-
+  //declaring the const.
   const [errorText, setErrorText] = useState("");
   const EMAIL_REGEX =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,10 +41,12 @@ const LoginScreen = ({ navigation }) => {
     },
   });
 
+  //send the data to the api when the button is pressed
   const onSubmit = (data) => {
     sendDataToAPI(data.email, data.password);
   };
 
+  //get the data from the async storage
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("@user_data");
@@ -63,6 +58,7 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  //store the data in the async storage
   const storeData = async (value) => {
     try {
       const jsonValue = JSON.stringify(value);
@@ -72,16 +68,16 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  //remoce a value from the async storage
   const removeValue = async () => {
     try {
       await AsyncStorage.removeItem("@user_data");
     } catch (e) {
       alert(e);
     }
-
-    console.log("Done.");
   };
 
+  //send data to the API and get feedback.
   const sendDataToAPI = (email, password) => {
     try {
       fetch(handlerPath + "login/loginHandler.php", {
@@ -95,10 +91,8 @@ const LoginScreen = ({ navigation }) => {
           password: password,
         }),
       })
-        // .then((response) => response.text())
         .then((response) => response.json())
         .then((response) => {
-          // console.log(response);
           catchFeedback(response);
         });
     } catch (error) {
@@ -106,12 +100,8 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  //catch the feedback from the API and give an alert.
   const catchFeedback = (response) => {
-    console.log(response);
-
-    // console.log(response);
-    // console.log(response.length);
-
     for (let index = 0; index < response.length; index++) {
       switch (response[index]) {
         case "email_incorrect":
@@ -130,13 +120,7 @@ const LoginScreen = ({ navigation }) => {
           alert("Deze inloggegevens kloppen niet.");
           break;
 
-        default: //Needs to go to welcomescreen
-          //Succes
-          console.log(response[0].id);
-          console.log(response[0].name);
-          console.log(response[0].email);
-          console.log(response[0].dateOfBirth);
-
+        default: 
           storeData(response[0]);
           navigation.navigate("WelcomeScreen");
           break;
@@ -154,7 +138,7 @@ const LoginScreen = ({ navigation }) => {
           />
         </View>
 
-        <Text style={Styles.titel}>Inloggen</Text>
+        <Text style={Styles.title}>Inloggen</Text>
 
         <View style={Styles.inputContainer}>
           <Controller

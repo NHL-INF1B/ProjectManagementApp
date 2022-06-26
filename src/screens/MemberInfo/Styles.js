@@ -6,11 +6,7 @@ export default StyleSheet.create({
     backgroundColor: "#009BAA",
     flex: 1,
   },
-  Circle: {
-    alignSelf: "center",
-  },
   person: {
-    marginTop: 50,
-    marginBottom: 100,
+    marginBottom: 50,
   },
 });

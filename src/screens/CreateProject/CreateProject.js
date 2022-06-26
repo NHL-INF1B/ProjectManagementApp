@@ -19,13 +19,13 @@ const CreateProject = ({ navigation }) => {
   const route = useRoute();
   const projectId = route.params.projectId;
   
-
+  //The const for the input data.
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       name: '',
     }
   });
-
+  //happens when the page opens.
   useEffect(() => {
     const data = getData();
     data.then((data) => {
@@ -35,6 +35,7 @@ const CreateProject = ({ navigation }) => {
     });
   }, []);
 
+  //get the data from the async.
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("@user_data");
@@ -46,13 +47,13 @@ const CreateProject = ({ navigation }) => {
     }
   };
 
+  // When the button is pressed, send data to the API
   const onSubmit = (data) => {
     sendDataToAPI(data.name, userId);
+    navigation.goBack();
   };
 
-  //the things where the info goes in.
-  // const [ProjectNaam, setProjectNaam] = useState('');
-
+  // Send and catch the feedback from the API
   const sendDataToAPI = (ProjectNaam, userid) => {
     try {
       fetch(handlerPath + "createproject/createProjectHandler.php", {
@@ -68,7 +69,7 @@ const CreateProject = ({ navigation }) => {
       })
         .then((response) => response.text())
         .then((response) => {
-          console.log(response);
+          ;
           alert('Project aangemaakt');
         });
     } catch (error) {
@@ -76,7 +77,6 @@ const CreateProject = ({ navigation }) => {
     }
   };
 
-  //the screen
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <Header GoToType="None" GoTo="None" CenterGoTo="None" ReturnType="Back" projectId={projectId} userId={userId} />
