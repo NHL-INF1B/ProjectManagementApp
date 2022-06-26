@@ -2,18 +2,17 @@
 PMA
 
 
-Steps how to install:
+Steps of how to install:
 
 
 Step 1: Open Terminal in project folder
 
-Step 2: type: npm i
+Step 2: Type: npm i
 
-Step 3: type: npm start OR expo start
+Step 3: Type: npm start OR expo start
 
-Step 4: type: d
+Step 4: Press: d
 
 Step 5: Press `Tunnel` instead of `LAN`
-
 
 Done.
